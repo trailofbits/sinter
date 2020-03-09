@@ -1,0 +1,4 @@
+cmake_minimum_required(VERSION 3.16.5)
+
+set(SINTER_CODESIGN_IDENTITY "XXXXXXXXXXXXXXXXXX" CACHE STRING "Codesign identity")
+
