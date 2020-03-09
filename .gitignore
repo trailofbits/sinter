@@ -1,0 +1,5 @@
+# ignore macOS filesystem metadata
+.DS_Store
+
+# ignore generated build files
+build/*
