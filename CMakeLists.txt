@@ -9,32 +9,32 @@
 cmake_minimum_required(VERSION 3.16.5)
 project("sinter" LANGUAGES Swift)
 
-#
-# Set the right codesign identity in cmake/options.cmake
-#   security find-identity -v -p codesigning
-#
-# Configure and build:
-#   mkdir build && cd build && cmake -G Ninja .. && ninja && sudo ./swift-eevee-sec
-#
-
 include("cmake/options.cmake")
 include("cmake/codesign.cmake")
+include("cmake/testing.cmake")
 
-function(swiftEeveeSec)
+if(SINTER_ENABLE_TESTS)
+  enable_testing()
+endif()
+
+function(sinterMain)
   add_subdirectory("libraries")
 
-  add_executable("${PROJECT_NAME}"
+  add_executable("sinter"
     src/main.swift
     src/EndpointSecurityMessage.swift
     src/EndpointSecurity.swift
     src/AuthorizationManager.swift
-    src/CodeSigningUtils.swift
     src/SignatureChecker.swift
   )
 
-  target_link_libraries("${PROJECT_NAME}" PRIVATE thirdparty_endpointsecurity)
+  target_link_libraries("sinter" PRIVATE
+    thirdparty_endpointsecurity
+    CodeSigningUtils
+  )
+
   codesign("${PROJECT_NAME}")
 endfunction()
 
-swiftEeveeSec()
+sinterMain()
 

@@ -9,4 +9,5 @@
 cmake_minimum_required(VERSION 3.16.5)
 
 set(SINTER_CODESIGN_IDENTITY "" CACHE STRING "Codesign identity")
+option(SINTER_ENABLE_TESTS "Set to true to enable tests" true)
 

@@ -7,6 +7,7 @@
 */
 
 import Dispatch
+import CodeSigningUtils
 
 class SignatureChecker {
   var should_terminate: Bool = false
