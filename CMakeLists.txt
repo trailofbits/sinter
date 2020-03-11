@@ -1,3 +1,11 @@
+#
+# Copyright (c) 2019-present, Trail of Bits, Inc.
+# All rights reserved.
+#
+# This source code is licensed in accordance with the terms specified in
+# the LICENSE file found in the root directory of this source tree.
+#
+
 cmake_minimum_required(VERSION 3.16.5)
 project("sinter" LANGUAGES Swift)
 
@@ -10,6 +18,7 @@ project("sinter" LANGUAGES Swift)
 #
 
 include("cmake/options.cmake")
+include("cmake/codesign.cmake")
 
 function(swiftEeveeSec)
   add_subdirectory("libraries")
@@ -24,13 +33,7 @@ function(swiftEeveeSec)
   )
 
   target_link_libraries("${PROJECT_NAME}" PRIVATE thirdparty_endpointsecurity)
-
-  add_custom_command(
-    TARGET "${PROJECT_NAME}" POST_BUILD
-    COMMAND codesign --entitlements "${CMAKE_CURRENT_SOURCE_DIR}/plist/entitlements.plist" --force -s "${SINTER_CODESIGN_IDENTITY}" -v "$<TARGET_FILE:${PROJECT_NAME}>"
-    COMMENT "Codesigning target ${PROJECT_NAME}..."
-    VERBATIM
-  )
+  codesign("${PROJECT_NAME}")
 endfunction()
 
 swiftEeveeSec()

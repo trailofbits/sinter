@@ -42,7 +42,7 @@ First, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) an
 
 `security find-identity -v -p codesigning`
 
-Copy the appropriate "Apple Development" ID (the ascii-encoded hex value), and paste it in the appropriate place in `sinter/cmake/options.cmake`. Note: later versions of Sinter will automate this step.
+Copy the appropriate "Apple Development" ID (the ascii-encoded hex value), and pass it to CMake at configure time: `-DSINTER_CODESIGN_IDENTITY:STRING=XXX"
 
 ### Apply for EndpointSecurity entitltements for your code-signing identity (optional, required for distribution)
 
