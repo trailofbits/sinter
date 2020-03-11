@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum CodeSignatureStatus {
+public enum CodeSignatureStatus {
   case InternalError
   case Valid
   case IOError
   case Invalid
 }
 
-func checkCodeSignature(path: String) -> CodeSignatureStatus {
+public func checkCodeSignature(path: String) -> CodeSignatureStatus {
   let file_url: URL? = URL(fileURLWithPath: path)
   if (file_url == nil) {
     return CodeSignatureStatus.IOError

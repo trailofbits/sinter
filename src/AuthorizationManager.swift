@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import CodeSigningUtils
 
 class AuthorizationManager {
   var endpoint_security: EndpointSecurity

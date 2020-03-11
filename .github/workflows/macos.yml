@@ -1,0 +1,73 @@
+name: macOS
+
+on:
+  push:
+    branches:
+      - '*'
+
+    tags:
+      - 'v*'
+
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  macos_build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macOS-10.15]
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Select the CMake version
+      id: cmake_version
+      run: echo ::set-output name=VALUE::3.17.0-rc2
+
+    - name: Generate the cache key
+      id: cache_key
+      run: echo ::set-output name=VALUE::build_${{ matrix.os }}_cmake-${{ steps.cmake_version.outputs.VALUE }}
+
+    - name: Update the cache (ccache)
+      uses: actions/cache@v1.0.3
+      with:
+        path: ccache
+        key: ${{ steps.cache_key.outputs.VALUE }}_ccache
+
+    - name: Update the cache (Downloads)
+      uses: actions/cache@v1.0.3
+      with:
+        path: downloads
+        key: ${{ steps.cache_key.outputs.VALUE }}_downloads
+
+    - name: Create the build folders
+      run: mkdir -p build downloads
+
+    - name: Install system dependencies
+      run: brew install coreutils ninja
+
+    - name: Install CMake
+      id: cmake_installer
+      run: |
+        if [ ! -f downloads/cmake.tar.gz ] ; then
+          curl -L "https://github.com/Kitware/CMake/releases/download/v${{ steps.cmake_version.outputs.VALUE }}/cmake-${{ steps.cmake_version.outputs.VALUE }}-Darwin-x86_64.tar.gz" -o downloads/cmake.tar.gz
+        fi
+
+        tar xzf downloads/cmake.tar.gz
+        echo ::set-output name=CMAKE_BINARY::$(realpath $(find cmake* -type d -name bin)/cmake)
+
+    - name: Configure the project
+      run: |
+        ( cd build && "${{ steps.cmake_installer.outputs.CMAKE_BINARY }}" -G Ninja -DSINTER_ENABLE_TESTS:BOOL=true .. )
+
+    - name: Build the project
+      run: |
+        export CCACHE_DIR="$(realpath ccache)"
+        ( cd build && cmake --build . -- -v)
+
+    - name: Run the tests
+      run: ( cd build && cmake --build . --target test -- -v )
+

@@ -19,7 +19,7 @@ function(codesign target_name)
 
   add_custom_command(
     TARGET "${target_name}" POST_BUILD
-    COMMAND codesign --entitlements "${CMAKE_CURRENT_SOURCE_DIR}/plist/entitlements.plist" --force -s "${SINTER_CODESIGN_IDENTITY}" -v "$<TARGET_FILE:${target_name}>"
+    COMMAND codesign --entitlements "${CMAKE_SOURCE_DIR}/plist/entitlements.plist" --force -s "${SINTER_CODESIGN_IDENTITY}" -v "$<TARGET_FILE:${target_name}>"
     COMMENT "Codesigning target ${target_name}..."
     VERBATIM
   )
