@@ -10,17 +10,17 @@ import Dispatch
 import CodeSigningUtils
 
 class SignatureChecker {
-  var should_terminate: Bool = false
+  var shouldTerminate: Bool = false
 
-  var message_list = [EndpointSecurityMessage]()
-  let message_list_dq = DispatchQueue(label: "SignatureChecker_message_list")
-  let message_list_sem = DispatchSemaphore(value: 0)
+  var messageList = [EndpointSecurityMessage]()
+  let messageListDq = DispatchQueue(label: "SignatureChecker_message_list")
+  let messageListSem = DispatchSemaphore(value: 0)
 
-  var processed_message_list = [EndpointSecurityMessage]()
-  let processed_message_list_dq = DispatchQueue(label: "SignatureChecker_processed_message_list")
-  let processed_message_list_sem = DispatchSemaphore(value: 0)
+  var processedMessageList = [EndpointSecurityMessage]()
+  let processedMessageListDq = DispatchQueue(label: "SignatureChecker_processed_message_list")
+  let processedMessageListSem = DispatchSemaphore(value: 0)
 
-  var code_signature_cache = [String: CodeSignatureStatus]()
+  var codeSignatureCache = [String: CodeSignatureStatus]()
 
   init?() {
     DispatchQueue.global(qos: .background).async(execute: processMessageQueue)
@@ -31,72 +31,71 @@ class SignatureChecker {
     terminate()
   }
 
-  func addMessagesToQueue(message_list: [EndpointSecurityMessage]) {
-    if (message_list.isEmpty) {
+  func addMessagesToQueue(messageList: [EndpointSecurityMessage]) {
+    if messageList.isEmpty {
       return
     }
 
-    self.message_list_dq.sync {
-      self.message_list.append(contentsOf: message_list)
-      self.message_list_sem.signal()
+    self.messageListDq.sync {
+      self.messageList.append(contentsOf: messageList)
+      self.messageListSem.signal()
     }
   }
 
   func processMessageQueue() {
-    self.should_terminate = false
+    self.shouldTerminate = false
 
-    while (!self.should_terminate) {
-      if (self.message_list_sem.wait(timeout: .now() + 5) != .success) {
+    while !self.shouldTerminate {
+      if self.messageListSem.wait(timeout: .now() + 5) != .success {
         continue
       }
 
-      var message_list = [EndpointSecurityMessage]()
-      self.message_list_dq.sync {
-        message_list = self.message_list
-        self.message_list = [EndpointSecurityMessage]()
+      var messageList = [EndpointSecurityMessage]()
+      self.messageListDq.sync {
+        messageList = self.messageList
+        self.messageList = [EndpointSecurityMessage]()
       }
 
-      var processed_message_list = [EndpointSecurityMessage]()
+      var processedMessageList = [EndpointSecurityMessage]()
 
-      for var message in message_list {
-        var signature_status: CodeSignatureStatus
-        if (self.code_signature_cache[message.binary_path] != nil) {
-          print("Restoring from cache: ", message.binary_path)
-          signature_status = self.code_signature_cache[message.binary_path]!
+      for var message in messageList {
+        var signatureStatus: CodeSignatureStatus
+        if self.codeSignatureCache[message.binaryPath] != nil {
+          print("Restoring from cache: ", message.binaryPath)
+          signatureStatus = self.codeSignatureCache[message.binaryPath]!
         } else {
-          signature_status = checkCodeSignature(path: message.binary_path)
-          self.code_signature_cache[message.binary_path] = signature_status
+          signatureStatus = checkCodeSignature(path: message.binaryPath)
+          self.codeSignatureCache[message.binaryPath] = signatureStatus
         }
 
-        message.signature_status = signature_status
-        processed_message_list.append(message)
+        message.signatureStatus = signatureStatus
+        processedMessageList.append(message)
       }
 
-      self.processed_message_list_dq.sync {
-        self.processed_message_list.append(contentsOf: processed_message_list)
-        processed_message_list = [EndpointSecurityMessage]()
+      self.processedMessageListDq.sync {
+        self.processedMessageList.append(contentsOf: processedMessageList)
+        processedMessageList = [EndpointSecurityMessage]()
 
-        self.processed_message_list_sem.signal()
+        self.processedMessageListSem.signal()
       }
     }
   }
 
   func getProcessedMessages() -> [EndpointSecurityMessage] {
-    if (self.processed_message_list_sem.wait(timeout: .now() + 5) != .success) {
+    if self.processedMessageListSem.wait(timeout: .now() + 5) != .success {
       return [EndpointSecurityMessage]()
     }
 
-    var processed_message_list = [EndpointSecurityMessage]()
-    self.processed_message_list_dq.sync {
-      processed_message_list = self.processed_message_list
-      self.processed_message_list = [EndpointSecurityMessage]()
+    var processedMessageList = [EndpointSecurityMessage]()
+    self.processedMessageListDq.sync {
+      processedMessageList = self.processedMessageList
+      self.processedMessageList = [EndpointSecurityMessage]()
     }
 
-    return processed_message_list
+    return processedMessageList
   }
 
   func terminate() {
-    self.should_terminate = true
+    self.shouldTerminate = true
   }
 }
-
