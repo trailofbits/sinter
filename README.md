@@ -48,6 +48,18 @@ Copy the appropriate "Apple Development" ID (the ascii-encoded hex value), and p
 
 To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account owner can apply for this entitlement.
 
+### Build with CMake
+
+From the Sinter directory:
+
+`mkdir build && cd build && cmake -G Ninja .. && ninja`
+
+## Run Sinter
+
+After building, from the build directory:
+
+`sudo ./sinter`
+
 ## License
 
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.

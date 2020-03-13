@@ -11,21 +11,21 @@ import Cocoa
 import CodeSigningUtils
 
 class AuthorizationManager {
-  var endpoint_security: EndpointSecurity
-  var signature_checker: SignatureChecker
+  var endpointSec: EndpointSecurity
+  var signatureChecker: SignatureChecker
 
-  var should_terminate: Bool = false
-  var authorization_cache = [String: Bool]()
+  var shouldTerminate: Bool = false
+  var authorizationCache = [String: Bool]()
 
   init?() {
-    if let endpoint_security = EndpointSecurity() {
-      self.endpoint_security = endpoint_security;
+    if let endpointSec = EndpointSecurity() {
+      self.endpointSec = endpointSec
     } else {
       return nil
     }
 
-    if let signature_checker = SignatureChecker() {
-      self.signature_checker = signature_checker;
+    if let signatureChecker = SignatureChecker() {
+      self.signatureChecker = signatureChecker
     } else {
       return nil
     }
@@ -35,51 +35,50 @@ class AuthorizationManager {
   }
 
   func exec() {
-    self.should_terminate = false;
+    self.shouldTerminate = false
 
-    while (!self.should_terminate) {
-      let message_list = self.endpoint_security.getMessages()
-      if (!message_list.isEmpty) {
-        self.signature_checker.addMessagesToQueue(message_list: message_list)
+    while !self.shouldTerminate {
+      let messageList = self.endpointSec.getMessages()
+      if !messageList.isEmpty {
+        self.signatureChecker.addMessagesToQueue(messageList: messageList)
       }
 
-      let processed_message_list = self.signature_checker.getProcessedMessages();
-      for message in processed_message_list {
-        if (message.signature_status != CodeSignatureStatus.Valid) {
-          self.endpoint_security.processMessage(message: message, allow: false)
-          print("Automatically denying execution for binary with broken signature: ", message.binary_path)
+      let processedMessageList = self.signatureChecker.getProcessedMessages()
+      for message in processedMessageList {
+        if message.signatureStatus != CodeSignatureStatus.Valid {
+          self.endpointSec.processMessage(message: message, allow: false)
+          print("Automatically denying execution for binary with broken signature: ", message.binaryPath)
 
         } else {
-          var allow_execution: Bool;
+          var allowExecution: Bool
 
-          if (self.authorization_cache[message.binary_path] != nil) {
-            allow_execution = self.authorization_cache[message.binary_path]!
-            print("Applying cached decision for ", message.binary_path)
+          if self.authorizationCache[message.binaryPath] != nil {
+            allowExecution = self.authorizationCache[message.binaryPath]!
+            print("Applying cached decision for ", message.binaryPath)
           } else {
-            allow_execution = AuthorizationManager.dialogOKCancel(binary_path: message.binary_path)
-            self.authorization_cache[message.binary_path] = allow_execution
+            allowExecution = AuthorizationManager.dialogOKCancel(binaryPath: message.binaryPath)
+            self.authorizationCache[message.binaryPath] = allowExecution
           }
 
-          self.endpoint_security.processMessage(message: message, allow:allow_execution)
+          self.endpointSec.processMessage(message: message, allow: allowExecution)
         }
       }
     }
   }
 
   func terminate() {
-    self.should_terminate = true;
+    self.shouldTerminate = true
   }
 
+  static func dialogOKCancel(binaryPath: String) -> Bool {
+    let messageBox = NSAlert()
 
-  static func dialogOKCancel(binary_path: String) -> Bool {
-    let message_box = NSAlert()
+    messageBox.messageText = binaryPath
+    messageBox.informativeText = "Allow execution?"
+    messageBox.alertStyle = .warning
+    messageBox.addButton(withTitle: "Allow")
+    messageBox.addButton(withTitle: "Deny")
 
-    message_box.messageText = binary_path
-    message_box.informativeText = "Allow execution?"
-    message_box.alertStyle = .warning
-    message_box.addButton(withTitle: "Allow")
-    message_box.addButton(withTitle: "Deny")
-
-    return message_box.runModal() == .alertFirstButtonReturn
+    return messageBox.runModal() == .alertFirstButtonReturn
   }
 }

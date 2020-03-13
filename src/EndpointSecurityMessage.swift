@@ -10,8 +10,7 @@ import EndpointSecurity
 import CodeSigningUtils
 
 struct EndpointSecurityMessage {
-  var unsafe_msg_ptr: UnsafeMutablePointer<es_message_t>;
-  var binary_path: String;
-  var signature_status: CodeSignatureStatus?;
+  var unsafeMsgPtr: UnsafeMutablePointer<es_message_t>
+  var binaryPath: String
+  var signatureStatus: CodeSignatureStatus?
 }
-
