@@ -1,0 +1,4 @@
+module EndpointSecurity {
+  header "EndpointSecurity.h"
+  export *
+}

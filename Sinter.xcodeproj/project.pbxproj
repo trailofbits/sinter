@@ -1,0 +1,724 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D2520B7F241C266200AC6747 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B7E241C266200AC6747 /* AppDelegate.swift */; };
+		D2520B81241C266200AC6747 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B80241C266200AC6747 /* ContentView.swift */; };
+		D2520B83241C266600AC6747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2520B82241C266600AC6747 /* Assets.xcassets */; };
+		D2520B86241C266600AC6747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2520B85241C266600AC6747 /* Preview Assets.xcassets */; };
+		D2520B89241C266600AC6747 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2520B87241C266600AC6747 /* Main.storyboard */; };
+		D2520BA4241C26F000AC6747 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520BA3241C26F000AC6747 /* main.swift */; };
+		D2520BA8241C26FC00AC6747 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; };
+		D2520BAB241C270300AC6747 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; };
+		D2520BAD241C270300AC6747 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; };
+		D2520BAF241C270300AC6747 /* SignatureChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; };
+		D2763980241C34060038FFC0 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; };
+		D2763981241C34060038FFC0 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2763982241C34060038FFC0 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; };
+		D2763983241C34060038FFC0 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2763984241C34060038FFC0 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; };
+		D2763985241C34060038FFC0 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2763986241C34060038FFC0 /* SignatureChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; };
+		D2763987241C34060038FFC0 /* SignatureChecker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D276398B241C34610038FFC0 /* service in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2520BA1241C26EF00AC6747 /* service */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D249E5B0241C0810000B2F5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D249E591241C080E000B2F5A;
+			remoteInfo = CodeSigningUtils;
+		};
+		D249E5B2241C0810000B2F5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D249E59A241C080E000B2F5A;
+			remoteInfo = CodeSigningUtilsTests;
+		};
+		D249E61A241C0C37000B2F5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D249E5FB241C0C35000B2F5A;
+			remoteInfo = EndpointSecurityClient;
+		};
+		D249E61C241C0C37000B2F5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D249E604241C0C35000B2F5A;
+			remoteInfo = EndpointSecurityClientTests;
+		};
+		D2520B1F241C131300AC6747 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2520B00241C131100AC6747;
+			remoteInfo = AuthorizationManager;
+		};
+		D2520B21241C131300AC6747 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2520B09241C131100AC6747;
+			remoteInfo = AuthorizationManagerTests;
+		};
+		D2520B59241C15C300AC6747 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2520B3A241C15C200AC6747;
+			remoteInfo = SignatureChecker;
+		};
+		D2520B5B241C15C300AC6747 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2520B43241C15C200AC6747;
+			remoteInfo = SignatureCheckerTests;
+		};
+		D2520BBB241C284200AC6747 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2F15A1F241BE729002351A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2520BA0241C26EF00AC6747;
+			remoteInfo = service;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D20D41EF241C303F0050015E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				D276398B241C34610038FFC0 /* service in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2520B9F241C26EF00AC6747 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D2520BAA241C26FC00AC6747 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2763988241C34060038FFC0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2763981241C34060038FFC0 /* AuthorizationManager.framework in Embed Frameworks */,
+				D2763987241C34060038FFC0 /* SignatureChecker.framework in Embed Frameworks */,
+				D2763983241C34060038FFC0 /* CodeSigningUtils.framework in Embed Frameworks */,
+				D2763985241C34060038FFC0 /* EndpointSecurityClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D23C17BC241C38B00058F97C /* service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = service.entitlements; sourceTree = "<group>"; };
+		D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodeSigningUtils.xcodeproj; path = CodeSigningUtils/CodeSigningUtils.xcodeproj; sourceTree = "<group>"; };
+		D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
+		D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
+		D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignatureChecker.xcodeproj; path = SignatureChecker/SignatureChecker.xcodeproj; sourceTree = "<group>"; };
+		D2520B7C241C266200AC6747 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2520B7E241C266200AC6747 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D2520B80241C266200AC6747 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D2520B82241C266600AC6747 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D2520B85241C266600AC6747 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D2520B88241C266600AC6747 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D2520B8A241C266600AC6747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2520B8B241C266600AC6747 /* Sinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinter.entitlements; sourceTree = "<group>"; };
+		D2520BA1241C26EF00AC6747 /* service */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = service; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2520BA3241C26F000AC6747 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2520B79241C266200AC6747 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2763980241C34060038FFC0 /* AuthorizationManager.framework in Frameworks */,
+				D2763986241C34060038FFC0 /* SignatureChecker.framework in Frameworks */,
+				D2763982241C34060038FFC0 /* CodeSigningUtils.framework in Frameworks */,
+				D2763984241C34060038FFC0 /* EndpointSecurityClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2520B9E241C26EF00AC6747 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2520BA8241C26FC00AC6747 /* AuthorizationManager.framework in Frameworks */,
+				D2520BAF241C270300AC6747 /* SignatureChecker.framework in Frameworks */,
+				D2520BAB241C270300AC6747 /* CodeSigningUtils.framework in Frameworks */,
+				D2520BAD241C270300AC6747 /* EndpointSecurityClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D249E5AC241C080E000B2F5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */,
+				D249E5B3241C0810000B2F5A /* CodeSigningUtilsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D249E616241C0C35000B2F5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */,
+				D249E61D241C0C37000B2F5A /* EndpointSecurityClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2520B1B241C131100AC6747 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B20241C131300AC6747 /* AuthorizationManager.framework */,
+				D2520B22241C131300AC6747 /* AuthorizationManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2520B55241C15C200AC6747 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B5A241C15C300AC6747 /* SignatureChecker.framework */,
+				D2520B5C241C15C300AC6747 /* SignatureCheckerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2520B7D241C266200AC6747 /* Sinter */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B7E241C266200AC6747 /* AppDelegate.swift */,
+				D2520B80241C266200AC6747 /* ContentView.swift */,
+				D2520B82241C266600AC6747 /* Assets.xcassets */,
+				D2520B87241C266600AC6747 /* Main.storyboard */,
+				D2520B8A241C266600AC6747 /* Info.plist */,
+				D2520B8B241C266600AC6747 /* Sinter.entitlements */,
+				D2520B84241C266600AC6747 /* Preview Content */,
+			);
+			path = Sinter;
+			sourceTree = "<group>";
+		};
+		D2520B84241C266600AC6747 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B85241C266600AC6747 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D2520BA2241C26F000AC6747 /* service */ = {
+			isa = PBXGroup;
+			children = (
+				D23C17BC241C38B00058F97C /* service.entitlements */,
+				D2520BA3241C26F000AC6747 /* main.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		D2F15A1E241BE729002351A9 = {
+			isa = PBXGroup;
+			children = (
+				D2F15A31241BE920002351A9 /* libraries */,
+				D2520B7D241C266200AC6747 /* Sinter */,
+				D2520BA2241C26F000AC6747 /* service */,
+				D2F15A28241BE72A002351A9 /* Products */,
+				D2F15A4E241BE9BF002351A9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D2F15A28241BE72A002351A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B7C241C266200AC6747 /* Sinter.app */,
+				D2520BA1241C26EF00AC6747 /* service */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2F15A31241BE920002351A9 /* libraries */ = {
+			isa = PBXGroup;
+			children = (
+				D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */,
+				D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */,
+				D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */,
+				D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */,
+			);
+			path = libraries;
+			sourceTree = "<group>";
+		};
+		D2F15A4E241BE9BF002351A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D2520B7B241C266200AC6747 /* Sinter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2520B97241C266700AC6747 /* Build configuration list for PBXNativeTarget "Sinter" */;
+			buildPhases = (
+				D2520B78241C266200AC6747 /* Sources */,
+				D2520B79241C266200AC6747 /* Frameworks */,
+				D2520B7A241C266200AC6747 /* Resources */,
+				D20D41EF241C303F0050015E /* CopyFiles */,
+				D2763988241C34060038FFC0 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2520BBC241C284200AC6747 /* PBXTargetDependency */,
+			);
+			name = Sinter;
+			productName = Sinter;
+			productReference = D2520B7C241C266200AC6747 /* Sinter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D2520BA0241C26EF00AC6747 /* service */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2520BA5241C26F000AC6747 /* Build configuration list for PBXNativeTarget "service" */;
+			buildPhases = (
+				D2520B9D241C26EF00AC6747 /* Sources */,
+				D2520B9E241C26EF00AC6747 /* Frameworks */,
+				D2520B9F241C26EF00AC6747 /* CopyFiles */,
+				D2520BAA241C26FC00AC6747 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = service;
+			productName = service;
+			productReference = D2520BA1241C26EF00AC6747 /* service */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D2F15A1F241BE729002351A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Trail of Bits";
+				TargetAttributes = {
+					D2520B7B241C266200AC6747 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D2520BA0241C26EF00AC6747 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = D2F15A22241BE729002351A9 /* Build configuration list for PBXProject "Sinter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D2F15A1E241BE729002351A9;
+			productRefGroup = D2F15A28241BE72A002351A9 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D2520B1B241C131100AC6747 /* Products */;
+					ProjectRef = D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */;
+				},
+				{
+					ProductGroup = D249E5AC241C080E000B2F5A /* Products */;
+					ProjectRef = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
+				},
+				{
+					ProductGroup = D249E616241C0C35000B2F5A /* Products */;
+					ProjectRef = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
+				},
+				{
+					ProductGroup = D2520B55241C15C200AC6747 /* Products */;
+					ProjectRef = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				D2520B7B241C266200AC6747 /* Sinter */,
+				D2520BA0241C26EF00AC6747 /* service */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CodeSigningUtils.framework;
+			remoteRef = D249E5B0241C0810000B2F5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D249E5B3241C0810000B2F5A /* CodeSigningUtilsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CodeSigningUtilsTests.xctest;
+			remoteRef = D249E5B2241C0810000B2F5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EndpointSecurityClient.framework;
+			remoteRef = D249E61A241C0C37000B2F5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D249E61D241C0C37000B2F5A /* EndpointSecurityClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EndpointSecurityClientTests.xctest;
+			remoteRef = D249E61C241C0C37000B2F5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2520B20241C131300AC6747 /* AuthorizationManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AuthorizationManager.framework;
+			remoteRef = D2520B1F241C131300AC6747 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2520B22241C131300AC6747 /* AuthorizationManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AuthorizationManagerTests.xctest;
+			remoteRef = D2520B21241C131300AC6747 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2520B5A241C15C300AC6747 /* SignatureChecker.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignatureChecker.framework;
+			remoteRef = D2520B59241C15C300AC6747 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2520B5C241C15C300AC6747 /* SignatureCheckerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignatureCheckerTests.xctest;
+			remoteRef = D2520B5B241C15C300AC6747 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D2520B7A241C266200AC6747 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2520B89241C266600AC6747 /* Main.storyboard in Resources */,
+				D2520B86241C266600AC6747 /* Preview Assets.xcassets in Resources */,
+				D2520B83241C266600AC6747 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2520B78241C266200AC6747 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2520B81241C266200AC6747 /* ContentView.swift in Sources */,
+				D2520B7F241C266200AC6747 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2520B9D241C26EF00AC6747 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2520BA4241C26F000AC6747 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2520BBC241C284200AC6747 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2520BA0241C26EF00AC6747 /* service */;
+			targetProxy = D2520BBB241C284200AC6747 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D2520B87241C266600AC6747 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2520B88241C266600AC6747 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D2520B98241C266700AC6747 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sinter/Sinter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Sinter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Sinter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D2520B99241C266700AC6747 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sinter/Sinter.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Sinter/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Sinter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D2520BA6241C26F000AC6747 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = service/service.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SinterService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D2520BA7241C26F000AC6747 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = service/service.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SinterService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D2F15A2C241BE72A002351A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D2F15A2D241BE72A002351A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D2520B97241C266700AC6747 /* Build configuration list for PBXNativeTarget "Sinter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2520B98241C266700AC6747 /* Debug */,
+				D2520B99241C266700AC6747 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2520BA5241C26F000AC6747 /* Build configuration list for PBXNativeTarget "service" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2520BA6241C26F000AC6747 /* Debug */,
+				D2520BA7241C26F000AC6747 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2F15A22241BE729002351A9 /* Build configuration list for PBXProject "Sinter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2F15A2C241BE72A002351A9 /* Debug */,
+				D2F15A2D241BE72A002351A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D2F15A1F241BE729002351A9 /* Project object */;
+}
