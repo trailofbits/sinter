@@ -50,7 +50,6 @@
 		D249E61E241C0C51000B2F5A /* EndpointSecurityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityClient.swift; sourceTree = "<group>"; };
 		D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520AEB241C0D5600AC6747 /* EndpointSecurity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurity.h; sourceTree = "<group>"; };
-		D2520AEC241C0D8000AC6747 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -98,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				D2520AEB241C0D5600AC6747 /* EndpointSecurity.h */,
-				D2520AEC241C0D8000AC6747 /* module.modulemap */,
 				D249E5FE241C0C35000B2F5A /* EndpointSecurityClient.h */,
 				D249E5FF241C0C35000B2F5A /* Info.plist */,
 				D249E61E241C0C51000B2F5A /* EndpointSecurityClient.swift */,

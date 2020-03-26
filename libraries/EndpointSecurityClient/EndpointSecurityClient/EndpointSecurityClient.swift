@@ -78,7 +78,7 @@ public class EndpointSecurityClient {
     }
 
     static func processBinaryPath(process: es_process_t) -> String? {
-        let executable = process.executable!.pointee
+        let executable = process.executable.pointee
         let path = String(cString: executable.path.data) // TODO: use path.size
 
         return path
@@ -87,7 +87,7 @@ public class EndpointSecurityClient {
     static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>) -> EndpointSecurityClientMessage {
         let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
         let message = unsafeMsgPtrCopy!.pointee
-        let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target!.pointee)
+        let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
