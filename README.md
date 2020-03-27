@@ -5,6 +5,7 @@ Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above.
 ## Features
 
 (Work in progress)
+- MONITOR mode: captures process execution events and records them to a log on the local filesystem.
 
 ## How to Run
 
@@ -22,11 +23,11 @@ Check that SIP is disabled, and boot back into regular macOS:
 
 `$ csrutil status`
 
-Finally, to run Sinter:
+Finally, to run Sinter, do not double-click the `Sinter` app bundle in Finder. Rather, launch the daemon:
 
-`$ sudo sinter`
+`$ sudo Sinter.app/Contents/MacOS/service`
 
-Sinter runs as a daemon. In this version it outputs events to the command line.
+In this version, it outputs events to the command line and to text-based log files under `/var/db/sinter/`.
 
 ## How to Build
 
@@ -34,31 +35,35 @@ Sinter builds on macOS 10.15 or above.
 
 ### Install the Prerequisites
 
-First, install [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12) and [Homebrew](https://brew.sh/). Then, install these build tool dependencies:
+First, install [Xcode 11.4 or newer](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
-`brew install cmake ninja`
+Install the Xcode command-line tools as well. One way to do this is:
 
-### Find your Apple code-signing identity (required)
+`$ xcode-select --install`
 
-`security find-identity -v -p codesigning`
+### Set your Apple code-signing identity (required)
 
-Copy the appropriate "Apple Development" ID (the ascii-encoded hex value), and pass it to CMake at configure time: `-DSINTER_CODESIGN_IDENTITY:STRING=XXX"
+With the Xcode project open, enter the top-level project settings, and navigate to `Signing & Capabilities`. Here, configure your signing certificate and identity information.
 
 ### Apply for EndpointSecurity entitltements for your code-signing identity (optional, required for distribution)
 
-To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account owner can apply for this entitlement.
+To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account *owner* can apply for this entitlement.
 
-### Build with CMake
+### Build with Xcode at the command line
 
 From the Sinter directory:
 
-`mkdir build && cd build && cmake -G Ninja .. && ninja`
+`$ xcodebuild -scheme Sinter`
+
+Optional: you may need to set the command-line tools to the full Xcode, first, then try the above command again:
+
+`$ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
 
 ## Run Sinter
 
-After building, from the build directory:
+After building, from the build directory (`cd` to the build directory seen in the `--destination` output of the `xcodebuild` step):
 
-`sudo ./sinter`
+`sudo Sinter.app/Contents/MacOS/service`
 
 ## License
 
