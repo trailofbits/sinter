@@ -58,7 +58,9 @@ public class AuthorizationManager {
                         endpointSecClient.processMessage(message: message, allow: allowExecution)
 
                     } else {
-                        print("Automatically allowing executing for binary with valid signature: ", message.binaryPath)
+                        print("Automatically allowing executing for binary with valid signature: ")
+                        print("     path: ", message.binaryPath)
+                        print("     cdhash: ", message.cdhash)
 
                         authorizationCache[message.binaryPath] = true
                         endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)

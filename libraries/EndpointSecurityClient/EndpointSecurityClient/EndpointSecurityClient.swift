@@ -14,6 +14,21 @@ public struct EndpointSecurityClientMessage {
     public var unsafeMsgPtr: UnsafeMutablePointer<es_message_t>
     public var binaryPath: String
     public var signatureStatus: CodeSignatureStatus?
+    public var cdhash: String
+}
+
+// Because a Swift tuple cannot/shouldn't be iterated at runtime,
+// use an UnsafeBufferPointer to store the twenty UInt8 values of
+// the cdhash (a tuple of UInt8 values) into an iterable array form
+struct CDhash {
+    var tuple: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+    var array: [UInt8] {
+        var tmp = self.tuple
+        return [UInt8](UnsafeBufferPointer(start: &tmp.0,
+                                    count: MemoryLayout.size(ofValue: tmp)))
+    }
 }
 
 public class EndpointSecurityClient {
@@ -83,15 +98,28 @@ public class EndpointSecurityClient {
 
         return path
     }
+    
+    static func processCdHash(process: es_process_t) -> String? {
+        // Convert the tuple of UInt8 bytes to its hexadecimal string form
+        let CDhashArray = CDhash(tuple: process.cdhash).array
+        var cdhashHexString: String = ""
+        for i in CDhashArray {
+            cdhashHexString += String(format: "%02X", i)
+        }
+        
+        return cdhashHexString
+    }
 
     static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>) -> EndpointSecurityClientMessage {
         let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
         let message = unsafeMsgPtrCopy!.pointee
         let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
+        let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
-            binaryPath: binaryPath!
+            binaryPath: binaryPath!,
+            cdhash: cdhash!
         )
     }
 }
