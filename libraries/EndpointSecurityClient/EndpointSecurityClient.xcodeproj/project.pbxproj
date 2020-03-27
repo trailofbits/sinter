@@ -14,6 +14,7 @@
 		D2520AE8241C0D2400AC6747 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */; };
 		D2520AE9241C0D2400AC6747 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2520AF3241C126B00AC6747 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */; };
+		DA1FAC82242DB25800C73B45 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA1FAC81242DB1E100C73B45 /* libbsm.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520AEB241C0D5600AC6747 /* EndpointSecurity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurity.h; sourceTree = "<group>"; };
 		D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
+		DA1FAC81242DB1E100C73B45 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA1FAC82242DB25800C73B45 /* libbsm.tbd in Frameworks */,
 				D2520AE8241C0D2400AC6747 /* CodeSigningUtils.framework in Frameworks */,
 				D2520AF3241C126B00AC6747 /* libEndpointSecurity.tbd in Frameworks */,
 			);
@@ -116,6 +119,7 @@
 		D2520AE6241C0D2400AC6747 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA1FAC81242DB1E100C73B45 /* libbsm.tbd */,
 				D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */,
 				D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */,
 			);

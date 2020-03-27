@@ -9,14 +9,15 @@
 import CodeSigningUtils
 import EndpointSecurity
 import Foundation
+import Darwin.bsm
 
 public struct EndpointSecurityClientMessage {
     public var unsafeMsgPtr: UnsafeMutablePointer<es_message_t>
     public var binaryPath: String
     public var signatureStatus: CodeSignatureStatus?
     public var cdhash: String
-    public var ppid: pid_t
-    public var gid: pid_t
+    public var ppid, gid, pid: pid_t
+    public var uid: uid_t
 }
 
 // Because a Swift tuple cannot/shouldn't be iterated at runtime,
@@ -119,13 +120,17 @@ public class EndpointSecurityClient {
         let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
         let ppid = message.event.exec.target.pointee.ppid
         let gid = message.event.exec.target.pointee.group_id
+        let pid = audit_token_to_pid(message.event.exec.target.pointee.audit_token)
+        let uid = audit_token_to_euid(message.event.exec.target.pointee.audit_token)
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
             binaryPath: binaryPath!,
             cdhash: cdhash!,
             ppid: ppid,
-            gid: gid
+            gid: gid,
+            pid: pid,
+            uid: uid
         )
     }
 }

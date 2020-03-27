@@ -63,6 +63,8 @@ public class AuthorizationManager {
                         print("     cdhash: ", message.cdhash)
                         print("     parent process ID: ", String(message.ppid))
                         print("     process group ID: ", String(message.gid))
+                        print("     process ID: ", String(message.pid))
+                        print("     user ID: ", String(message.uid))
 
                         authorizationCache[message.binaryPath] = true
                         endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)
