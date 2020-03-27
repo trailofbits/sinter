@@ -19,6 +19,7 @@ public struct EndpointSecurityClientMessage {
     public var ppid, gid, pid: pid_t
     public var uid: uid_t
     public var signingId, teamId: String
+    public var isAppleSigned: Bool /* a "platform binary" */
 }
 
 // Because a Swift tuple cannot/shouldn't be iterated at runtime,
@@ -143,6 +144,7 @@ public class EndpointSecurityClient {
         let gid = message.event.exec.target.pointee.group_id
         let pid = audit_token_to_pid(message.event.exec.target.pointee.audit_token)
         let uid = audit_token_to_euid(message.event.exec.target.pointee.audit_token)
+        let isAppleSigned = message.event.exec.target.pointee.is_platform_binary
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
@@ -153,7 +155,8 @@ public class EndpointSecurityClient {
             pid: pid,
             uid: uid,
             signingId: signingId,
-            teamId: teamId
+            teamId: teamId,
+            isAppleSigned: isAppleSigned
         )
     }
 }

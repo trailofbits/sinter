@@ -67,6 +67,7 @@ public class AuthorizationManager {
                         print("     user ID: ", String(message.uid))
                         print("     signing info: signing ID: ", message.signingId)
                         print("     signing info: team ID: ", message.teamId)
+                        print("     is signed with Apple certificates: ", message.isAppleSigned)
 
                         authorizationCache[message.binaryPath] = true
                         endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)
