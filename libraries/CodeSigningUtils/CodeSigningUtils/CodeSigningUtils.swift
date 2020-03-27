@@ -16,31 +16,31 @@ public enum CodeSignatureStatus {
 }
 
 public func checkCodeSignature(path: String) -> CodeSignatureStatus {
-    let file_url: URL? = URL(fileURLWithPath: path)
-    if file_url == nil {
+    let fileUrl: URL? = URL(fileURLWithPath: path)
+    if fileUrl == nil {
         return CodeSignatureStatus.IOError
     }
 
-    let check_flags: SecCSFlags? = SecCSFlags(rawValue: kSecCSCheckNestedCode)
-    if check_flags == nil {
+    let checkFlags: SecCSFlags? = SecCSFlags(rawValue: kSecCSCheckNestedCode)
+    if checkFlags == nil {
         return CodeSignatureStatus.InternalError
     }
 
-    var static_code_obj: SecStaticCode?
-    var err: OSStatus = SecStaticCodeCreateWithPath(file_url! as CFURL, [], &static_code_obj)
-    if err != OSStatus(noErr) || static_code_obj == nil {
+    var staticCodeObj: SecStaticCode?
+    var err: OSStatus = SecStaticCodeCreateWithPath(fileUrl! as CFURL, [], &staticCodeObj)
+    if err != OSStatus(noErr) || staticCodeObj == nil {
         return CodeSignatureStatus.IOError
     }
 
-    let sec_requirement: SecRequirement? = nil
-    var sec_err: Unmanaged<CFError>?
-    err = SecStaticCodeCheckValidityWithErrors(static_code_obj!,
-                                               check_flags!,
-                                               sec_requirement,
-                                               &sec_err)
+    let secRequirement: SecRequirement? = nil
+    var secErr: Unmanaged<CFError>?
+    err = SecStaticCodeCheckValidityWithErrors(staticCodeObj!,
+                                               checkFlags!,
+                                               secRequirement,
+                                               &secErr)
 
-    if sec_err != nil {
-        sec_err?.release()
+    if secErr != nil {
+        secErr?.release()
     }
 
     if err != errSecSuccess {

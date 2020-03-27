@@ -258,7 +258,6 @@
 				D2520B7D241C266200AC6747 /* Sinter */,
 				D2520BA2241C26F000AC6747 /* service */,
 				D2F15A28241BE72A002351A9 /* Products */,
-				D2F15A4E241BE9BF002351A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -280,13 +279,6 @@
 				D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */,
 			);
 			path = libraries;
-			sourceTree = "<group>";
-		};
-		D2F15A4E241BE9BF002351A9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,7 +498,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -529,7 +521,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -9,11 +9,31 @@
 import CodeSigningUtils
 import EndpointSecurity
 import Foundation
+import Darwin.bsm
 
 public struct EndpointSecurityClientMessage {
     public var unsafeMsgPtr: UnsafeMutablePointer<es_message_t>
     public var binaryPath: String
     public var signatureStatus: CodeSignatureStatus?
+    public var cdhash: String
+    public var ppid, gid, pid: pid_t
+    public var uid: uid_t
+    public var signingId, teamId: String
+    public var isAppleSigned: Bool /* a "platform binary" */
+}
+
+// Because a Swift tuple cannot/shouldn't be iterated at runtime,
+// use an UnsafeBufferPointer to store the twenty UInt8 values of
+// the cdhash (a tuple of UInt8 values) into an iterable array form
+struct CDhash {
+    var tuple: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+    var array: [UInt8] {
+        var tmp = self.tuple
+        return [UInt8](UnsafeBufferPointer(start: &tmp.0,
+                                    count: MemoryLayout.size(ofValue: tmp)))
+    }
 }
 
 public class EndpointSecurityClient {
@@ -78,20 +98,66 @@ public class EndpointSecurityClient {
     }
 
     static func processBinaryPath(process: es_process_t) -> String? {
-        let executable = process.executable!.pointee
+        let executable = process.executable.pointee
         let path = String(cString: executable.path.data) // TODO: use path.size
 
         return path
     }
 
-    static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>) -> EndpointSecurityClientMessage {
+    static func processCdHash(process: es_process_t) -> String? {
+        // Convert the tuple of UInt8 bytes to its hexadecimal string form
+        let CDhashArray = CDhash(tuple: process.cdhash).array
+        var cdhashHexString: String = ""
+        for eachByte in CDhashArray {
+            cdhashHexString += String(format: "%02X", eachByte)
+        }
+
+        return cdhashHexString
+    }
+
+    static func processTeamId(process: es_process_t) -> String {
+        var teamIdString: String = ""
+        if process.team_id.length > 0 {
+            teamIdString = String(cString: process.team_id.data)
+        }
+
+        return teamIdString
+    }
+
+    static func processSigningId(process: es_process_t) -> String {
+        var signingIdString: String = ""
+        if process.signing_id.length > 0 {
+            signingIdString = String(cString: process.signing_id.data)
+        }
+
+        return signingIdString
+    }
+
+    static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>)
+        -> EndpointSecurityClientMessage {
         let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
         let message = unsafeMsgPtrCopy!.pointee
-        let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target!.pointee)
+        let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
+        let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
+        let teamId = EndpointSecurityClient.processTeamId(process: message.event.exec.target.pointee)
+        let signingId = EndpointSecurityClient.processSigningId(process: message.event.exec.target.pointee)
+        let ppid = message.event.exec.target.pointee.ppid
+        let gid = message.event.exec.target.pointee.group_id
+        let pid = audit_token_to_pid(message.event.exec.target.pointee.audit_token)
+        let uid = audit_token_to_euid(message.event.exec.target.pointee.audit_token)
+        let isAppleSigned = message.event.exec.target.pointee.is_platform_binary
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
-            binaryPath: binaryPath!
+            binaryPath: binaryPath!,
+            cdhash: cdhash!,
+            ppid: ppid,
+            gid: gid,
+            pid: pid,
+            uid: uid,
+            signingId: signingId,
+            teamId: teamId,
+            isAppleSigned: isAppleSigned
         )
     }
 }

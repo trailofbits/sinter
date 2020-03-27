@@ -28,11 +28,11 @@ signal(SIGINT, SIG_IGN)
 
 print("Starting the Authorization Manager")
 DispatchQueue.global(qos: .userInteractive).async {
-    let exit_status = authorizationManager!.exec() ? EXIT_SUCCESS : EXIT_FAILURE
+    let exitStatus = authorizationManager!.exec() ? EXIT_SUCCESS : EXIT_FAILURE
 
     DispatchQueue.main.async {
-        print("Terminating with status ", exit_status)
-        exit(exit_status)
+        print("Terminating with status ", exitStatus)
+        exit(exitStatus)
     }
 }
 

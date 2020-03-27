@@ -58,10 +58,20 @@ public class AuthorizationManager {
                         endpointSecClient.processMessage(message: message, allow: allowExecution)
 
                     } else {
-                        print("Automatically allowing executing for binary with valid signature: ", message.binaryPath)
+                        print("Automatically allowing executing for binary with valid signature: ")
+                        print("     path: ", message.binaryPath)
+                        print("     cdhash: ", message.cdhash)
+                        print("     parent process ID: ", String(message.ppid))
+                        print("     process group ID: ", String(message.gid))
+                        print("     process ID: ", String(message.pid))
+                        print("     user ID: ", String(message.uid))
+                        print("     signing info: signing ID: ", message.signingId)
+                        print("     signing info: team ID: ", message.teamId)
+                        print("     is signed with Apple certificates: ", message.isAppleSigned)
 
                         authorizationCache[message.binaryPath] = true
-                        endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)
+                        endpointSecClient.processMessage(message: message,
+                                                         allow: authorizationCache[message.binaryPath]!)
                     }
                 }
             }
