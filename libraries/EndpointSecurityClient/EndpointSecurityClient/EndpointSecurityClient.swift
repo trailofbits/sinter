@@ -15,6 +15,8 @@ public struct EndpointSecurityClientMessage {
     public var binaryPath: String
     public var signatureStatus: CodeSignatureStatus?
     public var cdhash: String
+    public var ppid: pid_t
+    public var gid: pid_t
 }
 
 // Because a Swift tuple cannot/shouldn't be iterated at runtime,
@@ -115,11 +117,15 @@ public class EndpointSecurityClient {
         let message = unsafeMsgPtrCopy!.pointee
         let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
         let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
+        let ppid = message.event.exec.target.pointee.ppid
+        let gid = message.event.exec.target.pointee.group_id
 
         return EndpointSecurityClientMessage(
             unsafeMsgPtr: unsafeMsgPtrCopy!,
             binaryPath: binaryPath!,
-            cdhash: cdhash!
+            cdhash: cdhash!,
+            ppid: ppid,
+            gid: gid
         )
     }
 }
