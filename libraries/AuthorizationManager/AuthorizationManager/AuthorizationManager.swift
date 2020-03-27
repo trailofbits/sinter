@@ -13,6 +13,57 @@ import CodeSigningUtils
 import EndpointSecurityClient
 import SignatureChecker
 
+let logPath = "file:///var/db/sinter/"
+class Logger {
+    
+    static var logFile: URL? {
+        let logsDirectory = URL(string: logPath)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter.string(from: Date())
+        let fileName = "Sinter-\(dateString).log"
+        return logsDirectory!.appendingPathComponent(fileName)
+    }
+
+    static func log(_ message: String) {
+        guard let logFile = logFile else {
+            return
+        }
+        //print("Logging to path: ", logFile)
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "'['yyyy-MM-dd'T'HH:mm:ss.SSS'Z]'"
+        let timestamp = formatter.string(from: Date())
+        guard let data = (timestamp + " sinter: " + message + "\n").data(using: String.Encoding.utf8)
+            else { return }
+
+        if FileManager.default.fileExists(atPath: logFile.path) {
+            if let fileHandle = try? FileHandle(forWritingTo: logFile) {
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(data)
+                fileHandle.closeFile()
+            }
+        } else {
+            do {
+                // Create the log directory first if needed:
+                let logsDirectory = URL(string: logPath)
+                try FileManager.default.createDirectory(at: logsDirectory!, withIntermediateDirectories: true,
+                                                        attributes: nil)
+
+                // Then write the log:
+                do {
+                    try data.write(to: logFile, options: .atomicWrite)
+                } catch (let writeError) {
+                    print("Failed to write to log at \(logFile) : \(writeError)")
+                }
+            } catch (let createError)  {
+                print("Failed to create log directory at \(logPath) : \(createError)")
+            }
+        }
+    }
+}
+
 public class AuthorizationManager {
     var terminateExecution: Bool = false
     let terminateExecutionDq = DispatchQueue(label: "shouldTerminateDq")
@@ -68,6 +119,11 @@ public class AuthorizationManager {
                         print("     signing info: signing ID: ", message.signingId)
                         print("     signing info: team ID: ", message.teamId)
                         print("     is signed with Apple certificates: ", message.isAppleSigned)
+                        let logLine = "action=EXEC|decision=ALLOW|reason=CERT|sha256=?|cert_sha256=?|cert_cn=?|"
+                                    + "pid=\(String(message.pid))|ppid=\(String(message.ppid))|uid=\(String(message.uid))"
+                                    + "|user=?|gid=\(String(message.gid))|group=?|mode=?|path=\(message.binaryPath)"
+                                    + "|args=?|"
+                        Logger.log(logLine)
 
                         authorizationCache[message.binaryPath] = true
                         endpointSecClient.processMessage(message: message,
