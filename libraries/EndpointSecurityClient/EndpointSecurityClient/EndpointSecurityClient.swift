@@ -18,6 +18,7 @@ public struct EndpointSecurityClientMessage {
     public var cdhash: String
     public var ppid, gid, pid: pid_t
     public var uid: uid_t
+    public var signingId, teamId: String
 }
 
 // Because a Swift tuple cannot/shouldn't be iterated at runtime,
@@ -113,11 +114,31 @@ public class EndpointSecurityClient {
         return cdhashHexString
     }
 
+    static func processTeamId(process: es_process_t) -> String {
+        var teamIdString: String = ""
+        if process.team_id.length > 0 {
+            teamIdString = String(cString: process.team_id.data)
+        }
+        
+        return teamIdString
+    }
+    
+    static func processSigningId(process: es_process_t) -> String {
+        var signingIdString: String = ""
+        if process.signing_id.length > 0 {
+            signingIdString = String(cString: process.signing_id.data)
+        }
+        
+        return signingIdString
+    }
+    
     static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>) -> EndpointSecurityClientMessage {
         let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
         let message = unsafeMsgPtrCopy!.pointee
         let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
         let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
+        let teamId = EndpointSecurityClient.processTeamId(process: message.event.exec.target.pointee)
+        let signingId = EndpointSecurityClient.processSigningId(process: message.event.exec.target.pointee)
         let ppid = message.event.exec.target.pointee.ppid
         let gid = message.event.exec.target.pointee.group_id
         let pid = audit_token_to_pid(message.event.exec.target.pointee.audit_token)
@@ -130,7 +151,9 @@ public class EndpointSecurityClient {
             ppid: ppid,
             gid: gid,
             pid: pid,
-            uid: uid
+            uid: uid,
+            signingId: signingId,
+            teamId: teamId
         )
     }
 }

@@ -65,6 +65,8 @@ public class AuthorizationManager {
                         print("     process group ID: ", String(message.gid))
                         print("     process ID: ", String(message.pid))
                         print("     user ID: ", String(message.uid))
+                        print("     signing info: signing ID: ", message.signingId)
+                        print("     signing info: team ID: ", message.teamId)
 
                         authorizationCache[message.binaryPath] = true
                         endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)
