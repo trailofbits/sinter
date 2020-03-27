@@ -70,7 +70,8 @@ public class AuthorizationManager {
                         print("     is signed with Apple certificates: ", message.isAppleSigned)
 
                         authorizationCache[message.binaryPath] = true
-                        endpointSecClient.processMessage(message: message, allow: authorizationCache[message.binaryPath]!)
+                        endpointSecClient.processMessage(message: message,
+                                                         allow: authorizationCache[message.binaryPath]!)
                     }
                 }
             }

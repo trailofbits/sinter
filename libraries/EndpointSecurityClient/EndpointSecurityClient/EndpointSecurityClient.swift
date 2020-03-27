@@ -103,15 +103,15 @@ public class EndpointSecurityClient {
 
         return path
     }
-    
+
     static func processCdHash(process: es_process_t) -> String? {
         // Convert the tuple of UInt8 bytes to its hexadecimal string form
         let CDhashArray = CDhash(tuple: process.cdhash).array
         var cdhashHexString: String = ""
-        for i in CDhashArray {
-            cdhashHexString += String(format: "%02X", i)
+        for eachByte in CDhashArray {
+            cdhashHexString += String(format: "%02X", eachByte)
         }
-        
+
         return cdhashHexString
     }
 
@@ -120,20 +120,21 @@ public class EndpointSecurityClient {
         if process.team_id.length > 0 {
             teamIdString = String(cString: process.team_id.data)
         }
-        
+
         return teamIdString
     }
-    
+
     static func processSigningId(process: es_process_t) -> String {
         var signingIdString: String = ""
         if process.signing_id.length > 0 {
             signingIdString = String(cString: process.signing_id.data)
         }
-        
+
         return signingIdString
     }
-    
-    static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>) -> EndpointSecurityClientMessage {
+
+    static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>)
+        -> EndpointSecurityClientMessage {
         let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
         let message = unsafeMsgPtrCopy!.pointee
         let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
