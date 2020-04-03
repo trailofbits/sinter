@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D2520B0A241C131100AC6747 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B00241C131100AC6747 /* AuthorizationManager.framework */; };
-		D2520B0F241C131100AC6747 /* AuthorizationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B0E241C131100AC6747 /* AuthorizationManagerTests.swift */; };
 		D2520B11241C131100AC6747 /* AuthorizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2520B03241C131100AC6747 /* AuthorizationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2520B24241C132700AC6747 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B23241C132700AC6747 /* AuthorizationManager.swift */; };
 		D2DC99D6242EADBC00AB9EEC /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC99D5242EADBC00AB9EEC /* Logger.framework */; };
@@ -19,16 +17,6 @@
 		D2EFA238242163DB00BCB9A3 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA237242163DB00BCB9A3 /* Interface.swift */; };
 		D2EFA23F242169CE00BCB9A3 /* IEndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA23E242169CE00BCB9A3 /* IEndpointSecurityClient.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D2520B0B241C131100AC6747 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2520AF7241C131100AC6747 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2520AFF241C131100AC6747;
-			remoteInfo = AuthorizationManager;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D2DC99D8242EADBD00AB9EEC /* Embed Frameworks */ = {
@@ -48,9 +36,6 @@
 		D2520B00241C131100AC6747 /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520B03241C131100AC6747 /* AuthorizationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationManager.h; sourceTree = "<group>"; };
 		D2520B04241C131100AC6747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2520B09241C131100AC6747 /* AuthorizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthorizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2520B0E241C131100AC6747 /* AuthorizationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerTests.swift; sourceTree = "<group>"; };
-		D2520B10241C131100AC6747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2520B23241C132700AC6747 /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		D2520B26241C133300AC6747 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520B27241C133300AC6747 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,14 +57,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2520B06241C131100AC6747 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2520B0A241C131100AC6747 /* AuthorizationManager.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				D2520B02241C131100AC6747 /* AuthorizationManager */,
-				D2520B0D241C131100AC6747 /* AuthorizationManagerTests */,
 				D2520B01241C131100AC6747 /* Products */,
 				D2520B25241C133300AC6747 /* Frameworks */,
 			);
@@ -97,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				D2520B00241C131100AC6747 /* AuthorizationManager.framework */,
-				D2520B09241C131100AC6747 /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,15 +90,6 @@
 				D2520B04241C131100AC6747 /* Info.plist */,
 			);
 			path = AuthorizationManager;
-			sourceTree = "<group>";
-		};
-		D2520B0D241C131100AC6747 /* AuthorizationManagerTests */ = {
-			isa = PBXGroup;
-			children = (
-				D2520B0E241C131100AC6747 /* AuthorizationManagerTests.swift */,
-				D2520B10241C131100AC6747 /* Info.plist */,
-			);
-			path = AuthorizationManagerTests;
 			sourceTree = "<group>";
 		};
 		D2520B25241C133300AC6747 /* Frameworks */ = {
@@ -170,24 +136,6 @@
 			productReference = D2520B00241C131100AC6747 /* AuthorizationManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D2520B08241C131100AC6747 /* AuthorizationManagerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2520B17241C131100AC6747 /* Build configuration list for PBXNativeTarget "AuthorizationManagerTests" */;
-			buildPhases = (
-				D2520B05241C131100AC6747 /* Sources */,
-				D2520B06241C131100AC6747 /* Frameworks */,
-				D2520B07241C131100AC6747 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D2520B0C241C131100AC6747 /* PBXTargetDependency */,
-			);
-			name = AuthorizationManagerTests;
-			productName = AuthorizationManagerTests;
-			productReference = D2520B09241C131100AC6747 /* AuthorizationManagerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,9 +149,6 @@
 					D2520AFF241C131100AC6747 = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					D2520B08241C131100AC6747 = {
-						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -221,20 +166,12 @@
 			projectRoot = "";
 			targets = (
 				D2520AFF241C131100AC6747 /* AuthorizationManager */,
-				D2520B08241C131100AC6747 /* AuthorizationManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2520AFE241C131100AC6747 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2520B07241C131100AC6747 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -257,23 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2520B05241C131100AC6747 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2520B0F241C131100AC6747 /* AuthorizationManagerTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D2520B0C241C131100AC6747 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2520AFF241C131100AC6747 /* AuthorizationManager */;
-			targetProxy = D2520B0B241C131100AC6747 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D2520B12241C131100AC6747 /* Debug */ = {
@@ -448,42 +369,6 @@
 			};
 			name = Release;
 		};
-		D2520B18241C131100AC6747 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AuthorizationManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.AuthorizationManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D2520B19241C131100AC6747 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = AuthorizationManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.AuthorizationManagerTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -501,15 +386,6 @@
 			buildConfigurations = (
 				D2520B15241C131100AC6747 /* Debug */,
 				D2520B16241C131100AC6747 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2520B17241C131100AC6747 /* Build configuration list for PBXNativeTarget "AuthorizationManagerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2520B18241C131100AC6747 /* Debug */,
-				D2520B19241C131100AC6747 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

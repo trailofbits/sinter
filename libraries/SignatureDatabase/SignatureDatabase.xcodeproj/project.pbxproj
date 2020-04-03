@@ -11,22 +11,10 @@
 		D2DC998F242E870200AB9EEC /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; };
 		D2DC9990242E870200AB9EEC /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2DC9991242E872600AB9EEC /* SignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */; };
-		D2EFA26D2421A54600BCB9A3 /* SignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */; };
-		D2EFA2722421A54600BCB9A3 /* SignatureDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */; };
 		D2EFA2742421A54600BCB9A3 /* SignatureDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2EFA2882421A55300BCB9A3 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; };
 		D2EFA2892421A55300BCB9A3 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D2EFA26E2421A54600BCB9A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2EFA25A2421A54500BCB9A3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2EFA2622421A54500BCB9A3;
-			remoteInfo = SignatureDatabase;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D2EFA28A2421A55400BCB9A3 /* Embed Frameworks */ = {
@@ -49,9 +37,6 @@
 		D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignatureDatabase.h; sourceTree = "<group>"; };
 		D2EFA2672421A54500BCB9A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignatureDatabaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseTests.swift; sourceTree = "<group>"; };
-		D2EFA2732421A54600BCB9A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabase.swift; sourceTree = "<group>"; };
 		D2EFA2942421C41C00BCB9A3 /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,14 +52,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2EFA2692421A54600BCB9A3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2EFA26D2421A54600BCB9A3 /* SignatureDatabase.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				D2EFA2652421A54500BCB9A3 /* SignatureDatabase */,
-				D2EFA2702421A54600BCB9A3 /* SignatureDatabaseTests */,
 				D2EFA2642421A54500BCB9A3 /* Products */,
 				D2EFA2862421A55300BCB9A3 /* Frameworks */,
 			);
@@ -92,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */,
-				D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,15 +81,6 @@
 				D252E01E243627430000FD48 /* Interface.swift */,
 			);
 			path = SignatureDatabase;
-			sourceTree = "<group>";
-		};
-		D2EFA2702421A54600BCB9A3 /* SignatureDatabaseTests */ = {
-			isa = PBXGroup;
-			children = (
-				D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */,
-				D2EFA2732421A54600BCB9A3 /* Info.plist */,
-			);
-			path = SignatureDatabaseTests;
 			sourceTree = "<group>";
 		};
 		D2EFA2862421A55300BCB9A3 /* Frameworks */ = {
@@ -160,24 +126,6 @@
 			productReference = D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D2EFA26B2421A54600BCB9A3 /* SignatureDatabaseTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2EFA27A2421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabaseTests" */;
-			buildPhases = (
-				D2EFA2682421A54600BCB9A3 /* Sources */,
-				D2EFA2692421A54600BCB9A3 /* Frameworks */,
-				D2EFA26A2421A54600BCB9A3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D2EFA26F2421A54600BCB9A3 /* PBXTargetDependency */,
-			);
-			name = SignatureDatabaseTests;
-			productName = SignatureDatabaseTests;
-			productReference = D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -191,9 +139,6 @@
 					D2EFA2622421A54500BCB9A3 = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					D2EFA26B2421A54600BCB9A3 = {
-						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -211,20 +156,12 @@
 			projectRoot = "";
 			targets = (
 				D2EFA2622421A54500BCB9A3 /* SignatureDatabase */,
-				D2EFA26B2421A54600BCB9A3 /* SignatureDatabaseTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2EFA2612421A54500BCB9A3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2EFA26A2421A54600BCB9A3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -243,23 +180,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2EFA2682421A54600BCB9A3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2EFA2722421A54600BCB9A3 /* SignatureDatabaseTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D2EFA26F2421A54600BCB9A3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2EFA2622421A54500BCB9A3 /* SignatureDatabase */;
-			targetProxy = D2EFA26E2421A54600BCB9A3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D2EFA2752421A54600BCB9A3 /* Debug */ = {
@@ -434,42 +355,6 @@
 			};
 			name = Release;
 		};
-		D2EFA27B2421A54600BCB9A3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SignatureDatabaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabaseTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D2EFA27C2421A54600BCB9A3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = SignatureDatabaseTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabaseTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -487,15 +372,6 @@
 			buildConfigurations = (
 				D2EFA2782421A54600BCB9A3 /* Debug */,
 				D2EFA2792421A54600BCB9A3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2EFA27A2421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabaseTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2EFA27B2421A54600BCB9A3 /* Debug */,
-				D2EFA27C2421A54600BCB9A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

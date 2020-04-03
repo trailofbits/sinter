@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		35A4B70E40EE0D3F649CC90A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A4BB621A5565BE8675E147 /* Utility.swift */; };
-		D249E605241C0C35000B2F5A /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5FB241C0C35000B2F5A /* EndpointSecurityClient.framework */; };
-		D249E60A241C0C35000B2F5A /* EndpointSecurityClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E609241C0C35000B2F5A /* EndpointSecurityClientTests.swift */; };
 		D249E60C241C0C35000B2F5A /* EndpointSecurityClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D249E5FE241C0C35000B2F5A /* EndpointSecurityClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D249E61F241C0C51000B2F5A /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E61E241C0C51000B2F5A /* EndpointSecurityClient.swift */; };
 		D2520AF3241C126B00AC6747 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */; };
@@ -17,16 +15,6 @@
 		D2EFA2562421A4C700BCB9A3 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */; };
 		D2EFA2572421A4C700BCB9A3 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D249E606241C0C35000B2F5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D249E5F2241C0C35000B2F5A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D249E5FA241C0C35000B2F5A;
-			remoteInfo = EndpointSecurityClient;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D2EFA2582421A4C800BCB9A3 /* Embed Frameworks */ = {
@@ -47,9 +35,6 @@
 		D249E5FB241C0C35000B2F5A /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D249E5FE241C0C35000B2F5A /* EndpointSecurityClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurityClient.h; sourceTree = "<group>"; };
 		D249E5FF241C0C35000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D249E604241C0C35000B2F5A /* EndpointSecurityClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EndpointSecurityClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D249E609241C0C35000B2F5A /* EndpointSecurityClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityClientTests.swift; sourceTree = "<group>"; };
-		D249E60B241C0C35000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D249E61E241C0C51000B2F5A /* EndpointSecurityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityClient.swift; sourceTree = "<group>"; };
 		D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
@@ -67,14 +52,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E601241C0C35000B2F5A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D249E605241C0C35000B2F5A /* EndpointSecurityClient.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E5FD241C0C35000B2F5A /* EndpointSecurityClient */,
-				D249E608241C0C35000B2F5A /* EndpointSecurityClientTests */,
 				D249E5FC241C0C35000B2F5A /* Products */,
 				D2520AE6241C0D2400AC6747 /* Frameworks */,
 			);
@@ -92,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E5FB241C0C35000B2F5A /* EndpointSecurityClient.framework */,
-				D249E604241C0C35000B2F5A /* EndpointSecurityClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,15 +82,6 @@
 				D252E020243627B50000FD48 /* Interface.swift */,
 			);
 			path = EndpointSecurityClient;
-			sourceTree = "<group>";
-		};
-		D249E608241C0C35000B2F5A /* EndpointSecurityClientTests */ = {
-			isa = PBXGroup;
-			children = (
-				D249E609241C0C35000B2F5A /* EndpointSecurityClientTests.swift */,
-				D249E60B241C0C35000B2F5A /* Info.plist */,
-			);
-			path = EndpointSecurityClientTests;
 			sourceTree = "<group>";
 		};
 		D2520AE6241C0D2400AC6747 /* Frameworks */ = {
@@ -161,24 +127,6 @@
 			productReference = D249E5FB241C0C35000B2F5A /* EndpointSecurityClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D249E603241C0C35000B2F5A /* EndpointSecurityClientTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D249E612241C0C35000B2F5A /* Build configuration list for PBXNativeTarget "EndpointSecurityClientTests" */;
-			buildPhases = (
-				D249E600241C0C35000B2F5A /* Sources */,
-				D249E601241C0C35000B2F5A /* Frameworks */,
-				D249E602241C0C35000B2F5A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D249E607241C0C35000B2F5A /* PBXTargetDependency */,
-			);
-			name = EndpointSecurityClientTests;
-			productName = EndpointSecurityClientTests;
-			productReference = D249E604241C0C35000B2F5A /* EndpointSecurityClientTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,9 +140,6 @@
 					D249E5FA241C0C35000B2F5A = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					D249E603241C0C35000B2F5A = {
-						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -212,20 +157,12 @@
 			projectRoot = "";
 			targets = (
 				D249E5FA241C0C35000B2F5A /* EndpointSecurityClient */,
-				D249E603241C0C35000B2F5A /* EndpointSecurityClientTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D249E5F9241C0C35000B2F5A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D249E602241C0C35000B2F5A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -245,23 +182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E600241C0C35000B2F5A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D249E60A241C0C35000B2F5A /* EndpointSecurityClientTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D249E607241C0C35000B2F5A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D249E5FA241C0C35000B2F5A /* EndpointSecurityClient */;
-			targetProxy = D249E606241C0C35000B2F5A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D249E60D241C0C35000B2F5A /* Debug */ = {
@@ -442,42 +363,6 @@
 			};
 			name = Release;
 		};
-		D249E613241C0C35000B2F5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = EndpointSecurityClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.EndpointSecurityClientTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D249E614241C0C35000B2F5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = EndpointSecurityClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.EndpointSecurityClientTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -495,15 +380,6 @@
 			buildConfigurations = (
 				D249E610241C0C35000B2F5A /* Debug */,
 				D249E611241C0C35000B2F5A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D249E612241C0C35000B2F5A /* Build configuration list for PBXNativeTarget "EndpointSecurityClientTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D249E613241C0C35000B2F5A /* Debug */,
-				D249E614241C0C35000B2F5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
