@@ -7,7 +7,7 @@
  */
 
 import AuthorizationManager
-import EndpointSecurity
+import EndpointSecurityWrapper
 
 import Foundation
 
@@ -44,7 +44,7 @@ class EndpointSecurityClient: IEndpointSecurityClient {
             let endpointSecMessage = unsafeMsgPtrCopy!.pointee
 
             let binaryPath = EndpointSecurityClient.processBinaryPath(
-                process: endpointSecMessage.event.exec.target.pointee)
+                process: endpointSecMessage.event.exec.target!.pointee)
 
             let message = IEndpointSecurityClientMessage(messageId: identifier, binaryPath: binaryPath)
 
@@ -115,7 +115,7 @@ class EndpointSecurityClient: IEndpointSecurityClient {
     }
 
     static func processBinaryPath(process: es_process_t) -> String {
-        let executable = process.executable.pointee
+        let executable = process.executable!.pointee
 
         // TODO: use path.size
         let path = String(cString: executable.path.data)

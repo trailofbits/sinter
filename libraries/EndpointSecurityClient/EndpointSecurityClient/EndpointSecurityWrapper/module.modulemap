@@ -1,0 +1,4 @@
+module EndpointSecurityWrapper {
+  header "EndpointSecurityWrapper.h"
+  export *
+}
