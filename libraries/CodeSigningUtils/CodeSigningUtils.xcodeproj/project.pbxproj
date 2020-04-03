@@ -7,29 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D249E59B241C080E000B2F5A /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E591241C080E000B2F5A /* CodeSigningUtils.framework */; };
-		D249E5A0241C080E000B2F5A /* CodeSigningUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */; };
 		D249E5A2241C080E000B2F5A /* CodeSigningUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D249E594241C080E000B2F5A /* CodeSigningUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D249E5B7241C0864000B2F5A /* CodeSigningUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D249E59C241C080E000B2F5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D249E588241C080E000B2F5A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D249E590241C080E000B2F5A;
-			remoteInfo = CodeSigningUtils;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D249E591241C080E000B2F5A /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D249E594241C080E000B2F5A /* CodeSigningUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeSigningUtils.h; sourceTree = "<group>"; };
 		D249E595241C080E000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeSigningUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSigningUtilsTests.swift; sourceTree = "<group>"; };
-		D249E5A1241C080E000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSigningUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -41,14 +26,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E597241C080E000B2F5A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D249E59B241C080E000B2F5A /* CodeSigningUtils.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -56,7 +33,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E593241C080E000B2F5A /* CodeSigningUtils */,
-				D249E59E241C080E000B2F5A /* CodeSigningUtilsTests */,
 				D249E592241C080E000B2F5A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,7 +41,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E591241C080E000B2F5A /* CodeSigningUtils.framework */,
-				D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,15 +53,6 @@
 				D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */,
 			);
 			path = CodeSigningUtils;
-			sourceTree = "<group>";
-		};
-		D249E59E241C080E000B2F5A /* CodeSigningUtilsTests */ = {
-			isa = PBXGroup;
-			children = (
-				D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */,
-				D249E5A1241C080E000B2F5A /* Info.plist */,
-			);
-			path = CodeSigningUtilsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,24 +87,6 @@
 			productReference = D249E591241C080E000B2F5A /* CodeSigningUtils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D249E599241C080E000B2F5A /* CodeSigningUtilsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D249E5A8241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtilsTests" */;
-			buildPhases = (
-				D249E596241C080E000B2F5A /* Sources */,
-				D249E597241C080E000B2F5A /* Frameworks */,
-				D249E598241C080E000B2F5A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D249E59D241C080E000B2F5A /* PBXTargetDependency */,
-			);
-			name = CodeSigningUtilsTests;
-			productName = CodeSigningUtilsTests;
-			productReference = D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -152,9 +100,6 @@
 					D249E590241C080E000B2F5A = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
-					};
-					D249E599241C080E000B2F5A = {
-						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
@@ -172,20 +117,12 @@
 			projectRoot = "";
 			targets = (
 				D249E590241C080E000B2F5A /* CodeSigningUtils */,
-				D249E599241C080E000B2F5A /* CodeSigningUtilsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D249E58F241C080E000B2F5A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D249E598241C080E000B2F5A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,23 +140,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E596241C080E000B2F5A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D249E5A0241C080E000B2F5A /* CodeSigningUtilsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D249E59D241C080E000B2F5A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D249E590241C080E000B2F5A /* CodeSigningUtils */;
-			targetProxy = D249E59C241C080E000B2F5A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D249E5A3241C080E000B2F5A /* Debug */ = {
@@ -349,7 +270,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -376,7 +297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -390,42 +311,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtils;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		D249E5A9241C080E000B2F5A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CodeSigningUtilsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtilsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D249E5AA241C080E000B2F5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CodeSigningUtilsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtilsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -447,15 +332,6 @@
 			buildConfigurations = (
 				D249E5A6241C080E000B2F5A /* Debug */,
 				D249E5A7241C080E000B2F5A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D249E5A8241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtilsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D249E5A9241C080E000B2F5A /* Debug */,
-				D249E5AA241C080E000B2F5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

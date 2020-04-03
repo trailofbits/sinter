@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2520B7B241C266200AC6747"
-               BuildableName = "Sinter.app"
-               BlueprintName = "Sinter"
-               ReferencedContainer = "container:Sinter.xcodeproj">
+               BlueprintIdentifier = "D2DC99A5242EAD4000AB9EEC"
+               BuildableName = "Logger.framework"
+               BlueprintName = "Logger"
+               ReferencedContainer = "container:Logger.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D22A17132436493B005BFA77"
-               BuildableName = "MorozAuthorizationInterfaceTests.xctest"
-               BlueprintName = "MorozAuthorizationInterfaceTests"
-               ReferencedContainer = "container:libraries/MorozAuthorizationInterface/MorozAuthorizationInterface.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,16 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D2520B7B241C266200AC6747"
-            BuildableName = "Sinter.app"
-            BlueprintName = "Sinter"
-            ReferencedContainer = "container:Sinter.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -67,16 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D2520B7B241C266200AC6747"
-            BuildableName = "Sinter.app"
-            BlueprintName = "Sinter"
-            ReferencedContainer = "container:Sinter.xcodeproj">
+            BlueprintIdentifier = "D2DC99A5242EAD4000AB9EEC"
+            BuildableName = "Logger.framework"
+            BlueprintName = "Logger"
+            ReferencedContainer = "container:Logger.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

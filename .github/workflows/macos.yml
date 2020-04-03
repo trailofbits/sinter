@@ -24,9 +24,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Install system dependencies
+    - name: Check configured signing Team IDs
       run: |
-        sudo gem install xcpretty
+        ./scripts/check_configured_team_ids.sh
 
     - name: Create the build folder(s)
       id: build_folder
@@ -41,9 +41,10 @@ jobs:
 
     - name: Build the project
       run: |
-        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" clean build | xcpretty
+        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" clean build
 
     - name: Run the tests
+      if: matrix.build_type == 'Debug'
       run: |
-        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" test | xcpretty
+        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" test
 
