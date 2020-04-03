@@ -28,10 +28,6 @@ jobs:
       run: |
         ./scripts/check_configured_team_ids.sh
 
-    - name: Install system dependencies
-      run: |
-        sudo gem install xcpretty
-
     - name: Create the build folder(s)
       id: build_folder
       run: |
@@ -45,9 +41,9 @@ jobs:
 
     - name: Build the project
       run: |
-        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" clean build | xcpretty
+        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" clean build
 
     - name: Run the tests
       run: |
-        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" test | xcpretty
+        xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" test
 
