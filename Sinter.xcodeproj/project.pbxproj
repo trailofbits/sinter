@@ -7,28 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		94B4EE9B2435163600CDCFC5 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B4EE8F2435163600CDCFC5 /* libEndpointSecurity.tbd */; };
+		D22A173C24364A25005BFA77 /* MorozAuthorizationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22A17332436493C005BFA77 /* MorozAuthorizationInterface.framework */; };
+		D22A173D24364A25005BFA77 /* MorozAuthorizationInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D22A17332436493C005BFA77 /* MorozAuthorizationInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2520B7F241C266200AC6747 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B7E241C266200AC6747 /* AppDelegate.swift */; };
 		D2520B81241C266200AC6747 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520B80241C266200AC6747 /* ContentView.swift */; };
 		D2520B83241C266600AC6747 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2520B82241C266600AC6747 /* Assets.xcassets */; };
 		D2520B86241C266600AC6747 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2520B85241C266600AC6747 /* Preview Assets.xcassets */; };
 		D2520B89241C266600AC6747 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2520B87241C266600AC6747 /* Main.storyboard */; };
-		D2520BA4241C26F000AC6747 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2520BA3241C26F000AC6747 /* main.swift */; };
-		D2520BA8241C26FC00AC6747 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; };
-		D2520BAB241C270300AC6747 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; };
-		D2520BAD241C270300AC6747 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; };
-		D2520BAF241C270300AC6747 /* SignatureChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; };
 		D2763980241C34060038FFC0 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; };
 		D2763981241C34060038FFC0 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B20241C131300AC6747 /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2763982241C34060038FFC0 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; };
 		D2763983241C34060038FFC0 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2763984241C34060038FFC0 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; };
 		D2763985241C34060038FFC0 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2763986241C34060038FFC0 /* SignatureChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; };
-		D2763987241C34060038FFC0 /* SignatureChecker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2520B5A241C15C300AC6747 /* SignatureChecker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D276398B241C34610038FFC0 /* service in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2520BA1241C26EF00AC6747 /* service */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D2DC99E2242EC89F00AB9EEC /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC99CC242EAD4200AB9EEC /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2DC9A38242EFB0C00AB9EEC /* SinterD in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2DC9A25242EF90900AB9EEC /* SinterD */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D2EFA29C2421CA8300BCB9A3 /* SignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */; };
+		D2EFA29D2421CA8300BCB9A3 /* SignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D22A17322436493C005BFA77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D22A170B2436493A005BFA77;
+			remoteInfo = MorozAuthorizationInterface;
+		};
+		D22A17342436493C005BFA77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D22A17142436493B005BFA77;
+			remoteInfo = MorozAuthorizationInterfaceTests;
+		};
 		D249E5B0241C0810000B2F5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
@@ -71,26 +84,40 @@
 			remoteGlobalIDString = D2520B09241C131100AC6747;
 			remoteInfo = AuthorizationManagerTests;
 		};
-		D2520B59241C15C300AC6747 /* PBXContainerItemProxy */ = {
+		D2DC99CB242EAD4200AB9EEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+			containerPortal = D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2520B3A241C15C200AC6747;
-			remoteInfo = SignatureChecker;
+			remoteGlobalIDString = D2DC99A6242EAD4000AB9EEC;
+			remoteInfo = Logger;
 		};
-		D2520B5B241C15C300AC6747 /* PBXContainerItemProxy */ = {
+		D2DC99CD242EAD4200AB9EEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+			containerPortal = D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2520B43241C15C200AC6747;
-			remoteInfo = SignatureCheckerTests;
+			remoteGlobalIDString = D2DC99AF242EAD4000AB9EEC;
+			remoteInfo = LoggerTests;
 		};
-		D2520BBB241C284200AC6747 /* PBXContainerItemProxy */ = {
+		D2DC9A24242EF90900AB9EEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2F15A1F241BE729002351A9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2520BA0241C26EF00AC6747;
-			remoteInfo = service;
+			containerPortal = D2DC9A20242EF90700AB9EEC /* SinterD.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2DC9A16242EF90700AB9EEC;
+			remoteInfo = SinterD;
+		};
+		D2EFA2822421A54700BCB9A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2EFA2632421A54500BCB9A3;
+			remoteInfo = SignatureDatabase;
+		};
+		D2EFA2842421A54700BCB9A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2EFA26C2421A54600BCB9A3;
+			remoteInfo = SignatureDatabaseTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -101,27 +128,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				D276398B241C34610038FFC0 /* service in CopyFiles */,
+				D2DC9A38242EFB0C00AB9EEC /* SinterD in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2520B9F241C26EF00AC6747 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		D2520BAA241C26FC00AC6747 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D2763988241C34060038FFC0 /* Embed Frameworks */ = {
@@ -130,9 +138,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2DC99E2242EC89F00AB9EEC /* Logger.framework in Embed Frameworks */,
 				D2763981241C34060038FFC0 /* AuthorizationManager.framework in Embed Frameworks */,
-				D2763987241C34060038FFC0 /* SignatureChecker.framework in Embed Frameworks */,
 				D2763983241C34060038FFC0 /* CodeSigningUtils.framework in Embed Frameworks */,
+				D2EFA29D2421CA8300BCB9A3 /* SignatureDatabase.framework in Embed Frameworks */,
+				D22A173D24364A25005BFA77 /* MorozAuthorizationInterface.framework in Embed Frameworks */,
 				D2763985241C34060038FFC0 /* EndpointSecurityClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -141,11 +151,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D23C17BC241C38B00058F97C /* service.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = service.entitlements; sourceTree = "<group>"; };
+		94B4EE8F2435163600CDCFC5 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
+		D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MorozAuthorizationInterface.xcodeproj; path = MorozAuthorizationInterface/MorozAuthorizationInterface.xcodeproj; sourceTree = "<group>"; };
 		D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodeSigningUtils.xcodeproj; path = CodeSigningUtils/CodeSigningUtils.xcodeproj; sourceTree = "<group>"; };
 		D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
 		D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
-		D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignatureChecker.xcodeproj; path = SignatureChecker/SignatureChecker.xcodeproj; sourceTree = "<group>"; };
 		D2520B7C241C266200AC6747 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520B7E241C266200AC6747 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2520B80241C266200AC6747 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,8 +164,10 @@
 		D2520B88241C266600AC6747 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2520B8A241C266600AC6747 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2520B8B241C266600AC6747 /* Sinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinter.entitlements; sourceTree = "<group>"; };
-		D2520BA1241C26EF00AC6747 /* service */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = service; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2520BA3241C26F000AC6747 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logger.xcodeproj; path = Logger/Logger.xcodeproj; sourceTree = "<group>"; };
+		D2DC9A00242EF89200AB9EEC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D2DC9A20242EF90700AB9EEC /* SinterD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SinterD.xcodeproj; path = SinterD/SinterD.xcodeproj; sourceTree = "<group>"; };
+		D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignatureDatabase.xcodeproj; path = SignatureDatabase/SignatureDatabase.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,27 +175,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B4EE9B2435163600CDCFC5 /* libEndpointSecurity.tbd in Frameworks */,
 				D2763980241C34060038FFC0 /* AuthorizationManager.framework in Frameworks */,
-				D2763986241C34060038FFC0 /* SignatureChecker.framework in Frameworks */,
 				D2763982241C34060038FFC0 /* CodeSigningUtils.framework in Frameworks */,
+				D2EFA29C2421CA8300BCB9A3 /* SignatureDatabase.framework in Frameworks */,
+				D22A173C24364A25005BFA77 /* MorozAuthorizationInterface.framework in Frameworks */,
 				D2763984241C34060038FFC0 /* EndpointSecurityClient.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2520B9E241C26EF00AC6747 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2520BA8241C26FC00AC6747 /* AuthorizationManager.framework in Frameworks */,
-				D2520BAF241C270300AC6747 /* SignatureChecker.framework in Frameworks */,
-				D2520BAB241C270300AC6747 /* CodeSigningUtils.framework in Frameworks */,
-				D2520BAD241C270300AC6747 /* EndpointSecurityClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D22A17262436493B005BFA77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D22A17332436493C005BFA77 /* MorozAuthorizationInterface.framework */,
+				D22A17352436493C005BFA77 /* MorozAuthorizationInterfaceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D249E5AC241C080E000B2F5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,15 +223,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2520B55241C15C200AC6747 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2520B5A241C15C300AC6747 /* SignatureChecker.framework */,
-				D2520B5C241C15C300AC6747 /* SignatureCheckerTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D2520B7D241C266200AC6747 /* Sinter */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,22 +245,48 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D2520BA2241C26F000AC6747 /* service */ = {
+		D2DC99C1242EAD4000AB9EEC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D23C17BC241C38B00058F97C /* service.entitlements */,
-				D2520BA3241C26F000AC6747 /* main.swift */,
+				D2DC99CC242EAD4200AB9EEC /* Logger.framework */,
+				D2DC99CE242EAD4200AB9EEC /* LoggerTests.xctest */,
 			);
-			path = service;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2DC9A0C242EF8C400AB9EEC /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				D2DC9A20242EF90700AB9EEC /* SinterD.xcodeproj */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+		D2DC9A21242EF90700AB9EEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2DC9A25242EF90900AB9EEC /* SinterD */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2EFA27E2421A54600BCB9A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */,
+				D2EFA2852421A54700BCB9A3 /* SignatureDatabaseTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		D2F15A1E241BE729002351A9 = {
 			isa = PBXGroup;
 			children = (
+				D2DC9A0C242EF8C400AB9EEC /* tools */,
 				D2F15A31241BE920002351A9 /* libraries */,
 				D2520B7D241C266200AC6747 /* Sinter */,
-				D2520BA2241C26F000AC6747 /* service */,
 				D2F15A28241BE72A002351A9 /* Products */,
+				D2F15A4E241BE9BF002351A9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				D2520B7C241C266200AC6747 /* Sinter.app */,
-				D2520BA1241C26EF00AC6747 /* service */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,12 +301,23 @@
 		D2F15A31241BE920002351A9 /* libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */,
+				D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */,
+				D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */,
+				D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */,
 				D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */,
 				D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */,
 				D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */,
 			);
 			path = libraries;
+			sourceTree = "<group>";
+		};
+		D2F15A4E241BE9BF002351A9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94B4EE8F2435163600CDCFC5 /* libEndpointSecurity.tbd */,
+				D2DC9A00242EF89200AB9EEC /* UserNotifications.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,30 +336,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				D2520BBC241C284200AC6747 /* PBXTargetDependency */,
 			);
 			name = Sinter;
 			productName = Sinter;
 			productReference = D2520B7C241C266200AC6747 /* Sinter.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D2520BA0241C26EF00AC6747 /* service */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D2520BA5241C26F000AC6747 /* Build configuration list for PBXNativeTarget "service" */;
-			buildPhases = (
-				D2520B9D241C26EF00AC6747 /* Sources */,
-				D2520B9E241C26EF00AC6747 /* Frameworks */,
-				D2520B9F241C26EF00AC6747 /* CopyFiles */,
-				D2520BAA241C26FC00AC6747 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = service;
-			productName = service;
-			productReference = D2520BA1241C26EF00AC6747 /* service */;
-			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -333,9 +353,6 @@
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
 					D2520B7B241C266200AC6747 = {
-						CreatedOnToolsVersion = 11.3.1;
-					};
-					D2520BA0241C26EF00AC6747 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
@@ -365,19 +382,44 @@
 					ProjectRef = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
 				},
 				{
-					ProductGroup = D2520B55241C15C200AC6747 /* Products */;
-					ProjectRef = D2520B54241C15C200AC6747 /* SignatureChecker.xcodeproj */;
+					ProductGroup = D2DC99C1242EAD4000AB9EEC /* Products */;
+					ProjectRef = D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */;
+				},
+				{
+					ProductGroup = D22A17262436493B005BFA77 /* Products */;
+					ProjectRef = D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */;
+				},
+				{
+					ProductGroup = D2EFA27E2421A54600BCB9A3 /* Products */;
+					ProjectRef = D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */;
+				},
+				{
+					ProductGroup = D2DC9A21242EF90700AB9EEC /* Products */;
+					ProjectRef = D2DC9A20242EF90700AB9EEC /* SinterD.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				D2520B7B241C266200AC6747 /* Sinter */,
-				D2520BA0241C26EF00AC6747 /* service */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D22A17332436493C005BFA77 /* MorozAuthorizationInterface.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MorozAuthorizationInterface.framework;
+			remoteRef = D22A17322436493C005BFA77 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D22A17352436493C005BFA77 /* MorozAuthorizationInterfaceTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MorozAuthorizationInterfaceTests.xctest;
+			remoteRef = D22A17342436493C005BFA77 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -420,18 +462,39 @@
 			remoteRef = D2520B21241C131300AC6747 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2520B5A241C15C300AC6747 /* SignatureChecker.framework */ = {
+		D2DC99CC242EAD4200AB9EEC /* Logger.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = SignatureChecker.framework;
-			remoteRef = D2520B59241C15C300AC6747 /* PBXContainerItemProxy */;
+			path = Logger.framework;
+			remoteRef = D2DC99CB242EAD4200AB9EEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2520B5C241C15C300AC6747 /* SignatureCheckerTests.xctest */ = {
+		D2DC99CE242EAD4200AB9EEC /* LoggerTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = SignatureCheckerTests.xctest;
-			remoteRef = D2520B5B241C15C300AC6747 /* PBXContainerItemProxy */;
+			path = LoggerTests.xctest;
+			remoteRef = D2DC99CD242EAD4200AB9EEC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2DC9A25242EF90900AB9EEC /* SinterD */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SinterD;
+			remoteRef = D2DC9A24242EF90900AB9EEC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignatureDatabase.framework;
+			remoteRef = D2EFA2822421A54700BCB9A3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2EFA2852421A54700BCB9A3 /* SignatureDatabaseTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignatureDatabaseTests.xctest;
+			remoteRef = D2EFA2842421A54700BCB9A3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -459,23 +522,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2520B9D241C26EF00AC6747 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D2520BA4241C26F000AC6747 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D2520BBC241C284200AC6747 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2520BA0241C26EF00AC6747 /* service */;
-			targetProxy = D2520BBB241C284200AC6747 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D2520B87241C266600AC6747 /* Main.storyboard */ = {
@@ -498,7 +545,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
-				DEVELOPMENT_TEAM = 44WTB9L362;
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -521,7 +568,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
-				DEVELOPMENT_TEAM = 44WTB9L362;
+				DEVELOPMENT_TEAM = 97ZPZBSNR3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -530,36 +577,6 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Sinter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		D2520BA6241C26F000AC6747 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = service/service.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SinterService;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D2520BA7241C26F000AC6747 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = service/service.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 97ZPZBSNR3;
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SinterService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -688,15 +705,6 @@
 			buildConfigurations = (
 				D2520B98241C266700AC6747 /* Debug */,
 				D2520B99241C266700AC6747 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D2520BA5241C26F000AC6747 /* Build configuration list for PBXNativeTarget "service" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D2520BA6241C26F000AC6747 /* Debug */,
-				D2520BA7241C26F000AC6747 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -9,43 +9,43 @@
 import Foundation
 
 public enum CodeSignatureStatus {
-    case InternalError
-    case Valid
-    case IOError
-    case Invalid
+    case internalError
+    case valid
+    case ioError
+    case invalid
 }
 
 public func checkCodeSignature(path: String) -> CodeSignatureStatus {
-    let fileUrl: URL? = URL(fileURLWithPath: path)
-    if fileUrl == nil {
-        return CodeSignatureStatus.IOError
+    let url: URL? = URL(fileURLWithPath: path)
+    if url == nil {
+        return CodeSignatureStatus.ioError
     }
 
     let checkFlags: SecCSFlags? = SecCSFlags(rawValue: kSecCSCheckNestedCode)
     if checkFlags == nil {
-        return CodeSignatureStatus.InternalError
+        return CodeSignatureStatus.internalError
     }
 
     var staticCodeObj: SecStaticCode?
-    var err: OSStatus = SecStaticCodeCreateWithPath(fileUrl! as CFURL, [], &staticCodeObj)
+    var err: OSStatus = SecStaticCodeCreateWithPath(url! as CFURL, [], &staticCodeObj)
     if err != OSStatus(noErr) || staticCodeObj == nil {
-        return CodeSignatureStatus.IOError
+        return CodeSignatureStatus.ioError
     }
 
-    let secRequirement: SecRequirement? = nil
-    var secErr: Unmanaged<CFError>?
+    let requirement: SecRequirement? = nil
+    var error: Unmanaged<CFError>?
     err = SecStaticCodeCheckValidityWithErrors(staticCodeObj!,
                                                checkFlags!,
-                                               secRequirement,
-                                               &secErr)
+                                               requirement,
+                                               &error)
 
-    if secErr != nil {
-        secErr?.release()
+    if error != nil {
+        error?.release()
     }
 
     if err != errSecSuccess {
-        return CodeSignatureStatus.Invalid
+        return CodeSignatureStatus.invalid
     }
 
-    return CodeSignatureStatus.Valid
+    return CodeSignatureStatus.valid
 }

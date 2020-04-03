@@ -6,10 +6,10 @@
  the LICENSE file found in the root directory of this source tree.
  */
 
-@testable import SignatureChecker
+@testable import SignatureDatabase
 import XCTest
 
-class SignatureCheckerTests: XCTestCase {
+class SignatureDatabaseTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }

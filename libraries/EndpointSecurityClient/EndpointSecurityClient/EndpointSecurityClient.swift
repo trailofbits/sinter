@@ -6,50 +6,60 @@
  the LICENSE file found in the root directory of this source tree.
  */
 
-import CodeSigningUtils
+import AuthorizationManager
 import EndpointSecurity
+
 import Foundation
-import Darwin.bsm
 
-public struct EndpointSecurityClientMessage {
-    public var unsafeMsgPtr: UnsafeMutablePointer<es_message_t>
-    public var binaryPath: String
-    public var signatureStatus: CodeSignatureStatus?
-    public var cdhash: String
-    public var ppid, gid, pid: pid_t
-    public var uid: uid_t
-    public var signingId, teamId: String
-    public var isAppleSigned: Bool /* a "platform binary" */
-}
+class EndpointSecurityClient: IEndpointSecurityClient {
+    private var esClient: OpaquePointer?
 
-// Because a Swift tuple cannot/shouldn't be iterated at runtime,
-// use an UnsafeBufferPointer to store the twenty UInt8 values of
-// the cdhash (a tuple of UInt8 values) into an iterable array form
-struct CDhash {
-    var tuple: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
-                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
-                UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
-    var array: [UInt8] {
-        var tmp = self.tuple
-        return [UInt8](UnsafeBufferPointer(start: &tmp.0,
-                                    count: MemoryLayout.size(ofValue: tmp)))
+    private var internalMessageMap = [Int64: UnsafeMutablePointer<es_message_t>]()
+
+    private var messageList = [IEndpointSecurityClientMessage]()
+    private let messageListSem = DispatchSemaphore(value: 0)
+
+    @Atomic private var identifierGenerator: Int64 = 0
+    private var nextIdentifier: Int64 {
+        get {
+            identifierGenerator += 1
+            return identifierGenerator
+        }
+        set {
+            fatalError("nextIdentifier is read-only")
+        }
     }
-}
 
-public class EndpointSecurityClient {
-    var esClient: OpaquePointer?
-
-    let messageListQueue = DispatchQueue(label: "EndpointSecurity_message_list")
-    var messageList = [EndpointSecurityClientMessage]()
-    let messageListSem = DispatchSemaphore(value: 0)
+    private var callbackOpt: ((_ message: IEndpointSecurityClientMessage) -> Void)?
 
     public init?() {
         let clientErr = es_new_client(&esClient) { _, unsafeMessagePtr in
-            let message = EndpointSecurityClient.generateEndpointSecurityClientMessage(unsafeMsgPtr: unsafeMessagePtr)
+            let unsafeMsgPtrCopy = es_copy_message(unsafeMessagePtr)
+            let identifier = self.nextIdentifier
 
-            self.messageListQueue.sync {
-                self.messageList.append(message)
-                self.messageListSem.signal()
+            atomic {
+                self.internalMessageMap[identifier] = unsafeMsgPtrCopy
+            }
+
+            let endpointSecMessage = unsafeMsgPtrCopy!.pointee
+
+            let binaryPath = EndpointSecurityClient.processBinaryPath(
+                process: endpointSecMessage.event.exec.target.pointee)
+
+            let message = IEndpointSecurityClientMessage(messageId: identifier, binaryPath: binaryPath)
+
+            atomic {
+                if let callback = self.callbackOpt {
+                    for queueMessage in self.messageList {
+                        callback(queueMessage)
+                    }
+
+                    self.messageList.removeAll()
+                    callback(message)
+
+                } else {
+                    self.messageList.append(message)
+                }
             }
         }
 
@@ -76,88 +86,40 @@ public class EndpointSecurityClient {
         }
     }
 
-    public func getMessages() -> [EndpointSecurityClientMessage] {
-        var messageList = [EndpointSecurityClientMessage]()
-
-        if messageListSem.wait(timeout: .now() + 5) != .success {
-            return [EndpointSecurityClientMessage]()
-        }
-
-        messageListQueue.sync {
-            messageList = self.messageList
-            self.messageList = [EndpointSecurityClientMessage]()
-        }
-
-        return messageList
+    public func setCallback(callback: @escaping (_ message: IEndpointSecurityClientMessage) -> Void) {
+        callbackOpt = callback
     }
 
-    public func processMessage(message: EndpointSecurityClientMessage, allow: Bool) {
+    public func setAuthorization(messageId: Int64, allow: Bool, cache _: Bool) {
+        var internalMessageOpt: UnsafeMutablePointer<es_message_t>?
+
+        atomic {
+            internalMessageOpt = self.internalMessageMap[messageId]
+            if internalMessageOpt != nil {
+                self.internalMessageMap.removeValue(forKey: messageId)
+            }
+        }
+
+        if internalMessageOpt == nil {
+            return
+        }
+
         let authAction = allow ? ES_AUTH_RESULT_ALLOW : ES_AUTH_RESULT_DENY
-        es_respond_auth_result(esClient!, message.unsafeMsgPtr, authAction, false)
-        es_free_message(message.unsafeMsgPtr)
+        es_respond_auth_result(esClient!, internalMessageOpt!, authAction, false)
+        es_free_message(internalMessageOpt!)
     }
 
-    static func processBinaryPath(process: es_process_t) -> String? {
+    public func invalidateCachedAuthorization(binaryPath _: String) {
+        // TODO: find a way to only invalidate binaryPath
+        es_clear_cache(esClient!)
+    }
+
+    static func processBinaryPath(process: es_process_t) -> String {
         let executable = process.executable.pointee
-        let path = String(cString: executable.path.data) // TODO: use path.size
+
+        // TODO: use path.size
+        let path = String(cString: executable.path.data)
 
         return path
-    }
-
-    static func processCdHash(process: es_process_t) -> String? {
-        // Convert the tuple of UInt8 bytes to its hexadecimal string form
-        let CDhashArray = CDhash(tuple: process.cdhash).array
-        var cdhashHexString: String = ""
-        for eachByte in CDhashArray {
-            cdhashHexString += String(format: "%02X", eachByte)
-        }
-
-        return cdhashHexString
-    }
-
-    static func processTeamId(process: es_process_t) -> String {
-        var teamIdString: String = ""
-        if process.team_id.length > 0 {
-            teamIdString = String(cString: process.team_id.data)
-        }
-
-        return teamIdString
-    }
-
-    static func processSigningId(process: es_process_t) -> String {
-        var signingIdString: String = ""
-        if process.signing_id.length > 0 {
-            signingIdString = String(cString: process.signing_id.data)
-        }
-
-        return signingIdString
-    }
-
-    static func generateEndpointSecurityClientMessage(unsafeMsgPtr: UnsafePointer<es_message_t>)
-        -> EndpointSecurityClientMessage {
-        let unsafeMsgPtrCopy = es_copy_message(unsafeMsgPtr)
-        let message = unsafeMsgPtrCopy!.pointee
-        let binaryPath = EndpointSecurityClient.processBinaryPath(process: message.event.exec.target.pointee)
-        let cdhash = EndpointSecurityClient.processCdHash(process: message.event.exec.target.pointee)
-        let teamId = EndpointSecurityClient.processTeamId(process: message.event.exec.target.pointee)
-        let signingId = EndpointSecurityClient.processSigningId(process: message.event.exec.target.pointee)
-        let ppid = message.event.exec.target.pointee.ppid
-        let gid = message.event.exec.target.pointee.group_id
-        let pid = audit_token_to_pid(message.event.exec.target.pointee.audit_token)
-        let uid = audit_token_to_euid(message.event.exec.target.pointee.audit_token)
-        let isAppleSigned = message.event.exec.target.pointee.is_platform_binary
-
-        return EndpointSecurityClientMessage(
-            unsafeMsgPtr: unsafeMsgPtrCopy!,
-            binaryPath: binaryPath!,
-            cdhash: cdhash!,
-            ppid: ppid,
-            gid: gid,
-            pid: pid,
-            uid: uid,
-            signingId: signingId,
-            teamId: teamId,
-            isAppleSigned: isAppleSigned
-        )
     }
 }
