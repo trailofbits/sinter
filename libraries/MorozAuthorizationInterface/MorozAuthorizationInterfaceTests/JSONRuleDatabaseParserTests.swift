@@ -9,60 +9,9 @@
 @testable import MorozAuthorizationInterface
 import XCTest
 
-/*
-  {
-   "rules": [
-     {
-       "rule_type": "BINARY",
-       "policy": "BLACKLIST",
-       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-       "custom_msg": "blacklist firefox"
-     },
-     {
-       "rule_type": "CERTIFICATE",
-       "policy": "BLACKLIST",
-       "sha256": "e7726cf87cba9e25139465df5bd1557c8a8feed5c7dd338342d8da0959b63c8d",
-       "custom_msg": "blacklist dash app certificate"
-     },
-     {
-       "rule_type": "BINARY",
-       "policy": "WHITELIST_COMPILER",
-       "sha256": "60d79d1763fefb56716e4a36284300523eb4335c3726fb9070fa83074b02279e",
-       "custom_msg": "whitelist go compiler component"
-     },
-     {
-       "rule_type": "BINARY",
-       "policy": "WHITELIST_COMPILER",
-       "sha256": "8e78770685d51324b78588fddc6afc2f8b6cef5231c27eeb97363cc437fec18a",
-       "custom_msg": "whitelist go compiler component"
-     },
-     {
-       "rule_type": "BINARY",
-       "policy": "WHITELIST_COMPILER",
-       "sha256": "e88617cfd62809fb10e213c459a52f48e028fae4321e41134c4797465af886b6",
-       "custom_msg": "whitelist go compiler component"
-     },
-     {
-       "rule_type": "BINARY",
-       "policy": "WHITELIST_COMPILER",
-       "sha256": "d867fca68bbd7db18e9ced231800e7535bc067852b1e530987bb7f57b5e3a02c",
-       "custom_msg": "whitelist go compiler component"
-     }
-   ]
- }
- */
-
 class JSONRuleDatabaseParserTests: XCTestCase {
     let emptyFileHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     let expectedRuleMessage = "Test message"
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
 
     func testBinaryBlacklistRule() throws {
         let binaryBlacklistRule = """

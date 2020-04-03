@@ -44,6 +44,7 @@ jobs:
         xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" clean build
 
     - name: Run the tests
+      if: matrix.build_type == 'Debug'
       run: |
         xcodebuild -configuration ${{ matrix.build_type }} -project "${{ steps.project_folder.outputs.PATH }}" -scheme Sinter CONFIGURATION_BUILD_DIR="${{ steps.build_folder.outputs.PATH }}" test
 
