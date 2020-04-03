@@ -7,158 +7,197 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D249E59B241C080E000B2F5A /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D249E591241C080E000B2F5A /* CodeSigningUtils.framework */; };
-		D249E5A0241C080E000B2F5A /* CodeSigningUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */; };
-		D249E5A2241C080E000B2F5A /* CodeSigningUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D249E594241C080E000B2F5A /* CodeSigningUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D249E5B7241C0864000B2F5A /* CodeSigningUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */; };
+		D252E01F243627430000FD48 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252E01E243627430000FD48 /* Interface.swift */; };
+		D2DC998F242E870200AB9EEC /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; };
+		D2DC9990242E870200AB9EEC /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2DC9991242E872600AB9EEC /* SignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */; };
+		D2EFA26D2421A54600BCB9A3 /* SignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */; };
+		D2EFA2722421A54600BCB9A3 /* SignatureDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */; };
+		D2EFA2742421A54600BCB9A3 /* SignatureDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2EFA2882421A55300BCB9A3 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; };
+		D2EFA2892421A55300BCB9A3 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D249E59C241C080E000B2F5A /* PBXContainerItemProxy */ = {
+		D2EFA26E2421A54600BCB9A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D249E588241C080E000B2F5A /* Project object */;
+			containerPortal = D2EFA25A2421A54500BCB9A3 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D249E590241C080E000B2F5A;
-			remoteInfo = CodeSigningUtils;
+			remoteGlobalIDString = D2EFA2622421A54500BCB9A3;
+			remoteInfo = SignatureDatabase;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D2EFA28A2421A55400BCB9A3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D2DC9990242E870200AB9EEC /* AuthorizationManager.framework in Embed Frameworks */,
+				D2EFA2892421A55300BCB9A3 /* CodeSigningUtils.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		D249E591241C080E000B2F5A /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D249E594241C080E000B2F5A /* CodeSigningUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeSigningUtils.h; sourceTree = "<group>"; };
-		D249E595241C080E000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeSigningUtilsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSigningUtilsTests.swift; sourceTree = "<group>"; };
-		D249E5A1241C080E000B2F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSigningUtils.swift; sourceTree = "<group>"; };
+		D252E01E243627430000FD48 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignatureDatabase.h; sourceTree = "<group>"; };
+		D2EFA2672421A54500BCB9A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignatureDatabaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseTests.swift; sourceTree = "<group>"; };
+		D2EFA2732421A54600BCB9A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabase.swift; sourceTree = "<group>"; };
+		D2EFA2942421C41C00BCB9A3 /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D249E58E241C080E000B2F5A /* Frameworks */ = {
+		D2EFA2602421A54500BCB9A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DC998F242E870200AB9EEC /* AuthorizationManager.framework in Frameworks */,
+				D2EFA2882421A55300BCB9A3 /* CodeSigningUtils.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E597241C080E000B2F5A /* Frameworks */ = {
+		D2EFA2692421A54600BCB9A3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D249E59B241C080E000B2F5A /* CodeSigningUtils.framework in Frameworks */,
+				D2EFA26D2421A54600BCB9A3 /* SignatureDatabase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D249E587241C080E000B2F5A = {
+		D2EFA2592421A54500BCB9A3 = {
 			isa = PBXGroup;
 			children = (
-				D249E593241C080E000B2F5A /* CodeSigningUtils */,
-				D249E59E241C080E000B2F5A /* CodeSigningUtilsTests */,
-				D249E592241C080E000B2F5A /* Products */,
+				D2EFA2652421A54500BCB9A3 /* SignatureDatabase */,
+				D2EFA2702421A54600BCB9A3 /* SignatureDatabaseTests */,
+				D2EFA2642421A54500BCB9A3 /* Products */,
+				D2EFA2862421A55300BCB9A3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		D249E592241C080E000B2F5A /* Products */ = {
+		D2EFA2642421A54500BCB9A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D249E591241C080E000B2F5A /* CodeSigningUtils.framework */,
-				D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */,
+				D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */,
+				D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D249E593241C080E000B2F5A /* CodeSigningUtils */ = {
+		D2EFA2652421A54500BCB9A3 /* SignatureDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				D249E594241C080E000B2F5A /* CodeSigningUtils.h */,
-				D249E595241C080E000B2F5A /* Info.plist */,
-				D249E5B6241C0864000B2F5A /* CodeSigningUtils.swift */,
+				D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */,
+				D2EFA2672421A54500BCB9A3 /* Info.plist */,
+				D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */,
+				D252E01E243627430000FD48 /* Interface.swift */,
 			);
-			path = CodeSigningUtils;
+			path = SignatureDatabase;
 			sourceTree = "<group>";
 		};
-		D249E59E241C080E000B2F5A /* CodeSigningUtilsTests */ = {
+		D2EFA2702421A54600BCB9A3 /* SignatureDatabaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				D249E59F241C080E000B2F5A /* CodeSigningUtilsTests.swift */,
-				D249E5A1241C080E000B2F5A /* Info.plist */,
+				D2EFA2712421A54600BCB9A3 /* SignatureDatabaseTests.swift */,
+				D2EFA2732421A54600BCB9A3 /* Info.plist */,
 			);
-			path = CodeSigningUtilsTests;
+			path = SignatureDatabaseTests;
+			sourceTree = "<group>";
+		};
+		D2EFA2862421A55300BCB9A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */,
+				D2EFA2942421C41C00BCB9A3 /* AuthorizationManager.framework */,
+				D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D249E58C241C080E000B2F5A /* Headers */ = {
+		D2EFA25E2421A54500BCB9A3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D249E5A2241C080E000B2F5A /* CodeSigningUtils.h in Headers */,
+				D2EFA2742421A54600BCB9A3 /* SignatureDatabase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D249E590241C080E000B2F5A /* CodeSigningUtils */ = {
+		D2EFA2622421A54500BCB9A3 /* SignatureDatabase */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D249E5A5241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtils" */;
+			buildConfigurationList = D2EFA2772421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabase" */;
 			buildPhases = (
-				D249E58C241C080E000B2F5A /* Headers */,
-				D249E58D241C080E000B2F5A /* Sources */,
-				D249E58E241C080E000B2F5A /* Frameworks */,
-				D249E58F241C080E000B2F5A /* Resources */,
+				D2EFA25E2421A54500BCB9A3 /* Headers */,
+				D2EFA25F2421A54500BCB9A3 /* Sources */,
+				D2EFA2602421A54500BCB9A3 /* Frameworks */,
+				D2EFA2612421A54500BCB9A3 /* Resources */,
+				D2EFA28A2421A55400BCB9A3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = CodeSigningUtils;
-			productName = CodeSigningUtils;
-			productReference = D249E591241C080E000B2F5A /* CodeSigningUtils.framework */;
+			name = SignatureDatabase;
+			productName = SignatureDatabase;
+			productReference = D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D249E599241C080E000B2F5A /* CodeSigningUtilsTests */ = {
+		D2EFA26B2421A54600BCB9A3 /* SignatureDatabaseTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D249E5A8241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtilsTests" */;
+			buildConfigurationList = D2EFA27A2421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabaseTests" */;
 			buildPhases = (
-				D249E596241C080E000B2F5A /* Sources */,
-				D249E597241C080E000B2F5A /* Frameworks */,
-				D249E598241C080E000B2F5A /* Resources */,
+				D2EFA2682421A54600BCB9A3 /* Sources */,
+				D2EFA2692421A54600BCB9A3 /* Frameworks */,
+				D2EFA26A2421A54600BCB9A3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D249E59D241C080E000B2F5A /* PBXTargetDependency */,
+				D2EFA26F2421A54600BCB9A3 /* PBXTargetDependency */,
 			);
-			name = CodeSigningUtilsTests;
-			productName = CodeSigningUtilsTests;
-			productReference = D249E59A241C080E000B2F5A /* CodeSigningUtilsTests.xctest */;
+			name = SignatureDatabaseTests;
+			productName = SignatureDatabaseTests;
+			productReference = D2EFA26C2421A54600BCB9A3 /* SignatureDatabaseTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D249E588241C080E000B2F5A /* Project object */ = {
+		D2EFA25A2421A54500BCB9A3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
-					D249E590241C080E000B2F5A = {
+					D2EFA2622421A54500BCB9A3 = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1130;
 					};
-					D249E599241C080E000B2F5A = {
+					D2EFA26B2421A54600BCB9A3 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
-			buildConfigurationList = D249E58B241C080E000B2F5A /* Build configuration list for PBXProject "CodeSigningUtils" */;
+			buildConfigurationList = D2EFA25D2421A54500BCB9A3 /* Build configuration list for PBXProject "SignatureDatabase" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -166,26 +205,26 @@
 				en,
 				Base,
 			);
-			mainGroup = D249E587241C080E000B2F5A;
-			productRefGroup = D249E592241C080E000B2F5A /* Products */;
+			mainGroup = D2EFA2592421A54500BCB9A3;
+			productRefGroup = D2EFA2642421A54500BCB9A3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D249E590241C080E000B2F5A /* CodeSigningUtils */,
-				D249E599241C080E000B2F5A /* CodeSigningUtilsTests */,
+				D2EFA2622421A54500BCB9A3 /* SignatureDatabase */,
+				D2EFA26B2421A54600BCB9A3 /* SignatureDatabaseTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D249E58F241C080E000B2F5A /* Resources */ = {
+		D2EFA2612421A54500BCB9A3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E598241C080E000B2F5A /* Resources */ = {
+		D2EFA26A2421A54600BCB9A3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -195,34 +234,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D249E58D241C080E000B2F5A /* Sources */ = {
+		D2EFA25F2421A54500BCB9A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D249E5B7241C0864000B2F5A /* CodeSigningUtils.swift in Sources */,
+				D2DC9991242E872600AB9EEC /* SignatureDatabase.swift in Sources */,
+				D252E01F243627430000FD48 /* Interface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D249E596241C080E000B2F5A /* Sources */ = {
+		D2EFA2682421A54600BCB9A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D249E5A0241C080E000B2F5A /* CodeSigningUtilsTests.swift in Sources */,
+				D2EFA2722421A54600BCB9A3 /* SignatureDatabaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D249E59D241C080E000B2F5A /* PBXTargetDependency */ = {
+		D2EFA26F2421A54600BCB9A3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D249E590241C080E000B2F5A /* CodeSigningUtils */;
-			targetProxy = D249E59C241C080E000B2F5A /* PBXContainerItemProxy */;
+			target = D2EFA2622421A54500BCB9A3 /* SignatureDatabase */;
+			targetProxy = D2EFA26E2421A54600BCB9A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		D249E5A3241C080E000B2F5A /* Debug */ = {
+		D2EFA2752421A54600BCB9A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -285,7 +325,7 @@
 			};
 			name = Debug;
 		};
-		D249E5A4241C080E000B2F5A /* Release */ = {
+		D2EFA2762421A54600BCB9A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -341,7 +381,7 @@
 			};
 			name = Release;
 		};
-		D249E5A6241C080E000B2F5A /* Debug */ = {
+		D2EFA2782421A54600BCB9A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -353,14 +393,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CodeSigningUtils/Info.plist;
+				INFOPLIST_FILE = SignatureDatabase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtils;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -368,7 +408,7 @@
 			};
 			name = Debug;
 		};
-		D249E5A7241C080E000B2F5A /* Release */ = {
+		D2EFA2792421A54600BCB9A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -380,51 +420,51 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = CodeSigningUtils/Info.plist;
+				INFOPLIST_FILE = SignatureDatabase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtils;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabase;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
-		D249E5A9241C080E000B2F5A /* Debug */ = {
+		D2EFA27B2421A54600BCB9A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CodeSigningUtilsTests/Info.plist;
+				INFOPLIST_FILE = SignatureDatabaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtilsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		D249E5AA241C080E000B2F5A /* Release */ = {
+		D2EFA27C2421A54600BCB9A3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = CodeSigningUtilsTests/Info.plist;
+				INFOPLIST_FILE = SignatureDatabaseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.CodeSigningUtilsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SignatureDatabaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -433,34 +473,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D249E58B241C080E000B2F5A /* Build configuration list for PBXProject "CodeSigningUtils" */ = {
+		D2EFA25D2421A54500BCB9A3 /* Build configuration list for PBXProject "SignatureDatabase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D249E5A3241C080E000B2F5A /* Debug */,
-				D249E5A4241C080E000B2F5A /* Release */,
+				D2EFA2752421A54600BCB9A3 /* Debug */,
+				D2EFA2762421A54600BCB9A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D249E5A5241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtils" */ = {
+		D2EFA2772421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabase" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D249E5A6241C080E000B2F5A /* Debug */,
-				D249E5A7241C080E000B2F5A /* Release */,
+				D2EFA2782421A54600BCB9A3 /* Debug */,
+				D2EFA2792421A54600BCB9A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D249E5A8241C080E000B2F5A /* Build configuration list for PBXNativeTarget "CodeSigningUtilsTests" */ = {
+		D2EFA27A2421A54600BCB9A3 /* Build configuration list for PBXNativeTarget "SignatureDatabaseTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D249E5A9241C080E000B2F5A /* Debug */,
-				D249E5AA241C080E000B2F5A /* Release */,
+				D2EFA27B2421A54600BCB9A3 /* Debug */,
+				D2EFA27C2421A54600BCB9A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D249E588241C080E000B2F5A /* Project object */;
+	rootObject = D2EFA25A2421A54500BCB9A3 /* Project object */;
 }
