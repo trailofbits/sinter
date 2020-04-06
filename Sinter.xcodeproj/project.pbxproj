@@ -23,6 +23,8 @@
 		D2763985241C34060038FFC0 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2DC99E2242EC89F00AB9EEC /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC99CC242EAD4200AB9EEC /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2DC9A38242EFB0C00AB9EEC /* SinterD in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2DC9A25242EF90900AB9EEC /* SinterD */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D2E077DB243B8788000D96BF /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077CC243B728C000D96BF /* Configuration.framework */; };
+		D2E077DC243B8788000D96BF /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077CC243B728C000D96BF /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2EFA29C2421CA8300BCB9A3 /* SignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */; };
 		D2EFA29D2421CA8300BCB9A3 /* SignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -49,26 +51,12 @@
 			remoteGlobalIDString = D249E591241C080E000B2F5A;
 			remoteInfo = CodeSigningUtils;
 		};
-		D249E5B2241C0810000B2F5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D249E59A241C080E000B2F5A;
-			remoteInfo = CodeSigningUtilsTests;
-		};
 		D249E61A241C0C37000B2F5A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D249E5FB241C0C35000B2F5A;
 			remoteInfo = EndpointSecurityClient;
-		};
-		D249E61C241C0C37000B2F5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D249E604241C0C35000B2F5A;
-			remoteInfo = EndpointSecurityClientTests;
 		};
 		D2520B1F241C131300AC6747 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -77,26 +65,12 @@
 			remoteGlobalIDString = D2520B00241C131100AC6747;
 			remoteInfo = AuthorizationManager;
 		};
-		D2520B21241C131300AC6747 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2520B1A241C131100AC6747 /* AuthorizationManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2520B09241C131100AC6747;
-			remoteInfo = AuthorizationManagerTests;
-		};
 		D2DC99CB242EAD4200AB9EEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2DC99A6242EAD4000AB9EEC;
 			remoteInfo = Logger;
-		};
-		D2DC99CD242EAD4200AB9EEC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2DC99AF242EAD4000AB9EEC;
-			remoteInfo = LoggerTests;
 		};
 		D2DC9A24242EF90900AB9EEC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -105,19 +79,26 @@
 			remoteGlobalIDString = D2DC9A16242EF90700AB9EEC;
 			remoteInfo = SinterD;
 		};
+		D2E077CB243B728C000D96BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2E077C4243B728B000D96BF /* Configuration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2E077AA243B728A000D96BF;
+			remoteInfo = Configuration;
+		};
+		D2E077CD243B728C000D96BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2E077C4243B728B000D96BF /* Configuration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2E077B3243B728A000D96BF;
+			remoteInfo = ConfigurationTests;
+		};
 		D2EFA2822421A54700BCB9A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2EFA2632421A54500BCB9A3;
 			remoteInfo = SignatureDatabase;
-		};
-		D2EFA2842421A54700BCB9A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2EFA26C2421A54600BCB9A3;
-			remoteInfo = SignatureDatabaseTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -138,6 +119,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2E077DC243B8788000D96BF /* Configuration.framework in Embed Frameworks */,
 				D2DC99E2242EC89F00AB9EEC /* Logger.framework in Embed Frameworks */,
 				D2763981241C34060038FFC0 /* AuthorizationManager.framework in Embed Frameworks */,
 				D2763983241C34060038FFC0 /* CodeSigningUtils.framework in Embed Frameworks */,
@@ -167,6 +149,7 @@
 		D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logger.xcodeproj; path = Logger/Logger.xcodeproj; sourceTree = "<group>"; };
 		D2DC9A00242EF89200AB9EEC /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D2DC9A20242EF90700AB9EEC /* SinterD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SinterD.xcodeproj; path = SinterD/SinterD.xcodeproj; sourceTree = "<group>"; };
+		D2E077C4243B728B000D96BF /* Configuration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Configuration.xcodeproj; path = Configuration/Configuration.xcodeproj; sourceTree = "<group>"; };
 		D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignatureDatabase.xcodeproj; path = SignatureDatabase/SignatureDatabase.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E077DB243B8788000D96BF /* Configuration.framework in Frameworks */,
 				94B4EE9B2435163600CDCFC5 /* libEndpointSecurity.tbd in Frameworks */,
 				D2763980241C34060038FFC0 /* AuthorizationManager.framework in Frameworks */,
 				D2763982241C34060038FFC0 /* CodeSigningUtils.framework in Frameworks */,
@@ -200,7 +184,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E5B1241C0810000B2F5A /* CodeSigningUtils.framework */,
-				D249E5B3241C0810000B2F5A /* CodeSigningUtilsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */,
-				D249E61D241C0C37000B2F5A /* EndpointSecurityClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				D2520B20241C131300AC6747 /* AuthorizationManager.framework */,
-				D2520B22241C131300AC6747 /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				D2DC99CC242EAD4200AB9EEC /* Logger.framework */,
-				D2DC99CE242EAD4200AB9EEC /* LoggerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,11 +250,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2E077C5243B728B000D96BF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2E077CC243B728C000D96BF /* Configuration.framework */,
+				D2E077CE243B728C000D96BF /* ConfigurationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D2EFA27E2421A54600BCB9A3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */,
-				D2EFA2852421A54700BCB9A3 /* SignatureDatabaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,6 +289,7 @@
 		D2F15A31241BE920002351A9 /* libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D2E077C4243B728B000D96BF /* Configuration.xcodeproj */,
 				D22A17252436493B005BFA77 /* MorozAuthorizationInterface.xcodeproj */,
 				D2DC99C0242EAD4000AB9EEC /* Logger.xcodeproj */,
 				D2EFA27D2421A54600BCB9A3 /* SignatureDatabase.xcodeproj */,
@@ -378,6 +367,10 @@
 					ProjectRef = D249E5AB241C080E000B2F5A /* CodeSigningUtils.xcodeproj */;
 				},
 				{
+					ProductGroup = D2E077C5243B728B000D96BF /* Products */;
+					ProjectRef = D2E077C4243B728B000D96BF /* Configuration.xcodeproj */;
+				},
+				{
 					ProductGroup = D249E616241C0C35000B2F5A /* Products */;
 					ProjectRef = D249E615241C0C35000B2F5A /* EndpointSecurityClient.xcodeproj */;
 				},
@@ -427,25 +420,11 @@
 			remoteRef = D249E5B0241C0810000B2F5A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D249E5B3241C0810000B2F5A /* CodeSigningUtilsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CodeSigningUtilsTests.xctest;
-			remoteRef = D249E5B2241C0810000B2F5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D249E61B241C0C37000B2F5A /* EndpointSecurityClient.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = EndpointSecurityClient.framework;
 			remoteRef = D249E61A241C0C37000B2F5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D249E61D241C0C37000B2F5A /* EndpointSecurityClientTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EndpointSecurityClientTests.xctest;
-			remoteRef = D249E61C241C0C37000B2F5A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2520B20241C131300AC6747 /* AuthorizationManager.framework */ = {
@@ -455,25 +434,11 @@
 			remoteRef = D2520B1F241C131300AC6747 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2520B22241C131300AC6747 /* AuthorizationManagerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = AuthorizationManagerTests.xctest;
-			remoteRef = D2520B21241C131300AC6747 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D2DC99CC242EAD4200AB9EEC /* Logger.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Logger.framework;
 			remoteRef = D2DC99CB242EAD4200AB9EEC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D2DC99CE242EAD4200AB9EEC /* LoggerTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = LoggerTests.xctest;
-			remoteRef = D2DC99CD242EAD4200AB9EEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2DC9A25242EF90900AB9EEC /* SinterD */ = {
@@ -483,18 +448,25 @@
 			remoteRef = D2DC9A24242EF90900AB9EEC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D2E077CC243B728C000D96BF /* Configuration.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Configuration.framework;
+			remoteRef = D2E077CB243B728C000D96BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2E077CE243B728C000D96BF /* ConfigurationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ConfigurationTests.xctest;
+			remoteRef = D2E077CD243B728C000D96BF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D2EFA2832421A54700BCB9A3 /* SignatureDatabase.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SignatureDatabase.framework;
 			remoteRef = D2EFA2822421A54700BCB9A3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D2EFA2852421A54700BCB9A3 /* SignatureDatabaseTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignatureDatabaseTests.xctest;
-			remoteRef = D2EFA2842421A54700BCB9A3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

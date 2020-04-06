@@ -12,6 +12,9 @@
 		D249E61F241C0C51000B2F5A /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249E61E241C0C51000B2F5A /* EndpointSecurityClient.swift */; };
 		D2520AF3241C126B00AC6747 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */; };
 		D252E021243627B50000FD48 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252E020243627B50000FD48 /* Interface.swift */; };
+		D2E077FA243B964C000D96BF /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F9243B964C000D96BF /* Logger.framework */; };
+		D2E077FB243B964C000D96BF /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F9243B964C000D96BF /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2E077FD243BA3C8000D96BF /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077FC243BA3B8000D96BF /* libbsm.tbd */; };
 		D2EFA2562421A4C700BCB9A3 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */; };
 		D2EFA2572421A4C700BCB9A3 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -23,6 +26,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2E077FB243B964C000D96BF /* Logger.framework in Embed Frameworks */,
 				D2EFA2572421A4C700BCB9A3 /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -39,6 +43,8 @@
 		D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CodeSigningUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D252E020243627B50000FD48 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		D2E077F9243B964C000D96BF /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E077FC243BA3B8000D96BF /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -47,8 +53,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E077FA243B964C000D96BF /* Logger.framework in Frameworks */,
 				D2EFA2562421A4C700BCB9A3 /* AuthorizationManager.framework in Frameworks */,
 				D2520AF3241C126B00AC6747 /* libEndpointSecurity.tbd in Frameworks */,
+				D2E077FD243BA3C8000D96BF /* libbsm.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +95,8 @@
 		D2520AE6241C0D2400AC6747 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2E077FC243BA3B8000D96BF /* libbsm.tbd */,
+				D2E077F9243B964C000D96BF /* Logger.framework */,
 				D2EFA2552421A4C700BCB9A3 /* AuthorizationManager.framework */,
 				D2520AEE241C0E0C00AC6747 /* libEndpointSecurity.tbd */,
 				D2520AE7241C0D2400AC6747 /* CodeSigningUtils.framework */,

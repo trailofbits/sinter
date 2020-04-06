@@ -8,10 +8,27 @@
 
 import AuthorizationManager
 import EndpointSecurityWrapper
+import Logger
 
+import Darwin.bsm
 import Foundation
 
+// Because a Swift tuple cannot/shouldn't be iterated at runtime,
+// use an UnsafeBufferPointer to store the twenty UInt8 values of
+// the cdhash (a tuple of UInt8 values) into an iterable array form
+private struct CDhash {
+    public var tuple: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                       UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
+                       UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+
+    public var array: [UInt8] {
+        var tmp = tuple
+        return [UInt8](UnsafeBufferPointer(start: &tmp.0, count: MemoryLayout.size(ofValue: tmp)))
+    }
+}
+
 class EndpointSecurityClient: IEndpointSecurityClient {
+    private let logger: ILogger
     private var esClient: OpaquePointer?
 
     private var internalMessageMap = [Int64: UnsafeMutablePointer<es_message_t>]()
@@ -32,7 +49,9 @@ class EndpointSecurityClient: IEndpointSecurityClient {
 
     private var callbackOpt: ((_ message: IEndpointSecurityClientMessage) -> Void)?
 
-    public init?() {
+    public init?(logger: ILogger) {
+        self.logger = logger
+
         let clientErr = es_new_client(&esClient) { _, unsafeMessagePtr in
             let unsafeMsgPtrCopy = es_copy_message(unsafeMessagePtr)
             let identifier = self.nextIdentifier
@@ -50,8 +69,29 @@ class EndpointSecurityClient: IEndpointSecurityClient {
                 target = endpointSecMessage.event.exec.target!
             #endif
 
-            let binaryPath = EndpointSecurityClient.processBinaryPath(process: target.pointee)
-            let message = IEndpointSecurityClientMessage(messageId: identifier, binaryPath: binaryPath)
+            let binaryPath = EndpointSecurityClient.getProcessBinaryPath(process: target.pointee)
+
+            let ppid = target.pointee.ppid
+            let pid = audit_token_to_pid(target.pointee.audit_token)
+
+            let uid = audit_token_to_euid(target.pointee.audit_token)
+            let gid = target.pointee.group_id
+
+            let cdhash = EndpointSecurityClient.getProcessCdHash(process: target.pointee)
+            let signingId = EndpointSecurityClient.getProcessSigningId(process: target.pointee)
+            let teamId = EndpointSecurityClient.getProcessTeamId(process: target.pointee)
+            let isAppleSigned = target.pointee.is_platform_binary
+
+            let message = IEndpointSecurityClientMessage(messageId: identifier,
+                                                         binaryPath: binaryPath,
+                                                         parentProcessId: ppid,
+                                                         processId: pid,
+                                                         userId: uid,
+                                                         groupId: gid_t(gid),
+                                                         cdhash: cdhash,
+                                                         signingId: signingId,
+                                                         teamId: teamId,
+                                                         isAppleSigned: isAppleSigned)
 
             atomic {
                 if let callback = self.callbackOpt {
@@ -119,7 +159,7 @@ class EndpointSecurityClient: IEndpointSecurityClient {
         es_clear_cache(esClient!)
     }
 
-    static func processBinaryPath(process: es_process_t) -> String {
+    static func getProcessBinaryPath(process: es_process_t) -> String {
         let executable: es_file_t
 
         #if canImport(EndpointSecurity)
@@ -132,5 +172,34 @@ class EndpointSecurityClient: IEndpointSecurityClient {
         let path = String(cString: executable.path.data)
 
         return path
+    }
+
+    static func getProcessCdHash(process: es_process_t) -> String {
+        // Convert the tuple of UInt8 bytes to its hexadecimal string form
+        let CDhashArray = CDhash(tuple: process.cdhash).array
+        var cdhashHexString: String = ""
+        for eachByte in CDhashArray {
+            cdhashHexString += String(format: "%02X", eachByte)
+        }
+
+        return cdhashHexString
+    }
+
+    static func getProcessTeamId(process: es_process_t) -> String {
+        var teamIdString: String = ""
+        if process.team_id.length > 0 {
+            teamIdString = String(cString: process.team_id.data)
+        }
+
+        return teamIdString
+    }
+
+    static func getProcessSigningId(process: es_process_t) -> String {
+        var signingIdString: String = ""
+        if process.signing_id.length > 0 {
+            signingIdString = String(cString: process.signing_id.data)
+        }
+
+        return signingIdString
     }
 }

@@ -61,7 +61,7 @@ func parseJSONRuleDatabase(jsonData: Data) -> RuleDatabase {
                                                                           from: jsonData)
 
         if let jsonRuleArray = jsonRuleDatabase["rules"] {
-            let validHashCharacters = CharacterSet(charactersIn: "0123456789abcdef")
+            let validHashCharacters = CharacterSet(charactersIn: "0123456789ABCDEF")
 
             for jsonRule in jsonRuleArray {
                 var ruleType: RuleType
@@ -95,7 +95,9 @@ func parseJSONRuleDatabase(jsonData: Data) -> RuleDatabase {
                     continue
                 }
 
-                if jsonRule.sha256.rangeOfCharacter(from: validHashCharacters.inverted) != nil {
+                let sha256 = jsonRule.sha256.uppercased()
+
+                if sha256.rangeOfCharacter(from: validHashCharacters.inverted) != nil {
                     ruleDatabase.status = RuleDatabaseStatus.partial
                     continue
                 }
@@ -103,12 +105,21 @@ func parseJSONRuleDatabase(jsonData: Data) -> RuleDatabase {
                 let rule = RuleMapEntry(ruleType: ruleType,
                                         policy: rulePolicy,
                                         customMessage: jsonRule.custom_msg,
-                                        sha256: jsonRule.sha256)
+                                        sha256: sha256)
+
+                // TODO: We are truncating this to 20 chars because EndpointSecurity truncates
+                //      the hash too. We need to add support for getting the full hash from the
+                //      binary
+                let index = sha256.index(sha256.startIndex, offsetBy: 40)
+                let truncatedHash = String(sha256[..<index])
 
                 if ruleType == RuleType.binary {
-                    ruleDatabase.binaryRuleMap[jsonRule.sha256] = rule
+                    ruleDatabase.binaryRuleMap[sha256] = rule
+                    ruleDatabase.binaryRuleMap[truncatedHash] = rule
+
                 } else {
-                    ruleDatabase.certificateRuleMap[jsonRule.sha256] = rule
+                    ruleDatabase.certificateRuleMap[sha256] = rule
+                    ruleDatabase.certificateRuleMap[truncatedHash] = rule
                 }
             }
 

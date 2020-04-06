@@ -7,139 +7,109 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D252E01D243626690000FD48 /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D252E01C243626690000FD48 /* Interface.swift */; };
-		D2DC99B7242EAD4000AB9EEC /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = D2DC99A9242EAD4000AB9EEC /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2DC99D4242EAD6F00AB9EEC /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DC99D3242EAD6F00AB9EEC /* ILogger.swift */; };
-		D2DC99DC242EAE5800AB9EEC /* FilesystemLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DC99DB242EAE5800AB9EEC /* FilesystemLogger.swift */; };
-		D2E077F3243B93B8000D96BF /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F2243B93B8000D96BF /* Configuration.framework */; };
-		D2E077F4243B93B8000D96BF /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F2243B93B8000D96BF /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2E077BB243B728A000D96BF /* Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = D2E077AD243B728A000D96BF /* Configuration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D2E077D6243B72A2000D96BF /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E077D5243B72A2000D96BF /* Interface.swift */; };
+		D2E077D8243B7309000D96BF /* IConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E077D7243B7309000D96BF /* IConfiguration.swift */; };
+		D2E077DA243B737D000D96BF /* JSONConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E077D9243B737D000D96BF /* JSONConfiguration.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		D2E077F5243B93B8000D96BF /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D2E077F4243B93B8000D96BF /* Configuration.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		D252E01C243626690000FD48 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
-		D2DC99A6242EAD4000AB9EEC /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2DC99A9242EAD4000AB9EEC /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		D2DC99AA242EAD4000AB9EEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2DC99D3242EAD6F00AB9EEC /* ILogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ILogger.swift; sourceTree = "<group>"; };
-		D2DC99DB242EAE5800AB9EEC /* FilesystemLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemLogger.swift; sourceTree = "<group>"; };
-		D2DC99DE242EC13A00AB9EEC /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2E077F2243B93B8000D96BF /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E077AA243B728A000D96BF /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E077AD243B728A000D96BF /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Configuration.h; sourceTree = "<group>"; };
+		D2E077AE243B728A000D96BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2E077D5243B72A2000D96BF /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
+		D2E077D7243B7309000D96BF /* IConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IConfiguration.swift; sourceTree = "<group>"; };
+		D2E077D9243B737D000D96BF /* JSONConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2DC99A3242EAD4000AB9EEC /* Frameworks */ = {
+		D2E077A7243B728A000D96BF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2E077F3243B93B8000D96BF /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D2DC999C242EAD3F00AB9EEC = {
+		D2E077A0243B728A000D96BF = {
 			isa = PBXGroup;
 			children = (
-				D2DC99A8242EAD4000AB9EEC /* Logger */,
-				D2DC99A7242EAD4000AB9EEC /* Products */,
-				D2DC99DD242EC13A00AB9EEC /* Frameworks */,
+				D2E077AC243B728A000D96BF /* Configuration */,
+				D2E077AB243B728A000D96BF /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D2DC99A7242EAD4000AB9EEC /* Products */ = {
+		D2E077AB243B728A000D96BF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2DC99A6242EAD4000AB9EEC /* Logger.framework */,
+				D2E077AA243B728A000D96BF /* Configuration.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2DC99A8242EAD4000AB9EEC /* Logger */ = {
+		D2E077AC243B728A000D96BF /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				D2DC99A9242EAD4000AB9EEC /* Logger.h */,
-				D2DC99AA242EAD4000AB9EEC /* Info.plist */,
-				D2DC99D3242EAD6F00AB9EEC /* ILogger.swift */,
-				D2DC99DB242EAE5800AB9EEC /* FilesystemLogger.swift */,
-				D252E01C243626690000FD48 /* Interface.swift */,
+				D2E077AD243B728A000D96BF /* Configuration.h */,
+				D2E077AE243B728A000D96BF /* Info.plist */,
+				D2E077D5243B72A2000D96BF /* Interface.swift */,
+				D2E077D7243B7309000D96BF /* IConfiguration.swift */,
+				D2E077D9243B737D000D96BF /* JSONConfiguration.swift */,
 			);
-			path = Logger;
-			sourceTree = "<group>";
-		};
-		D2DC99DD242EC13A00AB9EEC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D2E077F2243B93B8000D96BF /* Configuration.framework */,
-				D2DC99DE242EC13A00AB9EEC /* EndpointSecurityClient.framework */,
-			);
-			name = Frameworks;
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D2DC99A1242EAD4000AB9EEC /* Headers */ = {
+		D2E077A5243B728A000D96BF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2DC99B7242EAD4000AB9EEC /* Logger.h in Headers */,
+				D2E077BB243B728A000D96BF /* Configuration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2DC99A5242EAD4000AB9EEC /* Logger */ = {
+		D2E077A9243B728A000D96BF /* Configuration */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2DC99BA242EAD4000AB9EEC /* Build configuration list for PBXNativeTarget "Logger" */;
+			buildConfigurationList = D2E077BE243B728B000D96BF /* Build configuration list for PBXNativeTarget "Configuration" */;
 			buildPhases = (
-				D2DC99A1242EAD4000AB9EEC /* Headers */,
-				D2DC99A2242EAD4000AB9EEC /* Sources */,
-				D2DC99A3242EAD4000AB9EEC /* Frameworks */,
-				D2DC99A4242EAD4000AB9EEC /* Resources */,
-				D2E077F5243B93B8000D96BF /* Embed Frameworks */,
+				D2E077A5243B728A000D96BF /* Headers */,
+				D2E077A6243B728A000D96BF /* Sources */,
+				D2E077A7243B728A000D96BF /* Frameworks */,
+				D2E077A8243B728A000D96BF /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Logger;
-			productName = Logger;
-			productReference = D2DC99A6242EAD4000AB9EEC /* Logger.framework */;
+			name = Configuration;
+			productName = Configuration;
+			productReference = D2E077AA243B728A000D96BF /* Configuration.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D2DC999D242EAD3F00AB9EEC /* Project object */ = {
+		D2E077A1243B728A000D96BF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
-					D2DC99A5242EAD4000AB9EEC = {
-						CreatedOnToolsVersion = 11.3.1;
-						LastSwiftMigration = 1130;
+					D2E077A9243B728A000D96BF = {
+						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
-			buildConfigurationList = D2DC99A0242EAD3F00AB9EEC /* Build configuration list for PBXProject "Logger" */;
+			buildConfigurationList = D2E077A4243B728A000D96BF /* Build configuration list for PBXProject "Configuration" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -147,18 +117,18 @@
 				en,
 				Base,
 			);
-			mainGroup = D2DC999C242EAD3F00AB9EEC;
-			productRefGroup = D2DC99A7242EAD4000AB9EEC /* Products */;
+			mainGroup = D2E077A0243B728A000D96BF;
+			productRefGroup = D2E077AB243B728A000D96BF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2DC99A5242EAD4000AB9EEC /* Logger */,
+				D2E077A9243B728A000D96BF /* Configuration */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D2DC99A4242EAD4000AB9EEC /* Resources */ = {
+		D2E077A8243B728A000D96BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -168,20 +138,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2DC99A2242EAD4000AB9EEC /* Sources */ = {
+		D2E077A6243B728A000D96BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2DC99D4242EAD6F00AB9EEC /* ILogger.swift in Sources */,
-				D2DC99DC242EAE5800AB9EEC /* FilesystemLogger.swift in Sources */,
-				D252E01D243626690000FD48 /* Interface.swift in Sources */,
+				D2E077D6243B72A2000D96BF /* Interface.swift in Sources */,
+				D2E077DA243B737D000D96BF /* JSONConfiguration.swift in Sources */,
+				D2E077D8243B7309000D96BF /* IConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D2DC99B8242EAD4000AB9EEC /* Debug */ = {
+		D2E077BC243B728B000D96BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -244,7 +214,7 @@
 			};
 			name = Debug;
 		};
-		D2DC99B9242EAD4000AB9EEC /* Release */ = {
+		D2E077BD243B728B000D96BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -300,25 +270,24 @@
 			};
 			name = Release;
 		};
-		D2DC99BB242EAD4000AB9EEC /* Debug */ = {
+		D2E077BF243B728B000D96BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Logger/Info.plist;
+				INFOPLIST_FILE = Configuration/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Logger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Configuration;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -326,25 +295,24 @@
 			};
 			name = Debug;
 		};
-		D2DC99BC242EAD4000AB9EEC /* Release */ = {
+		D2E077C0243B728B000D96BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Logger/Info.plist;
+				INFOPLIST_FILE = Configuration/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Logger;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Configuration;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -354,25 +322,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2DC99A0242EAD3F00AB9EEC /* Build configuration list for PBXProject "Logger" */ = {
+		D2E077A4243B728A000D96BF /* Build configuration list for PBXProject "Configuration" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2DC99B8242EAD4000AB9EEC /* Debug */,
-				D2DC99B9242EAD4000AB9EEC /* Release */,
+				D2E077BC243B728B000D96BF /* Debug */,
+				D2E077BD243B728B000D96BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2DC99BA242EAD4000AB9EEC /* Build configuration list for PBXNativeTarget "Logger" */ = {
+		D2E077BE243B728B000D96BF /* Build configuration list for PBXNativeTarget "Configuration" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2DC99BB242EAD4000AB9EEC /* Debug */,
-				D2DC99BC242EAD4000AB9EEC /* Release */,
+				D2E077BF243B728B000D96BF /* Debug */,
+				D2E077C0243B728B000D96BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D2DC999D242EAD3F00AB9EEC /* Project object */;
+	rootObject = D2E077A1243B728A000D96BF /* Project object */;
 }

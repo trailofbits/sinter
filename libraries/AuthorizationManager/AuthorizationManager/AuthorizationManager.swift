@@ -95,7 +95,12 @@ private final class AuthorizationManagerOperation: Operation {
     public override func main() {
         guard !isCancelled else { return }
 
-        let request = IAuthorizationInterfaceRequest(binaryPath: message.binaryPath, teamId: "ToDo")
+        let request = IAuthorizationInterfaceRequest(binaryPath: message.binaryPath,
+                                                     cdhash: message.cdhash,
+                                                     signingId: message.signingId,
+                                                     teamId: message.teamId,
+                                                     isAppleSigned: message.isAppleSigned)
+
         if !authorizationInterface.ruleForBinary(request: request, allow: &allow, cache: &cache) {
             allow = false
             cache = false

@@ -6,8 +6,15 @@
  the LICENSE file found in the root directory of this source tree.
  */
 
+import Configuration
 import Foundation
 
-public func createFilesystemLogger(logFolderPath: String) -> ILogger? {
-    FilesystemLogger(logFolderPath: logFolderPath)
+public func createFilesystemLogger(configuration: IConfiguration) -> ILogger? {
+    if let logFolderPath = configuration.stringValue(moduleName: "FilesystemLogger", key: "log_folder") {
+        return FilesystemLogger(logFolderPath: logFolderPath)
+
+    } else {
+        print("Failed to locate the following configuration key: FilesystemLogger.log_folder")
+        return nil
+    }
 }

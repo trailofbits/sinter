@@ -18,6 +18,8 @@
 		D22A174924376129005BFA77 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D22A174724376129005BFA77 /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D22A174B2437633D005BFA77 /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A174A2437633D005BFA77 /* JSONRuleDatabaseParser.swift */; };
 		D22A174D2437754C005BFA77 /* JSONRuleDatabaseParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A174C2437754C005BFA77 /* JSONRuleDatabaseParserTests.swift */; };
+		D2E077E1243B8E0E000D96BF /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077E0243B8E0E000D96BF /* Configuration.framework */; };
+		D2E077E2243B8E0E000D96BF /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077E0243B8E0E000D96BF /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2E077E2243B8E0E000D96BF /* Configuration.framework in Embed Frameworks */,
 				D22A174924376129005BFA77 /* Logger.framework in Embed Frameworks */,
 				D22A1745243655A4005BFA77 /* AuthorizationManager.framework in Embed Frameworks */,
 			);
@@ -58,6 +61,7 @@
 		D22A174724376129005BFA77 /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22A174A2437633D005BFA77 /* JSONRuleDatabaseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRuleDatabaseParser.swift; sourceTree = "<group>"; };
 		D22A174C2437754C005BFA77 /* JSONRuleDatabaseParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRuleDatabaseParserTests.swift; sourceTree = "<group>"; };
+		D2E077E0243B8E0E000D96BF /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E077E1243B8E0E000D96BF /* Configuration.framework in Frameworks */,
 				D22A174824376129005BFA77 /* Logger.framework in Frameworks */,
 				D22A1744243655A4005BFA77 /* AuthorizationManager.framework in Frameworks */,
 			);
@@ -125,6 +130,7 @@
 		D22A1742243655A4005BFA77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2E077E0243B8E0E000D96BF /* Configuration.framework */,
 				D22A174724376129005BFA77 /* Logger.framework */,
 				D22A1743243655A4005BFA77 /* AuthorizationManager.framework */,
 			);

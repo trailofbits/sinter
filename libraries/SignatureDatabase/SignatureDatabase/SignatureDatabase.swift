@@ -10,20 +10,25 @@ import AuthorizationManager
 import CodeSigningUtils
 import Dispatch
 import Foundation
+import Logger
 
 final class SignatureDatabase: ISignatureDatabase {
+    private let logger: ILogger
     private let operationQueue = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: "")
     private var operationMap = [String: SignatureDatabaseOperation]()
     private var valueCache = [String: Bool]()
 
-    public init(concurrentOperationCount: Int) {
+    public init(logger: ILogger, concurrentOperationCount: Int) {
+        self.logger = logger
+
         operationQueue.maxConcurrentOperationCount = concurrentOperationCount
         operationQueue.qualityOfService = .userInteractive
     }
 
     public func checkSignatureFor(message: IEndpointSecurityClientMessage,
-                                  block: @escaping (_ message: IEndpointSecurityClientMessage, _ valid: Bool) -> Void) {
+                                  block: @escaping (_ message: IEndpointSecurityClientMessage,
+                                                    _ valid: Bool) -> Void) {
         dispatchQueue.sync {
             if let cachedValue = valueCache[message.binaryPath] {
                 self.operationMap.removeValue(forKey: message.binaryPath)

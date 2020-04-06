@@ -9,13 +9,11 @@
 import Foundation
 
 public struct IAuthorizationInterfaceRequest {
-    public var binaryPath: String = ""
-    public var teamId: String = ""
-
-    public init(binaryPath: String, teamId: String) {
-        self.binaryPath = binaryPath
-        self.teamId = teamId
-    }
+    public var binaryPath: String
+    public var cdhash: String
+    public var signingId: String
+    public var teamId: String
+    public var isAppleSigned: Bool
 }
 
 public protocol IAuthorizationInterface {
