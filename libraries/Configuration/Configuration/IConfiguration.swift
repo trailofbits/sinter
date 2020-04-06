@@ -6,10 +6,9 @@
  the LICENSE file found in the root directory of this source tree.
  */
 
-import AuthorizationManager
 import Foundation
-import Logger
 
-public func createEndpointSecurityClient(logger: ILogger) -> IEndpointSecurityClient? {
-    EndpointSecurityClient(logger: logger)
+public protocol IConfiguration {
+    func stringValue(moduleName: String, key: String) -> String?
+    func integerValue(moduleName: String, key: String) -> Int?
 }

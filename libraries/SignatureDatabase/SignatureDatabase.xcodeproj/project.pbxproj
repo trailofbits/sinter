@@ -11,6 +11,8 @@
 		D2DC998F242E870200AB9EEC /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; };
 		D2DC9990242E870200AB9EEC /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2DC9991242E872600AB9EEC /* SignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EFA28F2421A5F800BCB9A3 /* SignatureDatabase.swift */; };
+		D2E077F7243B95D8000D96BF /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F6243B95D8000D96BF /* Logger.framework */; };
+		D2E077F8243B95D8000D96BF /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077F6243B95D8000D96BF /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2EFA2742421A54600BCB9A3 /* SignatureDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2EFA2882421A55300BCB9A3 /* CodeSigningUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; };
 		D2EFA2892421A55300BCB9A3 /* CodeSigningUtils.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -23,6 +25,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2E077F8243B95D8000D96BF /* Logger.framework in Embed Frameworks */,
 				D2DC9990242E870200AB9EEC /* AuthorizationManager.framework in Embed Frameworks */,
 				D2EFA2892421A55300BCB9A3 /* CodeSigningUtils.framework in Embed Frameworks */,
 			);
@@ -34,6 +37,7 @@
 /* Begin PBXFileReference section */
 		D252E01E243627430000FD48 /* Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
 		D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E077F6243B95D8000D96BF /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EFA2632421A54500BCB9A3 /* SignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EFA2662421A54500BCB9A3 /* SignatureDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignatureDatabase.h; sourceTree = "<group>"; };
 		D2EFA2672421A54500BCB9A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E077F7243B95D8000D96BF /* Logger.framework in Frameworks */,
 				D2DC998F242E870200AB9EEC /* AuthorizationManager.framework in Frameworks */,
 				D2EFA2882421A55300BCB9A3 /* CodeSigningUtils.framework in Frameworks */,
 			);
@@ -86,6 +91,7 @@
 		D2EFA2862421A55300BCB9A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2E077F6243B95D8000D96BF /* Logger.framework */,
 				D2DC998E242E870200AB9EEC /* AuthorizationManager.framework */,
 				D2EFA2942421C41C00BCB9A3 /* AuthorizationManager.framework */,
 				D2EFA2872421A55300BCB9A3 /* CodeSigningUtils.framework */,

@@ -12,9 +12,37 @@ public struct IEndpointSecurityClientMessage {
     public var messageId: Int64
     public var binaryPath: String
 
-    public init(messageId: Int64, binaryPath: String) {
+    public var ppid: pid_t
+    public var pid: pid_t
+
+    public var uid: uid_t
+    public var gid: gid_t
+
+    public var cdhash: String
+    public var signingId: String
+    public var teamId: String
+    public var isAppleSigned: Bool
+
+    public init(messageId: Int64,
+                binaryPath: String,
+                parentProcessId: pid_t,
+                processId: pid_t,
+                userId: uid_t,
+                groupId: gid_t,
+                cdhash: String,
+                signingId: String,
+                teamId: String,
+                isAppleSigned: Bool) {
         self.messageId = messageId
         self.binaryPath = binaryPath
+        ppid = parentProcessId
+        pid = processId
+        uid = userId
+        gid = groupId
+        self.cdhash = cdhash
+        self.signingId = signingId
+        self.teamId = teamId
+        self.isAppleSigned = isAppleSigned
     }
 }
 

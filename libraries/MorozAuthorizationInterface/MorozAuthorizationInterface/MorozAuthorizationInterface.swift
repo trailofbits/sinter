@@ -13,42 +13,57 @@ class MorozAuthorizationInterface: IAuthorizationInterface {
     private let logger: ILogger
 
     private let serverAddress: String
-    private let configUpdateInterval: TimeInterval
     private let machineIdentifier: String
 
     private var ruleDatabaseUpdateTimer = Timer()
     private var ruleDatabase = RuleDatabase()
+    private let defaultAllow: Bool
 
-    public init?(logger: ILogger, serverAddress: String, configUpdateInterval: TimeInterval) {
+    public init?(logger: ILogger, serverAddress: String, configUpdateInterval: TimeInterval, defaultAllow: Bool) {
         self.logger = logger
         self.serverAddress = serverAddress
-
-        // TODO: update the rule database every configUpdateInterval seconds
-        self.configUpdateInterval = configUpdateInterval
+        self.defaultAllow = defaultAllow
 
         // TODO: this should be a unique identifier that is hard to guess
         machineIdentifier = "Sinter"
 
-        // Request the rules right now, then schedule new updates
-        requestRuleDatabaseUpdate()
-
-        ruleDatabaseUpdateTimer = Timer.scheduledTimer(withTimeInterval: self.configUpdateInterval,
+        ruleDatabaseUpdateTimer = Timer.scheduledTimer(withTimeInterval: configUpdateInterval,
                                                        repeats: true) { _ in self.requestRuleDatabaseUpdate() }
+
+        ruleDatabaseUpdateTimer.fire()
     }
 
     deinit {
         self.ruleDatabaseUpdateTimer.invalidate()
     }
 
-    public func ruleForBinary(request _: IAuthorizationInterfaceRequest, allow: inout Bool, cache: inout Bool) -> Bool {
-        // TODO: Authorize using self.binaryRuleMap and self.certificateRuleMap
-        allow = true
-        cache = true
+    public func ruleForBinary(request: IAuthorizationInterfaceRequest, allow: inout Bool, cache: inout Bool) -> Bool {
+        cache = false
+
+        if request.isAppleSigned {
+            allow = true
+
+        } else if let rule = ruleDatabase.binaryRuleMap[request.cdhash] {
+            allow = rule.policy == RulePolicy.whitelist
+
+        } else if let rule = ruleDatabase.certificateRuleMap[request.signingId] {
+            allow = rule.policy == RulePolicy.whitelist
+
+        } else {
+            allow = defaultAllow
+        }
+
+        if !allow {
+            print("Denied", request.cdhash)
+        }
 
         return true
     }
 
     private func requestRuleDatabaseUpdate() {
+        logger.logMessage(severity: LogMessageSeverity.information,
+                          message: "Updating rules...")
+
         let requestAddress = serverAddress + "/v1/santa/ruledownload/" + machineIdentifier
 
         var request = URLRequest(url: URL(string: requestAddress)!)

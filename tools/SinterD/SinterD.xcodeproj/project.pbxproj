@@ -18,6 +18,8 @@
 		D2DC9A2F242EF92400AB9EEC /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC9A29242EF92400AB9EEC /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2DC9A32242EF92A00AB9EEC /* SignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC9A31242EF92A00AB9EEC /* SignatureDatabase.framework */; };
 		D2DC9A33242EF92A00AB9EEC /* SignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2DC9A31242EF92A00AB9EEC /* SignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2E077DE243B889F000D96BF /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077DD243B889F000D96BF /* Configuration.framework */; };
+		D2E077DF243B889F000D96BF /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2E077DD243B889F000D96BF /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +41,7 @@
 				D2DC9A2F242EF92400AB9EEC /* Logger.framework in Embed Frameworks */,
 				D2DC9A2D242EF92400AB9EEC /* EndpointSecurityClient.framework in Embed Frameworks */,
 				D2DC9A33242EF92A00AB9EEC /* SignatureDatabase.framework in Embed Frameworks */,
+				D2E077DF243B889F000D96BF /* Configuration.framework in Embed Frameworks */,
 				D2DC9A2B242EF92400AB9EEC /* AuthorizationManager.framework in Embed Frameworks */,
 				D22A173B24364A11005BFA77 /* MorozAuthorizationInterface.framework in Embed Frameworks */,
 			);
@@ -59,6 +62,7 @@
 		D2DC9A36242EFA3500AB9EEC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D2DC9A39242EFC6900AB9EEC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2DC9A3A242EFC7200AB9EEC /* SinterD.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = SinterD.entitlements; sourceTree = "<group>"; };
+		D2E077DD243B889F000D96BF /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 				D2DC9A2E242EF92400AB9EEC /* Logger.framework in Frameworks */,
 				D2DC9A2C242EF92400AB9EEC /* EndpointSecurityClient.framework in Frameworks */,
 				D2DC9A32242EF92A00AB9EEC /* SignatureDatabase.framework in Frameworks */,
+				D2E077DE243B889F000D96BF /* Configuration.framework in Frameworks */,
 				D2DC9A2A242EF92400AB9EEC /* AuthorizationManager.framework in Frameworks */,
 				D22A173A24364A11005BFA77 /* MorozAuthorizationInterface.framework in Frameworks */,
 			);
@@ -107,6 +112,7 @@
 		D2DC9A26242EF92400AB9EEC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2E077DD243B889F000D96BF /* Configuration.framework */,
 				D22A173924364A11005BFA77 /* MorozAuthorizationInterface.framework */,
 				D2DC9A36242EFA3500AB9EEC /* Cocoa.framework */,
 				D2DC9A34242EF93100AB9EEC /* UserNotifications.framework */,

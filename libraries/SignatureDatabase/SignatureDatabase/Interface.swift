@@ -8,7 +8,9 @@
 
 import AuthorizationManager
 import Foundation
+import Logger
 
-public func createSignatureDatabase(concurrentOperationCount: Int) -> ISignatureDatabase? {
-    SignatureDatabase(concurrentOperationCount: concurrentOperationCount)
+public func createSignatureDatabase(logger: ILogger, concurrentOperationCount: Int) -> ISignatureDatabase? {
+    SignatureDatabase(logger: logger,
+                      concurrentOperationCount: concurrentOperationCount)
 }

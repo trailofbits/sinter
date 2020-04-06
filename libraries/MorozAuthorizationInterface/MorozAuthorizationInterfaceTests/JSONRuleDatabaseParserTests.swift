@@ -10,7 +10,7 @@
 import XCTest
 
 class JSONRuleDatabaseParserTests: XCTestCase {
-    let emptyFileHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    let emptyFileHash = "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
     let expectedRuleMessage = "Test message"
 
     func testBinaryBlacklistRule() throws {
@@ -28,7 +28,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
         """
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: binaryBlacklistRule.data(using: .utf8)!)
-        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 0)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
@@ -57,7 +57,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
         """
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: binaryWhitelistRule1.data(using: .utf8)!)
-        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 0)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
@@ -86,7 +86,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
         """
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: binaryWhitelistRule2.data(using: .utf8)!)
-        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 0)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
@@ -116,7 +116,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: certificateBlacklistRule.data(using: .utf8)!)
         XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 0)
-        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
         let ruleOpt = ruleDatabase.certificateRuleMap[emptyFileHash]
@@ -145,7 +145,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: certificateWhitelistRule1.data(using: .utf8)!)
         XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 0)
-        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
         let ruleOpt = ruleDatabase.certificateRuleMap[emptyFileHash]
@@ -174,7 +174,7 @@ class JSONRuleDatabaseParserTests: XCTestCase {
 
         let ruleDatabase = parseJSONRuleDatabase(jsonData: certificateWhitelistRule2.data(using: .utf8)!)
         XCTAssertEqual(ruleDatabase.binaryRuleMap.count, 0)
-        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 1)
+        XCTAssertEqual(ruleDatabase.certificateRuleMap.count, 2)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.valid)
 
         let ruleOpt = ruleDatabase.certificateRuleMap[emptyFileHash]

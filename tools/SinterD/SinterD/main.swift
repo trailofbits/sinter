@@ -7,6 +7,7 @@
  */
 
 import AuthorizationManager
+import Configuration
 import EndpointSecurityClient
 import Logger
 import MorozAuthorizationInterface
@@ -14,44 +15,65 @@ import SignatureDatabase
 
 import Dispatch
 
-let filesystemLogger = createFilesystemLogger(logFolderPath: "/var/log/sinter")
-if filesystemLogger == nil {
+let localConfigurationOpt = createLocalJSONConfiguration()
+if localConfigurationOpt == nil {
+    print("Failed to initialize the Configuration object")
+    exit(EXIT_FAILURE)
+}
+
+let filesystemLoggerOpt = createFilesystemLogger(configuration: localConfigurationOpt!)
+if filesystemLoggerOpt == nil {
     print("Failed to initialize the FilesystemLogger object")
     exit(EXIT_FAILURE)
 }
 
-let authorizationInterface = createMorozAuthorizationInterface(logger: filesystemLogger!)
-if authorizationInterface == nil {
-    print("Failed to initialize the AuthorizationInterface object")
+let authorizationInterfaceOpt = createMorozAuthorizationInterface(logger: filesystemLoggerOpt!,
+                                                                  configuration: localConfigurationOpt!)
+
+if authorizationInterfaceOpt == nil {
+    filesystemLoggerOpt!.logMessage(severity: LogMessageSeverity.error,
+                                    message: "Failed to initialize the AuthorizationInterface object")
+
     exit(EXIT_FAILURE)
 }
 
-let signatureDatabase = createSignatureDatabase(concurrentOperationCount: 4)
-if signatureDatabase == nil {
-    print("Failed to initialize the SignatureDatabase object")
+let signatureDatabaseOpt = createSignatureDatabase(logger: filesystemLoggerOpt!,
+                                                   concurrentOperationCount: 4)
+
+if signatureDatabaseOpt == nil {
+    filesystemLoggerOpt!.logMessage(severity: LogMessageSeverity.error,
+                                    message: "Failed to initialize the SignatureDatabase object")
+
     exit(EXIT_FAILURE)
 }
 
-let endpointSecurityClientOpt = createEndpointSecurityClient()
+let endpointSecurityClientOpt = createEndpointSecurityClient(logger: filesystemLoggerOpt!)
 if endpointSecurityClientOpt == nil {
-    print("Failed to initialize the EndpointSecurityClient object")
+    filesystemLoggerOpt!.logMessage(severity: LogMessageSeverity.error,
+                                    message: "Failed to initialize the EndpointSecurityClient object")
+
     exit(EXIT_FAILURE)
 }
 
-let authorizationManager = createAuthorizationManager(authorizationInterface: authorizationInterface!,
-                                                      signatureDatabase: signatureDatabase!,
-                                                      endpointSecurityClient: endpointSecurityClientOpt!,
-                                                      logger: filesystemLogger!,
-                                                      concurrentOperationCount: 4)
+let authorizationManagerOpt = createAuthorizationManager(authorizationInterface: authorizationInterfaceOpt!,
+                                                         signatureDatabase: signatureDatabaseOpt!,
+                                                         endpointSecurityClient: endpointSecurityClientOpt!,
+                                                         logger: filesystemLoggerOpt!,
+                                                         concurrentOperationCount: 4)
 
-if authorizationManager == nil {
-    print("Failed to initialize the AuthorizationManager object")
+if authorizationManagerOpt == nil {
+    filesystemLoggerOpt!.logMessage(severity: LogMessageSeverity.error,
+                                    message: "Failed to initialize the AuthorizationManager object")
+
     exit(EXIT_FAILURE)
 }
 
-let signalHandler = DispatchSource.makeSignalSource(signal: SIGINT, queue: .main)
+let signalHandler = DispatchSource.makeSignalSource(signal: SIGINT,
+                                                    queue: .main)
+
 signalHandler.setEventHandler {
-    print("Terminating...")
+    filesystemLoggerOpt!.logMessage(severity: LogMessageSeverity.information,
+                                    message: "Terminating...")
 
     DispatchQueue.main.async {
         exit(EXIT_SUCCESS)
@@ -61,15 +83,5 @@ signalHandler.setEventHandler {
 signalHandler.resume()
 signal(SIGINT, SIG_IGN)
 
-// This will not work: check out the log with: sudo log stream
-import UserNotifications
-let center = UNUserNotificationCenter.current()
-center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-    if granted {
-        print("Access to UserNotifications has been granted")
-    } else {
-        print("Access to UserNotifications has *NOT* been granted:", error!)
-    }
-}
-
+RunLoop.current.run()
 dispatchMain()
