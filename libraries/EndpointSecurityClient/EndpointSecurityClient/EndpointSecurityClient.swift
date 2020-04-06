@@ -43,9 +43,14 @@ class EndpointSecurityClient: IEndpointSecurityClient {
 
             let endpointSecMessage = unsafeMsgPtrCopy!.pointee
 
-            let binaryPath = EndpointSecurityClient.processBinaryPath(
-                process: endpointSecMessage.event.exec.target!.pointee)
+            let target: UnsafeMutablePointer<es_process_t>
+            #if canImport(EndpointSecurity)
+                target = endpointSecMessage.event.exec.target
+            #else
+                target = endpointSecMessage.event.exec.target!
+            #endif
 
+            let binaryPath = EndpointSecurityClient.processBinaryPath(process: target.pointee)
             let message = IEndpointSecurityClientMessage(messageId: identifier, binaryPath: binaryPath)
 
             atomic {
@@ -115,7 +120,13 @@ class EndpointSecurityClient: IEndpointSecurityClient {
     }
 
     static func processBinaryPath(process: es_process_t) -> String {
-        let executable = process.executable!.pointee
+        let executable: es_file_t
+
+        #if canImport(EndpointSecurity)
+            executable = process.executable.pointee
+        #else
+            executable = process.executable!.pointee
+        #endif
 
         // TODO: use path.size
         let path = String(cString: executable.path.data)
