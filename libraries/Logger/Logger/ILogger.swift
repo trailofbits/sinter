@@ -24,10 +24,16 @@ public struct AuthorizationLogMessage {
     public var cdHash: String
     public var binaryPath: String
     public var reason: AuthorizationLogMessageReason
+    public var pid: Int
+    public var ppid: Int
+    public var uid: Int
+    public var gid: Int
 
     public init(timestamp: Int64, allowed: Bool, cached: Bool,
                 teamId: String, cdHash: String, binaryPath: String,
-                reason: AuthorizationLogMessageReason) {
+                reason: AuthorizationLogMessageReason,
+                pid: Int, ppid: Int,
+                uid: Int, gid: Int) {
         self.timestamp = timestamp
         self.allowed = allowed
         self.cached = cached
@@ -35,6 +41,10 @@ public struct AuthorizationLogMessage {
         self.cdHash = cdHash
         self.binaryPath = binaryPath
         self.reason = reason
+        self.pid = pid
+        self.ppid = ppid
+        self.uid = uid
+        self.gid = gid
     }
 }
 
