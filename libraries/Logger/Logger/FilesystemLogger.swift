@@ -9,24 +9,65 @@
 import Foundation
 
 final class FilesystemLogger: ILogger {
-    private let path: String
+    let logFileURL: URL
+
+    private static func getLogPath(logFolderPath: String) -> URL {
+        let logFolderURL = URL(string: "file:///" + logFolderPath)!
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyy-MM-dd"
+
+        let dateString = formatter.string(from: Date())
+        let fileName = "Sinter-\(dateString).log"
+
+        return logFolderURL.appendingPathComponent(fileName)
+    }
 
     public init?(logFolderPath: String) {
-        // TODO: generate a file path and then create a new log
-        path = logFolderPath
+        logFileURL = FilesystemLogger.getLogPath(logFolderPath: logFolderPath)
     }
 
     public func logAuthorization(message: AuthorizationLogMessage) {
-        // TODO: write to file
-        if message.allowed {
-            print("Allowed:", message.binaryPath)
-        } else {
-            print("Denied:", message.binaryPath)
+        let logLine = "action=EXEC|decision=ALLOW|reason=BINARY|sha256=\(message.cdHash)|cert_sha256=?|cert_cn=?|"
+            + "pid=\(String(message.pid))|ppid=\(String(message.ppid))|uid=\(String(message.uid))"
+            + "|user=?|gid=\(String(message.gid))|group=?|mode=?|path=\(message.binaryPath)"
+            + "|args=?|\n"
+
+        do {
+            try logLine.write(to: logFileURL,
+                              atomically: true,
+                              encoding: .utf8)
+
+        } catch {
+            print("\(logLine)")
         }
     }
 
-    public func logMessage(severity _: LogMessageSeverity, message: String) {
-        // TODO: write to file
-        print("Message:", message)
+    public func logMessage(severity: LogMessageSeverity, message: String) {
+        let severityDescription: String
+        switch severity {
+        case LogMessageSeverity.debug:
+            severityDescription = "Debug"
+
+        case LogMessageSeverity.information:
+            severityDescription = "Information"
+
+        case LogMessageSeverity.warning:
+            severityDescription = "Warning"
+
+        case LogMessageSeverity.error:
+            severityDescription = "Error"
+        }
+
+        let logLine = "severity=\(String(severityDescription))|message=\(message)\n"
+
+        do {
+            try logLine.write(to: logFileURL,
+                              atomically: true,
+                              encoding: .utf8)
+
+        } catch {
+            print("\(logLine)")
+        }
     }
 }

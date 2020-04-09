@@ -38,10 +38,14 @@ class AuthorizationManager: IAuthorizationManager {
                 timestamp: 0,
                 allowed: false,
                 cached: true,
-                teamId: "todo",
-                cdHash: "todo2",
+                teamId: "N/A",
+                cdHash: "N/A",
                 binaryPath: message.binaryPath,
-                reason: AuthorizationLogMessageReason.unsigned
+                reason: AuthorizationLogMessageReason.unsigned,
+                pid: Int(message.pid),
+                ppid: Int(message.ppid),
+                uid: Int(message.uid),
+                gid: Int(message.gid)
             )
 
             logger.logAuthorization(message: logMessage)
@@ -60,10 +64,14 @@ class AuthorizationManager: IAuthorizationManager {
                     timestamp: 0,
                     allowed: allow,
                     cached: cache,
-                    teamId: "todo",
-                    cdHash: "todo2",
+                    teamId: message.teamId,
+                    cdHash: message.cdhash,
                     binaryPath: message.binaryPath,
-                    reason: AuthorizationLogMessageReason.userAction
+                    reason: AuthorizationLogMessageReason.userAction,
+                    pid: Int(message.pid),
+                    ppid: Int(message.ppid),
+                    uid: Int(message.uid),
+                    gid: Int(message.gid)
                 )
 
                 self.logger.logAuthorization(message: logMessage)
