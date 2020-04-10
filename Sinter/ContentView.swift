@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Sinter is a background service and does not need to be run manually!")
+        Text("Hello, World!")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
