@@ -17,7 +17,6 @@
 		D2578418243F60350020BC32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2578417243F60350020BC32 /* Assets.xcassets */; };
 		D257841B243F60350020BC32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D257841A243F60350020BC32 /* Preview Assets.xcassets */; };
 		D257841E243F60350020BC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D257841C243F60350020BC32 /* Main.storyboard */; };
-		D257846C243F62EC0020BC32 /* SinterD in CopyFiles */ = {isa = PBXBuildFile; fileRef = D257846A243F62C20020BC32 /* SinterD */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D257848C243F635F0020BC32 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D257848B243F63520020BC32 /* LibSinter.framework */; };
 		D257848D243F635F0020BC32 /* LibSinter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D257848B243F63520020BC32 /* LibSinter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D25784D2243F73030020BC32 /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; };
@@ -27,6 +26,7 @@
 		D257851D243F781F0020BC32 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
 		D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851F243F78250020BC32 /* libEndpointSecurity.tbd */; };
+		D2875812244615E3007C51C3 /* com.trailofbits.sinter.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; };
 		D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -45,13 +45,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D2513BA52440D6E300002645;
 			remoteInfo = SyncServerDecisionManager;
-		};
-		D2578469243F62C20020BC32 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2578465243F62C10020BC32 /* SinterD.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D257845B243F62C10020BC32;
-			remoteInfo = SinterD;
 		};
 		D257848A243F63520020BC32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -81,6 +74,13 @@
 			remoteGlobalIDString = D2578505243F77DC0020BC32;
 			remoteInfo = EndpointSecurityClient;
 		};
+		D2875810244615C9007C51C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D257845B243F62C10020BC32;
+			remoteInfo = SystemExtension;
+		};
 		D2BDB3E2244102080027C57F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */;
@@ -94,10 +94,10 @@
 		D257846B243F62DA0020BC32 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
+			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
 			files = (
-				D257846C243F62EC0020BC32 /* SinterD in CopyFiles */,
+				D2875812244615E3007C51C3 /* com.trailofbits.sinter.systemextension in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,12 +132,12 @@
 		D257841D243F60350020BC32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D257841F243F60350020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2578420243F60350020BC32 /* Sinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinter.entitlements; sourceTree = "<group>"; };
-		D2578465243F62C10020BC32 /* SinterD.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SinterD.xcodeproj; path = SinterD/SinterD.xcodeproj; sourceTree = "<group>"; };
 		D2578486243F63520020BC32 /* LibSinter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LibSinter.xcodeproj; path = LibSinter/LibSinter.xcodeproj; sourceTree = "<group>"; };
 		D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FilesystemLogger.xcodeproj; path = FilesystemLogger/FilesystemLogger.xcodeproj; sourceTree = "<group>"; };
 		D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSONConfiguration.xcodeproj; path = JSONConfiguration/JSONConfiguration.xcodeproj; sourceTree = "<group>"; };
 		D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
+		D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemExtension.xcodeproj; path = SystemExtension/SystemExtension.xcodeproj; sourceTree = "<group>"; };
 		D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LocalDecisionManager.xcodeproj; path = LocalDecisionManager/LocalDecisionManager.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -235,17 +235,9 @@
 		D2578451243F62880020BC32 /* services */ = {
 			isa = PBXGroup;
 			children = (
-				D2578465243F62C10020BC32 /* SinterD.xcodeproj */,
+				D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */,
 			);
 			path = services;
-			sourceTree = "<group>";
-		};
-		D2578466243F62C10020BC32 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D257846A243F62C20020BC32 /* SinterD */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D257846D243F63080020BC32 /* Frameworks */ = {
@@ -285,6 +277,14 @@
 			isa = PBXGroup;
 			children = (
 				D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D287580D244615C8007C51C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -371,12 +371,12 @@
 					ProjectRef = D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */;
 				},
 				{
-					ProductGroup = D2578466243F62C10020BC32 /* Products */;
-					ProjectRef = D2578465243F62C10020BC32 /* SinterD.xcodeproj */;
-				},
-				{
 					ProductGroup = D2513BB12440D6E300002645 /* Products */;
 					ProjectRef = D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */;
+				},
+				{
+					ProductGroup = D287580D244615C8007C51C3 /* Products */;
+					ProjectRef = D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -399,13 +399,6 @@
 			fileType = wrapper.framework;
 			path = SyncServerDecisionManager.framework;
 			remoteRef = D2513BB42440D6E400002645 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D257846A243F62C20020BC32 /* SinterD */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = SinterD;
-			remoteRef = D2578469243F62C20020BC32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D257848B243F63520020BC32 /* LibSinter.framework */ = {
@@ -434,6 +427,13 @@
 			fileType = wrapper.framework;
 			path = EndpointSecurityClient.framework;
 			remoteRef = D2578514243F77DC0020BC32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = com.trailofbits.sinter.systemextension;
+			remoteRef = D2875810244615C9007C51C3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */ = {

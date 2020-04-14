@@ -34,7 +34,7 @@
 		D2513B902440BEC300002645 /* JSONConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513B972440C47200002645 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513BBB2440D70100002645 /* SyncServerDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SyncServerDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D257845B243F62C10020BC32 /* SinterD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SinterD; sourceTree = BUILT_PRODUCTS_DIR; };
+		D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.trailofbits.sinter.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		D257845E243F62C10020BC32 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D257848F243F63F50020BC32 /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25784CE243F72F70020BC32 /* FilesystemLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilesystemLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +73,7 @@
 		D257845C243F62C10020BC32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D257845B243F62C10020BC32 /* SinterD */,
+				D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,9 +103,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D257845A243F62C10020BC32 /* SinterD */ = {
+		D257845A243F62C10020BC32 /* SystemExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SinterD" */;
+			buildConfigurationList = D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SystemExtension" */;
 			buildPhases = (
 				D2578457243F62C10020BC32 /* Sources */,
 				D2578458243F62C10020BC32 /* Frameworks */,
@@ -115,9 +115,9 @@
 			);
 			dependencies = (
 			);
-			name = SinterD;
-			productName = SinterD;
-			productReference = D257845B243F62C10020BC32 /* SinterD */;
+			name = SystemExtension;
+			productName = com.trailofbits.sinter.systemextension
+			productReference = D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -135,7 +135,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SinterD" */;
+			buildConfigurationList = D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SystemExtension" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -148,7 +148,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D257845A243F62C10020BC32 /* SinterD */,
+				D257845A243F62C10020BC32 /* SystemExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -284,8 +284,9 @@
 				CODE_SIGN_ENTITLEMENTS = entitlements.plist;
 				CODE_SIGN_STYLE = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
 				SWIFT_VERSION = 5.0;
+				WRAPPER_EXTENSION = "";
 			};
 			name = Debug;
 		};
@@ -295,15 +296,16 @@
 				CODE_SIGN_ENTITLEMENTS = entitlements.plist;
 				CODE_SIGN_STYLE = Automatic;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
 				SWIFT_VERSION = 5.0;
+				WRAPPER_EXTENSION = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SinterD" */ = {
+		D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SystemExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2578460243F62C10020BC32 /* Debug */,
@@ -312,7 +314,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SinterD" */ = {
+		D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SystemExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2578463243F62C10020BC32 /* Debug */,
