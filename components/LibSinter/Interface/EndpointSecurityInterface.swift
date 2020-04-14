@@ -50,12 +50,26 @@ public struct EndpointSecurityExecAuthorization {
     public var platformBinary: Bool
 }
 
-public struct EndpointSecurityWriteNotification {
-    public init(filePath: String) {
-        self.filePath = filePath
+public enum EndpointSecurityFileChangeNotificationType {
+    case unknown
+    case write
+    case unlink
+    case rename
+    case mmap
+    case link
+    case truncate
+    case create
+}
+
+public struct EndpointSecurityFileChangeNotification {
+    public init(type: EndpointSecurityFileChangeNotificationType,
+                pathList: [String]) {
+        self.type = type
+        self.pathList = pathList
     }
 
-    public var filePath: String
+    public let type: EndpointSecurityFileChangeNotificationType
+    public let pathList: [String]
 }
 
 public struct EndpointSecurityExecInvalidationNotification {
@@ -70,9 +84,8 @@ public struct EndpointSecurityExecInvalidationNotification {
 
 public enum EndpointSecurityMessage {
     case ExecAuthorization(EndpointSecurityExecAuthorization)
-    case WriteNotification(EndpointSecurityWriteNotification)
+    case ChangeNotification(EndpointSecurityFileChangeNotification)
     case ExecInvalidationNotification(EndpointSecurityExecInvalidationNotification)
-    case InvalidWriteNotification
 }
 
 public protocol EndpointSecurityInterface {

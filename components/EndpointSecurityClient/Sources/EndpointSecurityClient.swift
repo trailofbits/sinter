@@ -45,23 +45,34 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         self.logger = logger
 
         let clientErr = es_new_client(&esClientOpt) { _, unsafeMessagePtr in
-            if unsafeMessagePtr.pointee.event_type == ES_EVENT_TYPE_AUTH_EXEC {
+            let eventType = unsafeMessagePtr.pointee.event_type
+
+            switch eventType {
+            case ES_EVENT_TYPE_AUTH_EXEC:
                 EndpointSecurityClient.processExecAuthorizationEvent(context: &self.context,
                                                                      esClient: self.esClientOpt!,
                                                                      logger: logger,
                                                                      unsafeMessagePtr: unsafeMessagePtr,
                                                                      callback: callback)
 
-            } else if unsafeMessagePtr.pointee.event_type == ES_EVENT_TYPE_NOTIFY_WRITE {
-                EndpointSecurityClient.processWriteNotificationEvent(context: &self.context,
+            case ES_EVENT_TYPE_NOTIFY_WRITE,
+                 ES_EVENT_TYPE_NOTIFY_UNLINK,
+                 ES_EVENT_TYPE_NOTIFY_RENAME,
+                 ES_EVENT_TYPE_NOTIFY_MMAP,
+                 ES_EVENT_TYPE_NOTIFY_LINK,
+                 ES_EVENT_TYPE_NOTIFY_TRUNCATE,
+                 ES_EVENT_TYPE_NOTIFY_CREATE:
+
+                EndpointSecurityClient.processFileChangeNotification(context: &self.context,
                                                                      esClient: self.esClientOpt!,
                                                                      logger: logger,
                                                                      unsafeMessagePtr: unsafeMessagePtr,
                                                                      callback: callback)
-
-            } else {
+            case _:
                 logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "Invalid event type received in EndpointSecurityClient")
+                                  message: "Invalid/unsupported event received in the EndpointSecurityClient read callback")
+
+                return
             }
         }
 
@@ -75,7 +86,13 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         }
 
         var eventTypeList: [es_event_type_t] = [ES_EVENT_TYPE_AUTH_EXEC,
-                                                ES_EVENT_TYPE_NOTIFY_WRITE]
+                                                ES_EVENT_TYPE_NOTIFY_WRITE,
+                                                ES_EVENT_TYPE_NOTIFY_UNLINK,
+                                                ES_EVENT_TYPE_NOTIFY_RENAME,
+                                                ES_EVENT_TYPE_NOTIFY_MMAP,
+                                                ES_EVENT_TYPE_NOTIFY_LINK,
+                                                ES_EVENT_TYPE_NOTIFY_TRUNCATE,
+                                                ES_EVENT_TYPE_NOTIFY_CREATE]
 
         let subscriptionErr = es_subscribe(esClientOpt!,
                                            &eventTypeList,
@@ -223,22 +240,49 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         }
     }
 
-    private static func processWriteNotificationEvent(context: inout EndpointSecurityClientContext,
+    private static func processFileChangeNotification(context: inout EndpointSecurityClientContext,
                                                       esClient: OpaquePointer,
                                                       logger: LoggerInterface,
                                                       unsafeMessagePtr: UnsafePointer<es_message_t>,
                                                       callback: @escaping EndpointSecurityCallback) {
-        if unsafeMessagePtr.pointee.event_type != ES_EVENT_TYPE_NOTIFY_WRITE {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Not an ES_EVENT_TYPE_NOTIFY_WRITE event")
+        let eventType = unsafeMessagePtr.pointee.event_type
+        var messageOpt: EndpointSecurityFileChangeNotification?
 
+        switch eventType {
+        case ES_EVENT_TYPE_NOTIFY_WRITE:
+            messageOpt = EndpointSecurityClient.parseWriteNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_UNLINK:
+            messageOpt = EndpointSecurityClient.parseUnlinkNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_RENAME:
+            messageOpt = EndpointSecurityClient.parseRenameNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_MMAP:
+            messageOpt = EndpointSecurityClient.parseMmapNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_LINK:
+            messageOpt = EndpointSecurityClient.parseLinkNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_TRUNCATE:
+            messageOpt = EndpointSecurityClient.parseTruncateNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_CREATE:
+            messageOpt = EndpointSecurityClient.parseCreateNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case _:
+            logger.logMessage(severity: LoggerMessageSeverity.error, message: "Invalid/unsupported event received in processFileChangeNotification")
             return
         }
 
-        if let message = EndpointSecurityClient.parseWriteNotification(esMessage: unsafeMessagePtr.pointee) {
-            atomic {
+        if messageOpt == nil {
+            return
+        }
+
+        atomic {
+            for filePath in messageOpt!.pathList {
                 for cachedPath in context.cachedPathList {
-                    if message.filePath.starts(with: cachedPath) {
+                    if filePath.starts(with: cachedPath) {
                         _ = EndpointSecurityClient.invalidateCacheInternal(context: &context,
                                                                            esClient: esClient,
                                                                            logger: logger)
@@ -246,7 +290,7 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
                 }
 
                 for authorizationMessage in context.authorizationMessageMap {
-                    if message.filePath.starts(with: authorizationMessage.value.binaryPath) {
+                    if filePath.starts(with: authorizationMessage.value.binaryPath) {
                         context.authorizationMessageMap.removeValue(forKey: authorizationMessage.key)
 
                         let notification = EndpointSecurityExecInvalidationNotification(identifier: authorizationMessage.key,
@@ -263,18 +307,8 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
                     }
                 }
 
-                callback(EndpointSecurityMessage.WriteNotification(message))
+                callback(EndpointSecurityMessage.ChangeNotification(messageOpt!))
             }
-
-        } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Failed to parse the es_message_t object. Ignoring write notification and clearing the EndpointSecurity cache")
-
-            _ = EndpointSecurityClient.invalidateCacheInternal(context: &context,
-                                                               esClient: esClient,
-                                                               logger: logger)
-
-            callback(EndpointSecurityMessage.InvalidWriteNotification)
         }
     }
 
@@ -313,9 +347,105 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         return parsedMessage
     }
 
-    private static func parseWriteNotification(esMessage: es_message_t) -> EndpointSecurityWriteNotification? {
+    private static func parseWriteNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
         let filePath = getFilePath(file: esMessage.event.write.target.pointee)
-        let parsedMessage = EndpointSecurityWriteNotification(filePath: filePath)
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.write,
+                                                                   pathList: [filePath])
+
+        return parsedMessage
+    }
+
+    private static func parseUnlinkNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let filePath = getFilePath(file: esMessage.event.unlink.target.pointee)
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.unlink,
+                                                                   pathList: [filePath])
+
+        return parsedMessage
+    }
+
+    private static func parseRenameNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let renameEvent = esMessage.event.rename
+
+        let sourceFilePath = getFilePath(file: renameEvent.source.pointee)
+
+        var destinationFilePath = String()
+        if renameEvent.destination_type == ES_DESTINATION_TYPE_EXISTING_FILE {
+            destinationFilePath = getFilePath(file: renameEvent.destination.existing_file.pointee)
+
+        } else {
+            let folderPath = getFilePath(file: renameEvent.destination.new_path.dir.pointee)
+
+            // TODO(alessandro): Use filename.size
+            destinationFilePath = folderPath + "/" + String(cString: renameEvent.destination.new_path.filename.data)
+        }
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.rename,
+                                                                   pathList: [sourceFilePath, destinationFilePath])
+
+        return parsedMessage
+    }
+
+    private static func parseMmapNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let mmapEvent = esMessage.event.mmap
+
+        if (mmapEvent.flags & MAP_PRIVATE) != 0 {
+            return nil
+        }
+
+        if (mmapEvent.protection & PROT_WRITE) == 0 {
+            return nil
+        }
+
+        let filePath = getFilePath(file: esMessage.event.mmap.source.pointee)
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.mmap,
+                                                                   pathList: [filePath])
+
+        return parsedMessage
+    }
+
+    private static func parseLinkNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let linkEvent = esMessage.event.link
+
+        let sourceFilePath = getFilePath(file: linkEvent.source.pointee)
+
+        let destinationFolderPath = getFilePath(file: linkEvent.target_dir.pointee)
+        let destinationFilePath = destinationFolderPath + "/" + String(cString: linkEvent.target_filename.data)
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.link,
+                                                                   pathList: [sourceFilePath, destinationFilePath])
+
+        return parsedMessage
+    }
+
+    private static func parseTruncateNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let filePath = getFilePath(file: esMessage.event.truncate.target.pointee)
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.truncate,
+                                                                   pathList: [filePath])
+
+        return parsedMessage
+    }
+
+    private static func parseCreateNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+        let createEvent = esMessage.event.create
+
+        var filePath = String()
+        if createEvent.destination_type == ES_DESTINATION_TYPE_EXISTING_FILE {
+            filePath = getFilePath(file: createEvent.destination.existing_file.pointee)
+
+        } else {
+            let folderPath = getFilePath(file: createEvent.destination.new_path.dir.pointee)
+
+            // TODO(alessandro): Use filename.size
+            filePath = folderPath + "/" + String(cString: createEvent.destination.new_path.filename.data)
+        }
+
+        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.create,
+                                                                   pathList: [filePath])
+
         return parsedMessage
     }
 

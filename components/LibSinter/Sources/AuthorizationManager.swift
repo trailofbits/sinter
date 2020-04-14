@@ -59,11 +59,15 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
             logger.logMessage(severity: LoggerMessageSeverity.warning,
                               message: "Binary '\(execInvalidationNotification.binaryPath)' has been changed on disk and its authorization has been denied")
 
-        case .InvalidWriteNotification:
-            signatureDatabase.invalidateCache()
+        case let .ChangeNotification(changeNotification):
+            if changeNotification.type == EndpointSecurityFileChangeNotificationType.unknown || changeNotification.pathList.isEmpty {
+                signatureDatabase.invalidateCache()
 
-        case let .WriteNotification(writeNotification):
-            signatureDatabase.invalidateCacheFor(path: writeNotification.filePath)
+            } else {
+                for path in changeNotification.pathList {
+                    signatureDatabase.invalidateCacheFor(path: path)
+                }
+            }
         }
     }
 
