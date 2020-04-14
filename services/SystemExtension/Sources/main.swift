@@ -23,26 +23,6 @@ var signatureDatabase: SignatureDatabaseInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
 
-// Determine which decision manager plugin we should load
-let syncServerFlag = "--decision-manager=sync-server"
-let localRulesFlag = "--decision-manager=local"
-
-print("Rule database options:")
-print(" > sync-server: \(syncServerFlag) (default)")
-print(" > Local rule database-server: \(localRulesFlag)\n")
-
-var useSyncServerDecisionManager = CommandLine.arguments.contains(syncServerFlag)
-let useLocalDecisionManager = CommandLine.arguments.contains(localRulesFlag)
-
-if useSyncServerDecisionManager, useLocalDecisionManager {
-    print("Please only use '\(syncServerFlag)' or '\(localRulesFlag)'")
-    exit(EXIT_FAILURE)
-}
-
-if !useLocalDecisionManager {
-    useSyncServerDecisionManager = true
-}
-
 // Initialize the configuration
 let configurationExp = createJSONConfiguration()
 switch configurationExp {
@@ -65,8 +45,6 @@ case let .failure(error):
     exit(EXIT_FAILURE)
 }
 
-logger.logMessage(severity: LoggerMessageSeverity.information, message: "Initializing")
-
 // Initialize the SignatureDatabase
 let signatureDatabaseExp = createInMemorySignatureDatabase()
 switch signatureDatabaseExp {
@@ -81,14 +59,34 @@ case let .failure(error):
 // Initialize the DecisionManager
 var decisionManagerExp: Result<DecisionManagerInterface, Error>
 
-if useSyncServerDecisionManager {
-    print("Using sync-server")
-    decisionManagerExp = createSyncServerDecisionManager(logger: logger,
-                                                         configuration: configuration)
+// Initialize the decision manager
+if let decisionManagerPluginName = configuration.stringValue(moduleName: "Sinter", key: "decision_manager") {
+    if decisionManagerPluginName == "sync-server" {
+        logger.logMessage(severity: LoggerMessageSeverity.information,
+                          message: "Initializing the sync-server decision manager plugin")
+
+        decisionManagerExp = createSyncServerDecisionManager(logger: logger,
+                                                             configuration: configuration)
+
+    } else if decisionManagerPluginName == "local" {
+        logger.logMessage(severity: LoggerMessageSeverity.information,
+                          message: "Initializing the local decision manager plugin")
+
+        decisionManagerExp = createLocalDecisionManager(logger: logger,
+                                                        configuration: configuration)
+
+    } else {
+        logger.logMessage(severity: LoggerMessageSeverity.error,
+                          message: "Invalid 'decision_manager' plugin name in the 'Sinter' configuration section")
+
+        exit(EXIT_FAILURE)
+    }
+
 } else {
-    print("Using local rule database")
-    decisionManagerExp = createLocalDecisionManager(logger: logger,
-                                                    configuration: configuration)
+    logger.logMessage(severity: LoggerMessageSeverity.error,
+                      message: "The configuration file does not contain the Sinter::decision_manager key")
+
+    exit(EXIT_FAILURE)
 }
 
 switch decisionManagerExp {

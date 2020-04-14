@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D2513B8D2440BEB200002645 /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B8C2440BEB200002645 /* InMemorySignatureDatabase.framework */; };
-		D2513B912440BEC300002645 /* JSONConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B902440BEC300002645 /* JSONConfiguration.framework */; };
-		D2513B982440C47200002645 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B972440C47200002645 /* EndpointSecurityClient.framework */; };
-		D2513BBC2440D70100002645 /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BBB2440D70100002645 /* SyncServerDecisionManager.framework */; };
-		D257845F243F62C10020BC32 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D257845E243F62C10020BC32 /* main.swift */; };
-		D2578490243F63F50020BC32 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D257848F243F63F50020BC32 /* LibSinter.framework */; };
-		D25784CF243F72F70020BC32 /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784CE243F72F70020BC32 /* FilesystemLogger.framework */; };
-		D2BDB3F0244105130027C57F /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3EF244105130027C57F /* LocalDecisionManager.framework */; };
+		D2E9F844244617BA0001A275 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E9F843244617BA0001A275 /* main.swift */; };
+		D2E9F84E244618030001A275 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F847244618030001A275 /* EndpointSecurityClient.framework */; };
+		D2E9F850244618030001A275 /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F848244618030001A275 /* FilesystemLogger.framework */; };
+		D2E9F852244618030001A275 /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F849244618030001A275 /* InMemorySignatureDatabase.framework */; };
+		D2E9F854244618030001A275 /* JSONConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F84A244618030001A275 /* JSONConfiguration.framework */; };
+		D2E9F856244618030001A275 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F84B244618030001A275 /* LibSinter.framework */; };
+		D2E9F858244618030001A275 /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F84C244618030001A275 /* LocalDecisionManager.framework */; };
+		D2E9F85A244618030001A275 /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E9F84D244618030001A275 /* SyncServerDecisionManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D2578459243F62C10020BC32 /* CopyFiles */ = {
+		D2E9F8302446177C0001A275 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -30,72 +30,74 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D2513B8C2440BEB200002645 /* InMemorySignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InMemorySignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2513B902440BEC300002645 /* JSONConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2513B972440C47200002645 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2513BBB2440D70100002645 /* SyncServerDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SyncServerDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.trailofbits.sinter.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
-		D257845E243F62C10020BC32 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		D257848F243F63F50020BC32 /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D25784CE243F72F70020BC32 /* FilesystemLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilesystemLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D265F67524410C3F00010532 /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
-		D2BDB3EF244105130027C57F /* LocalDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LocalDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D25CC58E24461E7F001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
+		D2E9F8322446177C0001A275 /* com.trailofbits.sinter.systemextension */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.trailofbits.sinter.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F843244617BA0001A275 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D2E9F847244618030001A275 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F848244618030001A275 /* FilesystemLogger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FilesystemLogger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F849244618030001A275 /* InMemorySignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InMemorySignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F84A244618030001A275 /* JSONConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JSONConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F84B244618030001A275 /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F84C244618030001A275 /* LocalDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LocalDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F84D244618030001A275 /* SyncServerDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SyncServerDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2E9F85D244618EB0001A275 /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2578458243F62C10020BC32 /* Frameworks */ = {
+		D2E9F82F2446177C0001A275 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2513B8D2440BEB200002645 /* InMemorySignatureDatabase.framework in Frameworks */,
-				D2513B982440C47200002645 /* EndpointSecurityClient.framework in Frameworks */,
-				D2513B912440BEC300002645 /* JSONConfiguration.framework in Frameworks */,
-				D2578490243F63F50020BC32 /* LibSinter.framework in Frameworks */,
-				D2513BBC2440D70100002645 /* SyncServerDecisionManager.framework in Frameworks */,
-				D25784CF243F72F70020BC32 /* FilesystemLogger.framework in Frameworks */,
-				D2BDB3F0244105130027C57F /* LocalDecisionManager.framework in Frameworks */,
+				D2E9F852244618030001A275 /* InMemorySignatureDatabase.framework in Frameworks */,
+				D2E9F856244618030001A275 /* LibSinter.framework in Frameworks */,
+				D2E9F854244618030001A275 /* JSONConfiguration.framework in Frameworks */,
+				D2E9F85A244618030001A275 /* SyncServerDecisionManager.framework in Frameworks */,
+				D2E9F84E244618030001A275 /* EndpointSecurityClient.framework in Frameworks */,
+				D2E9F858244618030001A275 /* LocalDecisionManager.framework in Frameworks */,
+				D2E9F850244618030001A275 /* FilesystemLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D2578452243F62C10020BC32 = {
+		D2E9F8292446177C0001A275 = {
 			isa = PBXGroup;
 			children = (
-				D265F67524410C3F00010532 /* entitlements.plist */,
-				D257845D243F62C10020BC32 /* Sources */,
-				D257845C243F62C10020BC32 /* Products */,
-				D257848E243F63F50020BC32 /* Frameworks */,
+				D2E9F85D244618EB0001A275 /* entitlements.plist */,
+				D2E9F842244617A30001A275 /* Sources */,
+				D2E9F8332446177C0001A275 /* Products */,
+				D2E9F846244618020001A275 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		D257845C243F62C10020BC32 /* Products */ = {
+		D2E9F8332446177C0001A275 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */,
+				D2E9F8322446177C0001A275 /* com.trailofbits.sinter.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D257845D243F62C10020BC32 /* Sources */ = {
+		D2E9F842244617A30001A275 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D257845E243F62C10020BC32 /* main.swift */,
+				D2E9F843244617BA0001A275 /* main.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		D257848E243F63F50020BC32 /* Frameworks */ = {
+		D2E9F846244618020001A275 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D2BDB3EF244105130027C57F /* LocalDecisionManager.framework */,
-				D2513BBB2440D70100002645 /* SyncServerDecisionManager.framework */,
-				D2513B972440C47200002645 /* EndpointSecurityClient.framework */,
-				D2513B902440BEC300002645 /* JSONConfiguration.framework */,
-				D2513B8C2440BEB200002645 /* InMemorySignatureDatabase.framework */,
-				D25784CE243F72F70020BC32 /* FilesystemLogger.framework */,
-				D257848F243F63F50020BC32 /* LibSinter.framework */,
+				D25CC58E24461E7F001C686C /* SystemExtensions.framework */,
+				D2E9F847244618030001A275 /* EndpointSecurityClient.framework */,
+				D2E9F848244618030001A275 /* FilesystemLogger.framework */,
+				D2E9F849244618030001A275 /* InMemorySignatureDatabase.framework */,
+				D2E9F84A244618030001A275 /* JSONConfiguration.framework */,
+				D2E9F84B244618030001A275 /* LibSinter.framework */,
+				D2E9F84C244618030001A275 /* LocalDecisionManager.framework */,
+				D2E9F84D244618030001A275 /* SyncServerDecisionManager.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -103,39 +105,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D257845A243F62C10020BC32 /* SystemExtension */ = {
+		D2E9F8312446177C0001A275 /* SystemExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SystemExtension" */;
+			buildConfigurationList = D2E9F8392446177C0001A275 /* Build configuration list for PBXNativeTarget "SystemExtension" */;
 			buildPhases = (
-				D2578457243F62C10020BC32 /* Sources */,
-				D2578458243F62C10020BC32 /* Frameworks */,
-				D2578459243F62C10020BC32 /* CopyFiles */,
+				D2E9F82E2446177C0001A275 /* Sources */,
+				D2E9F82F2446177C0001A275 /* Frameworks */,
+				D2E9F8302446177C0001A275 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SystemExtension;
-			productName = com.trailofbits.sinter.systemextension
-			productReference = D257845B243F62C10020BC32 /* com.trailofbits.sinter.systemextension */;
+			productName = SystemExtension;
+			productReference = D2E9F8322446177C0001A275 /* com.trailofbits.sinter.systemextension */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D2578453243F62C10020BC32 /* Project object */ = {
+		D2E9F82A2446177C0001A275 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
-					D257845A243F62C10020BC32 = {
+					D2E9F8312446177C0001A275 = {
 						CreatedOnToolsVersion = 11.4;
 					};
 				};
 			};
-			buildConfigurationList = D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SystemExtension" */;
+			buildConfigurationList = D2E9F82D2446177C0001A275 /* Build configuration list for PBXProject "SystemExtension" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -143,29 +145,29 @@
 				en,
 				Base,
 			);
-			mainGroup = D2578452243F62C10020BC32;
-			productRefGroup = D257845C243F62C10020BC32 /* Products */;
+			mainGroup = D2E9F8292446177C0001A275;
+			productRefGroup = D2E9F8332446177C0001A275 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D257845A243F62C10020BC32 /* SystemExtension */,
+				D2E9F8312446177C0001A275 /* SystemExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2578457243F62C10020BC32 /* Sources */ = {
+		D2E9F82E2446177C0001A275 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D257845F243F62C10020BC32 /* main.swift in Sources */,
+				D2E9F844244617BA0001A275 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D2578460243F62C10020BC32 /* Debug */ = {
+		D2E9F8372446177C0001A275 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -225,7 +227,7 @@
 			};
 			name = Debug;
 		};
-		D2578461243F62C10020BC32 /* Release */ = {
+		D2E9F8382446177C0001A275 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -278,52 +280,64 @@
 			};
 			name = Release;
 		};
-		D2578463243F62C10020BC32 /* Debug */ = {
+		D2E9F83A2446177C0001A275 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				DEVELOPMENT_TEAM = 44WTB9L362;
+				ENABLE_HARDENED_RUNTIME = NO;
+				EXECUTABLE_EXTENSION = "";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = "";
 			};
 			name = Debug;
 		};
-		D2578464243F62C10020BC32 /* Release */ = {
+		D2E9F83B2446177C0001A275 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				CREATE_INFOPLIST_SECTION_IN_BINARY = NO;
+				DEVELOPMENT_TEAM = 44WTB9L362;
+				ENABLE_HARDENED_RUNTIME = NO;
+				EXECUTABLE_EXTENSION = "";
+				INFOPLIST_FILE = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2578456243F62C10020BC32 /* Build configuration list for PBXProject "SystemExtension" */ = {
+		D2E9F82D2446177C0001A275 /* Build configuration list for PBXProject "SystemExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2578460243F62C10020BC32 /* Debug */,
-				D2578461243F62C10020BC32 /* Release */,
+				D2E9F8372446177C0001A275 /* Debug */,
+				D2E9F8382446177C0001A275 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2578462243F62C10020BC32 /* Build configuration list for PBXNativeTarget "SystemExtension" */ = {
+		D2E9F8392446177C0001A275 /* Build configuration list for PBXNativeTarget "SystemExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2578463243F62C10020BC32 /* Debug */,
-				D2578464243F62C10020BC32 /* Release */,
+				D2E9F83A2446177C0001A275 /* Debug */,
+				D2E9F83B2446177C0001A275 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D2578453243F62C10020BC32 /* Project object */;
+	rootObject = D2E9F82A2446177C0001A275 /* Project object */;
 }

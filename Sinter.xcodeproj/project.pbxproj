@@ -7,16 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B67244073A900002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B61244073A300002645 /* libbsm.tbd */; };
 		D2513B8A2440BE9700002645 /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; };
 		D2513B8B2440BE9700002645 /* InMemorySignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513BBF2440D70E00002645 /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; };
 		D2513BC02440D70E00002645 /* SyncServerDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2578414243F602F0020BC32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578413243F602F0020BC32 /* AppDelegate.swift */; };
-		D2578416243F602F0020BC32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578415243F602F0020BC32 /* ContentView.swift */; };
-		D2578418243F60350020BC32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2578417243F60350020BC32 /* Assets.xcassets */; };
-		D257841B243F60350020BC32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D257841A243F60350020BC32 /* Preview Assets.xcassets */; };
-		D257841E243F60350020BC32 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D257841C243F60350020BC32 /* Main.storyboard */; };
 		D257848C243F635F0020BC32 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D257848B243F63520020BC32 /* LibSinter.framework */; };
 		D257848D243F635F0020BC32 /* LibSinter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D257848B243F63520020BC32 /* LibSinter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D25784D2243F73030020BC32 /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; };
@@ -26,12 +23,25 @@
 		D257851D243F781F0020BC32 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
 		D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851F243F78250020BC32 /* libEndpointSecurity.tbd */; };
-		D2875812244615E3007C51C3 /* com.trailofbits.sinter.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25CC59024461E94001C686C /* SystemExtensions.framework */; };
+		D295C2D92448002700D39F9F /* SinterNotificationServer.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D295C2D22447FFB100D39F9F /* SinterNotificationServer.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; };
 		D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2BE19A924466031003FAA11 /* com.trailofbits.sinter.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2E9F8412446177E0001A275 /* com.trailofbits.sinter.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */; };
+		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
+		D2D94399244726A500626B17 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D94398244726A500626B17 /* UserNotifications.framework */; };
+		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D24B4A2F2448A73000958F82;
+			remoteInfo = NotificationService;
+		};
 		D2513B832440BE7200002645 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */;
@@ -74,12 +84,12 @@
 			remoteGlobalIDString = D2578505243F77DC0020BC32;
 			remoteInfo = EndpointSecurityClient;
 		};
-		D2875810244615C9007C51C3 /* PBXContainerItemProxy */ = {
+		D295C2D12447FFB100D39F9F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */;
+			containerPortal = D295C2CD2447FFAF00D39F9F /* SinterNotificationServer.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D257845B243F62C10020BC32;
-			remoteInfo = SystemExtension;
+			remoteGlobalIDString = D295C2B72447FFA500D39F9F;
+			remoteInfo = SinterNotificationServer;
 		};
 		D2BDB3E2244102080027C57F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -87,6 +97,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = D2BDB3CE244102070027C57F;
 			remoteInfo = LocalDecisionManager;
+		};
+		D2E9F8402446177E0001A275 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2E9F83C2446177C0001A275 /* SystemExtension.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2E9F8322446177C0001A275;
+			remoteInfo = SystemExtension;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -97,7 +114,7 @@
 			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
 			dstSubfolderSpec = 16;
 			files = (
-				D2875812244615E3007C51C3 /* com.trailofbits.sinter.systemextension in CopyFiles */,
+				D2BE19A924466031003FAA11 /* com.trailofbits.sinter.systemextension in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +125,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */,
+				D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */,
 				D2513B8B2440BE9700002645 /* InMemorySignatureDatabase.framework in Embed Frameworks */,
 				D257848D243F635F0020BC32 /* LibSinter.framework in Embed Frameworks */,
 				D25784D3243F73030020BC32 /* FilesystemLogger.framework in Embed Frameworks */,
@@ -118,27 +136,39 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D295C2A12447FCF500D39F9F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				D295C2D92448002700D39F9F /* SinterNotificationServer.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NotificationService.xcodeproj; path = NotificationService/NotificationService.xcodeproj; sourceTree = "<group>"; };
 		D2513B61244073A300002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InMemorySignatureDatabase.xcodeproj; path = InMemorySignatureDatabase/InMemorySignatureDatabase.xcodeproj; sourceTree = "<group>"; };
 		D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyncServerDecisionManager.xcodeproj; path = SyncServerDecisionManager/SyncServerDecisionManager.xcodeproj; sourceTree = "<group>"; };
 		D2578410243F602F0020BC32 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2578413243F602F0020BC32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D2578415243F602F0020BC32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D2578417243F60350020BC32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D257841A243F60350020BC32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D257841D243F60350020BC32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D257841F243F60350020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2578420243F60350020BC32 /* Sinter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sinter.entitlements; sourceTree = "<group>"; };
+		D2578420243F60350020BC32 /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D2578486243F63520020BC32 /* LibSinter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LibSinter.xcodeproj; path = LibSinter/LibSinter.xcodeproj; sourceTree = "<group>"; };
 		D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FilesystemLogger.xcodeproj; path = FilesystemLogger/FilesystemLogger.xcodeproj; sourceTree = "<group>"; };
 		D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSONConfiguration.xcodeproj; path = JSONConfiguration/JSONConfiguration.xcodeproj; sourceTree = "<group>"; };
 		D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
-		D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemExtension.xcodeproj; path = SystemExtension/SystemExtension.xcodeproj; sourceTree = "<group>"; };
+		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
+		D295C2CD2447FFAF00D39F9F /* SinterNotificationServer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SinterNotificationServer.xcodeproj; path = SinterNotificationServer/SinterNotificationServer.xcodeproj; sourceTree = "<group>"; };
 		D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LocalDecisionManager.xcodeproj; path = LocalDecisionManager/LocalDecisionManager.xcodeproj; sourceTree = "<group>"; };
+		D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionInstaller.swift; sourceTree = "<group>"; };
+		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D2D94398244726A500626B17 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServerInstaller.swift; sourceTree = "<group>"; };
+		D2E9F83C2446177C0001A275 /* SystemExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SystemExtension.xcodeproj; path = SystemExtension/SystemExtension.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +180,12 @@
 				D257848C243F635F0020BC32 /* LibSinter.framework in Frameworks */,
 				D25784D2243F73030020BC32 /* FilesystemLogger.framework in Frameworks */,
 				D2513B67244073A900002645 /* libbsm.tbd in Frameworks */,
+				D2D94399244726A500626B17 /* UserNotifications.framework in Frameworks */,
 				D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */,
 				D2513BBF2440D70E00002645 /* SyncServerDecisionManager.framework in Frameworks */,
 				D25784F9243F76EC0020BC32 /* JSONConfiguration.framework in Frameworks */,
+				D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */,
+				D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */,
 				D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */,
 				D2513B8A2440BE9700002645 /* InMemorySignatureDatabase.framework in Frameworks */,
 			);
@@ -161,6 +194,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D24B4A3B2448A73000958F82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D24B4A3F2448A73200958F82 /* NotificationService.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D2513B802440BE7100002645 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,28 +240,19 @@
 		D2578412243F602F0020BC32 /* Sinter */ = {
 			isa = PBXGroup;
 			children = (
-				D2578413243F602F0020BC32 /* AppDelegate.swift */,
-				D2578415243F602F0020BC32 /* ContentView.swift */,
-				D2578417243F60350020BC32 /* Assets.xcassets */,
-				D257841C243F60350020BC32 /* Main.storyboard */,
 				D257841F243F60350020BC32 /* Info.plist */,
-				D2578420243F60350020BC32 /* Sinter.entitlements */,
-				D2578419243F60350020BC32 /* Preview Content */,
+				D2578420243F60350020BC32 /* entitlements.plist */,
+				D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */,
+				D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */,
+				D2D943942447235E00626B17 /* main.swift */,
 			);
 			path = Sinter;
-			sourceTree = "<group>";
-		};
-		D2578419243F60350020BC32 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				D257841A243F60350020BC32 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		D2578426243F60460020BC32 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
 				D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */,
 				D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */,
 				D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */,
@@ -235,7 +267,8 @@
 		D2578451243F62880020BC32 /* services */ = {
 			isa = PBXGroup;
 			children = (
-				D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */,
+				D295C2CD2447FFAF00D39F9F /* SinterNotificationServer.xcodeproj */,
+				D2E9F83C2446177C0001A275 /* SystemExtension.xcodeproj */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -243,6 +276,8 @@
 		D257846D243F63080020BC32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D2D94398244726A500626B17 /* UserNotifications.framework */,
+				D25CC59024461E94001C686C /* SystemExtensions.framework */,
 				D2513B61244073A300002645 /* libbsm.tbd */,
 				D257851F243F78250020BC32 /* libEndpointSecurity.tbd */,
 			);
@@ -281,10 +316,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D287580D244615C8007C51C3 /* Products */ = {
+		D295C2CE2447FFAF00D39F9F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */,
+				D295C2D22447FFB100D39F9F /* SinterNotificationServer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,6 +328,14 @@
 			isa = PBXGroup;
 			children = (
 				D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2E9F83D2446177C0001A275 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2E9F8412446177E0001A275 /* com.trailofbits.sinter.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,6 +352,7 @@
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
 				D2578470243F63080020BC32 /* Embed Frameworks */,
+				D295C2A12447FCF500D39F9F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -371,12 +415,20 @@
 					ProjectRef = D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */;
 				},
 				{
+					ProductGroup = D24B4A3B2448A73000958F82 /* Products */;
+					ProjectRef = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+				},
+				{
+					ProductGroup = D295C2CE2447FFAF00D39F9F /* Products */;
+					ProjectRef = D295C2CD2447FFAF00D39F9F /* SinterNotificationServer.xcodeproj */;
+				},
+				{
 					ProductGroup = D2513BB12440D6E300002645 /* Products */;
 					ProjectRef = D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */;
 				},
 				{
-					ProductGroup = D287580D244615C8007C51C3 /* Products */;
-					ProjectRef = D287580C244615C8007C51C3 /* SystemExtension.xcodeproj */;
+					ProductGroup = D2E9F83D2446177C0001A275 /* Products */;
+					ProjectRef = D2E9F83C2446177C0001A275 /* SystemExtension.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -387,6 +439,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D24B4A3F2448A73200958F82 /* NotificationService.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = NotificationService.framework;
+			remoteRef = D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -429,11 +488,11 @@
 			remoteRef = D2578514243F77DC0020BC32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2875811244615C9007C51C3 /* com.trailofbits.sinter.systemextension */ = {
+		D295C2D22447FFB100D39F9F /* SinterNotificationServer.app */ = {
 			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = com.trailofbits.sinter.systemextension;
-			remoteRef = D2875810244615C9007C51C3 /* PBXContainerItemProxy */;
+			fileType = wrapper.application;
+			path = SinterNotificationServer.app;
+			remoteRef = D295C2D12447FFB100D39F9F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */ = {
@@ -443,6 +502,13 @@
 			remoteRef = D2BDB3E2244102080027C57F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D2E9F8412446177E0001A275 /* com.trailofbits.sinter.systemextension */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = com.trailofbits.sinter.systemextension;
+			remoteRef = D2E9F8402446177E0001A275 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -450,9 +516,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D257841E243F60350020BC32 /* Main.storyboard in Resources */,
-				D257841B243F60350020BC32 /* Preview Assets.xcassets in Resources */,
-				D2578418243F60350020BC32 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,23 +526,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2578416243F602F0020BC32 /* ContentView.swift in Sources */,
-				D2578414243F602F0020BC32 /* AppDelegate.swift in Sources */,
+				D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */,
+				D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */,
+				D2D943952447235E00626B17 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		D257841C243F60350020BC32 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D257841D243F60350020BC32 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D2578421243F60350020BC32 /* Debug */ = {
@@ -599,10 +652,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Sinter/Sinter.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sinter/entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -610,8 +665,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Sinter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -620,10 +676,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Sinter/Sinter.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sinter/entitlements.plist;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Sinter/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sinter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -631,8 +689,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.Sinter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

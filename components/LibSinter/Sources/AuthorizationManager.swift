@@ -7,12 +7,14 @@
  */
 
 import Foundation
+import NotificationService
 
 private final class AuthorizationManager: AuthorizationManagerInterface {
     let configuration: ConfigurationInterface
     let logger: LoggerInterface
     let signatureDatabase: SignatureDatabaseInterface
     let decisionManager: DecisionManagerInterface
+    let notificationClient: NotificationClientInterface
     var endpointSecurityOpt: EndpointSecurityInterface?
 
     private let operationQueue = OperationQueue()
@@ -26,6 +28,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
         self.logger = logger
         self.signatureDatabase = signatureDatabase
         self.decisionManager = decisionManager
+        notificationClient = createNotificationClient()
 
         // Use the factory function we have been given to create the
         // EndpointSecurity client
@@ -87,6 +90,8 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
                                                       allow: false,
                                                       cache: true)
 
+            notificationClient.showNotification(message: "Blocked, due to invalid signature: \(message.binaryPath)")
+
             logger.logMessage(severity: LoggerMessageSeverity.information,
                               message: "Invalid code signature for '\(message.binaryPath)'. Execution has been denied")
 
@@ -94,6 +99,8 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
             _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
                                                       allow: false,
                                                       cache: true)
+
+            notificationClient.showNotification(message: "Blocked unsigned application: \(message.binaryPath)")
 
             logger.logMessage(severity: LoggerMessageSeverity.information,
                               message: "The following application is not signed '\(message.binaryPath)'. Execution has been denied")
@@ -116,6 +123,10 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
                     self.logger.logMessage(severity: LoggerMessageSeverity.information,
                                            message: "The following signed application '\(message.binaryPath)' has been \(actionDescription)")
+
+                    if !allow {
+                        self.notificationClient.showNotification(message: "Blocked signed application: \(message.binaryPath)")
+                    }
                 }
             }
 
