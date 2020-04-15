@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# The following path is relative to the package-building source directory ./macOS-x64/application/
+APPLICATION_FILE_PATH=Sinter.app
+LAUNCHD_PLIST_FILE_PATH=com.trailofbits.sinter.plist
+
+# The following paths are the destinations of the installation.
+PRODUCT_HOME=/Applications/__PRODUCT__
+LAUNCHD_PLIST_HOME=/Library/LaunchDaemons/com.trailofbits.sinter.plist
+
+echo "Post installation process started"
+
+# Add the Sinter app bundle to /Applications
+# First removing what existed previously.
+rm -f ${PRODUCT_HOME}
+cp ${APPLICATION_FILE_PATH} ${PRODUCT_HOME}
+
+# Add the Sinter daemon as a LaunchDaemon
+# /bin/launchctl unload ${LAUNCHD_PLIST_HOME}
+# rm -f ${LAUNCHD_PLIST_HOME}
+# cp ${LAUNCHD_PLIST_FILE_PATH} ${LAUNCHD_PLIST_HOME}
+# /bin/launchctl load ${LAUNCHD_PLIST_HOME}
+
+echo "Post installation process finished"
