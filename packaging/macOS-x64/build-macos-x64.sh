@@ -159,9 +159,9 @@ function createInstaller() {
     buildPackage
     buildProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
     while true; do
-        read -p "Do you wish to sign the installer (You should have Apple Developer Certificate) [y/N]?" answer
+        read -p "Do you wish to sign the installer (requires an Apple Developer Certificate) [y/N]?" answer
         [[ $answer == "y" || $answer == "Y" ]] && FLAG=true && break
-        [[ $answer == "n" || $answer == "N" || $answer == "" ]] && log_info "Skiped signing process." && FLAG=false && break
+        [[ $answer == "n" || $answer == "N" || $answer == "" ]] && log_info "Skipped signing the package." && FLAG=false && break
         echo "Please answer with 'y' or 'n'"
     done
     [[ $FLAG == "true" ]] && signProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
@@ -174,16 +174,6 @@ function createUninstaller(){
     sed -i '' -e "s/__PRODUCT__/${PRODUCT}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
 }
 
-#Pre-requisites
-command -v mvn -v >/dev/null 2>&1 || {
-    log_warn "Apache Maven was not found. Please install Maven first."
-    # exit 1
-}
-command -v ballerina >/dev/null 2>&1 || {
-    log_warn "Ballerina was not found. Please install ballerina first."
-    # exit 1
-}
-
 #Main script
 log_info "Installer generating process started."
 
@@ -192,5 +182,5 @@ copyBuildDirectory
 createUninstaller
 createInstaller
 
-log_info "Installer generating process finished"
+log_info "Installer generating process finished."
 exit 0
