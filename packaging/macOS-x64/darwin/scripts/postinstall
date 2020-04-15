@@ -1,0 +1,19 @@
+#!/bin/bash
+
+APPLICATION_FILE=Sinter.app
+LAUNCHD_PLIST_FILE=com.trailofbits.sinter.plist
+
+# The following paths are the destinations of the installation.
+PRODUCT_HOME=/Applications/${APPLICATION_FILE}
+LAUNCHD_PLIST_HOME=/Library/LaunchDaemons/${LAUNCHD_PLIST_FILE}
+
+echo "Post installation process started"
+
+# Add the Sinter daemon as a LaunchDaemon
+# TODO: copy the plist file from Applications/Sinter/foo.plist ?
+# /bin/launchctl unload ${LAUNCHD_PLIST_HOME}
+# rm -f ${LAUNCHD_PLIST_HOME}
+# cp ${LAUNCHD_PLIST_FILE} ${LAUNCHD_PLIST_HOME}
+# /bin/launchctl load ${LAUNCHD_PLIST_HOME}
+
+echo "Post installation process finished"
