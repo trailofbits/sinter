@@ -111,8 +111,16 @@ copyBuildDirectory() {
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
-    cp -a ./application/. ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
+    cp -a ./application/*.app ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
     chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
+
+    mkdir -p ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
+    cp -a ./config/config.json.example ${TARGET_DIRECTORY}/darwinpkg/etc/sinter/config.json
+    chmod -R 666 ${TARGET_DIRECTORY}/darwinpkg/darwinpkg/etc/sinter
+
+    mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
+    cp -a ./plist/. ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
+    chmod -R 666 ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
 
     rm -rf ${TARGET_DIRECTORY}/package
     mkdir -p ${TARGET_DIRECTORY}/package
