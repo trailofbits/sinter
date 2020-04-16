@@ -133,7 +133,7 @@ copyBuildDirectory() {
 
 function buildPackage() {
     log_info "Application installer package building started.(1/3)"
-    pkgbuild --identifier org.${PRODUCT}.${VERSION} \
+    pkgbuild --identifier com.trailofbits.sinter \
     --version ${VERSION} \
     --scripts ${TARGET_DIRECTORY}/darwin/scripts \
     --root ${TARGET_DIRECTORY}/darwinpkg \
