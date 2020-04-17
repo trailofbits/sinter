@@ -6,14 +6,11 @@
  the LICENSE file found in the root directory of this source tree.
  */
 
+import Cocoa
 import Foundation
 import UserNotifications
 
 import NotificationService
-
-private let execAuthRequestIdentifier = "EXEC_AUTH_REQUEST"
-private let allowExecAuthRequestIdentifier = "ALLOW_ACTION"
-private let denyExecAuthRequestIdentifier = "DENY_ACTION"
 
 enum NotificationCenterError: Error {
     case userNotificationAccessDenied
@@ -44,25 +41,6 @@ class NotificationCenter: NotificationServiceProtocol {
         if !accessGranted {
             throw NotificationCenterError.userNotificationAccessDenied
         }
-
-        let allowAction = UNNotificationAction(identifier: allowExecAuthRequestIdentifier,
-                                               title: "Allow",
-                                               options: UNNotificationActionOptions(rawValue: 0))
-
-        let denyAction = UNNotificationAction(identifier: denyExecAuthRequestIdentifier,
-                                              title: "Deny",
-                                              options: UNNotificationActionOptions(rawValue: 0))
-
-        let execAuthorizationRequestCategory = UNNotificationCategory(identifier: execAuthRequestIdentifier,
-                                                                      actions: [allowAction, denyAction],
-                                                                      intentIdentifiers: [],
-                                                                      hiddenPreviewsBodyPlaceholder: "",
-                                                                      options: .customDismissAction)
-
-        notificationCenter.setNotificationCategories([execAuthorizationRequestCategory])
-
-        requestAuthorization(binaryPath: "/Applications/CMake.app",
-                             hash: "0e4df360b5763df4160bab1e686b510cb484f51d")
     }
 
     static func create() -> Result<NotificationCenter, Error> {
@@ -82,19 +60,20 @@ class NotificationCenter: NotificationServiceProtocol {
         notificationCenter.add(request)
     }
 
-    func requestAuthorization(binaryPath: String, hash _: String) -> Bool {
-        let content = UNMutableNotificationContent()
-        content.title = "Sinter"
-        content.body = "Select action for \(binaryPath)"
-        content.sound = UNNotificationSound.default
-        content.categoryIdentifier = execAuthRequestIdentifier
+    func requestAuthorization(binaryPath: String,
+                              hash: String,
+                              reply: @escaping (_ allow: Bool, _ cache: Bool) -> Void) {
+        DispatchQueue.main.sync {
+            let alert = NSAlert()
 
-        let request = UNNotificationRequest(identifier: UUID().uuidString,
-                                            content: content,
-                                            trigger: nil)
+            alert.messageText = "Sinter needs to allow an unknown program"
+            alert.informativeText = "Path: \(binaryPath)\nHash: \(hash)"
+            alert.alertStyle = .warning
+            alert.addButton(withTitle: "Allow")
+            alert.addButton(withTitle: "Deny")
 
-        notificationCenter.add(request)
-
-        return true
+            let allow = alert.runModal() == .alertFirstButtonReturn
+            reply(allow, false)
+        }
     }
 }

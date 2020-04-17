@@ -9,16 +9,25 @@
 import Foundation
 
 import LibSinter
+import NotificationService
+
+private enum DefaultAction {
+    case allow
+    case deny
+    case userPrompt
+}
 
 private final class LocalDecisionManager: DecisionManagerInterface {
     private let logger: LoggerInterface
     private let configuration: ConfigurationInterface
 
-    private let defaultAllow: Bool
+    private let defaultAction: DefaultAction
     private let ruleDatabasePath: String
 
     private var ruleDatabase = RuleDatabase()
     private var ruleDatabaseUpdateTimer = Timer()
+
+    private let notificationClient = createNotificationClient()
 
     private init(logger: LoggerInterface,
                  configuration: ConfigurationInterface) throws {
@@ -29,7 +38,7 @@ private final class LocalDecisionManager: DecisionManagerInterface {
                                                                  key: "update_interval")
 
         if configUpdateIntervalOpt == nil {
-            configUpdateIntervalOpt = 10
+            configUpdateIntervalOpt = 60
         }
 
         if let ruleDatabasePath = configuration.stringValue(moduleName: "LocalDecisionManager",
@@ -46,14 +55,17 @@ private final class LocalDecisionManager: DecisionManagerInterface {
         if let defaultAction = configuration.stringValue(moduleName: "LocalDecisionManager",
                                                          key: "default_action") {
             if defaultAction == "allow" {
-                defaultAllow = true
+                self.defaultAction = DefaultAction.allow
 
             } else if defaultAction == "deny" {
-                defaultAllow = false
+                self.defaultAction = DefaultAction.deny
+
+            } else if defaultAction == "userPrompt" {
+                self.defaultAction = DefaultAction.userPrompt
 
             } else {
                 logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The 'LocalDecisionManager.default_action' setting is not valid. Allowed values are: 'allow', 'deny'")
+                                  message: "The 'LocalDecisionManager.default_action' setting is not valid. Allowed values are: 'allow', 'deny', 'userPrompt'")
 
                 throw DecisionManagerError.invalidConfiguration
             }
@@ -76,14 +88,31 @@ private final class LocalDecisionManager: DecisionManagerInterface {
                                cache: inout Bool) -> Bool {
         cache = true
 
-        if request.platformBinary {
+        var evaluatePlatformBinary = true
+        if request.binaryPath == "/Applications/CMake.app" {
+            evaluatePlatformBinary = false
+        }
+
+        if evaluatePlatformBinary, request.platformBinary {
             allow = true
 
         } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
             allow = rule.policy == RulePolicy.whitelist
 
         } else {
-            allow = defaultAllow
+            switch defaultAction {
+            case .allow:
+                allow = true
+
+            case .deny:
+                allow = false
+
+            case .userPrompt:
+                notificationClient.requestAuthorization(binaryPath: request.binaryPath,
+                                                        hash: request.codeDirectoryHash.hash,
+                                                        allowExecution: &allow,
+                                                        cacheDecision: &cache)
+            }
         }
 
         return true

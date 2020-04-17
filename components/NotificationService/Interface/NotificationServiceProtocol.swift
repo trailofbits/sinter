@@ -12,5 +12,6 @@ import Foundation
     func showNotification(message: String)
 
     func requestAuthorization(binaryPath: String,
-                              hash: String) -> Bool
+                              hash: String,
+                              reply: @escaping (_ allow: Bool, _ cache: Bool) -> Void)
 }
