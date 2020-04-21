@@ -11,7 +11,10 @@ import Foundation
 
 import LibSinter
 
+private let eventExpirationTime: Double = 10
+
 private struct MessageMapEntry {
+    public var timestamp: Double
     public var binaryPath: String
     public var unsafeMessagePtr: UnsafeMutablePointer<es_message_t>
 }
@@ -39,6 +42,7 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
     private var context = EndpointSecurityClientContext()
     private let logger: LoggerInterface
     private var esClientOpt: OpaquePointer?
+    private var eventExpirationTimer = Timer()
 
     private init(logger: LoggerInterface,
                  callback: @escaping EndpointSecurityCallback) throws {
@@ -101,6 +105,12 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         if subscriptionErr != ES_RETURN_SUCCESS {
             throw EndpointSecurityError.subscriptionError
         }
+
+        eventExpirationTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(eventExpirationTime),
+                                                    repeats: true) { _ in EndpointSecurityClient.expireEvents(context: &self.context,
+                                                                                                              esClient: self.esClientOpt!,
+                                                                                                              logger: self.logger,
+                                                                                                              callback: callback) }
     }
 
     deinit {
@@ -108,12 +118,46 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
             es_unsubscribe_all(esClient)
             es_delete_client(esClient)
         }
+
+        self.eventExpirationTimer.invalidate()
     }
 
     static func create(logger: LoggerInterface,
                        callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
         Result<EndpointSecurityInterface, Error> { try EndpointSecurityClient(logger: logger,
                                                                               callback: callback) }
+    }
+
+    public static func expireEvents(context: inout EndpointSecurityClientContext,
+                                    esClient: OpaquePointer,
+                                    logger: LoggerInterface,
+                                    callback: @escaping EndpointSecurityCallback) {
+        let currentTimestamp = NSDate().timeIntervalSince1970
+        var expiredMessageMap = MessageMap()
+
+        atomic {
+            for messageIterator in context.authorizationMessageMap {
+                let elapsedTime = currentTimestamp - messageIterator.value.timestamp
+                if elapsedTime > eventExpirationTime {
+                    expiredMessageMap[messageIterator.key] = messageIterator.value
+                }
+            }
+
+            for expiredEventIterator in expiredMessageMap {
+                let notification = EndpointSecurityExecInvalidationNotification(identifier: expiredEventIterator.key,
+                                                                                binaryPath: expiredEventIterator.value.binaryPath,
+                                                                                reason: .expired)
+
+                callback(EndpointSecurityMessage.ExecInvalidationNotification(notification))
+
+                _ = EndpointSecurityClient.setAuthorizationInternal(context: &context,
+                                                                    esClient: esClient,
+                                                                    logger: logger,
+                                                                    identifier: expiredEventIterator.key,
+                                                                    allow: false,
+                                                                    cache: false)
+            }
+        }
     }
 
     public func setAuthorization(identifier: Int64, allow: Bool, cache: Bool) -> Bool {
@@ -220,7 +264,9 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
             message.identifier = context.nextIdentifier
 
             atomic {
-                let messageMapEntry = MessageMapEntry(binaryPath: message.binaryPath,
+                let timestamp = NSDate().timeIntervalSince1970
+                let messageMapEntry = MessageMapEntry(timestamp: timestamp,
+                                                      binaryPath: message.binaryPath,
                                                       unsafeMessagePtr: unsafeMsgPtrCopyOpt!)
 
                 context.authorizationMessageMap[message.identifier] = messageMapEntry
@@ -294,7 +340,8 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
                         context.authorizationMessageMap.removeValue(forKey: authorizationMessage.key)
 
                         let notification = EndpointSecurityExecInvalidationNotification(identifier: authorizationMessage.key,
-                                                                                        binaryPath: authorizationMessage.value.binaryPath)
+                                                                                        binaryPath: authorizationMessage.value.binaryPath,
+                                                                                        reason: .applicationChanged)
 
                         _ = EndpointSecurityClient.setAuthorizationInternal(context: &context,
                                                                             esClient: esClient,
@@ -328,7 +375,18 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
 
         let signingIdentifier = EndpointSecurityClient.getProcessSigningId(process: target)
         let teamIdentifier = EndpointSecurityClient.getProcessTeamId(process: target)
-        let platformBinary = target.is_platform_binary
+
+        // The target.is_platform_binary flag is tricky, and basically contains the value
+        // of the parent process. In case it's something like bash/zsh, it will get
+        // a value of 'true' even though the process being executed may not even
+        // be signed.
+        //
+        // This is because the execve() has completed but the code sections have not
+        // been updated yet
+        //
+        // The code signature is going to be verified before it can be authorized, so
+        // let's use the signingIdentifier instead for now
+        let platformBinary = signingIdentifier.starts(with: "com.apple.")
 
         let cdHash = EndpointSecurityClient.getProcessCdHash(process: target)
         let codeDirectoryHash = BinaryHash(type: BinaryHashType.truncatedSha256,
@@ -399,7 +457,6 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         }
 
         let filePath = getFilePath(file: esMessage.event.mmap.source.pointee)
-
         let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.mmap,
                                                                    pathList: [filePath])
 
@@ -455,6 +512,7 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
     }
 
     private static func getProcessBinaryPath(process: es_process_t) -> String {
+        // TODO: is there a better way to detect bundles?
         let binaryPath = getFilePath(file: process.executable.pointee)
 
         var bundleURL = URL(fileURLWithPath: binaryPath)

@@ -13,5 +13,5 @@ import Foundation
 
     func requestAuthorization(binaryPath: String,
                               hash: String,
-                              reply: @escaping (_ allow: Bool, _ cache: Bool) -> Void)
+                              reply: @escaping (_ allow: Bool) -> Void)
 }

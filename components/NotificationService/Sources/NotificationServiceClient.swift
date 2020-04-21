@@ -45,34 +45,29 @@ private class NotificationClient: NotificationClientInterface {
 
     public func requestAuthorization(binaryPath: String,
                                      hash: String,
-                                     allowExecution: inout Bool,
-                                     cacheDecision: inout Bool) {
+                                     allowExecution: inout Bool) {
         if let service = getClient() {
             let dg = DispatchGroup()
             dg.enter()
 
-            var allow = false
-            var cache = false
+            var response = false
 
             service.requestAuthorization(binaryPath: binaryPath,
                                          hash: hash,
-                                         reply: { (allowExecution: Bool, cacheDecision: Bool) in
-                                             allow = allowExecution
-                                             cache = cacheDecision
-
+                                         reply: { (allowExecution: Bool) in
+                                             response = allowExecution
                                              dg.leave()
             })
 
-            if dg.wait(timeout: DispatchTime(uptimeNanoseconds: 5000)) == DispatchTimeoutResult.success {
-                allowExecution = allow
-                cacheDecision = cache
+            if dg.wait(timeout: DispatchTime(uptimeNanoseconds: 1_000_000_000)) != DispatchTimeoutResult.success {
+                response = false
             }
+
+            allowExecution = response
 
         } else {
             print("Notification server not ready. Automatically denying \(binaryPath)/\(hash)")
-
             allowExecution = false
-            cacheDecision = false
         }
     }
 }

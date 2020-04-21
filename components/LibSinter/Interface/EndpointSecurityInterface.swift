@@ -72,14 +72,23 @@ public struct EndpointSecurityFileChangeNotification {
     public let pathList: [String]
 }
 
+public enum EndpointSecurityExecInvalidationNotificationReason {
+    case expired
+    case applicationChanged
+}
+
 public struct EndpointSecurityExecInvalidationNotification {
-    public init(identifier: Int64, binaryPath: String) {
+    public init(identifier: Int64,
+                binaryPath: String,
+                reason: EndpointSecurityExecInvalidationNotificationReason) {
         self.identifier = identifier
         self.binaryPath = binaryPath
+        self.reason = reason
     }
 
     public var identifier: Int64
     public var binaryPath: String
+    public var reason: EndpointSecurityExecInvalidationNotificationReason
 }
 
 public enum EndpointSecurityMessage {

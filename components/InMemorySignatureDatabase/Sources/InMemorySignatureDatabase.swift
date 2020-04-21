@@ -30,35 +30,34 @@ private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
                                   block: @escaping SignatureDatabaseCallback) {
         dispatchQueue.sync {
+            var cachedResultOpt: SignatureDatabaseResult?
             if message.codeDirectoryHash.hash.isEmpty {
                 resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
-                block(message, SignatureDatabaseResult.NotSigned)
+            }
 
-            } else {
-                if let cachedValue = resultCache[message.binaryPath] {
+            if let cachedResult = resultCache[message.binaryPath] {
+                cachedResultOpt = cachedResult
+            }
+
+            let operation = SignatureDatabaseOperation(path: message.binaryPath,
+                                                       cachedResultOpt: cachedResultOpt)
+
+            operation.completionBlock = { [unowned operation, message, block] in
+                self.dispatchQueue.sync {
+                    self.resultCache[message.binaryPath] = operation.getResult()
+                    block(message, operation.getResult())
+
                     self.operationMap.removeValue(forKey: message.binaryPath)
-                    block(message, cachedValue)
-
-                } else {
-                    let operation = SignatureDatabaseOperation(path: message.binaryPath)
-                    operation.completionBlock = { [unowned operation, message, block] in
-                        self.dispatchQueue.sync {
-                            self.resultCache[message.binaryPath] = operation.getResult()
-                            block(message, operation.getResult())
-
-                            self.operationMap.removeValue(forKey: message.binaryPath)
-                        }
-                    }
-
-                    let parentOperationOpt = self.operationMap[message.binaryPath]
-                    if parentOperationOpt != nil {
-                        operation.addDependency(parentOperationOpt!)
-                    }
-
-                    self.operationQueue.addOperation(operation)
-                    self.operationMap[message.binaryPath] = operation
                 }
             }
+
+            let parentOperationOpt = self.operationMap[message.binaryPath]
+            if parentOperationOpt != nil {
+                operation.addDependency(parentOperationOpt!)
+            }
+
+            self.operationQueue.addOperation(operation)
+            self.operationMap[message.binaryPath] = operation
         }
     }
 
@@ -101,22 +100,29 @@ public func createInMemorySignatureDatabase() -> Result<SignatureDatabaseInterfa
 private final class SignatureDatabaseOperation: Operation {
     private let path: String
     private var result = SignatureDatabaseResult.Invalid
+    private let cachedResultOpt: SignatureDatabaseResult?
 
-    public init(path: String) {
+    public init(path: String,
+                cachedResultOpt: SignatureDatabaseResult?) {
         self.path = path
+        self.cachedResultOpt = cachedResultOpt
+
         super.init()
     }
 
     public override func main() {
         guard !isCancelled else { return }
 
+        if let cachedResult = cachedResultOpt {
+            result = cachedResult
+            return
+        }
+
         if let parentOperation = dependencies.first as? SignatureDatabaseOperation {
             result = parentOperation.getResult()
 
         } else {
-            let err = checkCodeSignature(path: path)
-
-            switch err {
+            switch checkCodeSignature(path: path) {
             case .internalError:
                 result = SignatureDatabaseResult.Failed
 

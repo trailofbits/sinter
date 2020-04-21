@@ -62,7 +62,7 @@ class NotificationCenter: NotificationServiceProtocol {
 
     func requestAuthorization(binaryPath: String,
                               hash: String,
-                              reply: @escaping (_ allow: Bool, _ cache: Bool) -> Void) {
+                              reply: @escaping (_ allow: Bool) -> Void) {
         DispatchQueue.main.sync {
             let alert = NSAlert()
 
@@ -73,7 +73,7 @@ class NotificationCenter: NotificationServiceProtocol {
             alert.addButton(withTitle: "Deny")
 
             let allow = alert.runModal() == .alertFirstButtonReturn
-            reply(allow, false)
+            reply(allow)
         }
     }
 }

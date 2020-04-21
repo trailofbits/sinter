@@ -84,16 +84,8 @@ private final class LocalDecisionManager: DecisionManagerInterface {
     }
 
     public func processRequest(request: DecisionManagerRequest,
-                               allow: inout Bool,
-                               cache: inout Bool) -> Bool {
-        cache = true
-
-        var evaluatePlatformBinary = true
-        if request.binaryPath == "/Applications/CMake.app" {
-            evaluatePlatformBinary = false
-        }
-
-        if evaluatePlatformBinary, request.platformBinary {
+                               allow: inout Bool) -> Bool {
+        if request.platformBinary {
             allow = true
 
         } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
@@ -110,8 +102,7 @@ private final class LocalDecisionManager: DecisionManagerInterface {
             case .userPrompt:
                 notificationClient.requestAuthorization(binaryPath: request.binaryPath,
                                                         hash: request.codeDirectoryHash.hash,
-                                                        allowExecution: &allow,
-                                                        cacheDecision: &cache)
+                                                        allowExecution: &allow)
             }
         }
 

@@ -84,10 +84,7 @@ private final class SyncServerDecisionManager: DecisionManagerInterface {
     }
 
     public func processRequest(request: DecisionManagerRequest,
-                               allow: inout Bool,
-                               cache: inout Bool) -> Bool {
-        cache = false
-
+                               allow: inout Bool) -> Bool {
         if request.platformBinary {
             allow = true
 

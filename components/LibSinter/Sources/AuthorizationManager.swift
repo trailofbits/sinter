@@ -59,8 +59,22 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
                                                 block: processSignatureCheckNotification)
 
         case let .ExecInvalidationNotification(execInvalidationNotification):
+            let logMessage: String
+            let notificationMessage: String
+
+            switch execInvalidationNotification.reason {
+            case .applicationChanged:
+                logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the application has been changed on disk"
+                notificationMessage = "Denied '\(execInvalidationNotification.binaryPath)' (application changed)"
+            case .expired:
+                logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the authorization/code signing check process took too long"
+                notificationMessage = "Authorization expired: '\(execInvalidationNotification.binaryPath)'"
+            }
+
             logger.logMessage(severity: LoggerMessageSeverity.warning,
-                              message: "Binary '\(execInvalidationNotification.binaryPath)' has been changed on disk and its authorization has been denied")
+                              message: logMessage)
+
+            notificationClient.showNotification(message: notificationMessage)
 
         case let .ChangeNotification(changeNotification):
             if changeNotification.type == EndpointSecurityFileChangeNotificationType.unknown || changeNotification.pathList.isEmpty {
@@ -88,7 +102,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
         case SignatureDatabaseResult.Invalid:
             _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
                                                       allow: false,
-                                                      cache: true)
+                                                      cache: false)
 
             notificationClient.showNotification(message: "Blocked, due to invalid signature: \(message.binaryPath)")
 
@@ -98,7 +112,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
         case SignatureDatabaseResult.NotSigned:
             _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
                                                       allow: false,
-                                                      cache: true)
+                                                      cache: false)
 
             notificationClient.showNotification(message: "Blocked unsigned application: \(message.binaryPath)")
 
@@ -111,7 +125,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
             operation.completionBlock = { [unowned operation, message] in
                 let allow = operation.isAllowed()
-                let cache = operation.cacheEnabled()
+                let cache = message.platformBinary
 
                 // This operation can fail if a write notification has invalidated this
                 // request inside EndpointSecurityClient
@@ -164,7 +178,6 @@ private final class AuthorizationManagerOperation: Operation {
     private let message: EndpointSecurityExecAuthorization
 
     private var allow: Bool = false
-    private var cache: Bool = false
 
     public init(decisionManager: DecisionManagerInterface, message: EndpointSecurityExecAuthorization) {
         self.decisionManager = decisionManager
@@ -183,18 +196,12 @@ private final class AuthorizationManagerOperation: Operation {
                                              platformBinary: message.platformBinary)
 
         if !decisionManager.processRequest(request: request,
-                                           allow: &allow,
-                                           cache: &cache) {
+                                           allow: &allow) {
             allow = false
-            cache = false
         }
     }
 
     public func isAllowed() -> Bool {
         allow
-    }
-
-    public func cacheEnabled() -> Bool {
-        cache
     }
 }

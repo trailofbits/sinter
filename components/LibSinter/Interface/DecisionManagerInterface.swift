@@ -23,6 +23,5 @@ public struct DecisionManagerRequest {
 
 public protocol DecisionManagerInterface {
     func processRequest(request: DecisionManagerRequest,
-                        allow: inout Bool,
-                        cache: inout Bool) -> Bool
+                        allow: inout Bool) -> Bool
 }

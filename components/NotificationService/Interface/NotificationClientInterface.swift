@@ -13,6 +13,5 @@ public protocol NotificationClientInterface {
 
     func requestAuthorization(binaryPath: String,
                               hash: String,
-                              allowExecution: inout Bool,
-                              cacheDecision: inout Bool)
+                              allowExecution: inout Bool)
 }
