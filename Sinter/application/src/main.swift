@@ -9,7 +9,7 @@
 import Cocoa
 
 import JSONConfiguration
-import LibSinter
+import AuthorizationManager
 
 // Do not start if the path is not right; system extensions can't even be
 // registered if they are not under /Applications/Bundle.app/Library/SystemExtensions

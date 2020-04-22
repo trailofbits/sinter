@@ -7,15 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; };
+		D20F58E22450E4740070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B602440739200002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B5F2440738C00002645 /* libbsm.tbd */; };
 		D257850A243F77DC0020BC32 /* EndpointSecurityClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2578518243F77E30020BC32 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578517243F77E30020BC32 /* LibSinter.framework */; };
 		D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578523243F78580020BC32 /* EndpointSecurityClient.swift */; };
 		D2578528243F7CA00020BC32 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578527243F7CA00020BC32 /* Utility.swift */; };
 		D257852E243F88610020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851C243F780A0020BC32 /* libEndpointSecurity.tbd */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D20F58E32450E4740070C21C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D20F58E22450E4740070C21C /* AuthorizationManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D20F58E02450E4740070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513B5F2440738C00002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		D2578505243F77DC0020BC32 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurityClient.h; sourceTree = "<group>"; };
@@ -31,8 +47,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */,
 				D2513B602440739200002645 /* libbsm.tbd in Frameworks */,
-				D2578518243F77E30020BC32 /* LibSinter.framework in Frameworks */,
 				D257852E243F88610020BC32 /* libEndpointSecurity.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,7 +59,8 @@
 		D25784FB243F77DC0020BC32 = {
 			isa = PBXGroup;
 			children = (
-				D2578507243F77DC0020BC32 /* Sources */,
+				D2578509243F77DC0020BC32 /* Info.plist */,
+				D2578507243F77DC0020BC32 /* src */,
 				D2578506243F77DC0020BC32 /* Products */,
 				D2578516243F77E30020BC32 /* Frameworks */,
 			);
@@ -57,20 +74,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2578507243F77DC0020BC32 /* Sources */ = {
+		D2578507243F77DC0020BC32 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */,
-				D2578509243F77DC0020BC32 /* Info.plist */,
 				D2578523243F78580020BC32 /* EndpointSecurityClient.swift */,
 				D2578527243F7CA00020BC32 /* Utility.swift */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
 		D2578516243F77E30020BC32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D20F58E02450E4740070C21C /* AuthorizationManager.framework */,
 				D2513B5F2440738C00002645 /* libbsm.tbd */,
 				D257851C243F780A0020BC32 /* libEndpointSecurity.tbd */,
 				D2578517243F77E30020BC32 /* LibSinter.framework */,
@@ -100,6 +117,7 @@
 				D2578501243F77DC0020BC32 /* Sources */,
 				D2578502243F77DC0020BC32 /* Frameworks */,
 				D2578503243F77DC0020BC32 /* Resources */,
+				D20F58E32450E4740070C21C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -297,14 +315,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.EndpointSecurityClient;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.endpoint-security-client";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -324,14 +342,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.EndpointSecurityClient;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.endpoint-security-client";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

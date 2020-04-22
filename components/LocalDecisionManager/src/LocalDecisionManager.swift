@@ -8,7 +8,7 @@
 
 import Foundation
 
-import LibSinter
+import AuthorizationManager
 import NotificationService
 
 private enum DefaultAction {

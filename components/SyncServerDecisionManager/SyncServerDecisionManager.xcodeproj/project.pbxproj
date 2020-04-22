@@ -7,13 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20F58D92450E4560070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D82450E4560070C21C /* AuthorizationManager.framework */; };
+		D20F58DA2450E4560070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D82450E4560070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513BAA2440D6E300002645 /* SyncServerDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2513BB82440D6EF00002645 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB72440D6EF00002645 /* LibSinter.framework */; };
 		D2513BC22440D72100002645 /* SyncServerDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513BC12440D72100002645 /* SyncServerDecisionManager.swift */; };
 		D2513BC42440D73E00002645 /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513BC32440D73E00002645 /* JSONRuleDatabaseParser.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D20F58DB2450E4570070C21C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D20F58DA2450E4560070C21C /* AuthorizationManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D20F58D82450E4560070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513BA52440D6E300002645 /* SyncServerDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SyncServerDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncServerDecisionManager.h; sourceTree = "<group>"; };
 		D2513BA92440D6E300002645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -27,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2513BB82440D6EF00002645 /* LibSinter.framework in Frameworks */,
+				D20F58D92450E4560070C21C /* AuthorizationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,7 +53,8 @@
 		D2513B9B2440D6E300002645 = {
 			isa = PBXGroup;
 			children = (
-				D2513BA72440D6E300002645 /* Sources */,
+				D2513BA92440D6E300002645 /* Info.plist */,
+				D2513BA72440D6E300002645 /* src */,
 				D2513BA62440D6E300002645 /* Products */,
 				D2513BB62440D6EF00002645 /* Frameworks */,
 			);
@@ -51,20 +68,20 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2513BA72440D6E300002645 /* Sources */ = {
+		D2513BA72440D6E300002645 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */,
-				D2513BA92440D6E300002645 /* Info.plist */,
 				D2513BC12440D72100002645 /* SyncServerDecisionManager.swift */,
 				D2513BC32440D73E00002645 /* JSONRuleDatabaseParser.swift */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
 		D2513BB62440D6EF00002645 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D20F58D82450E4560070C21C /* AuthorizationManager.framework */,
 				D2513BB72440D6EF00002645 /* LibSinter.framework */,
 			);
 			name = Frameworks;
@@ -92,6 +109,7 @@
 				D2513BA12440D6E300002645 /* Sources */,
 				D2513BA22440D6E300002645 /* Frameworks */,
 				D2513BA32440D6E300002645 /* Resources */,
+				D20F58DB2450E4570070C21C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -289,14 +307,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SyncServerDecisionManager;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.sync-server-decision-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -316,14 +334,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.SyncServerDecisionManager;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.sync-server-decision-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

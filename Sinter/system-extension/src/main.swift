@@ -13,7 +13,7 @@ import EndpointSecurityClient
 import FilesystemLogger
 import InMemorySignatureDatabase
 import JSONConfiguration
-import LibSinter
+import AuthorizationManager
 import LocalDecisionManager
 import SyncServerDecisionManager
 

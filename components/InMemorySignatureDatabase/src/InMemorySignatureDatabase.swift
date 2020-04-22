@@ -8,7 +8,7 @@
 
 import Foundation
 
-import LibSinter
+import AuthorizationManager
 
 private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
     private let operationQueue = OperationQueue()

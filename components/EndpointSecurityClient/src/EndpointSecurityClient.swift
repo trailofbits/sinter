@@ -9,7 +9,7 @@
 import EndpointSecurity
 import Foundation
 
-import LibSinter
+import AuthorizationManager
 
 private let eventExpirationTime: Double = 10
 

@@ -41,8 +41,8 @@
 			isa = PBXGroup;
 			children = (
 				D24B4A332448A73000958F82 /* Info.plist */,
-				D24B4A402448A73700958F82 /* Interface */,
-				D24B4A312448A73000958F82 /* Sources */,
+				D24B4A402448A73700958F82 /* interface */,
+				D24B4A312448A73000958F82 /* src */,
 				D24B4A302448A73000958F82 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,24 +55,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D24B4A312448A73000958F82 /* Sources */ = {
+		D24B4A312448A73000958F82 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				D24B4A322448A73000958F82 /* NotificationService.h */,
 				D24B4A432448A85800958F82 /* NotificationServiceClient.swift */,
 				D24B4A452448A87D00958F82 /* NotificationServiceServer.swift */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
-		D24B4A402448A73700958F82 /* Interface */ = {
+		D24B4A402448A73700958F82 /* interface */ = {
 			isa = PBXGroup;
 			children = (
 				D24B4A412448A75E00958F82 /* NotificationServiceProtocol.swift */,
 				D24B4A472448A98B00958F82 /* NotificationServerInterface.swift */,
 				D24B4A492448A99900958F82 /* NotificationClientInterface.swift */,
 			);
-			path = Interface;
+			path = interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,7 +303,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -329,7 +329,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.NotificationService;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.notification-service";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

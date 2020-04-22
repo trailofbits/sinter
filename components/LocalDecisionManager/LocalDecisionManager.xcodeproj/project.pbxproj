@@ -11,7 +11,6 @@
 		D24B4A562448B88400958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BDB3D3244102070027C57F /* LocalDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2BDB3D1244102070027C57F /* LocalDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */; };
-		D2BDB3EA244102320027C57F /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E9244102320027C57F /* LibSinter.framework */; };
 		D2BDB3EE244104F00027C57F /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BDB3EA244102320027C57F /* LibSinter.framework in Frameworks */,
 				D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,7 +53,8 @@
 		D2BDB3C4244102070027C57F = {
 			isa = PBXGroup;
 			children = (
-				D2BDB3D0244102070027C57F /* Sources */,
+				D2BDB3D2244102070027C57F /* Info.plist */,
+				D2BDB3D0244102070027C57F /* src */,
 				D2BDB3CF244102070027C57F /* Products */,
 				D2BDB3E8244102320027C57F /* Frameworks */,
 			);
@@ -69,15 +68,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2BDB3D0244102070027C57F /* Sources */ = {
+		D2BDB3D0244102070027C57F /* src */ = {
 			isa = PBXGroup;
 			children = (
 				D2BDB3D1244102070027C57F /* LocalDecisionManager.h */,
-				D2BDB3D2244102070027C57F /* Info.plist */,
 				D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */,
 				D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
 		D2BDB3E8244102320027C57F /* Frameworks */ = {
@@ -309,14 +307,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.LocalDecisionManager;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.local-decision-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -336,14 +334,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.LocalDecisionManager;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.local-decision-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;

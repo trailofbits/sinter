@@ -8,7 +8,7 @@
 
 import Foundation
 
-import LibSinter
+import AuthorizationManager
 
 private final class JSONConfiguration: ConfigurationInterface {
     private let configuration: [String: [String: AnyObject]]

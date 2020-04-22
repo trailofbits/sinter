@@ -7,12 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20F58E52450E47B0070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E42450E47B0070C21C /* AuthorizationManager.framework */; };
+		D20F58E62450E47B0070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E42450E47B0070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D25784E3243F75540020BC32 /* JSONConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D25784E1243F75540020BC32 /* JSONConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D25784F1243F75810020BC32 /* LibSinter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784F0243F75810020BC32 /* LibSinter.framework */; };
 		D25784F8243F75AF0020BC32 /* JSONConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25784F7243F75AF0020BC32 /* JSONConfiguration.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D20F58E72450E47B0070C21C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D20F58E62450E47B0070C21C /* AuthorizationManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D20F58E42450E47B0070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25784DE243F75540020BC32 /* JSONConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONConfiguration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25784E1243F75540020BC32 /* JSONConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONConfiguration.h; sourceTree = "<group>"; };
 		D25784E2243F75540020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -25,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25784F1243F75810020BC32 /* LibSinter.framework in Frameworks */,
+				D20F58E52450E47B0070C21C /* AuthorizationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -35,7 +51,8 @@
 		D25784D4243F75540020BC32 = {
 			isa = PBXGroup;
 			children = (
-				D25784E0243F75540020BC32 /* Sources */,
+				D25784E2243F75540020BC32 /* Info.plist */,
+				D25784E0243F75540020BC32 /* src */,
 				D25784DF243F75540020BC32 /* Products */,
 				D25784EF243F75810020BC32 /* Frameworks */,
 			);
@@ -49,19 +66,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D25784E0243F75540020BC32 /* Sources */ = {
+		D25784E0243F75540020BC32 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				D25784E1243F75540020BC32 /* JSONConfiguration.h */,
-				D25784E2243F75540020BC32 /* Info.plist */,
 				D25784F7243F75AF0020BC32 /* JSONConfiguration.swift */,
 			);
-			path = Sources;
+			path = src;
 			sourceTree = "<group>";
 		};
 		D25784EF243F75810020BC32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D20F58E42450E47B0070C21C /* AuthorizationManager.framework */,
 				D25784F0243F75810020BC32 /* LibSinter.framework */,
 			);
 			name = Frameworks;
@@ -89,6 +106,7 @@
 				D25784DA243F75540020BC32 /* Sources */,
 				D25784DB243F75540020BC32 /* Frameworks */,
 				D25784DC243F75540020BC32 /* Resources */,
+				D20F58E72450E47B0070C21C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -285,14 +303,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.JSONConfiguration;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.json-configuration";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -312,14 +330,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.JSONConfiguration;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.json-configuration";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
