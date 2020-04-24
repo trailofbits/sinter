@@ -7,24 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; };
-		D24B4A562448B88400958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2A3A6AE24534AE300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */; };
-		D2A3A6AF24534AE300CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2BDB3D3244102070027C57F /* LocalDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2BDB3D1244102070027C57F /* LocalDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */; };
-		D2BDB3EE244104F00027C57F /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */; };
+		D20F58B22450E1E40070C21C /* AuthorizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F58B02450E1E40070C21C /* AuthorizationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D20F58C02450E20A0070C21C /* AuthorizationManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */; };
+		D20F58C22450E2190070C21C /* EndpointSecurityInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */; };
+		D20F58C42450E2260070C21C /* DecisionManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */; };
+		D20F58C62450E22F0070C21C /* LoggerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C52450E22F0070C21C /* LoggerInterface.swift */; };
+		D20F58C82450E23A0070C21C /* ConfigurationInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C72450E23A0070C21C /* ConfigurationInterface.swift */; };
+		D20F58CA2450E2430070C21C /* BinaryHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C92450E2430070C21C /* BinaryHash.swift */; };
+		D20F58CC2450E24F0070C21C /* SignatureDatabaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */; };
+		D20F58CE2450E2640070C21C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CD2450E2640070C21C /* AuthorizationManager.swift */; };
+		D20F58D52450E4300070C21C /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D42450E4300070C21C /* NotificationService.framework */; };
+		D20F58D62450E4300070C21C /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D42450E4300070C21C /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D24B4A572448B88400958F82 /* Embed Frameworks */ = {
+		D20F58D72450E4300070C21C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D2A3A6AF24534AE300CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
-				D24B4A562448B88400958F82 /* NotificationService.framework in Embed Frameworks */,
+				D20F58D62450E4300070C21C /* NotificationService.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,63 +35,78 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D24B4A542448B88400958F82 /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BDB3CE244102070027C57F /* LocalDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LocalDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BDB3D1244102070027C57F /* LocalDecisionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalDecisionManager.h; sourceTree = "<group>"; };
-		D2BDB3D2244102070027C57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDecisionManager.swift; sourceTree = "<group>"; };
-		D2BDB3E9244102320027C57F /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRuleDatabaseParser.swift; sourceTree = "<group>"; };
+		D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20F58B02450E1E40070C21C /* AuthorizationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationManager.h; sourceTree = "<group>"; };
+		D20F58B12450E1E40070C21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerInterface.swift; sourceTree = "<group>"; };
+		D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityInterface.swift; sourceTree = "<group>"; };
+		D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionManagerInterface.swift; sourceTree = "<group>"; };
+		D20F58C52450E22F0070C21C /* LoggerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInterface.swift; sourceTree = "<group>"; };
+		D20F58C72450E23A0070C21C /* ConfigurationInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationInterface.swift; sourceTree = "<group>"; };
+		D20F58C92450E2430070C21C /* BinaryHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHash.swift; sourceTree = "<group>"; };
+		D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseInterface.swift; sourceTree = "<group>"; };
+		D20F58CD2450E2640070C21C /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		D20F58D42450E4300070C21C /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		D2BDB3CB244102070027C57F /* Frameworks */ = {
+		D20F58AA2450E1E40070C21C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2A3A6AE24534AE300CF24FB /* AuthorizationManager.framework in Frameworks */,
-				D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */,
+				D20F58D52450E4300070C21C /* NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D2BDB3C4244102070027C57F = {
+		D20F58A32450E1E30070C21C = {
 			isa = PBXGroup;
 			children = (
-				D2BDB3D2244102070027C57F /* Info.plist */,
-				D2BDB3D0244102070027C57F /* src */,
-				D2BDB3CF244102070027C57F /* Products */,
-				D2BDB3E8244102320027C57F /* Frameworks */,
+				D20F58B12450E1E40070C21C /* Info.plist */,
+				D20F58BE2450E1F90070C21C /* interface */,
+				D20F58AF2450E1E40070C21C /* src */,
+				D20F58AE2450E1E40070C21C /* Products */,
+				D20F58D32450E4300070C21C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		D2BDB3CF244102070027C57F /* Products */ = {
+		D20F58AE2450E1E40070C21C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2BDB3CE244102070027C57F /* LocalDecisionManager.framework */,
+				D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2BDB3D0244102070027C57F /* src */ = {
+		D20F58AF2450E1E40070C21C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D2BDB3D1244102070027C57F /* LocalDecisionManager.h */,
-				D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */,
-				D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */,
+				D20F58B02450E1E40070C21C /* AuthorizationManager.h */,
+				D20F58CD2450E2640070C21C /* AuthorizationManager.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		D2BDB3E8244102320027C57F /* Frameworks */ = {
+		D20F58BE2450E1F90070C21C /* interface */ = {
 			isa = PBXGroup;
 			children = (
-				D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */,
-				D24B4A542448B88400958F82 /* NotificationService.framework */,
-				D2BDB3E9244102320027C57F /* LibSinter.framework */,
+				D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */,
+				D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */,
+				D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */,
+				D20F58C52450E22F0070C21C /* LoggerInterface.swift */,
+				D20F58C72450E23A0070C21C /* ConfigurationInterface.swift */,
+				D20F58C92450E2430070C21C /* BinaryHash.swift */,
+				D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		D20F58D32450E4300070C21C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D20F58D42450E4300070C21C /* NotificationService.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,52 +114,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		D2BDB3C9244102070027C57F /* Headers */ = {
+		D20F58A82450E1E40070C21C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BDB3D3244102070027C57F /* LocalDecisionManager.h in Headers */,
+				D20F58B22450E1E40070C21C /* AuthorizationManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2BDB3CD244102070027C57F /* LocalDecisionManager */ = {
+		D20F58AC2450E1E40070C21C /* AuthorizationManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2BDB3D6244102070027C57F /* Build configuration list for PBXNativeTarget "LocalDecisionManager" */;
+			buildConfigurationList = D20F58B52450E1E40070C21C /* Build configuration list for PBXNativeTarget "AuthorizationManager" */;
 			buildPhases = (
-				D2BDB3C9244102070027C57F /* Headers */,
-				D2BDB3CA244102070027C57F /* Sources */,
-				D2BDB3CB244102070027C57F /* Frameworks */,
-				D2BDB3CC244102070027C57F /* Resources */,
-				D24B4A572448B88400958F82 /* Embed Frameworks */,
+				D20F58A82450E1E40070C21C /* Headers */,
+				D20F58A92450E1E40070C21C /* Sources */,
+				D20F58AA2450E1E40070C21C /* Frameworks */,
+				D20F58AB2450E1E40070C21C /* Resources */,
+				D20F58D72450E4300070C21C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LocalDecisionManager;
-			productName = LocalDecisionManager;
-			productReference = D2BDB3CE244102070027C57F /* LocalDecisionManager.framework */;
+			name = AuthorizationManager;
+			productName = AuthorizationManager;
+			productReference = D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D2BDB3C5244102070027C57F /* Project object */ = {
+		D20F58A42450E1E30070C21C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
-					D2BDB3CD244102070027C57F = {
-						CreatedOnToolsVersion = 11.4;
+					D20F58AC2450E1E40070C21C = {
+						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1140;
 					};
 				};
 			};
-			buildConfigurationList = D2BDB3C8244102070027C57F /* Build configuration list for PBXProject "LocalDecisionManager" */;
+			buildConfigurationList = D20F58A72450E1E30070C21C /* Build configuration list for PBXProject "AuthorizationManager" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -149,18 +167,18 @@
 				en,
 				Base,
 			);
-			mainGroup = D2BDB3C4244102070027C57F;
-			productRefGroup = D2BDB3CF244102070027C57F /* Products */;
+			mainGroup = D20F58A32450E1E30070C21C;
+			productRefGroup = D20F58AE2450E1E40070C21C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2BDB3CD244102070027C57F /* LocalDecisionManager */,
+				D20F58AC2450E1E40070C21C /* AuthorizationManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		D2BDB3CC244102070027C57F /* Resources */ = {
+		D20F58AB2450E1E40070C21C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -170,19 +188,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D2BDB3CA244102070027C57F /* Sources */ = {
+		D20F58A92450E1E40070C21C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */,
-				D2BDB3EE244104F00027C57F /* JSONRuleDatabaseParser.swift in Sources */,
+				D20F58C42450E2260070C21C /* DecisionManagerInterface.swift in Sources */,
+				D20F58CE2450E2640070C21C /* AuthorizationManager.swift in Sources */,
+				D20F58C82450E23A0070C21C /* ConfigurationInterface.swift in Sources */,
+				D20F58C62450E22F0070C21C /* LoggerInterface.swift in Sources */,
+				D20F58C22450E2190070C21C /* EndpointSecurityInterface.swift in Sources */,
+				D20F58CA2450E2430070C21C /* BinaryHash.swift in Sources */,
+				D20F58C02450E20A0070C21C /* AuthorizationManagerInterface.swift in Sources */,
+				D20F58CC2450E24F0070C21C /* SignatureDatabaseInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		D2BDB3D4244102070027C57F /* Debug */ = {
+		D20F58B32450E1E40070C21C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -245,7 +269,7 @@
 			};
 			name = Debug;
 		};
-		D2BDB3D5244102070027C57F /* Release */ = {
+		D20F58B42450E1E40070C21C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -301,11 +325,10 @@
 			};
 			name = Release;
 		};
-		D2BDB3D7244102070027C57F /* Debug */ = {
+		D20F58B62450E1E40070C21C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -320,7 +343,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.local-decision-manager";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.authorization-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -328,11 +351,10 @@
 			};
 			name = Debug;
 		};
-		D2BDB3D8244102070027C57F /* Release */ = {
+		D20F58B72450E1E40070C21C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -347,7 +369,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.local-decision-manager";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.authorization-manager";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -357,25 +379,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2BDB3C8244102070027C57F /* Build configuration list for PBXProject "LocalDecisionManager" */ = {
+		D20F58A72450E1E30070C21C /* Build configuration list for PBXProject "AuthorizationManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2BDB3D4244102070027C57F /* Debug */,
-				D2BDB3D5244102070027C57F /* Release */,
+				D20F58B32450E1E40070C21C /* Debug */,
+				D20F58B42450E1E40070C21C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2BDB3D6244102070027C57F /* Build configuration list for PBXNativeTarget "LocalDecisionManager" */ = {
+		D20F58B52450E1E40070C21C /* Build configuration list for PBXNativeTarget "AuthorizationManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D2BDB3D7244102070027C57F /* Debug */,
-				D2BDB3D8244102070027C57F /* Release */,
+				D20F58B62450E1E40070C21C /* Debug */,
+				D20F58B72450E1E40070C21C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D2BDB3C5244102070027C57F /* Project object */;
+	rootObject = D20F58A42450E1E30070C21C /* Project object */;
 }

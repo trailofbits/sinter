@@ -26,10 +26,6 @@
 		D20F58832450DC880070C21C /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; };
 		D20F58842450DC880070C21C /* SyncServerDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D20F58CF2450E3CC0070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */; };
-		D20F58D02450E3CC0070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F58D12450E3D80070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */; };
-		D20F58D22450E3D80070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B67244073A900002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B61244073A300002645 /* libbsm.tbd */; };
@@ -45,6 +41,10 @@
 		D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851F243F78250020BC32 /* libEndpointSecurity.tbd */; };
 		D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25CC59024461E94001C686C /* SystemExtensions.framework */; };
+		D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
+		D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2A3A6AB24534A8F00CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
+		D2A3A6AC24534A8F00CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; };
 		D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */; };
@@ -54,13 +54,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D20F58BC2450E1E40070C21C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D20F58B82450E1E40070C21C /* AuthorizationManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D20F58AD2450E1E40070C21C;
-			remoteInfo = AuthorizationManager;
-		};
 		D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
@@ -102,6 +95,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = D2578505243F77DC0020BC32;
 			remoteInfo = EndpointSecurityClient;
+		};
+		D2A3A6A724534A0000CF24FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D20F58AD2450E1E40070C21C;
+			remoteInfo = AuthorizationManager;
 		};
 		D2BDB3E2244102080027C57F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -145,7 +145,7 @@
 				D20F58782450DC880070C21C /* EndpointSecurityClient.framework in Embed Frameworks */,
 				D20F58822450DC880070C21C /* LocalDecisionManager.framework in Embed Frameworks */,
 				D20F587A2450DC880070C21C /* FilesystemLogger.framework in Embed Frameworks */,
-				D20F58D02450E3CC0070C21C /* AuthorizationManager.framework in Embed Frameworks */,
+				D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,7 +172,7 @@
 				D25784D3243F73030020BC32 /* FilesystemLogger.framework in Embed Frameworks */,
 				D2513BC02440D70E00002645 /* SyncServerDecisionManager.framework in Embed Frameworks */,
 				D25784FA243F76EC0020BC32 /* JSONConfiguration.framework in Embed Frameworks */,
-				D20F58D22450E3D80070C21C /* AuthorizationManager.framework in Embed Frameworks */,
+				D2A3A6AC24534A8F00CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
 				D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -200,7 +200,6 @@
 		D20F586F2450DC090070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58752450DC510070C21C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58762450DC510070C21C /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
-		D20F58B82450E1E40070C21C /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = ../../../../Desktop/AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
 		D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NotificationService.xcodeproj; path = NotificationService/NotificationService.xcodeproj; sourceTree = "<group>"; };
 		D2513B61244073A300002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InMemorySignatureDatabase.xcodeproj; path = InMemorySignatureDatabase/InMemorySignatureDatabase.xcodeproj; sourceTree = "<group>"; };
@@ -213,6 +212,7 @@
 		D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
+		D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
 		D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LocalDecisionManager.xcodeproj; path = LocalDecisionManager/LocalDecisionManager.xcodeproj; sourceTree = "<group>"; };
 		D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionInstaller.swift; sourceTree = "<group>"; };
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 				D20F58772450DC880070C21C /* EndpointSecurityClient.framework in Frameworks */,
 				D20F58812450DC880070C21C /* LocalDecisionManager.framework in Frameworks */,
 				D20F58792450DC880070C21C /* FilesystemLogger.framework in Frameworks */,
-				D20F58CF2450E3CC0070C21C /* AuthorizationManager.framework in Frameworks */,
+				D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +253,7 @@
 				D2D94399244726A500626B17 /* UserNotifications.framework in Frameworks */,
 				D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */,
 				D2513BBF2440D70E00002645 /* SyncServerDecisionManager.framework in Frameworks */,
-				D20F58D12450E3D80070C21C /* AuthorizationManager.framework in Frameworks */,
+				D2A3A6AB24534A8F00CF24FB /* AuthorizationManager.framework in Frameworks */,
 				D25784F9243F76EC0020BC32 /* JSONConfiguration.framework in Frameworks */,
 				D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */,
 				D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */,
@@ -322,14 +322,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		D20F58B92450E1E40070C21C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D24B4A3B2448A73000958F82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,7 +379,7 @@
 		D2578426243F60460020BC32 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				D20F58B82450E1E40070C21C /* AuthorizationManager.xcodeproj */,
+				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
 				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
 				D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */,
 				D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */,
@@ -430,6 +422,14 @@
 			isa = PBXGroup;
 			children = (
 				D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2A3A6A424534A0000CF24FB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -535,8 +535,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D20F58B92450E1E40070C21C /* Products */;
-					ProjectRef = D20F58B82450E1E40070C21C /* AuthorizationManager.xcodeproj */;
+					ProductGroup = D2A3A6A424534A0000CF24FB /* Products */;
+					ProjectRef = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
 				},
 				{
 					ProductGroup = D2578511243F77DC0020BC32 /* Products */;
@@ -577,13 +577,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D20F58BD2450E1E40070C21C /* AuthorizationManager.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AuthorizationManager.framework;
-			remoteRef = D20F58BC2450E1E40070C21C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D24B4A3F2448A73200958F82 /* NotificationService.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -624,6 +617,13 @@
 			fileType = wrapper.framework;
 			path = EndpointSecurityClient.framework;
 			remoteRef = D2578514243F77DC0020BC32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AuthorizationManager.framework;
+			remoteRef = D2A3A6A724534A0000CF24FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */ = {
