@@ -1,31 +1,36 @@
 # Sinter
 
-Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above.
+Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the safe-by-design Swift programming language.
 
 ## Features
 
 (Work in progress)
 - MONITOR mode: captures process execution events and records them to a log on the local filesystem.
+- Process execution whitelisting and blacklisting
+ - by certificate Team ID
+ - by hash
+ - by executable file path
+- Sync server support (compatible with the Moroz sync-server for Santa clients)
 
-## How to Run
+## How to Run (if built from source)
 
-Current builds of Sinter require SIP to be disabled. To disable SIP (*not recommended except on a test system*):
+Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source. To disable SIP (*not recommended except on a test system*):
 
 Schedule a Recovery Mode reboot:
 
 `$ sudo nvram "recovery-boot-mode=unused"; sudo reboot recovery`
 
-From Recovery Mode, launch Utilities -> Terminal, and disable SIP:
+From Recovery Mode, launch Utilities -> Terminal. Disable SIP, and boot back into regular macOS:
 
 `$ csrutil disable; reboot`
 
-Check that SIP is disabled, and boot back into regular macOS:
+To confirm that SIP is disabled:
 
 `$ csrutil status`
 
-Finally, to run Sinter, do not double-click the `Sinter` app bundle in Finder. Rather, launch the daemon:
+Finally, to run Sinter, do not double-click the `Sinter` app bundle in Finder. Rather, launch the daemon directly:
 
-`$ sudo Sinter.app/Contents/MacOS/service`
+`$ sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
 
 In this version, it outputs events to the command line and to text-based log files under `/var/db/sinter/`.
 
@@ -59,11 +64,13 @@ Optional: you may need to set the command-line tools to the full Xcode, first, t
 
 `$ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
 
-## Run Sinter
+## Configure and Run Sinter
+
+Sinter requires a configuration file to be present at `/etc/sinter/config.json`. An example is provided in the source tree at `./config/config.json`.
 
 After building, from the build directory (`cd` to the build directory seen in the `--destination` output of the `xcodebuild` step):
 
-`sudo Sinter.app/Contents/MacOS/service`
+`sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
 
 ## License
 
