@@ -1,0 +1,14 @@
+#!/bin/bash
+
+LAUNCHD_PLIST_FILE=com.trailofbits.sinter.plist
+LAUNCHD_PLIST_PATH=/Library/LaunchDaemons/${LAUNCHD_PLIST_FILE}
+
+echo "Post installation process started"
+
+# Adding the Sinter daemon as a LaunchDaemon.
+# The LaunchDaemon plist file has already been copied to the path here.
+# Now, unload any previous instance of Sinter and then load it.
+/bin/launchctl unload ${LAUNCHD_PLIST_PATH}
+/bin/launchctl load ${LAUNCHD_PLIST_PATH}
+
+echo "Post installation process finished"

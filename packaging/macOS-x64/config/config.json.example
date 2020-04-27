@@ -1,0 +1,11 @@
+{
+  "FilesystemLogger": {
+    "log_folder": "/var/log/sinter"
+  },
+  "MorozAuthorizationInterface": {
+    "server_address": "http://127.0.0.1:8080",
+    "update_interval": 10,
+    "default_action": "allow"
+  }
+}
+
