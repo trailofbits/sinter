@@ -522,7 +522,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D257840B243F602E0020BC32 /* Build configuration list for PBXProject "sinter" */;
+			buildConfigurationList = D257840B243F602E0020BC32 /* Build configuration list for PBXProject "Sinter" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -745,7 +745,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
 				PRODUCT_MODULE_NAME = "com.trailofbits.sinter.system-extension";
 				PRODUCT_NAME = "com.trailofbits.sinter.system-extension";
@@ -765,7 +765,7 @@
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
 				PRODUCT_MODULE_NAME = "com.trailofbits.sinter.system-extension";
 				PRODUCT_NAME = "com.trailofbits.sinter.system-extension";
@@ -957,7 +957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D257840B243F602E0020BC32 /* Build configuration list for PBXProject "sinter" */ = {
+		D257840B243F602E0020BC32 /* Build configuration list for PBXProject "Sinter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2578421243F60350020BC32 /* Debug */,
