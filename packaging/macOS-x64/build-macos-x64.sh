@@ -153,8 +153,8 @@ function signProduct() {
     mkdir -p ${TARGET_DIRECTORY}/pkg-signed
     chmod -R 755 ${TARGET_DIRECTORY}/pkg-signed
 
-    security find-identity -v -p codesigning 
-    read -p "Please enter the Apple Developer Installer Certificate ID from above:" APPLE_DEVELOPER_CERTIFICATE_ID
+    # security find-identity -v | grep -i Installer
+    read -p "Please enter your Apple Developer Installer Certificate ID common name (example: \"TRAIL OF BITS INC (44WTB9L362)\"). If you are unsure, try 'security find-identity -v | grep -i Installer':" APPLE_DEVELOPER_CERTIFICATE_ID
     productsign --sign "Developer ID Installer: ${APPLE_DEVELOPER_CERTIFICATE_ID}" \
     ${TARGET_DIRECTORY}/pkg/$1 \
     ${TARGET_DIRECTORY}/pkg-signed/$1
@@ -167,7 +167,7 @@ function createInstaller() {
     buildPackage
     buildProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
     while true; do
-        read -p "Do you wish to sign the installer (requires an Apple Developer Certificate) [y/N]?" answer
+        read -p "Do you wish to sign the installer (requires an Apple Developer Installer Certificate) [y/N]?" answer
         [[ $answer == "y" || $answer == "Y" ]] && FLAG=true && break
         [[ $answer == "n" || $answer == "N" || $answer == "" ]] && log_info "Skipped signing the package." && FLAG=false && break
         echo "Please answer with 'y' or 'n'"
