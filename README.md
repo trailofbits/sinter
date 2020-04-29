@@ -70,7 +70,7 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
 
 After building, from the build directory (`cd` to the build directory seen in the `--destination` output of the `xcodebuild` step):
 
-`sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
+`sudo ./Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon`
 
 ## License
 

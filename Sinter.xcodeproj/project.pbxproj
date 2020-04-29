@@ -25,7 +25,7 @@
 		D20F58822450DC880070C21C /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D20F58832450DC880070C21C /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; };
 		D20F58842450DC880070C21C /* SyncServerDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B67244073A900002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B61244073A300002645 /* libbsm.tbd */; };
@@ -156,7 +156,7 @@
 			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
 			dstSubfolderSpec = 16;
 			files = (
-				D20F58872450DDBF0070C21C /* com.trailofbits.sinter.systemextension in CopyFiles */,
+				D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,7 +196,7 @@
 		D20F58502450DA380070C21C /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D20F58612450DA800070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58632450DA8E0070C21C /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
-		D20F586D2450DC090070C21C /* com.trailofbits.sinter.systemextension */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = com.trailofbits.sinter.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = com.trailofbits.sinter.daemon.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F586F2450DC090070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58752450DC510070C21C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58762450DC510070C21C /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 			children = (
 				D2578410243F602F0020BC32 /* Sinter.app */,
 				D20F58412450DA370070C21C /* notification-server.xpc */,
-				D20F586D2450DC090070C21C /* com.trailofbits.sinter.systemextension */,
+				D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,8 +478,8 @@
 			);
 			name = "system-extension";
 			productName = "system-extension";
-			productReference = D20F586D2450DC090070C21C /* com.trailofbits.sinter.systemextension */;
-			productType = "com.apple.product-type.tool";
+			productReference = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */;
+			productType = "com.apple.product-type.system-extension";
 		};
 		D257840F243F602E0020BC32 /* Sinter */ = {
 			isa = PBXNativeTarget;
@@ -522,7 +522,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D257840B243F602E0020BC32 /* Build configuration list for PBXProject "Sinter" */;
+			buildConfigurationList = D257840B243F602E0020BC32 /* Build configuration list for PBXProject "sinter" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -739,19 +739,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Sinter/system-extension/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.system-extension";
-				PRODUCT_MODULE_NAME = "com.trailofbits.sinter.system-extension";
-				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = "";
 			};
 			name = Debug;
 		};
@@ -759,19 +756,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Sinter/system-extension/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_HARDENED_RUNTIME = NO;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.system-extension";
-				PRODUCT_MODULE_NAME = "com.trailofbits.sinter.system-extension";
-				PRODUCT_NAME = com.trailofbits.sinter.systemextension;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = "";
 			};
 			name = Release;
 		};
@@ -957,7 +951,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D257840B243F602E0020BC32 /* Build configuration list for PBXProject "Sinter" */ = {
+		D257840B243F602E0020BC32 /* Build configuration list for PBXProject "sinter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2578421243F60350020BC32 /* Debug */,
