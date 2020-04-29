@@ -714,7 +714,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Sinter/notification-server/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -729,7 +729,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.notification-server";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (dev)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (App Distribution)";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = xpc;
 			};
@@ -756,7 +756,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Sinter/system-extension/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -764,7 +764,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (App Distribution)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -911,7 +911,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sinter/application/entitlements.plist;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -925,7 +925,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter development profile";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter (Application Distribution)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
