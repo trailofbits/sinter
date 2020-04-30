@@ -8,13 +8,13 @@
   <meta name="CocoaVersion" content="1894.4">
   <style type="text/css">
     p.p2 {margin: 0.0px 0.0px 11.0px 0.0px; font: 11.0px Helvetica; color: #020202; -webkit-text-stroke: #020202}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #767e7c; -webkit-text-stroke: #767e7c}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Menlo; color: #636b69; -webkit-text-stroke: #636b69}
     p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; color: #000000; -webkit-text-stroke: #000000}
-    p.p7 {margin: 0.0px 0.0px 11.0px 0.0px; font: 11.0px Menlo; color: #767e7c; -webkit-text-stroke: #767e7c}
-    p.p8 {margin: 0.0px 0.0px 10.0px 0.0px; font: 10.0px Helvetica; color: #767e7c; -webkit-text-stroke: #767e7c}
+    p.p7 {margin: 0.0px 0.0px 11.0px 0.0px; font: 11.0px Menlo; color: #636b69; -webkit-text-stroke: #636b69}
+    p.p8 {margin: 0.0px 0.0px 10.0px 0.0px; font: 10.0px Helvetica; color: #636b69; -webkit-text-stroke: #636b69}
     li.li6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px Helvetica; color: #0000e9; -webkit-text-stroke: #000000}
     span.s1 {font-kerning: none}
-    span.s2 {font-kerning: none; color: #997615; -webkit-text-stroke: 0px #997615}
+    span.s2 {font-kerning: none; color: #866412; -webkit-text-stroke: 0px #866412}
     span.s3 {-webkit-text-stroke: 0px #000000}
     span.s4 {text-decoration: underline ; font-kerning: none}
     span.s5 {font: 11.0px Helvetica; font-kerning: none; color: #020202; -webkit-text-stroke: 0px #020202}
@@ -25,9 +25,9 @@
 <body>
 <h3 style="margin: 0.0px 0.0px 14.0px 0.0px; font: 14.0px Helvetica; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Sinter Endpoint Agent</b></span></h3>
 <p class="p2"><span class="s1">Thank you for installing the Sinter Endpoint Agent.</span></p>
-<h5 style="margin: 0.0px 0.0px 16.6px 0.0px; font: 10.0px Helvetica; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Run Sinter Agent Manually (optional)</b></span></h5>
+<h5 style="margin: 0.0px 0.0px 16.6px 0.0px; font: 10.0px Helvetica; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Run Sinter Agent Manually (optional; should be running already after install)</b></span></h5>
 <p class="p2"><span class="s1">Open a new terminal and run the following command to get started with Sinter:</span></p>
-<p class="p4"><span class="s2">  $ </span><span class="s1">sudo /Applications/Sinter/Sinter.app/Contents/MacOS/SinterD</span></p>
+<p class="p4"><span class="s2">  $ </span><span class="s1">sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon</span></p>
 <p class="p5"><span class="s1"><br>
 </span></p>
 <h5 style="margin: 0.0px 0.0px 16.6px 0.0px; font: 10.0px Helvetica; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Resources</b></span></h5>
@@ -40,7 +40,7 @@
 <h5 style="margin: 0.0px 0.0px 16.6px 0.0px; font: 10.0px Helvetica; color: #000000; -webkit-text-stroke: #000000"><span class="s1"><b>Uninstalling Sinter</b></span></h5>
 <p class="p7"><span class="s5">Run the following command to uninstall Sinter. <br>
 </span><span class="s2"><br>
-  $ </span><span class="s1"># /bin/launchctl unload /Library/LaunchDaemons/com.trailofbits.sinter.plist</span></p>
+  $ </span><span class="s1">sudo /bin/launchctl unload /Library/LaunchDaemons/com.trailofbits.sinter.plist</span></p>
 <p class="p7"><span class="s2"><span class="Apple-converted-space">  </span>$ </span><span class="s1">rm -f /Library/LaunchDaemons/com.trailofbits.sinter.plist</span></p>
 <p class="p2"><span class="s1">Then, drag /Applications/Sinter/ to the Trash.</span><span class="s6"><br>
 </span></p>

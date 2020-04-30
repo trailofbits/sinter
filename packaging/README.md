@@ -14,4 +14,4 @@ cd macOS-x64
 ./build-macos-x64.sh Sinter 0.1.0
 ```
 where `Sinter` is the product name (where it will be installed under `/Applications`) and `0.1.0` is a version string (currently unused).
-- Find the resulting pkg installer in ./macOS-x64/target/pkg/
+- Find the resulting unsigned pkg installer in `./macOS-x64/target/pkg/` or, if you chose to sign the package, in `./macOS-x64/target/pkg-signed`. 

@@ -1,11 +1,18 @@
 {
-  "FilesystemLogger": {
-    "log_folder": "/var/log/sinter"
+  "Sinter": {
+    "decision_manager": "sync-server"
   },
-  "MorozAuthorizationInterface": {
+
+  "SyncServerDecisionManager": {
     "server_address": "http://127.0.0.1:8080",
     "update_interval": 10,
-    "default_action": "allow"
+    "default_action": "allow",
+    "machine_identifier": "default_1234"
+  },
+
+  "LocalDecisionManager": {
+    "default_action": "allow",
+    "rule_database_path": "/etc/sinter/rules.json",
+    "update_interval": "10"
   }
 }
-

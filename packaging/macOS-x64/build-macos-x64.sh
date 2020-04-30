@@ -14,9 +14,6 @@ function printUsage() {
 
 }
 
-#Start the generator
-printSignature
-
 #Argument validation
 if [[ "$1" == "-h" ||  "$1" == "--help" ]]; then
     printUsage
@@ -111,12 +108,12 @@ copyBuildDirectory() {
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
-    cp -a ./application/*.app ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
+    cp -a ./application/* ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
     chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
     cp -a ./config/config.json.example ${TARGET_DIRECTORY}/darwinpkg/etc/sinter/config.json
-    chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/darwinpkg/etc/sinter
+    chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
     cp -a ./plist/. ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
@@ -133,7 +130,7 @@ copyBuildDirectory() {
 
 function buildPackage() {
     log_info "Application installer package building started.(1/3)"
-    pkgbuild --identifier com.trailofbits.sinter \
+    pkgbuild --identifier "com.trailofbits.sinter" \
     --version ${VERSION} \
     --scripts ${TARGET_DIRECTORY}/darwin/scripts \
     --root ${TARGET_DIRECTORY}/darwinpkg \
@@ -153,8 +150,8 @@ function signProduct() {
     mkdir -p ${TARGET_DIRECTORY}/pkg-signed
     chmod -R 755 ${TARGET_DIRECTORY}/pkg-signed
 
-    security find-identity -v -p codesigning 
-    read -p "Please enter the Apple Developer Installer Certificate ID from above:" APPLE_DEVELOPER_CERTIFICATE_ID
+    # security find-identity -v | grep -i Installer
+    read -p "Please enter your Apple Developer Installer Certificate ID common name (example: \"TRAIL OF BITS INC (44WTB9L362)\"). If you are unsure, try 'security find-identity -v | grep -i Installer':" APPLE_DEVELOPER_CERTIFICATE_ID
     productsign --sign "Developer ID Installer: ${APPLE_DEVELOPER_CERTIFICATE_ID}" \
     ${TARGET_DIRECTORY}/pkg/$1 \
     ${TARGET_DIRECTORY}/pkg-signed/$1
@@ -167,7 +164,7 @@ function createInstaller() {
     buildPackage
     buildProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
     while true; do
-        read -p "Do you wish to sign the installer (requires an Apple Developer Certificate) [y/N]?" answer
+        read -p "Do you wish to sign the installer (requires an Apple Developer Installer Certificate) [y/N]?" answer
         [[ $answer == "y" || $answer == "Y" ]] && FLAG=true && break
         [[ $answer == "n" || $answer == "N" || $answer == "" ]] && log_info "Skipped signing the package." && FLAG=false && break
         echo "Please answer with 'y' or 'n'"
@@ -177,7 +174,7 @@ function createInstaller() {
 }
 
 function createUninstaller(){
-    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}
+    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/
     sed -i '' -e "s/__VERSION__/${VERSION}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
     sed -i '' -e "s/__PRODUCT__/${PRODUCT}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
 }
