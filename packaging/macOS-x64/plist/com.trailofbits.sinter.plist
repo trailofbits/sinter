@@ -6,7 +6,7 @@
 	<string>com.trailofbits.sinter</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Applications/Sinter/Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon</string>
+		<string>/Applications/Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
