@@ -32,7 +32,7 @@ Finally, to run Sinter, do not double-click the `Sinter` app bundle in Finder. R
 
 `$ sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
 
-In this version, it outputs events to stdout.
+In this version, it outputs events to stdout. When run as a LaunchDaemon, which is the default install method, it includes a configuration that also redirects stdout and stderr to logs in `/var/db/sinter/`. Logs are updated every 2 minutes. View `Console.app` for live logging.
 
 ## How to Build
 
