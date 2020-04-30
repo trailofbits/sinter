@@ -133,7 +133,7 @@ copyBuildDirectory() {
 
 function buildPackage() {
     log_info "Application installer package building started.(1/3)"
-    pkgbuild --identifier com.trailofbits.sinter \
+    pkgbuild --identifier "com.trailofbits.sinter" \
     --version ${VERSION} \
     --scripts ${TARGET_DIRECTORY}/darwin/scripts \
     --root ${TARGET_DIRECTORY}/darwinpkg \
@@ -177,7 +177,7 @@ function createInstaller() {
 }
 
 function createUninstaller(){
-    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}
+    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/
     sed -i '' -e "s/__VERSION__/${VERSION}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
     sed -i '' -e "s/__PRODUCT__/${PRODUCT}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
 }
