@@ -11,7 +11,6 @@ function printUsage() {
   echo
   echo -e "\033[1mExample::\033[0m"
   echo "$0 Sinter 2.6.0"
-
 }
 
 #Argument validation
@@ -107,9 +106,10 @@ copyBuildDirectory() {
     rm -rf ${TARGET_DIRECTORY}/darwinpkg
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg
 
-    mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
-    cp -a ./application/* ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
-    chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}
+    # Install path must be /Applications/Sinter.app in order to meet SystemExtension requirements
+    mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Applications/
+    cp -a ./application/* ${TARGET_DIRECTORY}/darwinpkg/Applications/
+    chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Applications/
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
     cp -a ./config/config.json.example ${TARGET_DIRECTORY}/darwinpkg/etc/sinter/config.json
@@ -174,9 +174,11 @@ function createInstaller() {
 }
 
 function createUninstaller(){
-    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/
-    sed -i '' -e "s/__VERSION__/${VERSION}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
-    sed -i '' -e "s/__PRODUCT__/${PRODUCT}/g" "${TARGET_DIRECTORY}/darwinpkg/Library/${PRODUCT}/${VERSION}/uninstall.sh"
+#  If we want to ship an uninstaller script later, uncomment these lines.
+#    cp darwin/Resources/uninstall.sh ${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/
+#    sed -i '' -e "s/__VERSION__/${VERSION}/g" "${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/uninstall.sh"
+#    sed -i '' -e "s/__PRODUCT__/${PRODUCT}/g" "${TARGET_DIRECTORY}/darwinpkg/Applications/${PRODUCT}/uninstall.sh"
+    log_info "Skipping uninstaller script inclusion."
 }
 
 #Main script
