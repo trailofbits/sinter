@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D20F58E92450E4800070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E82450E4800070C21C /* AuthorizationManager.framework */; };
-		D20F58EA2450E4800070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E82450E4800070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D25784B5243F6FE60020BC32 /* FilesystemLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D25784B3243F6FE60020BC32 /* FilesystemLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25784C2243F700F0020BC32 /* FilesystemLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25784C1243F700F0020BC32 /* FilesystemLogger.swift */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F58EA2450E4800070C21C /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

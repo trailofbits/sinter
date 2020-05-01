@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; };
-		D24B4A562448B88400958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2A3A6AE24534AE300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */; };
-		D2A3A6AF24534AE300CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2BDB3D3244102070027C57F /* LocalDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2BDB3D1244102070027C57F /* LocalDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */; };
 		D2BDB3EE244104F00027C57F /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */; };
@@ -23,8 +21,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D2A3A6AF24534AE300CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
-				D24B4A562448B88400958F82 /* NotificationService.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

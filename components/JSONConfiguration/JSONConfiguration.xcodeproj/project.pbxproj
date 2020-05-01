@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D20F58E52450E47B0070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E42450E47B0070C21C /* AuthorizationManager.framework */; };
-		D20F58E62450E47B0070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E42450E47B0070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D25784E3243F75540020BC32 /* JSONConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = D25784E1243F75540020BC32 /* JSONConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25784F8243F75AF0020BC32 /* JSONConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25784F7243F75AF0020BC32 /* JSONConfiguration.swift */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F58E62450E47B0070C21C /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

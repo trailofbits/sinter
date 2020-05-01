@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D20F58DD2450E45E0070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58DC2450E45E0070C21C /* AuthorizationManager.framework */; };
-		D20F58DE2450E45E0070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58DC2450E45E0070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B792440BE7100002645 /* InMemorySignatureDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D2513B772440BE7100002645 /* InMemorySignatureDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2513B942440BF2400002645 /* InMemorySignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513B932440BF2400002645 /* InMemorySignatureDatabase.swift */; };
 		D2513B962440BFA000002645 /* CodeSignatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513B952440BFA000002645 /* CodeSignatureChecker.swift */; };
@@ -21,7 +20,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F58DE2450E45E0070C21C /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
