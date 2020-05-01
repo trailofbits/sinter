@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; };
-		D20F58E22450E4740070C21C /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2513B602440739200002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B5F2440738C00002645 /* libbsm.tbd */; };
 		D257850A243F77DC0020BC32 /* EndpointSecurityClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578523243F78580020BC32 /* EndpointSecurityClient.swift */; };
@@ -23,7 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F58E22450E4740070C21C /* AuthorizationManager.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,7 +17,6 @@
 		D20F58CC2450E24F0070C21C /* SignatureDatabaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */; };
 		D20F58CE2450E2640070C21C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CD2450E2640070C21C /* AuthorizationManager.swift */; };
 		D20F58D52450E4300070C21C /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D42450E4300070C21C /* NotificationService.framework */; };
-		D20F58D62450E4300070C21C /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D42450E4300070C21C /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +26,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F58D62450E4300070C21C /* NotificationService.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
