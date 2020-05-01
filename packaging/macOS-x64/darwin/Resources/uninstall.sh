@@ -42,7 +42,7 @@ VERSION=__VERSION__
 PRODUCT=__PRODUCT__
 
 echo "Application uninstalling process started"
-# remove link to shorcut file
+# remove application bundle
 find "/Applications/" -name "__PRODUCT__" | xargs rm
 if [ $? -eq 0 ]
 then
@@ -51,7 +51,7 @@ else
   echo "[1/3] [ERROR] Could not delete Application" >&2
 fi
 
-#forget from pkgutil
+# forget from pkgutil
 pkgutil --forget "org.$PRODUCT.$VERSION" > /dev/null 2>&1
 if [ $? -eq 0 ]
 then
@@ -60,7 +60,7 @@ else
   echo "[2/3] [ERROR] Could not delete application informations" >&2
 fi
 
-#remove launchd item
+# remove launchd item
 /bin/launchctl unload /Library/LaunchDaemons/com.trailofbits.sinter.plist && rm -f /Library/LaunchDaemons/com.trailofbits.sinter.plist
 if [ $? -eq 0 ]
 then
