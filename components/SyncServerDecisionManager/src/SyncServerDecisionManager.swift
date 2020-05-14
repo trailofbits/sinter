@@ -11,11 +11,16 @@ import Foundation
 import AuthorizationManager
 
 private final class SyncServerDecisionManager: DecisionManagerInterface {
+    func getClientMode() -> DecisionManagerClientMode {
+        return self.clientMode
+    }
+    
     private let logger: LoggerInterface
     private let configuration: ConfigurationInterface
 
     private let serverAddress: String
     private let machineIdentifier: String
+    private let clientMode: DecisionManagerClientMode
     private let defaultAllow: Bool
 
     private var ruleDatabaseUpdateTimer = Timer()
@@ -44,6 +49,26 @@ private final class SyncServerDecisionManager: DecisionManagerInterface {
             throw DecisionManagerError.invalidConfiguration
         }
 
+        if let clientMode = configuration.integerValue(moduleName: "SyncServerDecisionManager",
+                                                      key: "client_mode") {
+            if clientMode == 1 {
+                self.clientMode = .MONITOR
+            }
+            else if clientMode == 2 {
+                self.clientMode = .LOCKDOWN
+            }
+            else {
+                logger.logMessage(severity: LoggerMessageSeverity.error,
+                                  message: "The 'SyncServerDecisionManager.client_mode' setting is not valid. Allowed values are: 1 (MONITOR) or 2 (LOCKDOWN)")
+
+                throw DecisionManagerError.invalidConfiguration
+            }
+        } else {
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "The client_mode setting is missing from the 'SyncServerDecisionManager' configuration section. Defaulting to MONITOR mode.")
+            self.clientMode = .MONITOR
+        }
+        
         if let defaultAction = configuration.stringValue(moduleName: "SyncServerDecisionManager",
                                                          key: "default_action") {
             if defaultAction == "allow" {
