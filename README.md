@@ -6,11 +6,14 @@ Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, wr
 
 (Work in progress)
 - MONITOR mode: captures process execution events and records them to a log on the local filesystem.
-- Process execution whitelisting and blacklisting
- - by certificate Team ID
- - by hash
- - by executable file path
-- Sync server support (compatible with the Moroz sync-server for Santa clients)
+- LOCKDOWN mode: like MONITOR mode, but additionally blocks processes with missing or invalid signatures.
+
+- While in either mode:
+ - Process execution whitelisting and blacklisting
+  - by certificate Team ID
+  - by hash
+  - by executable file path
+ - Sync server support (compatible with the Moroz sync-server for Santa clients)
 
 ## How to Run (if built from source)
 
