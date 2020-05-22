@@ -13,11 +13,6 @@ public enum DecisionManagerError: Error {
     case invalidConfiguration
 }
 
-public enum DecisionManagerClientMode: Int {
-    case MONITOR
-    case LOCKDOWN
-}
-
 public struct DecisionManagerRequest {
     public var binaryPath: String
     public var codeDirectoryHash: BinaryHash
@@ -29,5 +24,4 @@ public struct DecisionManagerRequest {
 public protocol DecisionManagerInterface {
     func processRequest(request: DecisionManagerRequest,
                         allow: inout Bool) -> Bool
-    func getClientMode() -> DecisionManagerClientMode
 }

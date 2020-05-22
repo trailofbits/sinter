@@ -90,119 +90,61 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
     private func processSignatureCheckNotification(message: EndpointSecurityExecAuthorization,
                                                    result: SignatureDatabaseResult) {
-        
-        if decisionManager.getClientMode() == DecisionManagerClientMode.MONITOR {
-            switch result {
-            // In MONITOR mode, implicit block rules are not enforced, only logged:
-            case SignatureDatabaseResult.Failed:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: true,
-                                                          cache: false)
+        switch result {
+        case SignatureDatabaseResult.Failed:
+            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
+                                                      allow: false,
+                                                      cache: false)
 
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "Failed to validate the code signature for '\(message.binaryPath)'.")
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "Failed to validate the code signature for '\(message.binaryPath)'. Execution has been denied")
 
-            case SignatureDatabaseResult.Invalid:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: true,
-                                                          cache: false)
+        case SignatureDatabaseResult.Invalid:
+            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
+                                                      allow: false,
+                                                      cache: false)
 
-                logger.logMessage(severity: LoggerMessageSeverity.information,
-                                  message: "Invalid code signature for '\(message.binaryPath)'.")
+            notificationClient.showNotification(message: "Blocked, due to invalid signature: \(message.binaryPath)")
 
-            case SignatureDatabaseResult.NotSigned:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: true,
-                                                          cache: false)
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "Invalid code signature for '\(message.binaryPath)'. Execution has been denied")
 
-                logger.logMessage(severity: LoggerMessageSeverity.information,
-                                  message: "The following application is not signed '\(message.binaryPath)'.")
+        case SignatureDatabaseResult.NotSigned:
+            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
+                                                      allow: false,
+                                                      cache: false)
 
-            // In MONITOR mode, explicit block rules are still enforced:
-            case SignatureDatabaseResult.Valid:
-                let operation = AuthorizationManagerOperation(decisionManager: decisionManager,
-                                                              message: message)
+            notificationClient.showNotification(message: "Blocked unsigned application: \(message.binaryPath)")
 
-                operation.completionBlock = { [unowned operation, message] in
-                    let allow = operation.isAllowed()
-                    let cache = message.platformBinary
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "The following application is not signed '\(message.binaryPath)'. Execution has been denied")
 
-                    // This operation can fail if a write notification has invalidated this
-                    // request inside EndpointSecurityClient
-                    if self.endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                                  allow: allow,
-                                                                  cache: cache) {
-                        var actionDescription = allow ? "allowed" : "denied"
-                        actionDescription += cache ? " (cached)" : ""
+        case SignatureDatabaseResult.Valid:
+            let operation = AuthorizationManagerOperation(decisionManager: decisionManager,
+                                                          message: message)
 
-                        self.logger.logMessage(severity: LoggerMessageSeverity.information,
-                                               message: "The following signed application '\(message.binaryPath)' has been \(actionDescription)")
+            operation.completionBlock = { [unowned operation, message] in
+                let allow = operation.isAllowed()
+                let cache = message.platformBinary
 
-                        if !allow {
-                            self.notificationClient.showNotification(message: "Blocked signed application: \(message.binaryPath)")
-                        }
+                // This operation can fail if a write notification has invalidated this
+                // request inside EndpointSecurityClient
+                if self.endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
+                                                              allow: allow,
+                                                              cache: cache) {
+                    var actionDescription = allow ? "allowed" : "denied"
+                    actionDescription += cache ? " (cached)" : ""
+
+                    self.logger.logMessage(severity: LoggerMessageSeverity.information,
+                                           message: "The following signed application '\(message.binaryPath)' has been \(actionDescription)")
+
+                    if !allow {
+                        self.notificationClient.showNotification(message: "Blocked signed application: \(message.binaryPath)")
                     }
                 }
-
-                operationQueue.addOperation(operation)
             }
-        } else if decisionManager.getClientMode() == DecisionManagerClientMode.LOCKDOWN {
-            switch result {
-            case SignatureDatabaseResult.Failed:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: false,
-                                                          cache: false)
 
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "Failed to validate the code signature for '\(message.binaryPath)'. Execution has been denied")
-
-            case SignatureDatabaseResult.Invalid:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: false,
-                                                          cache: false)
-
-                notificationClient.showNotification(message: "Blocked, due to invalid signature: \(message.binaryPath)")
-
-                logger.logMessage(severity: LoggerMessageSeverity.information,
-                                  message: "Invalid code signature for '\(message.binaryPath)'. Execution has been denied")
-
-            case SignatureDatabaseResult.NotSigned:
-                _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                          allow: false,
-                                                          cache: false)
-
-                notificationClient.showNotification(message: "Blocked unsigned application: \(message.binaryPath)")
-
-                logger.logMessage(severity: LoggerMessageSeverity.information,
-                                  message: "The following application is not signed '\(message.binaryPath)'. Execution has been denied")
-
-            case SignatureDatabaseResult.Valid:
-                let operation = AuthorizationManagerOperation(decisionManager: decisionManager,
-                                                              message: message)
-
-                operation.completionBlock = { [unowned operation, message] in
-                    let allow = operation.isAllowed()
-                    let cache = message.platformBinary
-
-                    // This operation can fail if a write notification has invalidated this
-                    // request inside EndpointSecurityClient
-                    if self.endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                                  allow: allow,
-                                                                  cache: cache) {
-                        var actionDescription = allow ? "allowed" : "denied"
-                        actionDescription += cache ? " (cached)" : ""
-
-                        self.logger.logMessage(severity: LoggerMessageSeverity.information,
-                                               message: "The following signed application '\(message.binaryPath)' has been \(actionDescription)")
-
-                        if !allow {
-                            self.notificationClient.showNotification(message: "Blocked signed application: \(message.binaryPath)")
-                        }
-                    }
-                }
-
-                operationQueue.addOperation(operation)
-            }
+            operationQueue.addOperation(operation)
         }
     }
 

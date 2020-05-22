@@ -18,14 +18,9 @@ private enum DefaultAction {
 }
 
 private final class LocalDecisionManager: DecisionManagerInterface {
-    func getClientMode() -> DecisionManagerClientMode {
-        return self.clientMode
-    }
-    
     private let logger: LoggerInterface
     private let configuration: ConfigurationInterface
 
-    private let clientMode: DecisionManagerClientMode
     private let defaultAction: DefaultAction
     private let ruleDatabasePath: String
 
@@ -46,26 +41,6 @@ private final class LocalDecisionManager: DecisionManagerInterface {
             configUpdateIntervalOpt = 60
         }
 
-        if let clientMode = configuration.integerValue(moduleName: "LocalDecisionManager",
-                                                      key: "client_mode") {
-            if clientMode == 1 {
-                self.clientMode = .MONITOR
-            }
-            else if clientMode == 2 {
-                self.clientMode = .LOCKDOWN
-            }
-            else {
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The 'LocalDecisionManager.client_mode' setting is not valid. Allowed values are: 1 (MONITOR) or 2 (LOCKDOWN)")
-
-                throw DecisionManagerError.invalidConfiguration
-            }
-        } else {
-            logger.logMessage(severity: LoggerMessageSeverity.information,
-                              message: "The client_mode setting is missing from the 'LocalDecisionManager' configuration section. Defaulting to MONITOR mode.")
-            self.clientMode = .MONITOR
-        }
-        
         if let ruleDatabasePath = configuration.stringValue(moduleName: "LocalDecisionManager",
                                                             key: "rule_database_path") {
             self.ruleDatabasePath = ruleDatabasePath
