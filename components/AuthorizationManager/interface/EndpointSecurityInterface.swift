@@ -47,6 +47,7 @@ public struct EndpointSecurityExecAuthorization {
     public var codeDirectoryHash: BinaryHash
     public var signingIdentifier: String
     public var teamIdentifier: String
+
     public var platformBinary: Bool
 }
 

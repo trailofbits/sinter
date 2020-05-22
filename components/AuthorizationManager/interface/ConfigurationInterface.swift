@@ -17,4 +17,5 @@ public enum ConfigurationError: Error {
 public protocol ConfigurationInterface {
     func stringValue(moduleName: String, key: String) -> String?
     func integerValue(moduleName: String, key: String) -> Int?
+    func booleanValue(moduleName: String, key: String) -> Bool?
 }

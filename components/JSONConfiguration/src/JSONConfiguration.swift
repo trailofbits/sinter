@@ -63,6 +63,21 @@ private final class JSONConfiguration: ConfigurationInterface {
     public func integerValue(moduleName: String, key: String) -> Int? {
         getValue(moduleName: moduleName, key: key)
     }
+
+    public func booleanValue(moduleName: String, key: String) -> Bool? {
+        if let keyValue = stringValue(moduleName: moduleName, key: key) {
+            if keyValue == "true" {
+                return true
+            } else if keyValue == "false" {
+                return false
+            } else {
+                return nil
+            }
+
+        } else {
+            return nil
+        }
+    }
 }
 
 public func createJSONConfiguration() -> Result<ConfigurationInterface, Error> {

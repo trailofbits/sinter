@@ -12,75 +12,39 @@ import AuthorizationManager
 
 private final class SyncServerDecisionManager: DecisionManagerInterface {
     private let logger: LoggerInterface
-    private let configuration: ConfigurationInterface
+    private let configurationSource: ConfigurationInterface
+    private var configuration: Configuration
 
-    private let serverAddress: String
-    private let machineIdentifier: String
-    private let defaultAllow: Bool
+    private var configUpdateTimer = Timer()
 
-    private var ruleDatabaseUpdateTimer = Timer()
     private var ruleDatabase = RuleDatabase()
 
     private init(logger: LoggerInterface,
-                 configuration: ConfigurationInterface) throws {
+                 configurationSource: ConfigurationInterface) throws {
+
         self.logger = logger
-        self.configuration = configuration
+        self.configurationSource = configurationSource
 
-        var configUpdateIntervalOpt = configuration.integerValue(moduleName: "SyncServerDecisionManager",
-                                                                 key: "update_interval")
-
-        if configUpdateIntervalOpt == nil {
-            configUpdateIntervalOpt = 10
-        }
-
-        if let machineIdentifier = configuration.stringValue(moduleName: "SyncServerDecisionManager",
-                                                             key: "machine_identifier") {
-            self.machineIdentifier = machineIdentifier
-
+        // Make sure that at least the very first configuration succeeds, since we
+        // always revert to the last known good configuration if the the file breaks
+        // later on when we do an update
+        if let configuration = SyncServerDecisionManager.readConfiguration(configurationSource: self.configurationSource,
+                                                                           logger: self.logger) {
+            self.configuration = configuration
         } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'machine_identifier' setting is missing from the 'SyncServerDecisionManager' configuration section")
-
             throw DecisionManagerError.invalidConfiguration
         }
 
-        if let defaultAction = configuration.stringValue(moduleName: "SyncServerDecisionManager",
-                                                         key: "default_action") {
-            if defaultAction == "allow" {
-                defaultAllow = true
+        self.requestRuleDatabaseUpdate()
 
-            } else if defaultAction == "deny" {
-                defaultAllow = false
+        configUpdateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(self.configuration.configurationUpdateInterval()),
+                                                 repeats: true) { _ in
+                                                    if let newConfiguration = SyncServerDecisionManager.readConfiguration(configurationSource: self.configurationSource, logger: self.logger) {
+                                                        self.configuration = newConfiguration
+                                                    }
 
-            } else {
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The 'SyncServerDecisionManager.default_action' setting is not valid. Allowed values are: 'allow', 'deny'")
-
-                throw DecisionManagerError.invalidConfiguration
-            }
-
-        } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'default_action' setting is missing from the 'SyncServerDecisionManager' configuration section")
-
-            throw DecisionManagerError.invalidConfiguration
-        }
-
-        if let serverAddress = configuration.stringValue(moduleName: "SyncServerDecisionManager",
-                                                         key: "server_address") {
-            self.serverAddress = serverAddress
-
-        } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'server_address' setting is missing from the 'SyncServerDecisionManager' configuration section")
-
-            throw DecisionManagerError.invalidConfiguration
-        }
-
-        ruleDatabaseUpdateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(configUpdateIntervalOpt!),
-                                                       repeats: true) { _ in self.requestRuleDatabaseUpdate() }
-
-        ruleDatabaseUpdateTimer.fire()
+                                                    self.requestRuleDatabaseUpdate()
+                                                }
     }
 
     public func processRequest(request: DecisionManagerRequest,
@@ -92,7 +56,7 @@ private final class SyncServerDecisionManager: DecisionManagerInterface {
             allow = rule.policy == RulePolicy.whitelist
 
         } else {
-            allow = defaultAllow
+            allow = self.configuration.unknownProgramsAllowed()
         }
 
         return true
@@ -101,14 +65,48 @@ private final class SyncServerDecisionManager: DecisionManagerInterface {
     static func create(logger: LoggerInterface,
                        configuration: ConfigurationInterface) -> Result<DecisionManagerInterface, Error> {
         Result<DecisionManagerInterface, Error> { try SyncServerDecisionManager(logger: logger,
-                                                                                configuration: configuration) }
+                                                                                configurationSource: configuration) }
+    }
+
+    private static func readConfiguration(configurationSource: ConfigurationInterface,
+                                          logger: LoggerInterface) -> Configuration? {
+
+        do {
+            return try Configuration(configurationSource: configurationSource)
+
+        } catch ConfigurationError.invalidServerAddressKey {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'server_address' key is missing from the SyncServerDecisionManager section")
+
+            return nil
+
+        } catch ConfigurationError.invalidOrMissingAllowUnknownProgramsKey {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'allow_unknown_programs' key is missing from the SyncServerDecisionManager section")
+
+            return nil
+
+        } catch ConfigurationError.invalidMachineIdentifierKey {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'machine_identifier' key is missing from the SyncServerDecisionManager section")
+
+            return nil
+
+        } catch {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                               message: "Unexpected error occurred when attempting to acquire the SyncServerDecisionManager configuration")
+
+            return nil
+        }
     }
 
     private func requestRuleDatabaseUpdate() {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Requesting new rule database from the sync-server...")
 
-        let requestAddress = serverAddress + "/v1/santa/ruledownload/" + machineIdentifier
+        let requestAddress = configuration.serverAddress() +
+                             "/v1/santa/ruledownload/" +
+                             configuration.machineId()
 
         var request = URLRequest(url: URL(string: requestAddress)!)
         request.httpMethod = "POST"

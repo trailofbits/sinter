@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D20F58D92450E4560070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D82450E4560070C21C /* AuthorizationManager.framework */; };
+		D21A3ECC2478261000B5C0D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21A3ECB2478261000B5C0D2 /* Configuration.swift */; };
 		D2513BAA2440D6E300002645 /* SyncServerDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2513BC22440D72100002645 /* SyncServerDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513BC12440D72100002645 /* SyncServerDecisionManager.swift */; };
 		D2513BC42440D73E00002645 /* JSONRuleDatabaseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513BC32440D73E00002645 /* JSONRuleDatabaseParser.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		D20F58D82450E4560070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D21A3ECB2478261000B5C0D2 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D2513BA52440D6E300002645 /* SyncServerDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SyncServerDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyncServerDecisionManager.h; sourceTree = "<group>"; };
 		D2513BA92440D6E300002645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				D2513BA82440D6E300002645 /* SyncServerDecisionManager.h */,
 				D2513BC12440D72100002645 /* SyncServerDecisionManager.swift */,
 				D2513BC32440D73E00002645 /* JSONRuleDatabaseParser.swift */,
+				D21A3ECB2478261000B5C0D2 /* Configuration.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21A3ECC2478261000B5C0D2 /* Configuration.swift in Sources */,
 				D2513BC22440D72100002645 /* SyncServerDecisionManager.swift in Sources */,
 				D2513BC42440D73E00002645 /* JSONRuleDatabaseParser.swift in Sources */,
 			);

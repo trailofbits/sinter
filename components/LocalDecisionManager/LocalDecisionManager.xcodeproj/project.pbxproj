@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A542448B88400958F82 /* NotificationService.framework */; };
+		D21A3ECA2478223C00B5C0D2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21A3EC92478223C00B5C0D2 /* Configuration.swift */; };
 		D2A3A6AE24534AE300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */; };
 		D2BDB3D3244102070027C57F /* LocalDecisionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D2BDB3D1244102070027C57F /* LocalDecisionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */; };
@@ -28,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D21A3EC92478223C00B5C0D2 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D24B4A542448B88400958F82 /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2A3A6AD24534AE300CF24FB /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BDB3CE244102070027C57F /* LocalDecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LocalDecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,7 +45,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2A3A6AE24534AE300CF24FB /* AuthorizationManager.framework in Frameworks */,
-				D24B4A552448B88400958F82 /* NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +72,7 @@
 		D2BDB3D0244102070027C57F /* src */ = {
 			isa = PBXGroup;
 			children = (
+				D21A3EC92478223C00B5C0D2 /* Configuration.swift */,
 				D2BDB3D1244102070027C57F /* LocalDecisionManager.h */,
 				D2BDB3E62441021D0027C57F /* LocalDecisionManager.swift */,
 				D2BDB3ED244104F00027C57F /* JSONRuleDatabaseParser.swift */,
@@ -170,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21A3ECA2478223C00B5C0D2 /* Configuration.swift in Sources */,
 				D2BDB3E72441021D0027C57F /* LocalDecisionManager.swift in Sources */,
 				D2BDB3EE244104F00027C57F /* JSONRuleDatabaseParser.swift in Sources */,
 			);

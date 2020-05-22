@@ -9,78 +9,42 @@
 import Foundation
 
 import AuthorizationManager
-import NotificationService
-
-private enum DefaultAction {
-    case allow
-    case deny
-    case userPrompt
-}
 
 private final class LocalDecisionManager: DecisionManagerInterface {
     private let logger: LoggerInterface
-    private let configuration: ConfigurationInterface
+    private let configurationSource: ConfigurationInterface
+    private var configuration: Configuration
 
-    private let defaultAction: DefaultAction
-    private let ruleDatabasePath: String
+    private var configUpdateTimer = Timer()
 
     private var ruleDatabase = RuleDatabase()
-    private var ruleDatabaseUpdateTimer = Timer()
-
-    private let notificationClient = createNotificationClient()
 
     private init(logger: LoggerInterface,
-                 configuration: ConfigurationInterface) throws {
+                 configurationSource: ConfigurationInterface) throws {
+
         self.logger = logger
-        self.configuration = configuration
+        self.configurationSource = configurationSource
 
-        var configUpdateIntervalOpt = configuration.integerValue(moduleName: "LocalDecisionManager",
-                                                                 key: "update_interval")
-
-        if configUpdateIntervalOpt == nil {
-            configUpdateIntervalOpt = 60
-        }
-
-        if let ruleDatabasePath = configuration.stringValue(moduleName: "LocalDecisionManager",
-                                                            key: "rule_database_path") {
-            self.ruleDatabasePath = ruleDatabasePath
-
+        // Make sure that at least the very first configuration succeeds, since we
+        // always revert to the last known good configuration if the the file breaks
+        // later on when we do an update
+        if let configuration = LocalDecisionManager.readConfiguration(configurationSource: self.configurationSource,
+                                                                      logger: self.logger) {
+            self.configuration = configuration
         } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'rule_database_path' setting is missing from the 'LocalDecisionManager' configuration section")
-
             throw DecisionManagerError.invalidConfiguration
         }
 
-        if let defaultAction = configuration.stringValue(moduleName: "LocalDecisionManager",
-                                                         key: "default_action") {
-            if defaultAction == "allow" {
-                self.defaultAction = DefaultAction.allow
+        self.updateRuleDatabase()
 
-            } else if defaultAction == "deny" {
-                self.defaultAction = DefaultAction.deny
+        configUpdateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(self.configuration.configurationUpdateInterval()),
+                                                 repeats: true) { _ in
+                                                    if let newConfiguration = LocalDecisionManager.readConfiguration(configurationSource: self.configurationSource, logger: self.logger) {
+                                                        self.configuration = newConfiguration
+                                                    }
 
-            } else if defaultAction == "userPrompt" {
-                self.defaultAction = DefaultAction.userPrompt
-
-            } else {
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The 'LocalDecisionManager.default_action' setting is not valid. Allowed values are: 'allow', 'deny', 'userPrompt'")
-
-                throw DecisionManagerError.invalidConfiguration
-            }
-
-        } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'default_action' setting is missing from the 'LocalDecisionManager' configuration section")
-
-            throw DecisionManagerError.invalidConfiguration
-        }
-
-        ruleDatabaseUpdateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(configUpdateIntervalOpt!),
-                                                       repeats: true) { _ in self.updateRuleDatabase() }
-
-        ruleDatabaseUpdateTimer.fire()
+                                                    self.updateRuleDatabase()
+                                                }
     }
 
     public func processRequest(request: DecisionManagerRequest,
@@ -92,18 +56,7 @@ private final class LocalDecisionManager: DecisionManagerInterface {
             allow = rule.policy == RulePolicy.whitelist
 
         } else {
-            switch defaultAction {
-            case .allow:
-                allow = true
-
-            case .deny:
-                allow = false
-
-            case .userPrompt:
-                notificationClient.requestAuthorization(binaryPath: request.binaryPath,
-                                                        hash: request.codeDirectoryHash.hash,
-                                                        allowExecution: &allow)
-            }
+            allow = self.configuration.unknownProgramsAllowed()
         }
 
         return true
@@ -112,17 +65,45 @@ private final class LocalDecisionManager: DecisionManagerInterface {
     static func create(logger: LoggerInterface,
                        configuration: ConfigurationInterface) -> Result<DecisionManagerInterface, Error> {
         Result<DecisionManagerInterface, Error> { try LocalDecisionManager(logger: logger,
-                                                                           configuration: configuration) }
+                                                                           configurationSource: configuration) }
+    }
+
+    private static func readConfiguration(configurationSource: ConfigurationInterface,
+                                          logger: LoggerInterface) -> Configuration? {
+
+        do {
+            return try Configuration(configurationSource: configurationSource)
+
+        } catch ConfigurationError.invalidRuleDatabasePathKey {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'rule_database_path' key is missing from the LocalDecisionManager section")
+
+            return nil
+
+        } catch ConfigurationError.invalidOrMissingAllowUnknownProgramsKey {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'allow_unknown_programs' key is missing from the LocalDecisionManager section")
+
+            return nil
+
+        } catch {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                               message: "Unexpected error occurred when attempting to acquire the LocalDecisionManager configuration")
+
+            return nil
+        }
     }
 
     private func updateRuleDatabase() {
+        let ruleDatabasePath = self.configuration.databasePath()
+
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Updating rule database from \(ruleDatabasePath)...")
 
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: ruleDatabasePath) {
             logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The rule database file file does not exist")
+                              message: "The rule database file does not exist")
 
             return
         }
