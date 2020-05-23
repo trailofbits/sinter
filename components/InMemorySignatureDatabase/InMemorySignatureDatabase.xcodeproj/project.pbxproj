@@ -11,6 +11,7 @@
 		D2513B792440BE7100002645 /* InMemorySignatureDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = D2513B772440BE7100002645 /* InMemorySignatureDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2513B942440BF2400002645 /* InMemorySignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513B932440BF2400002645 /* InMemorySignatureDatabase.swift */; };
 		D2513B962440BFA000002645 /* CodeSignatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2513B952440BFA000002645 /* CodeSignatureChecker.swift */; };
+		D255881B247950DB00AD4072 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255881A247950DB00AD4072 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		D2513B862440BE7E00002645 /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513B932440BF2400002645 /* InMemorySignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySignatureDatabase.swift; sourceTree = "<group>"; };
 		D2513B952440BFA000002645 /* CodeSignatureChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSignatureChecker.swift; sourceTree = "<group>"; };
+		D255881A247950DB00AD4072 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				D2513B772440BE7100002645 /* InMemorySignatureDatabase.h */,
 				D2513B932440BF2400002645 /* InMemorySignatureDatabase.swift */,
 				D2513B952440BFA000002645 /* CodeSignatureChecker.swift */,
+				D255881A247950DB00AD4072 /* Utilities.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D255881B247950DB00AD4072 /* Utilities.swift in Sources */,
 				D2513B942440BF2400002645 /* InMemorySignatureDatabase.swift in Sources */,
 				D2513B962440BFA000002645 /* CodeSignatureChecker.swift in Sources */,
 			);

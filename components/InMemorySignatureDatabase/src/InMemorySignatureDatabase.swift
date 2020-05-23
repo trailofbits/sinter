@@ -10,17 +10,19 @@ import Foundation
 
 import AuthorizationManager
 
+let fileSizeLimit: Int = (1024 * 1024) * 10
+
 private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
-    private let operationQueue = OperationQueue()
+    private let primaryOperationQueue: OperationQueue
+    private let secondaryOperationQueue: OperationQueue
+
     private let dispatchQueue = DispatchQueue(label: "")
     private var operationMap = [String: SignatureDatabaseOperation]()
     private var resultCache = [String: SignatureDatabaseResult]()
 
     private init() throws {
-        // Initialize the operation queue according to the online processor count
-        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
-        operationQueue.maxConcurrentOperationCount = onlineProcessorCount
-        operationQueue.qualityOfService = .userInteractive
+        primaryOperationQueue = createOperationQueue(type: OperationQueueType.primary)
+        secondaryOperationQueue = createOperationQueue(type: OperationQueueType.secondary)
     }
 
     static func create() -> Result<SignatureDatabaseInterface, Error> {
@@ -29,16 +31,26 @@ private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
 
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
                                   block: @escaping SignatureDatabaseCallback) {
+        var queueTypeOpt: OperationQueueType? = nil
+        if let fileInformation = getFileInformation(path: message.binaryPath) {
+            // TODO: Check file permissions
+            if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
+                queueTypeOpt = OperationQueueType.primary
+            } else {
+                queueTypeOpt = OperationQueueType.secondary
+            }
+        }
+
         dispatchQueue.sync {
-            var cachedResultOpt: SignatureDatabaseResult?
-            if message.codeDirectoryHash.hash.isEmpty {
+            if queueTypeOpt == nil {
+                resultCache[message.binaryPath] = SignatureDatabaseResult.Invalid
+                queueTypeOpt = OperationQueueType.secondary
+
+            } else if message.codeDirectoryHash.hash.isEmpty {
                 resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
             }
 
-            if let cachedResult = resultCache[message.binaryPath] {
-                cachedResultOpt = cachedResult
-            }
-
+            let cachedResultOpt = resultCache[message.binaryPath]
             let operation = SignatureDatabaseOperation(path: message.binaryPath,
                                                        cachedResultOpt: cachedResultOpt)
 
@@ -56,8 +68,14 @@ private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
                 operation.addDependency(parentOperationOpt!)
             }
 
-            self.operationQueue.addOperation(operation)
             self.operationMap[message.binaryPath] = operation
+
+            switch (queueTypeOpt!) {
+            case .primary:
+                self.primaryOperationQueue.addOperation(operation)
+            case .secondary:
+                self.secondaryOperationQueue.addOperation(operation)
+            }
         }
     }
 
@@ -146,3 +164,4 @@ private final class SignatureDatabaseOperation: Operation {
         result
     }
 }
+
