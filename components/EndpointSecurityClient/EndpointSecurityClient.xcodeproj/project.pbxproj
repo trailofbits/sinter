@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; };
 		D2513B602440739200002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B5F2440738C00002645 /* libbsm.tbd */; };
+		D255881D247960DD00AD4072 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D255881C247960DD00AD4072 /* Configuration.swift */; };
 		D257850A243F77DC0020BC32 /* EndpointSecurityClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578523243F78580020BC32 /* EndpointSecurityClient.swift */; };
 		D2578528243F7CA00020BC32 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578527243F7CA00020BC32 /* Utility.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		D20F58E02450E4740070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2513B5F2440738C00002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
+		D255881C247960DD00AD4072 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		D2578505243F77DC0020BC32 /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndpointSecurityClient.h; sourceTree = "<group>"; };
 		D2578509243F77DC0020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */,
 				D2578523243F78580020BC32 /* EndpointSecurityClient.swift */,
 				D2578527243F7CA00020BC32 /* Utility.swift */,
+				D255881C247960DD00AD4072 /* Configuration.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D255881D247960DD00AD4072 /* Configuration.swift in Sources */,
 				D2578528243F7CA00020BC32 /* Utility.swift in Sources */,
 				D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */,
 			);

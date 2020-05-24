@@ -11,17 +11,15 @@ import Foundation
 import AuthorizationManager
 
 public enum ConfigurationError: Error {
-    case invalidRuleDatabasePathKey
-    case invalidOrMissingAllowUnknownProgramsKey
+    case invalidAllowUnsignedPrograms
 }
 
 public final class Configuration {
-    private let allowUnknownPrograms: Bool
-    private let ruleDatabasePath: String
+    private let allowUnsignedPrograms: Bool
     private let updateInterval: Int
 
     public init(configurationSource: ConfigurationInterface) throws {
-        if let updateInterval = configurationSource.integerValue(moduleName: "LocalDecisionManager",
+        if let updateInterval = configurationSource.integerValue(moduleName: "EndpointSecurityClient",
                                                                  key: "update_interval") {
 
             self.updateInterval = updateInterval
@@ -29,29 +27,17 @@ public final class Configuration {
             self.updateInterval = 60
         }
 
-        if let ruleDatabasePath = configurationSource.stringValue(moduleName: "LocalDecisionManager",
-                                                                  key: "rule_database_path") {
-            self.ruleDatabasePath = ruleDatabasePath
+        if let allowUnsignedPrograms = configurationSource.booleanValue(moduleName: "EndpointSecurityClient",
+                                                                        key: "allow_unsigned") {
+            self.allowUnsignedPrograms = allowUnsignedPrograms
 
         } else {
-            throw ConfigurationError.invalidRuleDatabasePathKey
-        }
-
-        if let allowUnknownPrograms = configurationSource.booleanValue(moduleName: "LocalDecisionManager",
-                                                                       key: "allow_unknown_programs") {
-            self.allowUnknownPrograms = allowUnknownPrograms
-
-        } else {
-            throw ConfigurationError.invalidOrMissingAllowUnknownProgramsKey
+            throw ConfigurationError.invalidAllowUnsignedPrograms
         }
     }
 
-    public func unknownProgramsAllowed() -> Bool {
-      return allowUnknownPrograms
-    }
-
-    public func databasePath() -> String {
-      return ruleDatabasePath
+    public func unsignedProgramsAllowed() -> Bool {
+      return allowUnsignedPrograms
     }
 
     public func configurationUpdateInterval() -> Int {

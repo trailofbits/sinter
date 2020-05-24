@@ -164,4 +164,3 @@ private final class SignatureDatabaseOperation: Operation {
         result
     }
 }
-
