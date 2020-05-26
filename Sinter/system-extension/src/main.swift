@@ -10,18 +10,20 @@ import Dispatch
 import Foundation
 
 import EndpointSecurityClient
-import FilesystemLogger
+import Logger
 import InMemorySignatureDatabase
-import JSONConfiguration
+import Configuration
 import AuthorizationManager
 import LocalDecisionManager
 import SyncServerDecisionManager
 
 var configuration: ConfigurationInterface
-var logger: LoggerInterface
 var signatureDatabase: SignatureDatabaseInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
+
+// Initialize the logger
+let logger = createFilesystemLogger()
 
 // Initialize the configuration
 let configurationExp = createJSONConfiguration()
@@ -34,16 +36,9 @@ case let .failure(error):
     exit(EXIT_FAILURE)
 }
 
-// Initialize the logger
-let loggerExp = createFilesystemLogger(configuration: configuration)
-switch loggerExp {
-case let .success(obj):
-    logger = obj
-
-case let .failure(error):
-    print("Failed to create the FilesytemLogger object: \(error)")
-    exit(EXIT_FAILURE)
-}
+// The logger has been using stdout/stderr so far; pass the
+// new configuration object we just created
+logger.setConfiguration(configuration: configuration)
 
 // Initialize the SignatureDatabase
 let signatureDatabaseExp = createInMemorySignatureDatabase()
@@ -60,7 +55,7 @@ case let .failure(error):
 var decisionManagerExp: Result<DecisionManagerInterface, Error>
 
 // Initialize the decision manager
-if let decisionManagerPluginName = configuration.stringValue(moduleName: "Sinter", key: "decision_manager") {
+if let decisionManagerPluginName = configuration.stringValue(section: "Sinter", key: "decision_manager") {
     if decisionManagerPluginName == "sync-server" {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Initializing the sync-server decision manager plugin")

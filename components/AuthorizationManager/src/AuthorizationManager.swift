@@ -8,6 +8,8 @@
 
 import Foundation
 import NotificationService
+import Configuration
+import Logger
 
 private final class AuthorizationManager: AuthorizationManagerInterface {
     let configuration: ConfigurationInterface

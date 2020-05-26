@@ -7,6 +7,7 @@
  */
 
 import Foundation
+import Logger
 
 public enum EndpointSecurityError: Error {
     case unknownError

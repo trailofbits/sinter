@@ -9,6 +9,7 @@
 import Foundation
 
 import AuthorizationManager
+import Configuration
 
 public enum ConfigurationError: Error {
     case invalidOrMissingAllowUnknownProgramsKey
@@ -23,7 +24,7 @@ public final class Configuration {
     private let updateInterval: Int
 
     public init(configurationSource: ConfigurationInterface) throws {
-        if let allowUnknownPrograms = configurationSource.booleanValue(moduleName: "SyncServerDecisionManager",
+        if let allowUnknownPrograms = configurationSource.booleanValue(section: "SyncServerDecisionManager",
                                                                        key: "allow_unknown_programs") {
             self.allowUnknownPrograms = allowUnknownPrograms
 
@@ -31,7 +32,7 @@ public final class Configuration {
             throw ConfigurationError.invalidOrMissingAllowUnknownProgramsKey
         }
 
-        if let serverURL = configurationSource.stringValue(moduleName: "SyncServerDecisionManager",
+        if let serverURL = configurationSource.stringValue(section: "SyncServerDecisionManager",
                                                            key: "server_address") {
             self.serverURL = serverURL
 
@@ -39,7 +40,7 @@ public final class Configuration {
             throw ConfigurationError.invalidServerAddressKey
         }
 
-        if let machineIdentifier = configurationSource.stringValue(moduleName: "SyncServerDecisionManager",
+        if let machineIdentifier = configurationSource.stringValue(section: "SyncServerDecisionManager",
                                                                    key: "machine_identifier") {
             self.machineIdentifier = machineIdentifier
 
@@ -47,7 +48,7 @@ public final class Configuration {
             throw ConfigurationError.invalidMachineIdentifierKey
         }
 
-        if let updateInterval = configurationSource.integerValue(moduleName: "SyncServerDecisionManager",
+        if let updateInterval = configurationSource.integerValue(section: "SyncServerDecisionManager",
                                                                  key: "update_interval") {
 
             self.updateInterval = updateInterval

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-import JSONConfiguration
+import Configuration
 import AuthorizationManager
 
 // Do not start if the path is not right; system extensions can't even be

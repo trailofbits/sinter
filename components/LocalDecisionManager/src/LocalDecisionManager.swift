@@ -9,6 +9,8 @@
 import Foundation
 
 import AuthorizationManager
+import Logger
+import Configuration
 
 private final class LocalDecisionManager: DecisionManagerInterface {
     private let logger: LoggerInterface

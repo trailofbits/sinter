@@ -9,6 +9,7 @@
 import Foundation
 
 import AuthorizationManager
+import Configuration
 
 public enum ConfigurationError: Error {
     case invalidAllowUnsignedPrograms
@@ -19,7 +20,7 @@ public final class Configuration {
     private let updateInterval: Int
 
     public init(configurationSource: ConfigurationInterface) throws {
-        if let updateInterval = configurationSource.integerValue(moduleName: "EndpointSecurityClient",
+        if let updateInterval = configurationSource.integerValue(section: "EndpointSecurityClient",
                                                                  key: "update_interval") {
 
             self.updateInterval = updateInterval
@@ -27,7 +28,7 @@ public final class Configuration {
             self.updateInterval = 60
         }
 
-        if let allowUnsignedPrograms = configurationSource.booleanValue(moduleName: "EndpointSecurityClient",
+        if let allowUnsignedPrograms = configurationSource.booleanValue(section: "EndpointSecurityClient",
                                                                         key: "allow_unsigned") {
             self.allowUnsignedPrograms = allowUnsignedPrograms
 

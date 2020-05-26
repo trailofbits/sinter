@@ -10,6 +10,7 @@ import EndpointSecurity
 import Foundation
 
 import AuthorizationManager
+import Logger
 
 private let eventExpirationTime: Double = 10
 
