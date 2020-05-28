@@ -8,6 +8,7 @@
 
 import Logger
 import Configuration
+import EndpointSecurityClient
 
 public enum DecisionManagerError: Error {
     case unknownError
@@ -21,22 +22,25 @@ public enum BinaryHashType {
     case truncatedSha256
 }
 
-public struct BinaryHash {
-    public init(type: BinaryHashType, hash: String) {
-        self.type = type
-        self.hash = hash
-    }
-
-    public var type: BinaryHashType
-    public var hash: String
-}
-
 public struct DecisionManagerRequest {
     public var binaryPath: String
     public var codeDirectoryHash: BinaryHash
     public var signingIdentifier: String
     public var teamIdentifier: String
     public var platformBinary: Bool
+
+    public init(binaryPath: String,
+                codeDirectoryHash: BinaryHash,
+                signingIdentifier: String,
+                teamIdentifier: String,
+                platformBinary: Bool) {
+
+        self.binaryPath = binaryPath
+        self.codeDirectoryHash = codeDirectoryHash
+        self.signingIdentifier = signingIdentifier
+        self.teamIdentifier = teamIdentifier
+        self.platformBinary = platformBinary
+    }
 }
 
 public protocol DecisionManagerInterface {

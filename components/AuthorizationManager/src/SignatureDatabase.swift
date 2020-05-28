@@ -7,12 +7,20 @@
  */
 
 import Foundation
+import EndpointSecurityClient
 
-import AuthorizationManager
+fileprivate let fileSizeLimit: Int = (1024 * 1024) * 10
 
-let fileSizeLimit: Int = (1024 * 1024) * 10
+public enum SignatureDatabaseResult {
+    case Valid
+    case Invalid
+    case NotSigned
+    case Failed
+}
 
-private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
+public typealias SignatureDatabaseCallback = (EndpointSecurityExecAuthorization, SignatureDatabaseResult) -> Void
+
+final class SignatureDatabase {
     private let primaryOperationQueue: OperationQueue
     private let secondaryOperationQueue: OperationQueue
 
@@ -20,17 +28,14 @@ private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
     private var operationMap = [String: SignatureDatabaseOperation]()
     private var resultCache = [String: SignatureDatabaseResult]()
 
-    private init() throws {
+    init() {
         primaryOperationQueue = createOperationQueue(type: OperationQueueType.primary)
         secondaryOperationQueue = createOperationQueue(type: OperationQueueType.secondary)
     }
 
-    static func create() -> Result<SignatureDatabaseInterface, Error> {
-        Result<SignatureDatabaseInterface, Error> { try InMemorySignatureDatabase() }
-    }
-
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
                                   block: @escaping SignatureDatabaseCallback) {
+
         var queueTypeOpt: OperationQueueType? = nil
         if let fileInformation = getFileInformation(path: message.binaryPath) {
             // TODO: Check file permissions
@@ -109,10 +114,6 @@ private final class InMemorySignatureDatabase: SignatureDatabaseInterface {
             resultCache.removeAll()
         }
     }
-}
-
-public func createInMemorySignatureDatabase() -> Result<SignatureDatabaseInterface, Error> {
-    InMemorySignatureDatabase.create()
 }
 
 private final class SignatureDatabaseOperation: Operation {

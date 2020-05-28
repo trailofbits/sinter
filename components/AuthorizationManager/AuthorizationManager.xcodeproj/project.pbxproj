@@ -9,27 +9,47 @@
 /* Begin PBXBuildFile section */
 		D20F58B22450E1E40070C21C /* AuthorizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D20F58B02450E1E40070C21C /* AuthorizationManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D20F58C02450E20A0070C21C /* AuthorizationManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */; };
-		D20F58C22450E2190070C21C /* EndpointSecurityInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */; };
-		D20F58C42450E2260070C21C /* DecisionManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */; };
-		D20F58CA2450E2430070C21C /* BinaryHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58C92450E2430070C21C /* BinaryHash.swift */; };
-		D20F58CC2450E24F0070C21C /* SignatureDatabaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */; };
 		D20F58CE2450E2640070C21C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58CD2450E2640070C21C /* AuthorizationManager.swift */; };
-		D20F58D52450E4300070C21C /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58D42450E4300070C21C /* NotificationService.framework */; };
-		D248E48C247D431F002B9FBE /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E48B247D431F002B9FBE /* Logger.framework */; };
+		D295BFE42480013400CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFDF2480013400CBE00A /* Configuration.framework */; };
+		D295BFE62480013400CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFE02480013400CBE00A /* DecisionManager.framework */; };
+		D295BFE82480013400CBE00A /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFE12480013400CBE00A /* EndpointSecurityClient.framework */; };
+		D295BFEC2480013400CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E48B247D431F002B9FBE /* Logger.framework */; };
+		D295BFEE2480013400CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFE32480013400CBE00A /* NotificationService.framework */; };
+		D295BFF22480018300CBE00A /* FilesystemUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFF12480018300CBE00A /* FilesystemUtilities.swift */; };
+		D295BFF42480019200CBE00A /* CodeSignatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFF32480019200CBE00A /* CodeSignatureChecker.swift */; };
+		D295BFF6248001A000CBE00A /* SignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFF5248001A000CBE00A /* SignatureDatabase.swift */; };
+		D295C00E24800BC200CBE00A /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */; };
+		D295C01624800C8000CBE00A /* AuthorizationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D295C00F24800BC200CBE00A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D20F58A42450E1E30070C21C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F58AC2450E1E40070C21C;
+			remoteInfo = AuthorizationManager;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F58B02450E1E40070C21C /* AuthorizationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthorizationManager.h; sourceTree = "<group>"; };
 		D20F58B12450E1E40070C21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerInterface.swift; sourceTree = "<group>"; };
-		D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityInterface.swift; sourceTree = "<group>"; };
-		D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionManagerInterface.swift; sourceTree = "<group>"; };
-		D20F58C92450E2430070C21C /* BinaryHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryHash.swift; sourceTree = "<group>"; };
-		D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseInterface.swift; sourceTree = "<group>"; };
 		D20F58CD2450E2640070C21C /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		D20F58D42450E4300070C21C /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D248E48B247D431F002B9FBE /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFDF2480013400CBE00A /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFE02480013400CBE00A /* DecisionManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DecisionManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFE12480013400CBE00A /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFE22480013400CBE00A /* InMemorySignatureDatabase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InMemorySignatureDatabase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFE32480013400CBE00A /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFF12480018300CBE00A /* FilesystemUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesystemUtilities.swift; sourceTree = "<group>"; };
+		D295BFF32480019200CBE00A /* CodeSignatureChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSignatureChecker.swift; sourceTree = "<group>"; };
+		D295BFF5248001A000CBE00A /* SignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabase.swift; sourceTree = "<group>"; };
+		D295C00924800BC200CBE00A /* AuthorizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthorizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,8 +57,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D248E48C247D431F002B9FBE /* Logger.framework in Frameworks */,
-				D20F58D52450E4300070C21C /* NotificationService.framework in Frameworks */,
+				D295BFE62480013400CBE00A /* DecisionManager.framework in Frameworks */,
+				D295BFE42480013400CBE00A /* Configuration.framework in Frameworks */,
+				D295BFEE2480013400CBE00A /* NotificationService.framework in Frameworks */,
+				D295BFE82480013400CBE00A /* EndpointSecurityClient.framework in Frameworks */,
+				D295BFEC2480013400CBE00A /* Logger.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C00624800BC200CBE00A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D295C00E24800BC200CBE00A /* AuthorizationManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +82,7 @@
 				D20F58B12450E1E40070C21C /* Info.plist */,
 				D20F58BE2450E1F90070C21C /* interface */,
 				D20F58AF2450E1E40070C21C /* src */,
+				D295C01424800C6700CBE00A /* tests */,
 				D20F58AE2450E1E40070C21C /* Products */,
 				D20F58D32450E4300070C21C /* Frameworks */,
 			);
@@ -60,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */,
+				D295C00924800BC200CBE00A /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -69,6 +102,9 @@
 			children = (
 				D20F58B02450E1E40070C21C /* AuthorizationManager.h */,
 				D20F58CD2450E2640070C21C /* AuthorizationManager.swift */,
+				D295BFF12480018300CBE00A /* FilesystemUtilities.swift */,
+				D295BFF32480019200CBE00A /* CodeSignatureChecker.swift */,
+				D295BFF5248001A000CBE00A /* SignatureDatabase.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -77,10 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				D20F58BF2450E20A0070C21C /* AuthorizationManagerInterface.swift */,
-				D20F58C12450E2190070C21C /* EndpointSecurityInterface.swift */,
-				D20F58C32450E2260070C21C /* DecisionManagerInterface.swift */,
-				D20F58C92450E2430070C21C /* BinaryHash.swift */,
-				D20F58CB2450E24F0070C21C /* SignatureDatabaseInterface.swift */,
 			);
 			path = interface;
 			sourceTree = "<group>";
@@ -88,10 +120,23 @@
 		D20F58D32450E4300070C21C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D295BFDF2480013400CBE00A /* Configuration.framework */,
+				D295BFE02480013400CBE00A /* DecisionManager.framework */,
+				D295BFE12480013400CBE00A /* EndpointSecurityClient.framework */,
+				D295BFE22480013400CBE00A /* InMemorySignatureDatabase.framework */,
+				D295BFE32480013400CBE00A /* NotificationService.framework */,
 				D248E48B247D431F002B9FBE /* Logger.framework */,
 				D20F58D42450E4300070C21C /* NotificationService.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D295C01424800C6700CBE00A /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,18 +171,40 @@
 			productReference = D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D295C00824800BC200CBE00A /* AuthorizationManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D295C01124800BC200CBE00A /* Build configuration list for PBXNativeTarget "AuthorizationManagerTests" */;
+			buildPhases = (
+				D295C00524800BC200CBE00A /* Sources */,
+				D295C00624800BC200CBE00A /* Frameworks */,
+				D295C00724800BC200CBE00A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D295C01024800BC200CBE00A /* PBXTargetDependency */,
+			);
+			name = AuthorizationManagerTests;
+			productName = AuthorizationManagerTests;
+			productReference = D295C00924800BC200CBE00A /* AuthorizationManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D20F58A42450E1E30070C21C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
 					D20F58AC2450E1E40070C21C = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1140;
+					};
+					D295C00824800BC200CBE00A = {
+						CreatedOnToolsVersion = 11.5;
 					};
 				};
 			};
@@ -155,12 +222,20 @@
 			projectRoot = "";
 			targets = (
 				D20F58AC2450E1E40070C21C /* AuthorizationManager */,
+				D295C00824800BC200CBE00A /* AuthorizationManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D20F58AB2450E1E40070C21C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C00724800BC200CBE00A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -174,16 +249,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20F58C42450E2260070C21C /* DecisionManagerInterface.swift in Sources */,
 				D20F58CE2450E2640070C21C /* AuthorizationManager.swift in Sources */,
-				D20F58C22450E2190070C21C /* EndpointSecurityInterface.swift in Sources */,
-				D20F58CA2450E2430070C21C /* BinaryHash.swift in Sources */,
+				D295BFF22480018300CBE00A /* FilesystemUtilities.swift in Sources */,
+				D295BFF6248001A000CBE00A /* SignatureDatabase.swift in Sources */,
 				D20F58C02450E20A0070C21C /* AuthorizationManagerInterface.swift in Sources */,
-				D20F58CC2450E24F0070C21C /* SignatureDatabaseInterface.swift in Sources */,
+				D295BFF42480019200CBE00A /* CodeSignatureChecker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C00524800BC200CBE00A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D295C01624800C8000CBE00A /* AuthorizationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D295C01024800BC200CBE00A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D20F58AC2450E1E40070C21C /* AuthorizationManager */;
+			targetProxy = D295C00F24800BC200CBE00A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D20F58B32450E1E40070C21C /* Debug */ = {
@@ -356,6 +446,42 @@
 			};
 			name = Release;
 		};
+		D295C01224800BC200CBE00A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.authorizattion-manager-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D295C01324800BC200CBE00A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.authorizattion-manager-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -373,6 +499,15 @@
 			buildConfigurations = (
 				D20F58B62450E1E40070C21C /* Debug */,
 				D20F58B72450E1E40070C21C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D295C01124800BC200CBE00A /* Build configuration list for PBXNativeTarget "AuthorizationManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D295C01224800BC200CBE00A /* Debug */,
+				D295C01324800BC200CBE00A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

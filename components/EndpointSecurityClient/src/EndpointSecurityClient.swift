@@ -8,6 +8,7 @@
 
 import EndpointSecurity
 import Logger
+import Configuration
 
 private let eventExpirationTime: Double = 10
 
@@ -21,11 +22,12 @@ struct MessageMapEntry {
 typealias MessageMap = [Int64: MessageMapEntry]
 
 struct EndpointSecurityClientContext {
+    public var allowUnsignedPrograms = false
     public var authorizationMessageMap = MessageMap()
     public var cachedPathList = Set<String>()
 }
 
-final class EndpointSecurityClient: EndpointSecurityInterface {
+final class EndpointSecurityClient: EndpointSecurityInterface, ConfigurationSubscriberInterface {
     private var context = EndpointSecurityClientContext()
 
     private let api: EndpointSecurityAPIInterface
@@ -34,11 +36,14 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
     private var eventExpirationTimer = Timer()
 
     private init(api: EndpointSecurityAPIInterface,
+                 configuration: ConfigurationInterface,
                  logger: LoggerInterface,
                  callback: @escaping EndpointSecurityCallback) throws {
 
         self.api = api
         self.logger = logger
+        
+        configuration.subscribe(subscriber: self)
 
         let clientErr = api.newClient(client: &esClientOpt) { _, unsafeMessagePtr in
             self.endpointSecurityCallback(unsafeMessagePtr: unsafeMessagePtr,
@@ -93,12 +98,20 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
     }
 
     static func create(api: EndpointSecurityAPIInterface,
+                       configuration: ConfigurationInterface,
                        logger: LoggerInterface,
                        callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
 
         Result<EndpointSecurityInterface, Error> { try EndpointSecurityClient(api: api,
+                                                                              configuration: configuration,
                                                                               logger: logger,
                                                                               callback: callback) }
+    }
+
+    func onConfigurationChange(configuration: ConfigurationInterface) {
+        EndpointSecurityClient.readConfiguration(context: &context,
+                                                 configuration: configuration,
+                                                 logger: logger)
     }
 
     public func setAuthorization(identifier: Int64, allow: Bool, cache: Bool) -> Bool {
@@ -133,6 +146,20 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
     private func onExecEvent(unsafeMessagePtr: UnsafePointer<es_message_t>,
                              callback: @escaping EndpointSecurityCallback) {
 
+        // Reject unsigned programs if they are not allowed
+        let target = unsafeMessagePtr.pointee.event.exec.target.pointee
+        let signingIdentifier = getProcessSigningId(process: target)
+
+        if signingIdentifier.isEmpty && !context.allowUnsignedPrograms {
+            _ = api.respondAuthResult(client: esClientOpt!,
+                                      message: unsafeMessagePtr,
+                                      result: ES_AUTH_RESULT_DENY,
+                                      cache: true)
+            
+            return
+        }
+
+        // Copy the message and save it, so we can respond to it later
         let unsafeMsgPtrCopyOpt = es_copy_message(unsafeMessagePtr)
         if unsafeMsgPtrCopyOpt == nil {
             _ = api.respondAuthResult(client: esClientOpt!,
@@ -146,31 +173,31 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
             return
         }
 
-       if var message = parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee) {
-           message.identifier = identifierGenerator.generate()
+        if var message = parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee) {
+            message.identifier = identifierGenerator.generate()
 
-           atomic {
-               let timestamp = NSDate().timeIntervalSince1970
-               let messageMapEntry = MessageMapEntry(key: message.identifier,
-                                                     timestamp: timestamp,
-                                                     binaryPath: message.binaryPath,
-                                                     unsafeMessagePtr: unsafeMsgPtrCopyOpt!)
+            atomic {
+                let timestamp = NSDate().timeIntervalSince1970
+                let messageMapEntry = MessageMapEntry(key: message.identifier,
+                                                      timestamp: timestamp,
+                                                      binaryPath: message.binaryPath,
+                                                      unsafeMessagePtr: unsafeMsgPtrCopyOpt!)
 
-               context.authorizationMessageMap[message.identifier] = messageMapEntry
-               callback(EndpointSecurityMessage.ExecAuthorization(message))
-           }
+                context.authorizationMessageMap[message.identifier] = messageMapEntry
+                callback(EndpointSecurityMessage.ExecAuthorization(message))
+            }
 
-       } else {
-           _ = api.respondAuthResult(client: esClientOpt!,
+        } else {
+            _ = api.respondAuthResult(client: esClientOpt!,
                                      message: unsafeMsgPtrCopyOpt!,
                                      result: ES_AUTH_RESULT_DENY,
                                      cache: false)
 
-           _ = api.freeMessage(msg: unsafeMsgPtrCopyOpt!)
+            _ = api.freeMessage(msg: unsafeMsgPtrCopyOpt!)
 
-           logger.logMessage(severity: .error,
-                             message: "Failed to parse the es_message_t object. Denying execution")
-       }
+            logger.logMessage(severity: .error,
+                              message: "Failed to parse the es_message_t object. Denying execution")
+        }
     }
 
     private func onFileChangeEvent(unsafeMessagePtr: UnsafePointer<es_message_t>,
@@ -263,6 +290,24 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
             logger.logMessage(severity: .error,
                               message: "Invalid/unsupported event received in the EndpointSecurityClient read callback")
         }
+    }
+
+    static func readConfiguration(context: inout EndpointSecurityClientContext,
+                                  configuration: ConfigurationInterface,
+                                  logger: LoggerInterface) -> Void {
+
+        var newAllowUnsignedPrograms = false
+
+        if let allowUnsignedPrograms = configuration.booleanValue(section: "Sinter",
+                                                                   key: "allow_unsigned_programs") {
+            newAllowUnsignedPrograms = allowUnsignedPrograms
+
+        } else {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'allow_unsigned_programs' key is missing from the Sinter section")
+        }
+
+        context.allowUnsignedPrograms = newAllowUnsignedPrograms
     }
 
     static func onEventExpiration(context: inout EndpointSecurityClientContext,
@@ -401,10 +446,12 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
     }
 }
 
-public func createEndpointSecurityClient(logger: LoggerInterface,
+public func createEndpointSecurityClient(configuration: ConfigurationInterface,
+                                         logger: LoggerInterface,
                                          callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
 
     EndpointSecurityClient.create(api: createSystemEndpointSecurityAPI(),
+                                  configuration: configuration,
                                   logger: logger,
                                   callback: callback)
 }

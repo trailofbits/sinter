@@ -10,24 +10,22 @@
 		D20F58622450DA800070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58612450DA800070C21C /* main.swift */; };
 		D20F58642450DA8E0070C21C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58632450DA8E0070C21C /* NotificationCenter.swift */; };
 		D20F58652450DB110070C21C /* notification-server.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D20F58662450DB200070C21C /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D20F58672450DB200070C21C /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
-		D20F58772450DC880070C21C /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
-		D20F58782450DC880070C21C /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D22BCE2E2476CD46008F766E /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D22BCE2F2476CD46008F766E /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D22BCE352476D0DE008F766E /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D22BCE362476D0DE008F766E /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D248E487247D4274002B9FBE /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
-		D248E488247D4274002B9FBE /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D248E489247D4283002B9FBE /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
-		D248E48A247D4283002B9FBE /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
-		D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2C129A624774DAE0031DBEC /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; };
-		D2C129A724774DAE0031DBEC /* InMemorySignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
+		D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C01A24800EDF00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
+		D295C01B24800EDF00CBE00A /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
+		D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
+		D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
+		D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0232480113F00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; };
+		D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */; };
 		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
 		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
@@ -76,19 +74,26 @@
 			remoteGlobalIDString = D24B4A2F2448A73000958F82;
 			remoteInfo = NotificationService;
 		};
-		D2513B832440BE7200002645 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2513B742440BE7100002645;
-			remoteInfo = InMemorySignatureDatabase;
-		};
 		D2578514243F77DC0020BC32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2578505243F77DC0020BC32;
 			remoteInfo = EndpointSecurityClient;
+		};
+		D295BFFF248001A700CBE00A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2C58E52247F37130029E06C;
+			remoteInfo = EndpointSecurityClientTests;
+		};
+		D295C01824800E5100CBE00A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D295C00924800BC200CBE00A;
+			remoteInfo = AuthorizationManagerTests;
 		};
 		D2A3A6A724534A0000CF24FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -114,17 +119,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D20F58682450DB200070C21C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D20F58672450DB200070C21C /* NotificationService.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D20F586B2450DC090070C21C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -134,33 +128,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		D20F58852450DC880070C21C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D22BCE2F2476CD46008F766E /* NotificationService.framework in Embed Frameworks */,
-				D20F58782450DC880070C21C /* EndpointSecurityClient.framework in Embed Frameworks */,
-				D248E48A247D4283002B9FBE /* Configuration.framework in Embed Frameworks */,
-				D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
-				D2C129A724774DAE0031DBEC /* InMemorySignatureDatabase.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D22BCE322476CD7C008F766E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D248E488247D4274002B9FBE /* Configuration.framework in Embed Frameworks */,
-				D22BCE362476D0DE008F766E /* NotificationService.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D257846B243F62DA0020BC32 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,6 +136,43 @@
 			files = (
 				D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C01C24800EE000CBE00A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D295C01B24800EDF00CBE00A /* DecisionManager.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C0252480113F00CBE00A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */,
+				D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */,
+				D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */,
+				D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */,
+				D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C0282480115000CBE00A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D295C2A12447FCF500D39F9F /* CopyFiles */ = {
@@ -198,7 +202,6 @@
 		D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DecisionManager.xcodeproj; path = DecisionManager/DecisionManager.xcodeproj; sourceTree = "<group>"; };
 		D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NotificationService.xcodeproj; path = NotificationService/NotificationService.xcodeproj; sourceTree = "<group>"; };
 		D2513B61244073A300002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
-		D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InMemorySignatureDatabase.xcodeproj; path = InMemorySignatureDatabase/InMemorySignatureDatabase.xcodeproj; sourceTree = "<group>"; };
 		D2578410243F602F0020BC32 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D257841F243F60350020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2578420243F60350020BC32 /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
@@ -217,7 +220,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20F58662450DB200070C21C /* NotificationService.framework in Frameworks */,
+				D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,11 +228,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D22BCE2E2476CD46008F766E /* NotificationService.framework in Frameworks */,
-				D20F58772450DC880070C21C /* EndpointSecurityClient.framework in Frameworks */,
-				D248E489247D4283002B9FBE /* Configuration.framework in Frameworks */,
-				D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */,
-				D2C129A624774DAE0031DBEC /* InMemorySignatureDatabase.framework in Frameworks */,
+				D295C0232480113F00CBE00A /* Logger.framework in Frameworks */,
+				D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */,
+				D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */,
+				D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */,
+				D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,8 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D248E487247D4274002B9FBE /* Configuration.framework in Frameworks */,
-				D22BCE352476D0DE008F766E /* NotificationService.framework in Frameworks */,
+				D295C01A24800EDF00CBE00A /* DecisionManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,14 +340,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2513B802440BE7100002645 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D2578407243F602E0020BC32 = {
 			isa = PBXGroup;
 			children = (
@@ -385,7 +379,6 @@
 				D248E47E247D420E002B9FBE /* Logger.xcodeproj */,
 				D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */,
 				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
-				D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -405,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */,
+				D295C000248001A700CBE00A /* EndpointSecurityClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -413,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */,
+				D295C01924800E5100CBE00A /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,7 +422,7 @@
 				D20F583D2450DA370070C21C /* Sources */,
 				D20F583E2450DA370070C21C /* Frameworks */,
 				D20F583F2450DA370070C21C /* Resources */,
-				D20F58682450DB200070C21C /* Embed Frameworks */,
+				D295C0282480115000CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -445,7 +440,7 @@
 				D20F58692450DC090070C21C /* Sources */,
 				D20F586A2450DC090070C21C /* Frameworks */,
 				D20F586B2450DC090070C21C /* CopyFiles */,
-				D20F58852450DC880070C21C /* Embed Frameworks */,
+				D295C0252480113F00CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -465,7 +460,7 @@
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
 				D295C2A12447FCF500D39F9F /* CopyFiles */,
-				D22BCE322476CD7C008F766E /* Embed Frameworks */,
+				D295C01C24800EE000CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -524,10 +519,6 @@
 				{
 					ProductGroup = D2578511243F77DC0020BC32 /* Products */;
 					ProjectRef = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
-				},
-				{
-					ProductGroup = D2513B802440BE7100002645 /* Products */;
-					ProjectRef = D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */;
 				},
 				{
 					ProductGroup = D248E47F247D420E002B9FBE /* Products */;
@@ -590,18 +581,25 @@
 			remoteRef = D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = InMemorySignatureDatabase.framework;
-			remoteRef = D2513B832440BE7200002645 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = EndpointSecurityClient.framework;
 			remoteRef = D2578514243F77DC0020BC32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D295C000248001A700CBE00A /* EndpointSecurityClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EndpointSecurityClientTests.xctest;
+			remoteRef = D295BFFF248001A700CBE00A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D295C01924800E5100CBE00A /* AuthorizationManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AuthorizationManagerTests.xctest;
+			remoteRef = D295C01824800E5100CBE00A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */ = {

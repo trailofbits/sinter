@@ -11,14 +11,11 @@ import Foundation
 
 import EndpointSecurityClient
 import Logger
-import InMemorySignatureDatabase
 import Configuration
 import AuthorizationManager
-import LocalDecisionManager
-import SyncServerDecisionManager
+import DecisionManager
 
 var configuration: ConfigurationInterface
-var signatureDatabase: SignatureDatabaseInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
 
@@ -40,35 +37,21 @@ case let .failure(error):
 // new configuration object we just created
 logger.setConfiguration(configuration: configuration)
 
-// Initialize the SignatureDatabase
-let signatureDatabaseExp = createInMemorySignatureDatabase()
-switch signatureDatabaseExp {
-case let .success(obj):
-    signatureDatabase = obj
-
-case let .failure(error):
-    print("Failed to create the SignatureDatabase object: \(error)")
-    exit(EXIT_FAILURE)
-}
-
-// Initialize the DecisionManager
-var decisionManagerExp: Result<DecisionManagerInterface, Error>
-
 // Initialize the decision manager
 if let decisionManagerPluginName = configuration.stringValue(section: "Sinter", key: "decision_manager") {
     if decisionManagerPluginName == "sync-server" {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Initializing the sync-server decision manager plugin")
 
-        decisionManagerExp = createSyncServerDecisionManager(logger: logger,
-                                                             configuration: configuration)
+        decisionManager = createRemoteDecisionManager(logger: logger,
+                                                      configuration: configuration)
 
     } else if decisionManagerPluginName == "local" {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Initializing the local decision manager plugin")
 
-        decisionManagerExp = createLocalDecisionManager(logger: logger,
-                                                        configuration: configuration)
+        decisionManager = createLocalDecisionManager(logger: logger,
+                                                     configuration: configuration)
 
     } else {
         logger.logMessage(severity: LoggerMessageSeverity.error,
@@ -83,20 +66,18 @@ if let decisionManagerPluginName = configuration.stringValue(section: "Sinter", 
 
     exit(EXIT_FAILURE)
 }
+/*
+ public typealias EndpointSecurityCallback = (_ message: EndpointSecurityMessage) -> Void
 
-switch decisionManagerExp {
-case let .success(obj):
-    decisionManager = obj
+ public typealias EndpointSecurityInterfaceFactory = (LoggerInterface, @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
 
-case let .failure(error):
-    print("Failed to create the DecisionManager object: \(error)")
-    exit(EXIT_FAILURE)
-}
-
+ public func createEndpointSecurityClient(configuration: ConfigurationInterface,
+                                          logger: LoggerInterface,
+                                          callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
+ */
 // Initialize the AuthorizationManager
 let authorizationManagerExp = createAuthorizationManager(configuration: configuration,
                                                          logger: logger,
-                                                         signatureDatabase: signatureDatabase,
                                                          decisionManager: decisionManager,
                                                          endpointSecurityFactory: createEndpointSecurityClient)
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Logger
+import Configuration
 
 public enum EndpointSecurityError: Error {
     case unknownError
@@ -18,7 +19,9 @@ public enum EndpointSecurityError: Error {
 
 public typealias EndpointSecurityCallback = (_ message: EndpointSecurityMessage) -> Void
 
-public typealias EndpointSecurityInterfaceFactory = (LoggerInterface, @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
+public typealias EndpointSecurityInterfaceFactory = (ConfigurationInterface,
+                                                     LoggerInterface,
+                                                     @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
 
 // EndpointSecurity uses either SHA1 or SHA256 hashes, but can
 // only represent 20 bytes so SHA256 hashes are truncated

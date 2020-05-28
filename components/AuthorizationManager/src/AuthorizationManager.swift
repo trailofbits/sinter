@@ -10,31 +10,38 @@ import Foundation
 import NotificationService
 import Configuration
 import Logger
+import DecisionManager
+import EndpointSecurityClient
 
 private final class AuthorizationManager: AuthorizationManagerInterface {
     let configuration: ConfigurationInterface
     let logger: LoggerInterface
-    let signatureDatabase: SignatureDatabaseInterface
     let decisionManager: DecisionManagerInterface
     let notificationClient: NotificationClientInterface
     var endpointSecurityOpt: EndpointSecurityInterface?
+    let signatureDatabase = SignatureDatabase()
 
     private let operationQueue = OperationQueue()
 
     private init(configuration: ConfigurationInterface,
                  logger: LoggerInterface,
-                 signatureDatabase: SignatureDatabaseInterface,
                  decisionManager: DecisionManagerInterface,
                  endpointSecurityFactory: EndpointSecurityInterfaceFactory) throws {
+
         self.configuration = configuration
         self.logger = logger
-        self.signatureDatabase = signatureDatabase
         self.decisionManager = decisionManager
         notificationClient = createNotificationClient()
 
+        // Initialize the operation queue according to the online processor count
+        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
+        operationQueue.maxConcurrentOperationCount = onlineProcessorCount
+        operationQueue.qualityOfService = .userInteractive
+
         // Use the factory function we have been given to create the
         // EndpointSecurity client
-        let endpointSecurityExp = endpointSecurityFactory(logger,
+        let endpointSecurityExp = endpointSecurityFactory(configuration,
+                                                          logger,
                                                           onEndpointSecurityMessage)
 
         switch endpointSecurityExp {
@@ -47,11 +54,6 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
             throw AuthorizationManagerError.endpointSecurityFactoryError
         }
-
-        // Initialize the operation queue according to the online processor count
-        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
-        operationQueue.maxConcurrentOperationCount = onlineProcessorCount
-        operationQueue.qualityOfService = .userInteractive
     }
 
     private func onEndpointSecurityMessage(message: EndpointSecurityMessage) {
@@ -152,12 +154,10 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
     static func create(configuration: ConfigurationInterface,
                        logger: LoggerInterface,
-                       signatureDatabase: SignatureDatabaseInterface,
                        decisionManager: DecisionManagerInterface,
                        endpointSecurityFactory: EndpointSecurityInterfaceFactory) -> Result<AuthorizationManagerInterface, Error> {
         Result<AuthorizationManagerInterface, Error> { try AuthorizationManager(configuration: configuration,
                                                                                 logger: logger,
-                                                                                signatureDatabase: signatureDatabase,
                                                                                 decisionManager: decisionManager,
                                                                                 endpointSecurityFactory: endpointSecurityFactory) }
     }
@@ -165,12 +165,11 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
 public func createAuthorizationManager(configuration: ConfigurationInterface,
                                        logger: LoggerInterface,
-                                       signatureDatabase: SignatureDatabaseInterface,
                                        decisionManager: DecisionManagerInterface,
                                        endpointSecurityFactory: EndpointSecurityInterfaceFactory) -> Result<AuthorizationManagerInterface, Error> {
+
     AuthorizationManager.create(configuration: configuration,
                                 logger: logger,
-                                signatureDatabase: signatureDatabase,
                                 decisionManager: decisionManager,
                                 endpointSecurityFactory: endpointSecurityFactory)
 }
@@ -197,10 +196,8 @@ private final class AuthorizationManagerOperation: Operation {
                                              teamIdentifier: message.teamIdentifier,
                                              platformBinary: message.platformBinary)
 
-        if !decisionManager.processRequest(request: request,
-                                           allow: &allow) {
-            allow = false
-        }
+        decisionManager.processRequest(request: request,
+                                       allow: &allow)
     }
 
     public func isAllowed() -> Bool {
