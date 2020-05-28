@@ -41,7 +41,7 @@ public struct DecisionManagerRequest {
 
 public protocol DecisionManagerInterface {
     func processRequest(request: DecisionManagerRequest,
-                        allow: inout Bool) -> Bool
+                        allow: inout Bool) -> Void
 }
 
 public func createLocalDecisionManager(logger: LoggerInterface,

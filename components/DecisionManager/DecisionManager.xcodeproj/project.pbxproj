@@ -27,6 +27,10 @@
 		D248E4CE247D4F37002B9FBE /* DecisionManagerInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248E4CD247D4F37002B9FBE /* DecisionManagerInterface.swift */; };
 		D248E4D1247D7C7F002B9FBE /* LocalRuleDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248E4D0247D7C7F002B9FBE /* LocalRuleDatabaseProvider.swift */; };
 		D248E4D4247D7FA6002B9FBE /* RemoteRuleDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248E4D3247D7FA6002B9FBE /* RemoteRuleDatabaseProvider.swift */; };
+		D295BFDA247FFB4C00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD8247FFB4C00CBE00A /* Configuration.framework */; };
+		D295BFDB247FFB4C00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD8247FFB4C00CBE00A /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295BFDC247FFB4C00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD9247FFB4C00CBE00A /* Logger.framework */; };
+		D295BFDD247FFB4C00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD9247FFB4C00CBE00A /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D295BFDE247FFB4C00CBE00A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D295BFDD247FFB4C00CBE00A /* Logger.framework in Embed Frameworks */,
+				D295BFDB247FFB4C00CBE00A /* Configuration.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D21FDCCE247DAC5D00309B61 /* JSONRuleDatabaseParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRuleDatabaseParserTests.swift; sourceTree = "<group>"; };
 		D21FDCD4247DAF8900309B61 /* JSONRuleDatabaseParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSONRuleDatabaseParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +78,8 @@
 		D248E4CD247D4F37002B9FBE /* DecisionManagerInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionManagerInterface.swift; sourceTree = "<group>"; };
 		D248E4D0247D7C7F002B9FBE /* LocalRuleDatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRuleDatabaseProvider.swift; sourceTree = "<group>"; };
 		D248E4D3247D7FA6002B9FBE /* RemoteRuleDatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRuleDatabaseProvider.swift; sourceTree = "<group>"; };
+		D295BFD8247FFB4C00CBE00A /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFD9247FFB4C00CBE00A /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D295BFDC247FFB4C00CBE00A /* Logger.framework in Frameworks */,
+				D295BFDA247FFB4C00CBE00A /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +119,7 @@
 				D248E4BC247D4C39002B9FBE /* src */,
 				D248E4BD247D4C41002B9FBE /* tests */,
 				D248E499247D4C25002B9FBE /* Products */,
+				D295BFD7247FFB4C00CBE00A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +160,15 @@
 				D21FDCCE247DAC5D00309B61 /* JSONRuleDatabaseParserTests.swift */,
 			);
 			path = tests;
+			sourceTree = "<group>";
+		};
+		D295BFD7247FFB4C00CBE00A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D295BFD8247FFB4C00CBE00A /* Configuration.framework */,
+				D295BFD9247FFB4C00CBE00A /* Logger.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +229,7 @@
 				D248E494247D4C25002B9FBE /* Sources */,
 				D248E495247D4C25002B9FBE /* Frameworks */,
 				D248E496247D4C25002B9FBE /* Resources */,
+				D295BFDE247FFB4C00CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

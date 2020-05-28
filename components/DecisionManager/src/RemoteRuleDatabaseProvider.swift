@@ -11,43 +11,57 @@ import Configuration
 
 class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
     private let logger: LoggerInterface
+    private let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.remote-rule-database-provider")
 
     private var serverURL = String()
     private var machineIdentifier = String()
+    private var database = RuleDatabase()
 
     init(logger: LoggerInterface) {
         self.logger = logger
     }
 
-    func getRuleDatabase(configuration: ConfigurationInterface) -> RuleDatabase? {
-        if let serverURL = configuration.stringValue(section: "RemoteDecisionManager",
-                                                     key: "server_url") {
+    func configure(configuration: ConfigurationInterface) {
+        
+        let serverURLOpt = configuration.stringValue(section: "RemoteDecisionManager",
+                                                     key: "server_url")
+        
+        let machineIdentifierOpt = configuration.stringValue(section: "RemoteDecisionManager",
+                                                             key: "machine_identifier")
 
-            self.serverURL = serverURL
-
-        } else {
+        if serverURLOpt == nil {
             logger.logMessage(severity: LoggerMessageSeverity.error,
                               message: "The 'server_url' key is missing from the RemoteDecisionManager section")
             
-            return nil
+            return
         }
 
-        if let machineIdentifier = configuration.stringValue(section: "RemoteDecisionManager",
-                                                     key: "machine_identifier") {
-
-            self.machineIdentifier = machineIdentifier
-
-        } else {
+        if machineIdentifierOpt == nil {
             logger.logMessage(severity: LoggerMessageSeverity.error,
                               message: "The 'machine_identifier' key is missing from the RemoteDecisionManager section")
             
-            return nil
+            return
         }
-
-        return requestRuleDatabase()
+        
+        dispatchQueue.sync {
+            serverURL = serverURLOpt!
+            machineIdentifier = machineIdentifierOpt!
+            
+            requestRuleDatabaseUpdate()
+        }
     }
 
-    private func requestRuleDatabase() -> RuleDatabase? {
+    func ruleDatabase() -> RuleDatabase {
+        var database = RuleDatabase()
+
+        dispatchQueue.sync {
+            database = self.database
+        }
+
+        return database
+    }
+    
+    func requestRuleDatabaseUpdate() {
         let requestAddress = serverURL +
                              "/v1/santa/ruledownload/" +
                              machineIdentifier
@@ -57,18 +71,13 @@ class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
             self.logger.logMessage(severity: LoggerMessageSeverity.error,
                                    message: "The following server URL is not valid: '\(requestAddress)'")
 
-            return nil
+            return
         }
 
         var request = URLRequest(url: requestUrlOpt!)
         request.httpMethod = "POST"
 
         let session = URLSession.shared
-        var ruleDatabase: RuleDatabase? = nil
-
-        let dg = DispatchGroup()
-        dg.enter()
-
         let task = session.dataTask(with: request,
                                     completionHandler: { dataOpt, _, errorOpt -> Void in
 
@@ -78,15 +87,12 @@ class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
                 self.logger.logMessage(severity: LoggerMessageSeverity.error,
                                        message: errorMessage)
 
-                dg.leave()
                 return
             }
             
             if dataOpt == nil {
                 self.logger.logMessage(severity: LoggerMessageSeverity.error,
                                        message: "The remote has not answered to the POST request")
-
-                dg.leave()
                 return
             }
 
@@ -109,15 +115,12 @@ class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
             }
 
             if acceptRules {
-                ruleDatabase = newRuleDatabase
+                self.dispatchQueue.sync {
+                    self.database = newRuleDatabase
+                }
             }
-                                        
-            dg.leave()
         })
 
         task.resume()
-        dg.wait()
-
-        return ruleDatabase
     }
 }

@@ -12,62 +12,79 @@ import Configuration
 class LocalRuleDatabaseProvider : RuleDatabaseProviderInterface {
     private let logger: LoggerInterface
     
+    private let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.local-rule-database-provider")
+    private var database = RuleDatabase()
+    
     init(logger: LoggerInterface) {
         self.logger = logger
     }
-
-    func getRuleDatabase(configuration: ConfigurationInterface) -> RuleDatabase? {
-        if let ruleDatabasePath = configuration.stringValue(section: "LocalDecisionManager",
-                                                            key: "rule_database_path") {
-
-            let fileManager = FileManager.default
-            if !fileManager.fileExists(atPath: ruleDatabasePath) {
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The rule database file does not exist: \(ruleDatabasePath)")
-
-                return nil
-            }
-
-            let ruleDatabaseURL = URL(fileURLWithPath: ruleDatabasePath)
-
-            do {
-                let jsonRuleDatabase = try Data(contentsOf: ruleDatabaseURL)
-                let newRuleDatabase = parseJSONRuleDatabase(jsonData: jsonRuleDatabase)
-
-                var acceptRules = false
-                switch newRuleDatabase.status {
-                case RuleDatabaseStatus.invalid:
-                    logger.logMessage(severity: LoggerMessageSeverity.error,
-                                      message: "The rule database is not valid")
-
-                case RuleDatabaseStatus.partial:
-                    acceptRules = true
-
-                    logger.logMessage(severity: LoggerMessageSeverity.error,
-                                      message: "The rule database contains invalid rules")
-
-                case RuleDatabaseStatus.valid:
-                    acceptRules = true
-                }
-
-                if !acceptRules {
-                    return nil
-                }
-
-                return newRuleDatabase
-
-            } catch {
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "The rule database file is not valid")
-
-                return nil
-            }
-
-        } else {
+    
+    func configure(configuration: ConfigurationInterface) {
+        let ruleDatabasePathOpt = configuration.stringValue(section: "LocalDecisionManager",
+                                                            key: "rule_database_path")
+        
+        if ruleDatabasePathOpt == nil {
             logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'allow_unknown_programs' key is missing from the Sinter section")
+                              message: "The 'rule_database_path' key is missing from the LocalDecisionManager section")
             
-            return nil
+            return
         }
+
+        let fileManager = FileManager.default
+        if !fileManager.fileExists(atPath: ruleDatabasePathOpt!) {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The rule database file does not exist: \(ruleDatabasePathOpt!)")
+
+            return
+        }
+
+        let ruleDatabaseURL = URL(fileURLWithPath: ruleDatabasePathOpt!)
+        let jsonRuleDatabase: Data
+
+        do {
+            jsonRuleDatabase = try Data(contentsOf: ruleDatabaseURL)
+
+        } catch {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The rule database file is not valid")
+            
+            return
+        }
+
+        let newRuleDatabase = parseJSONRuleDatabase(jsonData: jsonRuleDatabase)
+
+        var acceptRules = false
+        switch newRuleDatabase.status {
+        case RuleDatabaseStatus.invalid:
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The rule database is not valid")
+
+        case RuleDatabaseStatus.partial:
+            acceptRules = true
+
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The rule database contains invalid rules")
+
+        case RuleDatabaseStatus.valid:
+            acceptRules = true
+        }
+
+        if !acceptRules {
+            return
+        }
+
+        dispatchQueue.sync {
+            self.database = newRuleDatabase
+        }
+    }
+
+    func ruleDatabase() -> RuleDatabase {
+        var ruleDatabase = RuleDatabase()
+        
+        dispatchQueue.sync {
+            ruleDatabase = self.database
+        }
+        
+        return ruleDatabase
     }
 }

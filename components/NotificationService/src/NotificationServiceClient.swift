@@ -8,20 +8,20 @@
 
 import Foundation
 
-private class NotificationClient: NotificationClientInterface {
+fileprivate class NotificationClient: NotificationClientInterface {
     var connectionOpt: NSXPCConnection?
     var serviceOpt: NotificationServiceProtocol?
 
     private func getClient() -> NotificationServiceProtocol? {
         if connectionOpt == nil {
-            connectionOpt = NSXPCConnection(machServiceName: "com.trailofbits.SinterNotificationServer")
+            connectionOpt = NSXPCConnection(machServiceName: "com.trailofbits.sinter.notification-server")
 
             connectionOpt!.remoteObjectInterface = NSXPCInterface(with: NotificationServiceProtocol.self)
             connectionOpt!.resume()
         }
 
         if serviceOpt == nil {
-            serviceOpt = connectionOpt!.synchronousRemoteObjectProxyWithErrorHandler { _ in
+            serviceOpt = connectionOpt!.remoteObjectProxyWithErrorHandler { _ in
                 self.connectionOpt!.invalidate()
 
                 self.connectionOpt = nil
@@ -32,42 +32,12 @@ private class NotificationClient: NotificationClientInterface {
         return serviceOpt
     }
 
-    init() {}
-
     public func showNotification(message: String) {
         if let service = getClient() {
             service.showNotification(message: message)
 
         } else {
             print("Notification server not ready. Message: \(message)")
-        }
-    }
-
-    public func requestAuthorization(binaryPath: String,
-                                     hash: String,
-                                     allowExecution: inout Bool) {
-        if let service = getClient() {
-            let dg = DispatchGroup()
-            dg.enter()
-
-            var response = false
-
-            service.requestAuthorization(binaryPath: binaryPath,
-                                         hash: hash,
-                                         reply: { (allowExecution: Bool) in
-                                             response = allowExecution
-                                             dg.leave()
-            })
-
-            if dg.wait(timeout: DispatchTime(uptimeNanoseconds: 1_000_000_000)) != DispatchTimeoutResult.success {
-                response = false
-            }
-
-            allowExecution = response
-
-        } else {
-            print("Notification server not ready. Automatically denying \(binaryPath)/\(hash)")
-            allowExecution = false
         }
     }
 }

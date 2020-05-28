@@ -12,12 +12,11 @@ import Configuration
 struct BaseDecisionManagerContext {
     public var allowUnknownPrograms = false
     public var allowUnsignedPrograms = false
-
-    public var ruleDatabase = RuleDatabase()
 }
 
 protocol RuleDatabaseProviderInterface {
-    func getRuleDatabase(configuration: ConfigurationInterface) -> RuleDatabase?
+    func configure(configuration: ConfigurationInterface)
+    func ruleDatabase() -> RuleDatabase
 }
 
 class BaseDecisionManager: DecisionManagerInterface,
@@ -44,17 +43,16 @@ class BaseDecisionManager: DecisionManagerInterface,
                                                configuration: configuration,
                                                logger: logger)
 
-        if let ruleDatabase = ruleDatabaseProvider.getRuleDatabase(configuration: configuration) {
-            context.ruleDatabase = ruleDatabase
-        }
+        ruleDatabaseProvider.configure(configuration: configuration)
     }
 
     public func processRequest(request: DecisionManagerRequest,
-                               allow: inout Bool) -> Bool {
+                               allow: inout Bool) {
 
-        return BaseDecisionManager.processRequest(context: context,
-                                                   request: request,
-                                                   allow: &allow)
+        BaseDecisionManager.processRequest(context: context,
+                                           request: request,
+                                           ruleDatabase: ruleDatabaseProvider.ruleDatabase(),
+                                           allow: &allow)
     }
 
     static func readConfiguration(context: inout BaseDecisionManagerContext,
@@ -74,7 +72,7 @@ class BaseDecisionManager: DecisionManagerInterface,
         }
 
         if let allowUnsignedPrograms = configuration.booleanValue(section: "Sinter",
-                                                                   key: "allow_unknown_programs") {
+                                                                   key: "allow_unsigned_programs") {
             newAllowUnsignedPrograms = allowUnsignedPrograms
 
         } else {
@@ -88,20 +86,20 @@ class BaseDecisionManager: DecisionManagerInterface,
 
     static func processRequest(context: BaseDecisionManagerContext,
                                request: DecisionManagerRequest,
-                               allow: inout Bool) -> Bool {
+                               ruleDatabase: RuleDatabase,
+                               allow: inout Bool) -> Void {
+
         if request.platformBinary {
             allow = true
 
         } else if request.codeDirectoryHash.hash.isEmpty {
             allow = context.allowUnsignedPrograms
 
-        } else if let rule = context.ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
+        } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
             allow = rule.policy == RulePolicy.whitelist
 
         } else {
             allow = context.allowUnknownPrograms
         }
-
-        return true
     }
 }

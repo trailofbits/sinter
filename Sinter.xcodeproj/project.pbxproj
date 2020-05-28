@@ -379,13 +379,13 @@
 		D2578426243F60460020BC32 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */,
-				D248E47E247D420E002B9FBE /* Logger.xcodeproj */,
-				D248E475247D4203002B9FBE /* Configuration.xcodeproj */,
-				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
-				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
-				D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */,
 				D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */,
+				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
+				D248E475247D4203002B9FBE /* Configuration.xcodeproj */,
+				D248E47E247D420E002B9FBE /* Logger.xcodeproj */,
+				D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */,
+				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
+				D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */,
 			);
 			path = components;
 			sourceTree = "<group>";

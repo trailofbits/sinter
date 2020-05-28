@@ -20,6 +20,23 @@ public typealias EndpointSecurityCallback = (_ message: EndpointSecurityMessage)
 
 public typealias EndpointSecurityInterfaceFactory = (LoggerInterface, @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
 
+// EndpointSecurity uses either SHA1 or SHA256 hashes, but can
+// only represent 20 bytes so SHA256 hashes are truncated
+public enum BinaryHashType {
+    case sha1
+    case truncatedSha256
+}
+
+public struct BinaryHash {
+    public init(type: BinaryHashType, hash: String) {
+        self.type = type
+        self.hash = hash
+    }
+
+    public var type: BinaryHashType
+    public var hash: String
+}
+
 public struct EndpointSecurityExecAuthorization {
     public init(binaryPath: String, parentProcessId: pid_t,
                 processId: pid_t, userId: uid_t, groupId: gid_t,
@@ -53,7 +70,7 @@ public struct EndpointSecurityExecAuthorization {
     public var platformBinary: Bool
 }
 
-public enum EndpointSecurityFileChangeNotificationType {
+public enum EndpointSecurityFileChangeNotificationType : CaseIterable {
     case unknown
     case write
     case unlink
@@ -67,6 +84,7 @@ public enum EndpointSecurityFileChangeNotificationType {
 public struct EndpointSecurityFileChangeNotification {
     public init(type: EndpointSecurityFileChangeNotificationType,
                 pathList: [String]) {
+
         self.type = type
         self.pathList = pathList
     }

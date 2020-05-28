@@ -10,8 +10,4 @@ import Foundation
 
 @objc public protocol NotificationServiceProtocol {
     func showNotification(message: String)
-
-    func requestAuthorization(binaryPath: String,
-                              hash: String,
-                              reply: @escaping (_ allow: Bool) -> Void)
 }

@@ -10,7 +10,7 @@ import Foundation
 
 @propertyWrapper
 struct Atomic<Value> {
-    private let queue = DispatchQueue(label: "com.trailofbits.sinter.atomicProperty")
+    private let queue = DispatchQueue(label: "com.trailofbits.sinter.atomic-property")
     private var value: Value
 
     init(wrappedValue: Value) {
