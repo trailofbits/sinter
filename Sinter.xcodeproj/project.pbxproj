@@ -14,8 +14,8 @@
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
 		D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D295C01A24800EDF00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
-		D295C01B24800EDF00CBE00A /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
 		D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
@@ -138,17 +138,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D295C01C24800EE000CBE00A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D295C01B24800EDF00CBE00A /* DecisionManager.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D295C0252480113F00CBE00A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -158,6 +147,7 @@
 				D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */,
 				D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */,
 				D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */,
+				D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */,
 				D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */,
 				D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */,
 			);
@@ -231,6 +221,7 @@
 				D295C0232480113F00CBE00A /* Logger.framework in Frameworks */,
 				D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */,
 				D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */,
+				D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */,
 				D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */,
 				D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */,
 			);
@@ -240,7 +231,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D295C01A24800EDF00CBE00A /* DecisionManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +450,6 @@
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
 				D295C2A12447FCF500D39F9F /* CopyFiles */,
-				D295C01C24800EE000CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

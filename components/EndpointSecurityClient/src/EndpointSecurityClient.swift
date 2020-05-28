@@ -217,7 +217,11 @@ final class EndpointSecurityClient: EndpointSecurityInterface, ConfigurationSubs
             messageOpt = parseRenameNotification(esMessage: unsafeMessagePtr.pointee)
 
         case ES_EVENT_TYPE_NOTIFY_MMAP:
+            // Ignore read-only mmap() requests
             messageOpt = parseMmapNotification(esMessage: unsafeMessagePtr.pointee)
+            if messageOpt == nil {
+                return
+            }
 
         case ES_EVENT_TYPE_NOTIFY_LINK:
             messageOpt = parseLinkNotification(esMessage: unsafeMessagePtr.pointee)
@@ -283,6 +287,7 @@ final class EndpointSecurityClient: EndpointSecurityInterface, ConfigurationSubs
              ES_EVENT_TYPE_NOTIFY_LINK,
              ES_EVENT_TYPE_NOTIFY_TRUNCATE,
              ES_EVENT_TYPE_NOTIFY_CREATE:
+
             onFileChangeEvent(unsafeMessagePtr: unsafeMessagePtr,
                               callback: callback)
 
