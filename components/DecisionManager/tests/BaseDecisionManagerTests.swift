@@ -10,6 +10,7 @@ import XCTest
 
 import Configuration
 import Logger
+import EndpointSecurityClient
 
 final class DecisionManagerTests : XCTestCase {
     func testConfiguration() throws {

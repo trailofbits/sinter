@@ -13,15 +13,18 @@ import Logger
 import DecisionManager
 import EndpointSecurityClient
 
-private final class AuthorizationManager: AuthorizationManagerInterface {
-    let configuration: ConfigurationInterface
-    let logger: LoggerInterface
-    let decisionManager: DecisionManagerInterface
-    let notificationClient: NotificationClientInterface
-    var endpointSecurityOpt: EndpointSecurityInterface?
-    let signatureDatabase = SignatureDatabase()
+final class AuthorizationManagerContext {
+}
 
-    private let operationQueue = OperationQueue()
+private final class AuthorizationManager: AuthorizationManagerInterface {
+    private let configuration: ConfigurationInterface
+    private let logger: LoggerInterface
+    private let decisionManager: DecisionManagerInterface
+
+    private var endpointSecurityOpt: EndpointSecurityInterface? = nil
+    private let notificationClient: NotificationClientInterface
+    private let signatureDatabase = SignatureDatabase()
+    private let operationQueue: OperationQueue
 
     private init(configuration: ConfigurationInterface,
                  logger: LoggerInterface,
@@ -31,15 +34,10 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
         self.configuration = configuration
         self.logger = logger
         self.decisionManager = decisionManager
+
         notificationClient = createNotificationClient()
+        operationQueue = createOperationQueue(type: OperationQueueType.primary)
 
-        // Initialize the operation queue according to the online processor count
-        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
-        operationQueue.maxConcurrentOperationCount = onlineProcessorCount
-        operationQueue.qualityOfService = .userInteractive
-
-        // Use the factory function we have been given to create the
-        // EndpointSecurity client
         let endpointSecurityExp = endpointSecurityFactory(configuration,
                                                           logger,
                                                           onEndpointSecurityMessage)

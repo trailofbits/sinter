@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E497247D4C25002B9FBE"
-               BuildableName = "DecisionManager.framework"
-               BlueprintName = "DecisionManager"
-               ReferencedContainer = "container:DecisionManager.xcodeproj">
+               BlueprintIdentifier = "D248E43C247D2ACF002B9FBE"
+               BuildableName = "Logger.framework"
+               BlueprintName = "Logger"
+               ReferencedContainer = "container:Logger.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D248E445247D2ACF002B9FBE"
+               BuildableName = "LoggerTests.xctest"
+               BlueprintName = "LoggerTests"
+               ReferencedContainer = "container:Logger.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +46,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D21FDCE9247DB06800309B61"
-               BuildableName = "BaseDecisionManagerTests.xctest"
-               BlueprintName = "BaseDecisionManagerTests"
-               ReferencedContainer = "container:DecisionManager.xcodeproj">
+               BlueprintIdentifier = "D248E445247D2ACF002B9FBE"
+               BuildableName = "LoggerTests.xctest"
+               BlueprintName = "LoggerTests"
+               ReferencedContainer = "container:Logger.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -60,10 +74,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D248E497247D4C25002B9FBE"
-            BuildableName = "DecisionManager.framework"
-            BlueprintName = "DecisionManager"
-            ReferencedContainer = "container:DecisionManager.xcodeproj">
+            BlueprintIdentifier = "D248E43C247D2ACF002B9FBE"
+            BuildableName = "Logger.framework"
+            BlueprintName = "Logger"
+            ReferencedContainer = "container:Logger.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

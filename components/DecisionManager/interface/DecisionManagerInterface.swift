@@ -15,13 +15,6 @@ public enum DecisionManagerError: Error {
     case invalidConfiguration
 }
 
-// EndpointSecurity uses either SHA1 or SHA256 hashes, but can
-// only represent 20 bytes so SHA256 hashes are truncated
-public enum BinaryHashType {
-    case sha1
-    case truncatedSha256
-}
-
 public struct DecisionManagerRequest {
     public var binaryPath: String
     public var codeDirectoryHash: BinaryHash

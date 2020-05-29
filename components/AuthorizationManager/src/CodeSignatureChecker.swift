@@ -15,7 +15,7 @@ public enum CodeSignatureStatus {
     case invalid
 }
 
-public func checkCodeSignature(path: String) -> CodeSignatureStatus {
+func checkCodeSignature(path: String) -> CodeSignatureStatus {
     let url: URL? = URL(fileURLWithPath: path)
     if url == nil {
         return CodeSignatureStatus.ioError

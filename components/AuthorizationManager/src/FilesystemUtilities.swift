@@ -8,30 +8,8 @@
 
 import Foundation
 
-enum OperationQueueType {
-    case primary
-    case secondary
-}
-
-func createOperationQueue(type: OperationQueueType) -> OperationQueue {
-    let queue = OperationQueue()
-    
-    switch type {
-    case .primary:
-        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
-
-        queue.maxConcurrentOperationCount = onlineProcessorCount
-        queue.qualityOfService = .userInteractive
-
-    case .secondary:
-        queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .background
-    }
-
-    return queue
-}
-
 struct FileInformation {
+    public var path = String()
     public var ownerId: Int = 0
     public var size: Int = 0
 }
@@ -46,6 +24,7 @@ func getFileInformation(path: String) -> FileInformation? {
     }
     
     var fileInformation = FileInformation()
+    fileInformation.path = path
 
     if let fileSize = fileAttributes[FileAttributeKey.size] as? Int {
         fileInformation.size = fileSize

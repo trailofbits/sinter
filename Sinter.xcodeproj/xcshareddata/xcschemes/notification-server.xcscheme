@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E497247D4C25002B9FBE"
-               BuildableName = "DecisionManager.framework"
-               BlueprintName = "DecisionManager"
-               ReferencedContainer = "container:DecisionManager.xcodeproj">
+               BlueprintIdentifier = "D20F58402450DA370070C21C"
+               BuildableName = "notification-server.xpc"
+               BlueprintName = "notification-server"
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D21FDCE9247DB06800309B61"
-               BuildableName = "BaseDecisionManagerTests.xctest"
-               BlueprintName = "BaseDecisionManagerTests"
-               ReferencedContainer = "container:DecisionManager.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,6 +40,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "D20F58402450DA370070C21C"
+            BuildableName = "notification-server.xpc"
+            BlueprintName = "notification-server"
+            ReferencedContainer = "container:Sinter.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,15 +57,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D248E497247D4C25002B9FBE"
-            BuildableName = "DecisionManager.framework"
-            BlueprintName = "DecisionManager"
-            ReferencedContainer = "container:DecisionManager.xcodeproj">
+            BlueprintIdentifier = "D20F58402450DA370070C21C"
+            BuildableName = "notification-server.xpc"
+            BlueprintName = "notification-server"
+            ReferencedContainer = "container:Sinter.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
