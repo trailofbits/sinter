@@ -12,7 +12,7 @@ public enum LoggerError: Error {
     case unknownError
 }
 
-public enum LoggerMessageSeverity {
+public enum LoggerMessageSeverity : CaseIterable {
     case debug
     case information
     case warning

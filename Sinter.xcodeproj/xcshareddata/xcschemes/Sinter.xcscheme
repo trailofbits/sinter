@@ -56,6 +56,66 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D295C00824800BC200CBE00A"
+               BuildableName = "AuthorizationManagerTests.xctest"
+               BlueprintName = "AuthorizationManagerTests"
+               ReferencedContainer = "container:components/AuthorizationManager/AuthorizationManager.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D248E400247D2221002B9FBE"
+               BuildableName = "ConfigurationTests.xctest"
+               BlueprintName = "ConfigurationTests"
+               ReferencedContainer = "container:components/Configuration/Configuration.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D21FDCE9247DB06800309B61"
+               BuildableName = "BaseDecisionManagerTests.xctest"
+               BlueprintName = "BaseDecisionManagerTests"
+               ReferencedContainer = "container:components/DecisionManager/DecisionManager.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D21FDCD3247DAF8900309B61"
+               BuildableName = "JSONRuleDatabaseParserTests.xctest"
+               BlueprintName = "JSONRuleDatabaseParserTests"
+               ReferencedContainer = "container:components/DecisionManager/DecisionManager.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D2C58E51247F37130029E06C"
+               BuildableName = "EndpointSecurityClientTests.xctest"
+               BlueprintName = "EndpointSecurityClientTests"
+               ReferencedContainer = "container:components/EndpointSecurityClient/EndpointSecurityClient.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D248E445247D2ACF002B9FBE"
+               BuildableName = "LoggerTests.xctest"
+               BlueprintName = "LoggerTests"
+               ReferencedContainer = "container:components/Logger/Logger.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

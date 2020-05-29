@@ -9,24 +9,97 @@
 import XCTest
 @testable import Logger
 
+fileprivate typealias LoggedMessage = [String: String]
+
 class LoggerTests: XCTestCase {
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    private func validateLoggedMessage(message: String,
+                                       expectedSeverity: LoggerMessageSeverity,
+                                       expectedMessage: String) {
+        var newlineCount = 0
+        for c in message {
+            if c == "\n" {
+                newlineCount += 1
+            }
         }
+        
+        XCTAssertEqual(newlineCount, 1)
+
+        let lastCharacterOpt = message.last
+        XCTAssertNotNil(lastCharacterOpt)
+
+        XCTAssertEqual(lastCharacterOpt!, "\n")
+
+        let dataOpt = message.data(using: .utf8)
+        XCTAssertNotNil(dataOpt)
+
+        var loggedMessage = LoggedMessage()
+
+        do {
+            loggedMessage = try JSONDecoder().decode(LoggedMessage.self,
+                                                     from: dataOpt!)
+        } catch {
+        }
+        
+        XCTAssertFalse(loggedMessage.isEmpty)
+
+        let objectTypeOpt = loggedMessage["type"]
+        XCTAssertNotNil(objectTypeOpt)
+
+        let loggedSeverityOpt = loggedMessage["severity"]
+        XCTAssertNotNil(loggedSeverityOpt)
+        
+        let loggedMessageOpt = loggedMessage["message"]
+        XCTAssertNotNil(loggedMessageOpt)
+        
+        XCTAssertEqual(objectTypeOpt!, "message")
+        XCTAssertEqual(loggedSeverityOpt!, "\(expectedSeverity)")
+        XCTAssertEqual(loggedMessageOpt!, "\(expectedMessage)")
+    }
+
+    func testMessageGenerator() throws {
+        let testMessage = "Test message"
+
+        for severity in LoggerMessageSeverity.allCases {
+            let message = FilesystemLogger.generateLogMessage(severity: severity,
+                                                              message: testMessage)
+            
+            validateLoggedMessage(message: message,
+                                  expectedSeverity: severity,
+                                  expectedMessage: testMessage)
+        }
+    }
+
+    func testFileWriter() throws {
+        let context = FilesystemLoggerContext()
+
+        let severity = LoggerMessageSeverity.information
+        let message = "Test"
+
+        var succeeded = FilesystemLogger.logMessage(context: context,
+                                                    severity: severity,
+                                                    message: message)
+
+        XCTAssertFalse(succeeded)
+
+        let logFilePath = NSTemporaryDirectory() + "/" + String(getpid())
+        context.logFileURL = URL(fileURLWithPath: logFilePath)
+
+        succeeded = FilesystemLogger.logMessage(context: context,
+                                                severity: severity,
+                                                message: message)
+
+        XCTAssertTrue(succeeded)
+
+        var loggedMessage = String()
+        
+        do {
+            loggedMessage = try String(contentsOf: context.logFileURL)
+        } catch {
+        }
+        
+        XCTAssertFalse(loggedMessage.isEmpty)
+        validateLoggedMessage(message: loggedMessage,
+                              expectedSeverity: severity,
+                              expectedMessage: message)
     }
 }
