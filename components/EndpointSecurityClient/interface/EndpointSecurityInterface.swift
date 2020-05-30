@@ -19,8 +19,7 @@ public enum EndpointSecurityError: Error {
 
 public typealias EndpointSecurityCallback = (_ message: EndpointSecurityMessage) -> Void
 
-public typealias EndpointSecurityInterfaceFactory = (ConfigurationInterface,
-                                                     LoggerInterface,
+public typealias EndpointSecurityInterfaceFactory = (LoggerInterface,
                                                      @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
 
 // EndpointSecurity uses either SHA1 or SHA256 hashes, but can

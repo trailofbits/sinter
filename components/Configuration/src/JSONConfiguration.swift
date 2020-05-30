@@ -18,7 +18,7 @@ struct JSONConfigurationContext {
 }
 
 final class JSONConfiguration: ConfigurationInterface {
-    private let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.jsonconfiguration")
+    private let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.configuration")
     private var updateTimer = Timer()
     private let configFilePath: String
     private var subscriptionList = [Subscription]()
@@ -37,8 +37,8 @@ final class JSONConfiguration: ConfigurationInterface {
     }
     
     public func stringValue(section: String, key: String) -> String? {
-        var value: String?
-        
+        var value: String? = nil
+
         dispatchQueue.sync {
             value = JSONConfiguration.stringValue(context: context,
                                                   section: section,
@@ -49,7 +49,7 @@ final class JSONConfiguration: ConfigurationInterface {
     }
 
     public func integerValue(section: String, key: String) -> Int? {
-        var value: Int?
+        var value: Int? = nil
         
         dispatchQueue.sync {
             value = JSONConfiguration.integerValue(context: context,
@@ -61,7 +61,7 @@ final class JSONConfiguration: ConfigurationInterface {
     }
 
     public func booleanValue(section: String, key: String) -> Bool? {
-        var value: Bool?
+        var value: Bool? = nil
         
         dispatchQueue.sync {
             value = JSONConfiguration.booleanValue(context: context,
@@ -76,41 +76,43 @@ final class JSONConfiguration: ConfigurationInterface {
         let subscription = Subscription(configuration: self,
                                         subscriber: subscriber)
 
+        subscription.notify()
+
         dispatchQueue.sync {
             subscriptionList.append(subscription)
         }
-        
-        subscription.notify()
     }
 
     private func updateConfiguration() -> ConfigurationError? {
-        var newContext = JSONConfigurationContext()
-        if let error = JSONConfiguration.loadConfigurationFromFile(context: &newContext,
-                                                                   configFilePath: self.configFilePath) {
-            return error
-        }
+        var errorOpt: ConfigurationError? = nil
+        var subscriptionList = [Subscription]()
 
         dispatchQueue.sync {
-            updateTimer.invalidate()
-            self.context = newContext
-            
-            let updateInterval: Int = JSONConfiguration.integerValue(context: self.context,
-                                                                     section: "Sinter",
-                                                                     key: "config_update_interval") ?? 60
+            var newContext = JSONConfigurationContext()
+            if let error = JSONConfiguration.loadConfigurationFromFile(context: &newContext,
+                                                                       configFilePath: self.configFilePath) {
+                errorOpt = error
 
-            updateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(updateInterval),
-                                               repeats: true) { _ in _ = self.updateConfiguration() }
+            } else {
+                updateTimer.invalidate()
+                self.context = newContext
+
+                let updateInterval = JSONConfiguration.integerValue(context: self.context,
+                                                                    section: "Sinter",
+                                                                    key: "config_update_interval") ?? 600
+
+                updateTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(updateInterval),
+                                                   repeats: true) { _ in _ = self.updateConfiguration() }
+            }
+
+            subscriptionList = self.subscriptionList
         }
-
-        let subscriptionList = self.subscriptionList
 
         for subscription in subscriptionList {
-            dispatchQueue.async {
-                subscription.notify()
-            }
+            subscription.notify()
         }
 
-        return nil
+        return errorOpt
     }
 
     static func loadConfigurationFromFile(context: inout JSONConfigurationContext,

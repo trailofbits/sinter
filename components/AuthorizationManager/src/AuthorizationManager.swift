@@ -13,33 +13,28 @@ import Logger
 import DecisionManager
 import EndpointSecurityClient
 
-final class AuthorizationManagerContext {
-}
+private final class AuthorizationManager: AuthorizationManagerInterface,
+                                          ConfigurationSubscriberInterface {
 
-private final class AuthorizationManager: AuthorizationManagerInterface {
-    private let configuration: ConfigurationInterface
     private let logger: LoggerInterface
     private let decisionManager: DecisionManagerInterface
 
     private var endpointSecurityOpt: EndpointSecurityInterface? = nil
     private let notificationClient: NotificationClientInterface
-    private let signatureDatabase = SignatureDatabase()
-    private let operationQueue: OperationQueue
+    private let signatureDatabase: SignatureDatabase
 
     private init(configuration: ConfigurationInterface,
                  logger: LoggerInterface,
                  decisionManager: DecisionManagerInterface,
                  endpointSecurityFactory: EndpointSecurityInterfaceFactory) throws {
 
-        self.configuration = configuration
         self.logger = logger
         self.decisionManager = decisionManager
 
+        signatureDatabase = SignatureDatabase(logger: self.logger)
         notificationClient = createNotificationClient()
-        operationQueue = createOperationQueue(type: OperationQueueType.primary)
 
-        let endpointSecurityExp = endpointSecurityFactory(configuration,
-                                                          logger,
+        let endpointSecurityExp = endpointSecurityFactory(logger,
                                                           onEndpointSecurityMessage)
 
         switch endpointSecurityExp {
@@ -52,13 +47,23 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
 
             throw AuthorizationManagerError.endpointSecurityFactoryError
         }
+
+        configuration.subscribe(subscriber: self)
+    }
+
+    func onConfigurationChange(configuration: ConfigurationInterface) {
+        logger.logMessage(severity: LoggerMessageSeverity.information,
+                          message: "Deleting the cache")
+
+        _ = endpointSecurityOpt!.invalidateCache()
+        signatureDatabase.invalidateCache()
     }
 
     private func onEndpointSecurityMessage(message: EndpointSecurityMessage) {
         switch message {
         case let .ExecAuthorization(execAuthorization):
             signatureDatabase.checkSignatureFor(message: execAuthorization,
-                                                block: processSignatureCheckNotification)
+                                                block: signatureDatabaseCallback)
 
         case let .ExecInvalidationNotification(execInvalidationNotification):
             let logMessage: String
@@ -68,8 +73,10 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
             case .applicationChanged:
                 logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the application has been changed on disk"
                 notificationMessage = "Denied '\(execInvalidationNotification.binaryPath)' (application changed)"
+
             case .expired:
                 logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the authorization/code signing check process took too long"
+
                 notificationMessage = "Authorization expired: '\(execInvalidationNotification.binaryPath)'"
             }
 
@@ -90,63 +97,52 @@ private final class AuthorizationManager: AuthorizationManagerInterface {
         }
     }
 
-    private func processSignatureCheckNotification(message: EndpointSecurityExecAuthorization,
-                                                   result: SignatureDatabaseResult) {
+    private func signatureDatabaseCallback(message: EndpointSecurityExecAuthorization,
+                                           result: SignatureDatabaseResult) {
+
         switch result {
         case SignatureDatabaseResult.Failed:
-            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                      allow: false,
-                                                      cache: false)
-
             logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Failed to validate the code signature for '\(message.binaryPath)'. Execution has been denied")
+                              message: "Failed to validate the code signature for '\(message.binaryPath)'")
 
         case SignatureDatabaseResult.Invalid:
-            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                      allow: false,
-                                                      cache: false)
-
-            notificationClient.showNotification(message: "Blocked, due to invalid signature: \(message.binaryPath)")
-
             logger.logMessage(severity: LoggerMessageSeverity.information,
-                              message: "Invalid code signature for '\(message.binaryPath)'. Execution has been denied")
+                              message: "Invalid code signature for '\(message.binaryPath)'")
 
         case SignatureDatabaseResult.NotSigned:
-            _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                      allow: false,
-                                                      cache: false)
-
-            notificationClient.showNotification(message: "Blocked unsigned application: \(message.binaryPath)")
-
             logger.logMessage(severity: LoggerMessageSeverity.information,
-                              message: "The following application is not signed '\(message.binaryPath)'. Execution has been denied")
+                              message: "The following application is not signed '\(message.binaryPath)'")
 
         case SignatureDatabaseResult.Valid:
-            let operation = AuthorizationManagerOperation(decisionManager: decisionManager,
-                                                          message: message)
+            ()
+        }
 
-            operation.completionBlock = { [unowned operation, message] in
-                let allow = operation.isAllowed()
-                let cache = message.platformBinary
+        let request = DecisionManagerRequest(binaryPath: message.binaryPath,
+                                             codeDirectoryHash: message.codeDirectoryHash,
+                                             signingIdentifier: message.signingIdentifier,
+                                             teamIdentifier: message.teamIdentifier,
+                                             platformBinary: message.platformBinary)
 
-                // This operation can fail if a write notification has invalidated this
-                // request inside EndpointSecurityClient
-                if self.endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
-                                                              allow: allow,
-                                                              cache: cache) {
-                    var actionDescription = allow ? "allowed" : "denied"
-                    actionDescription += cache ? " (cached)" : ""
+        var allow = false
+        var cache = false
+        decisionManager.processRequest(request: request,
+                                       allow: &allow,
+                                       cache: &cache,
+                                       signatureCheckResult: result)
 
-                    self.logger.logMessage(severity: LoggerMessageSeverity.information,
-                                           message: "The following signed application '\(message.binaryPath)' has been \(actionDescription)")
+        _ = endpointSecurityOpt!.setAuthorization(identifier: message.identifier,
+                                                  allow: allow,
+                                                  cache: cache)
 
-                    if !allow {
-                        self.notificationClient.showNotification(message: "Blocked signed application: \(message.binaryPath)")
-                    }
-                }
-            }
+        if allow {
+             logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "Allowed: '\(message.binaryPath)'")
 
-            operationQueue.addOperation(operation)
+        } else {
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                             message: "Blocked: '\(message.binaryPath)'")
+
+            notificationClient.showNotification(message: "Blocked: \(message.binaryPath)")
         }
     }
 
@@ -170,35 +166,4 @@ public func createAuthorizationManager(configuration: ConfigurationInterface,
                                 logger: logger,
                                 decisionManager: decisionManager,
                                 endpointSecurityFactory: endpointSecurityFactory)
-}
-
-private final class AuthorizationManagerOperation: Operation {
-    private let decisionManager: DecisionManagerInterface
-    private let message: EndpointSecurityExecAuthorization
-
-    private var allow: Bool = false
-
-    public init(decisionManager: DecisionManagerInterface, message: EndpointSecurityExecAuthorization) {
-        self.decisionManager = decisionManager
-        self.message = message
-
-        super.init()
-    }
-
-    public override func main() {
-        guard !isCancelled else { return }
-
-        let request = DecisionManagerRequest(binaryPath: message.binaryPath,
-                                             codeDirectoryHash: message.codeDirectoryHash,
-                                             signingIdentifier: message.signingIdentifier,
-                                             teamIdentifier: message.teamIdentifier,
-                                             platformBinary: message.platformBinary)
-
-        decisionManager.processRequest(request: request,
-                                       allow: &allow)
-    }
-
-    public func isAllowed() -> Bool {
-        allow
-    }
 }

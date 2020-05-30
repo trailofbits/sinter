@@ -12,6 +12,7 @@ import Configuration
 struct BaseDecisionManagerContext {
     public var allowUnknownPrograms = false
     public var allowUnsignedPrograms = false
+    public var allowInvalidPrograms = false
 }
 
 protocol RuleDatabaseProviderInterface {
@@ -39,20 +40,26 @@ class BaseDecisionManager: DecisionManagerInterface,
     }
 
     func onConfigurationChange(configuration: ConfigurationInterface) {
-        BaseDecisionManager.readConfiguration(context: &context,
-                                               configuration: configuration,
-                                               logger: logger)
+        dispatchQueue.sync {
+            BaseDecisionManager.readConfiguration(context: &context,
+                                                  configuration: configuration,
+                                                  logger: logger)
 
-        ruleDatabaseProvider.configure(configuration: configuration)
+            ruleDatabaseProvider.configure(configuration: configuration)
+        }
     }
 
     public func processRequest(request: DecisionManagerRequest,
-                               allow: inout Bool) {
+                               allow: inout Bool,
+                               cache: inout Bool,
+                               signatureCheckResult: SignatureDatabaseResult) {
 
         BaseDecisionManager.processRequest(context: context,
                                            request: request,
                                            ruleDatabase: ruleDatabaseProvider.ruleDatabase(),
-                                           allow: &allow)
+                                           allow: &allow,
+                                           cache: &cache,
+                                           signatureCheckResult: signatureCheckResult)
     }
 
     static func readConfiguration(context: inout BaseDecisionManagerContext,
@@ -61,6 +68,7 @@ class BaseDecisionManager: DecisionManagerInterface,
 
         var newAllowUnknownPrograms = false
         var newAllowUnsignedPrograms = false
+        var newAllowInvalidPrograms = false
 
         if let allowUnknownPrograms = configuration.booleanValue(section: "Sinter",
                                                                    key: "allow_unknown_programs") {
@@ -79,27 +87,51 @@ class BaseDecisionManager: DecisionManagerInterface,
             logger.logMessage(severity: LoggerMessageSeverity.error,
                               message: "The 'allow_unsigned_programs' key is missing from the Sinter section")
         }
+
+        if let allowInvalidPrograms = configuration.booleanValue(section: "Sinter",
+                                                                 key: "allow_invalid_programs") {
+            newAllowInvalidPrograms = allowInvalidPrograms
+
+        } else {
+            logger.logMessage(severity: LoggerMessageSeverity.error,
+                              message: "The 'allow_invalid_programs' key is missing from the Sinter section")
+        }
         
         context.allowUnknownPrograms = newAllowUnknownPrograms
         context.allowUnsignedPrograms = newAllowUnsignedPrograms
+        context.allowInvalidPrograms = newAllowInvalidPrograms
     }
 
     static func processRequest(context: BaseDecisionManagerContext,
                                request: DecisionManagerRequest,
                                ruleDatabase: RuleDatabase,
-                               allow: inout Bool) -> Void {
+                               allow: inout Bool,
+                               cache: inout Bool,
+                               signatureCheckResult: SignatureDatabaseResult) -> Void {
 
-        if request.platformBinary {
-            allow = true
+        cache = false
 
-        } else if request.codeDirectoryHash.hash.isEmpty {
+        switch signatureCheckResult {
+        case SignatureDatabaseResult.Failed:
+            allow = context.allowInvalidPrograms
+
+        case SignatureDatabaseResult.Invalid:
+            allow = context.allowInvalidPrograms
+
+        case SignatureDatabaseResult.NotSigned:
             allow = context.allowUnsignedPrograms
 
-        } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
-            allow = rule.policy == RulePolicy.whitelist
+        case SignatureDatabaseResult.Valid:
+            if request.platformBinary {
+                allow = true
+                cache = true
 
-        } else {
-            allow = context.allowUnknownPrograms
+            } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
+                allow = rule.policy == RulePolicy.whitelist
+
+            } else {
+                allow = context.allowUnknownPrograms
+            }
         }
     }
 }

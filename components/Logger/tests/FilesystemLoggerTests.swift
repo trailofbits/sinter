@@ -42,6 +42,9 @@ class LoggerTests: XCTestCase {
         
         XCTAssertFalse(loggedMessage.isEmpty)
 
+        let timestampOpt = loggedMessage["timestamp"]
+        XCTAssertNotNil(timestampOpt)
+
         let objectTypeOpt = loggedMessage["type"]
         XCTAssertNotNil(objectTypeOpt)
 
@@ -62,7 +65,7 @@ class LoggerTests: XCTestCase {
         for severity in LoggerMessageSeverity.allCases {
             let message = FilesystemLogger.generateLogMessage(severity: severity,
                                                               message: testMessage)
-            
+
             validateLoggedMessage(message: message,
                                   expectedSeverity: severity,
                                   expectedMessage: testMessage)

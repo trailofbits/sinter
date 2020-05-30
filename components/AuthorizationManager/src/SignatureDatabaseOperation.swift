@@ -7,6 +7,7 @@
  */
 
 import Foundation
+import DecisionManager
 
 final class SignatureDatabaseOperation : Operation {
     private let path: String

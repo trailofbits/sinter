@@ -1,18 +1,21 @@
 {
   "Sinter": {
-    "decision_manager": "sync-server"
+    "decision_manager": "local",
+
+    "allow_unsigned_programs": "true",
+    "allow_invalid_programs": "true",
+    "allow_unknown_programs": "true",
+
+    "log_file_path": "/var/log/sinter.log",
+    "config_update_interval": 600,
   },
 
   "SyncServerDecisionManager": {
-    "server_address": "http://127.0.0.1:8080",
-    "update_interval": 10,
-    "default_action": "allow",
-    "machine_identifier": "default_1234"
+    "server_address": "https://server_address:port",
+    "machine_identifier": "machine_identifier",
   },
 
   "LocalDecisionManager": {
-    "default_action": "allow",
     "rule_database_path": "/etc/sinter/rules.json",
-    "update_interval": "10"
   }
 }

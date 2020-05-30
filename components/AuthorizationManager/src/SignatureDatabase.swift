@@ -8,15 +8,10 @@
 
 import Foundation
 import EndpointSecurityClient
+import DecisionManager
+import Logger
 
 fileprivate let fileSizeLimit: Int = (1024 * 1024) * 10
-
-public enum SignatureDatabaseResult {
-    case Valid
-    case Invalid
-    case NotSigned
-    case Failed
-}
 
 public typealias SignatureDatabaseCallback = (EndpointSecurityExecAuthorization,
                                               SignatureDatabaseResult) -> Void
@@ -33,24 +28,76 @@ fileprivate let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.sig
 
 final class SignatureDatabase {
     private var context = SignatureDatabaseContext()
+    private var logger: LoggerInterface
+
+    public init(logger: LoggerInterface) {
+        self.logger = logger
+    }
 
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
                                   block: @escaping SignatureDatabaseCallback) {
 
-        let fileInformationOpt = getFileInformation(path: message.binaryPath)
+        dispatchQueue.sync {
+            let fileInformationOpt = getFileInformation(path: message.binaryPath)
+
+            var queueType = OperationQueueType.secondary
+            if let fileInformation = fileInformationOpt {
+                if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
+                    queueType = OperationQueueType.primary
+                }
+
+            } else {
+                context.resultCache[message.binaryPath] = SignatureDatabaseResult.Failed
+            }
+
+            if message.codeDirectoryHash.hash.isEmpty {
+                context.resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
+            }
+
+            let cachedResultOpt = context.resultCache[message.binaryPath]
+            let operation = SignatureDatabaseOperation(path: message.binaryPath,
+                                                       cachedResultOpt: cachedResultOpt)
+
+            operation.completionBlock = { [unowned operation, message, block] in
+                let result = operation.getResult()
+                block(message, result)
+
+                let binaryPath = message.binaryPath
+                self.setResult(binaryPath: binaryPath,
+                               result: result)
+            }
+
+            let parentOperationOpt = context.operationMap[message.binaryPath]
+            if parentOperationOpt != nil {
+                operation.addDependency(parentOperationOpt!)
+            }
+
+            context.operationMap[message.binaryPath] = operation
+
+            switch (queueType) {
+            case .primary:
+                context.primaryOperationQueue.addOperation(operation)
+
+            case .secondary:
+                context.secondaryOperationQueue.addOperation(operation)
+            }
+        }
+    }
+
+    private func setResult(binaryPath: String,
+                           result: SignatureDatabaseResult) {
 
         dispatchQueue.sync {
-            SignatureDatabase.checkSignatureFor(context: &context,
-                                                message: message,
-                                                fileInformationOpt: fileInformationOpt,
-                                                block: block)
+            context.resultCache[binaryPath] = result
+            context.operationMap.removeValue(forKey: binaryPath)
         }
     }
 
     public func invalidateCacheFor(path: String) {
         dispatchQueue.sync {
             SignatureDatabase.invalidateCacheFor(context: &context,
-                                                 path: path)
+                                                 path: path,
+                                                 logger: logger)
         }
     }
 
@@ -61,7 +108,8 @@ final class SignatureDatabase {
     }
 
     static func invalidateCacheFor(context: inout SignatureDatabaseContext,
-                                   path: String) {
+                                   path: String,
+                                   logger: LoggerInterface) {
 
         var operationPathList = [String]()
 
@@ -78,6 +126,9 @@ final class SignatureDatabase {
         
         for operationPath in operationPathList {
             context.operationMap.removeValue(forKey: operationPath)
+
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "Invalidating signature check operation for \(operationPath)")
         }
 
         var resultPathList = [String]()
@@ -92,6 +143,9 @@ final class SignatureDatabase {
         
         for resultPath in resultPathList {
             context.resultCache.removeValue(forKey: resultPath)
+
+            logger.logMessage(severity: LoggerMessageSeverity.information,
+                              message: "Invalidating cached signature check status \(resultPath)")
         }
     }
 
@@ -102,56 +156,5 @@ final class SignatureDatabase {
 
         context.operationMap.removeAll()
         context.resultCache.removeAll()
-    }
-
-    static func checkSignatureFor(context: inout SignatureDatabaseContext,
-                                  message: EndpointSecurityExecAuthorization,
-                                  fileInformationOpt: FileInformation?,
-                                  block: @escaping SignatureDatabaseCallback) {
-
-        var queueTypeOpt: OperationQueueType? = nil
-        if let fileInformation = fileInformationOpt {
-            if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
-                queueTypeOpt = OperationQueueType.primary
-            } else {
-                queueTypeOpt = OperationQueueType.secondary
-            }
-        }
-
-        if queueTypeOpt == nil {
-            context.resultCache[message.binaryPath] = SignatureDatabaseResult.Failed
-            queueTypeOpt = OperationQueueType.secondary
-
-        } else if message.codeDirectoryHash.hash.isEmpty {
-            context.resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
-        }
-
-        let cachedResultOpt = context.resultCache[message.binaryPath]
-        let operation = SignatureDatabaseOperation(path: message.binaryPath,
-                                                   cachedResultOpt: cachedResultOpt)
-
-        operation.completionBlock = { [unowned operation, message, block, context] in
-            dispatchQueue.sync {
-                context.resultCache[message.binaryPath] = operation.getResult()
-                block(message, operation.getResult())
-
-                context.operationMap.removeValue(forKey: message.binaryPath)
-            }
-        }
-
-        let parentOperationOpt = context.operationMap[message.binaryPath]
-        if parentOperationOpt != nil {
-            operation.addDependency(parentOperationOpt!)
-        }
-
-        context.operationMap[message.binaryPath] = operation
-
-        switch (queueTypeOpt!) {
-        case .primary:
-            context.primaryOperationQueue.addOperation(operation)
-
-        case .secondary:
-            context.secondaryOperationQueue.addOperation(operation)
-        }
     }
 }

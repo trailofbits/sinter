@@ -116,6 +116,69 @@
 			remoteGlobalIDString = D21FDCEA247DB06800309B61;
 			remoteInfo = BaseDecisionManagerTests;
 		};
+		D2BED8C22481BED900A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F58402450DA370070C21C;
+			remoteInfo = "notification-server";
+		};
+		D2BED8C42481BED900A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F586C2450DC090070C21C;
+			remoteInfo = "system-extension";
+		};
+		D2BED8D22481BEE700A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D24B4A2E2448A73000958F82;
+			remoteInfo = NotificationService;
+		};
+		D2BED8D42481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E475247D4203002B9FBE /* Configuration.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E3F7247D2221002B9FBE;
+			remoteInfo = Configuration;
+		};
+		D2BED8D62481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E47E247D420E002B9FBE /* Logger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E43C247D2ACF002B9FBE;
+			remoteInfo = Logger;
+		};
+		D2BED8D82481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E497247D4C25002B9FBE;
+			remoteInfo = DecisionManager;
+		};
+		D2BED8DA2481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F58AC2450E1E40070C21C;
+			remoteInfo = AuthorizationManager;
+		};
+		D2BED8DC2481BF1700A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2578504243F77DC0020BC32;
+			remoteInfo = EndpointSecurityClient;
+		};
+		D2BED8DE2481BF2200A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D24B4A2E2448A73000958F82;
+			remoteInfo = NotificationService;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -417,6 +480,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8D32481BEE700A44C62 /* PBXTargetDependency */,
 			);
 			name = "notification-server";
 			productName = "notification-server";
@@ -435,6 +499,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8DF2481BF2200A44C62 /* PBXTargetDependency */,
+				D2BED8DD2481BF1700A44C62 /* PBXTargetDependency */,
+				D2BED8D52481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8D72481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8D92481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8DB2481BEF800A44C62 /* PBXTargetDependency */,
 			);
 			name = "system-extension";
 			productName = "system-extension";
@@ -454,6 +524,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8C32481BED900A44C62 /* PBXTargetDependency */,
+				D2BED8C52481BED900A44C62 /* PBXTargetDependency */,
 			);
 			name = Sinter;
 			productName = Sinter;
@@ -660,6 +732,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2BED8C32481BED900A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D20F58402450DA370070C21C /* notification-server */;
+			targetProxy = D2BED8C22481BED900A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8C52481BED900A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D20F586C2450DC090070C21C /* system-extension */;
+			targetProxy = D2BED8C42481BED900A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D32481BEE700A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NotificationService;
+			targetProxy = D2BED8D22481BEE700A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D52481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Configuration;
+			targetProxy = D2BED8D42481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D72481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Logger;
+			targetProxy = D2BED8D62481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D92481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DecisionManager;
+			targetProxy = D2BED8D82481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DB2481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AuthorizationManager;
+			targetProxy = D2BED8DA2481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DD2481BF1700A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EndpointSecurityClient;
+			targetProxy = D2BED8DC2481BF1700A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DF2481BF2200A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NotificationService;
+			targetProxy = D2BED8DE2481BF2200A44C62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D20F58512450DA380070C21C /* Debug */ = {

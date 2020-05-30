@@ -19,7 +19,6 @@
 		D295BFF42480019200CBE00A /* CodeSignatureChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFF32480019200CBE00A /* CodeSignatureChecker.swift */; };
 		D295BFF6248001A000CBE00A /* SignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFF5248001A000CBE00A /* SignatureDatabase.swift */; };
 		D295C00E24800BC200CBE00A /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58AD2450E1E40070C21C /* AuthorizationManager.framework */; };
-		D295C01624800C8000CBE00A /* AuthorizationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */; };
 		D2BED8B3248183F100A44C62 /* OperationQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BED8B2248183F100A44C62 /* OperationQueue.swift */; };
 		D2BED8BB248189D800A44C62 /* SignatureDatabaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BED8BA248189D800A44C62 /* SignatureDatabaseOperation.swift */; };
 		D2BED8BD24818B8500A44C62 /* SignatureDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BED8BC24818B8500A44C62 /* SignatureDatabaseTests.swift */; };
@@ -52,7 +51,6 @@
 		D295BFF32480019200CBE00A /* CodeSignatureChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSignatureChecker.swift; sourceTree = "<group>"; };
 		D295BFF5248001A000CBE00A /* SignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabase.swift; sourceTree = "<group>"; };
 		D295C00924800BC200CBE00A /* AuthorizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthorizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerTests.swift; sourceTree = "<group>"; };
 		D2BED8B2248183F100A44C62 /* OperationQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueue.swift; sourceTree = "<group>"; };
 		D2BED8BA248189D800A44C62 /* SignatureDatabaseOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseOperation.swift; sourceTree = "<group>"; };
 		D2BED8BC24818B8500A44C62 /* SignatureDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureDatabaseTests.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		D295C01424800C6700CBE00A /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				D295C01524800C8000CBE00A /* AuthorizationManagerTests.swift */,
 				D2BED8BC24818B8500A44C62 /* SignatureDatabaseTests.swift */,
 			);
 			path = tests;
@@ -272,7 +269,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D295C01624800C8000CBE00A /* AuthorizationManagerTests.swift in Sources */,
 				D2BED8BD24818B8500A44C62 /* SignatureDatabaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

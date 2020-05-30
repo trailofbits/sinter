@@ -9,7 +9,8 @@
 import Configuration
 import Darwin
 
-fileprivate let defaultLogFilePath = "/var/db/sinter/sinter.log"
+fileprivate let defaultLogFilePath = "/var/log/sinter.log"
+fileprivate let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.filesystem-logger")
 
 final class FilesystemLoggerContext {
     var logFileURL = URL(fileURLWithPath: "")
@@ -19,8 +20,10 @@ final class FilesystemLogger: LoggerInterface, ConfigurationSubscriberInterface 
     var context = FilesystemLoggerContext()
 
     func onConfigurationChange(configuration: ConfigurationInterface) {
-        FilesystemLogger.readConfiguration(context: &context,
-                                           configuration: configuration)
+        dispatchQueue.sync {
+            FilesystemLogger.readConfiguration(context: &context,
+                                               configuration: configuration)
+        }
     }
 
     func setConfiguration(configuration: ConfigurationInterface) {
@@ -59,7 +62,12 @@ final class FilesystemLogger: LoggerInterface, ConfigurationSubscriberInterface 
     static func generateLogMessage(severity: LoggerMessageSeverity,
                                    message: String) -> String {
 
-        return String(format: "{ \"type\": \"message\", \"severity\": \"\(severity)\", \"message\": \"\(message)\" }\n")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MMM-dd HH:mm:ss"
+
+        let timestamp = dateFormatter.string(from: Date())
+
+        return String(format: "{ \"timestamp\": \"\(timestamp)\", \"type\": \"message\", \"severity\": \"\(severity)\", \"message\": \"\(message)\" }\n")
     }
     
     static func logMessage(context: FilesystemLoggerContext,
@@ -69,15 +77,32 @@ final class FilesystemLogger: LoggerInterface, ConfigurationSubscriberInterface 
         let message = FilesystemLogger.generateLogMessage(severity: severity,
                                                           message: message)
 
-        do {
-            try message.write(to: context.logFileURL,
-                              atomically: true,
-                              encoding: .utf8)
+        var succeeded = false
 
-            return true
+        dispatchQueue.sync {
+            if let fileHandle = try? FileHandle(forWritingTo: context.logFileURL) {
+                fileHandle.seekToEndOfFile()
 
-        } catch {
-            return false
+                let messageData = message.data(using: .utf8)!
+                fileHandle.write(messageData)
+
+                fileHandle.closeFile()
+
+                succeeded = true
+
+            } else {
+                do {
+                    try message.write(to: context.logFileURL,
+                                      atomically: true,
+                                      encoding: .utf8)
+
+                    succeeded = true
+
+                } catch {
+                }
+            }
         }
+
+        return succeeded
     }
 }

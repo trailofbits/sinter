@@ -24,7 +24,7 @@ func createOperationQueue(type: OperationQueueType) -> OperationQueue {
         queue.qualityOfService = .userInteractive
 
     case .secondary:
-        queue.maxConcurrentOperationCount = 1
+        queue.maxConcurrentOperationCount = 2
         queue.qualityOfService = .background
     }
 

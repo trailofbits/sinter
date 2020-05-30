@@ -66,15 +66,7 @@ if let decisionManagerPluginName = configuration.stringValue(section: "Sinter", 
 
     exit(EXIT_FAILURE)
 }
-/*
- public typealias EndpointSecurityCallback = (_ message: EndpointSecurityMessage) -> Void
 
- public typealias EndpointSecurityInterfaceFactory = (LoggerInterface, @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error>
-
- public func createEndpointSecurityClient(configuration: ConfigurationInterface,
-                                          logger: LoggerInterface,
-                                          callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
- */
 // Initialize the AuthorizationManager
 let authorizationManagerExp = createAuthorizationManager(configuration: configuration,
                                                          logger: logger,

@@ -82,10 +82,10 @@ class EndpointSecurityClientTests: XCTestCase {
     }
     
     func testEventExpiration() throws {
-        var context = generateContext()
+        let context = generateContext()
         var expiredMessageList = [MessageMapEntry]()
 
-        EndpointSecurityClient.expireEvents(context: &context,
+        EndpointSecurityClient.expireEvents(context: context,
                                             expiredMessageList: &expiredMessageList,
                                             currentTimestamp: 0,
                                             maxRequestAge: 1)
@@ -93,21 +93,21 @@ class EndpointSecurityClientTests: XCTestCase {
         XCTAssertTrue(expiredMessageList.isEmpty)
         XCTAssertEqual(context.authorizationMessageMap.count, 2)
 
-        EndpointSecurityClient.expireEvents(context: &context,
+        EndpointSecurityClient.expireEvents(context: context,
                                             expiredMessageList: &expiredMessageList,
                                             currentTimestamp: 2,
                                             maxRequestAge: 1)
         
         XCTAssertEqual(expiredMessageList.count, 1)
-        XCTAssertEqual(context.authorizationMessageMap.count, 1)
+        XCTAssertEqual(context.authorizationMessageMap.count, 2)
 
-        EndpointSecurityClient.expireEvents(context: &context,
+        EndpointSecurityClient.expireEvents(context: context,
                                             expiredMessageList: &expiredMessageList,
                                             currentTimestamp: 3,
                                             maxRequestAge: 1)
         
-        XCTAssertEqual(expiredMessageList.count, 1)
-        XCTAssertTrue(context.authorizationMessageMap.isEmpty)
+        XCTAssertEqual(expiredMessageList.count, 2)
+        XCTAssertEqual(context.authorizationMessageMap.count, 2)
     }
     
     func testEventExpirationHandler() throws {

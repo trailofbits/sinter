@@ -36,9 +36,18 @@ public struct DecisionManagerRequest {
     }
 }
 
+public enum SignatureDatabaseResult : CaseIterable {
+    case Valid
+    case Invalid
+    case NotSigned
+    case Failed
+}
+
 public protocol DecisionManagerInterface {
     func processRequest(request: DecisionManagerRequest,
-                        allow: inout Bool) -> Void
+                        allow: inout Bool,
+                        cache: inout Bool,
+                        signatureCheckResult: SignatureDatabaseResult) -> Void
 }
 
 public func createLocalDecisionManager(logger: LoggerInterface,

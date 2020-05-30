@@ -18,15 +18,19 @@ final class DecisionManagerTests : XCTestCase {
         let logger = DummyLogger()
         
         var context = BaseDecisionManagerContext()
+        XCTAssertFalse(context.allowInvalidPrograms)
         XCTAssertFalse(context.allowUnknownPrograms)
         XCTAssertFalse(context.allowUnsignedPrograms)
+
 
         BaseDecisionManager.readConfiguration(context: &context,
                                               configuration: configuration,
                                               logger: logger)
 
+        XCTAssertTrue(context.allowInvalidPrograms)
         XCTAssertTrue(context.allowUnknownPrograms)
         XCTAssertTrue(context.allowUnsignedPrograms)
+
     }
     
     func testRequestProcessingForPlatformBinaries() throws {
@@ -38,13 +42,30 @@ final class DecisionManagerTests : XCTestCase {
                                              teamIdentifier: "",
                                              platformBinary: true)
         
-        var allow = false
-        BaseDecisionManager.processRequest(context: BaseDecisionManagerContext(),
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
+        let context = BaseDecisionManagerContext()
+        XCTAssertFalse(context.allowInvalidPrograms)
+        XCTAssertFalse(context.allowUnknownPrograms)
+        XCTAssertFalse(context.allowUnsignedPrograms)
 
-        XCTAssertTrue(allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
+
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            if signatureCheckResult == SignatureDatabaseResult.Valid {
+                XCTAssertTrue(allow)
+                XCTAssertTrue(cache)
+            } else {
+                XCTAssertFalse(allow)
+                XCTAssertFalse(cache)
+            }
+        }
     }
 
     func testRequestProcessingForUnsignedPrograms() throws {
@@ -57,25 +78,46 @@ final class DecisionManagerTests : XCTestCase {
                                              platformBinary: false)
         
         var context = BaseDecisionManagerContext()
+        XCTAssertFalse(context.allowInvalidPrograms)
+        XCTAssertFalse(context.allowUnknownPrograms)
         XCTAssertFalse(context.allowUnsignedPrograms)
 
-        var allow = false
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
 
-        XCTAssertFalse(allow)
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            XCTAssertFalse(allow)
+            XCTAssertFalse(cache)
+        }
 
         context.allowUnsignedPrograms = true
-        allow = false
 
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
 
-        XCTAssertTrue(allow)
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            if signatureCheckResult == SignatureDatabaseResult.NotSigned {
+                XCTAssertTrue(allow)
+            } else {
+                XCTAssertFalse(allow)
+            }
+
+            XCTAssertFalse(cache)
+        }
     }
 
     func testRequestProcessingForUnknownPrograms() throws {
@@ -88,25 +130,46 @@ final class DecisionManagerTests : XCTestCase {
                                              platformBinary: false)
         
         var context = BaseDecisionManagerContext()
+        XCTAssertFalse(context.allowInvalidPrograms)
         XCTAssertFalse(context.allowUnknownPrograms)
+        XCTAssertFalse(context.allowUnsignedPrograms)
 
-        var allow = false
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
 
-        XCTAssertFalse(allow)
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            XCTAssertFalse(allow)
+            XCTAssertFalse(cache)
+        }
         
         context.allowUnknownPrograms = true
-        allow = false
 
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
 
-        XCTAssertTrue(allow)
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            if signatureCheckResult == SignatureDatabaseResult.Valid {
+                XCTAssertTrue(allow)
+            } else {
+                XCTAssertFalse(allow)
+            }
+
+            XCTAssertFalse(cache)
+        }
     }
 
     func testRequestProcessingForKnownPrograms() throws {
@@ -121,39 +184,70 @@ final class DecisionManagerTests : XCTestCase {
                                              platformBinary: false)
         
         let context = BaseDecisionManagerContext()
+        XCTAssertFalse(context.allowInvalidPrograms)
         XCTAssertFalse(context.allowUnknownPrograms)
+        XCTAssertFalse(context.allowUnsignedPrograms)
 
-        var allow = false
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: RuleDatabase(),
-                                           allow: &allow)
-
-        XCTAssertFalse(allow)
-        
         var ruleDatabase = RuleDatabase()
+        XCTAssertTrue(ruleDatabase.binaryRuleMap.isEmpty)
+        XCTAssertTrue(ruleDatabase.certificateRuleMap.isEmpty)
+
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
+
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: RuleDatabase(),
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            XCTAssertFalse(allow)
+            XCTAssertFalse(cache)
+        }
+
         ruleDatabase.binaryRuleMap[cmakeHash] = RuleMapEntry(ruleType: RuleType.binary,
                                                              policy: RulePolicy.whitelist,
                                                              customMessage: "Test",
                                                              truncatedHash: cmakeHash)
 
-        allow = false
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: ruleDatabase,
-                                           allow: &allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
 
-        XCTAssertTrue(allow)
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: ruleDatabase,
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            if signatureCheckResult == SignatureDatabaseResult.Valid {
+                XCTAssertTrue(allow)
+            } else {
+                XCTAssertFalse(allow)
+            }
+
+            XCTAssertFalse(cache)
+        }
 
         ruleDatabase.binaryRuleMap[cmakeHash]!.policy = RulePolicy.blacklist
         
-        allow = true
-        BaseDecisionManager.processRequest(context: context,
-                                           request: request,
-                                           ruleDatabase: ruleDatabase,
-                                           allow: &allow)
-        
-        XCTAssertFalse(allow)
+        for signatureCheckResult in SignatureDatabaseResult.allCases {
+            var allow = false
+            var cache = false
+
+            BaseDecisionManager.processRequest(context: context,
+                                               request: request,
+                                               ruleDatabase: ruleDatabase,
+                                               allow: &allow,
+                                               cache: &cache,
+                                               signatureCheckResult: signatureCheckResult)
+
+            XCTAssertFalse(allow)
+            XCTAssertFalse(cache)
+        }
     }
 }
 
@@ -172,8 +266,8 @@ fileprivate final class TestConfiguration : ConfigurationInterface {
         if section != "Sinter" {
             return nil
         }
-        
-        if key == "allow_unknown_programs" || key == "allow_unsigned_programs" {
+
+        if key == "allow_unknown_programs" || key == "allow_unsigned_programs" || key == "allow_invalid_programs" {
             return true
         }
 
