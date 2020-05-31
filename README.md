@@ -23,15 +23,63 @@ Optional: you may need to set the command-line tools to the full Xcode, first, t
 `$ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
 
 # Running Sinter
-## Configuration
-Sinter requires a configuration file to be present at `/etc/sinter/config.json`. An [example configuration](config/config.json) is provided in the source tree.
-
+## Prerequisites
 It is important for Sinter.app to have the 'Full Disk Access' permission, otherwise it will fail to start. Do this by opening System Preferences, Security, Privacy tab, Full Disk Access. Check the item for `Sinter.app`.
 
-The PKG installer will setup a LaunchDaemon that will automatically open Sinter on startup. Developers that may want to start the daemon from the shell must ensure that the terminal they use also have the 'Full Disk Access' permission, otherwise the EndpointSecurity API will return an error.
+The PKG installer will setup a LaunchDaemon that will automatically open Sinter on startup. Developers that may want to start the daemon from the shell must ensure that the **terminal they use also have the 'Full Disk Access' permission**, otherwise the EndpointSecurity API will return an error.
 
-## Logging
-Log files are located in the `/var/db/sinter` folder, and are flushed by launchd automatically once every 2 minutes.
+## Configuration
+Sinter requires a configuration file to be present at `/etc/sinter/config.json`. This is how the settings look like, taken from the [example configuration](config/config.json) saved in the config folder:
+```json
+{
+  "Sinter": {
+    "decision_manager": "local",
+
+    "allow_unsigned_programs": "true",
+    "allow_invalid_programs": "true",
+    "allow_unknown_programs": "true",
+
+    "log_file_path": "/var/log/sinter.log",
+    "config_update_interval": 600,
+  },
+
+  "SyncServerDecisionManager": {
+    "server_address": "https://server_address:port",
+    "machine_identifier": "machine_identifier",
+  },
+
+  "LocalDecisionManager": {
+    "rule_database_path": "/etc/sinter/rules.json",
+  }
+}
+```
+
+The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **SyncServerDecisionManager** configuration section, where the server URL and machine identifier can be set.
+
+## Configuring Sinter in MONITOR mode
+Modes are not implemented in Sinter, as everything is rule-based. It is possible to implement the monitoring functionality by tweaking the following settings:
+
+ - **allow_unsigned_programs**: allow applications that are not signed
+ - **allow_invalid_programs**: allow applications that fail the signature check
+ - **allow_unknown_programs**: automatically allow applications that are not covered by the active rule database
+
+## Rule format
+Rule databases are written in JSON format. Here's an example database that allows the CMake application bundle from cmake.org:
+
+```json
+{
+  "rules": [
+    {
+      "rule_type": "BINARY",
+      "policy": "WHITELIST",
+      "sha256": "BDD0AF132D89EA4810566B3E1E0D1E48BAC6CF18D0C787054BB62A4938683039",
+      "custom_msg": "CMake"
+    }
+  ]
+}
+```
+
+Sinter only supports BINARY rules for now, using either WHITELIST or BLACKLIST policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
 # License
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.
