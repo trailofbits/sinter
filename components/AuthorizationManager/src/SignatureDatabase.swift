@@ -38,18 +38,6 @@ final class SignatureDatabase {
                                   block: @escaping SignatureDatabaseCallback) {
 
         dispatchQueue.sync {
-            let fileInformationOpt = getFileInformation(path: message.binaryPath)
-
-            var queueType = OperationQueueType.secondary
-            if let fileInformation = fileInformationOpt {
-                if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
-                    queueType = OperationQueueType.primary
-                }
-
-            } else {
-                context.resultCache[message.binaryPath] = SignatureDatabaseResult.Failed
-            }
-
             if message.codeDirectoryHash.hash.isEmpty {
                 context.resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
             }
@@ -73,7 +61,8 @@ final class SignatureDatabase {
             }
 
             context.operationMap[message.binaryPath] = operation
-
+            
+            let queueType = SignatureDatabase.getQueueTypeFor(path: message.binaryPath)
             switch (queueType) {
             case .primary:
                 context.primaryOperationQueue.addOperation(operation)
@@ -156,5 +145,25 @@ final class SignatureDatabase {
 
         context.operationMap.removeAll()
         context.resultCache.removeAll()
+    }
+
+    static func getQueueTypeFor(fileInformation: FileInformation) -> OperationQueueType {
+        var queueType = OperationQueueType.secondary
+
+        if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
+            queueType = OperationQueueType.primary
+        }
+        
+        return queueType
+    }
+
+    static func getQueueTypeFor(path: String) -> OperationQueueType {
+        var queueType = OperationQueueType.secondary
+
+        if let fileInformation = getFileInformation(path: path) {
+            queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+        }
+        
+        return queueType
     }
 }

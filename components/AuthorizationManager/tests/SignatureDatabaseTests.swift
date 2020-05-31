@@ -83,65 +83,33 @@ class SignatureDatabaseTests: XCTestCase {
         XCTAssertEqual(context.operationMap.count, 1)
     }
 
-    /*func testOperationQueueSelection() throws {
-        var context = generateContext()
-
-        XCTAssertEqual(context.resultCache.count, 3)
-        XCTAssertEqual(context.operationMap.count, 2)
-
-        var message = EndpointSecurityExecAuthorization(binaryPath: "/Applications/Xcode.app",
-                                                        parentProcessId: 0,
-                                                        processId: 0,
-                                                        userId: 0,
-                                                        groupId: 0,
-                                                        codeDirectoryHash: BinaryHash(type: BinaryHashType.truncatedSha256,
-                                                                                      hash: "91BFCC1CE8BCE7473D35FD00BDDF33AF52A1D2FD"),
-                                                        signingIdentifier: "com.apple.Safari",
-                                                        teamIdentifier: "",
-                                                        platformBinary: true)
-
-        SignatureDatabase.checkSignatureFor(context: &context,
-                                            message: message,
-                                            fileInformationOpt: FileInformation(path: message.binaryPath,
-                                                                                ownerId: 0,
-                                                                                size: 10737418240)) { _,_  in }
-
-        message = EndpointSecurityExecAuthorization(binaryPath: "/bin/zsh",
-                                                    parentProcessId: 0,
-                                                    processId: 0,
-                                                    userId: 0,
-                                                    groupId: 0,
-                                                    codeDirectoryHash: BinaryHash(type: BinaryHashType.truncatedSha256,
-                                                                                  hash: "549629A736F078FC304EE55CBA2D525F4D43488B"),
-                                                    signingIdentifier: "com.apple.zsh",
-                                                    teamIdentifier: "",
-                                                    platformBinary: true)
-
-        SignatureDatabase.checkSignatureFor(context: &context,
-                                            message: message,
-                                            fileInformationOpt: FileInformation(path: message.binaryPath,
-                                                                                ownerId: 0,
-                                                                                size: 637840)) { _,_  in }
-
-        message = EndpointSecurityExecAuthorization(binaryPath: "/bin/bash",
-                                                    parentProcessId: 0,
-                                                    processId: 0,
-                                                    userId: 0,
-                                                    groupId: 0,
-                                                    codeDirectoryHash: BinaryHash(type: BinaryHashType.truncatedSha256,
-                                                                                  hash: "D322B5B0D920367DCE6A10576F96A1B0F7CFDB59"),
-                                                    signingIdentifier: "com.apple.bash",
-                                                    teamIdentifier: "",
-                                                    platformBinary: true)
-
-        SignatureDatabase.checkSignatureFor(context: &context,
-                                            message: message,
-                                            fileInformationOpt: FileInformation(path: message.binaryPath,
-                                                                                ownerId: 1,
-                                                                                size: 637840)) { _,_  in }
+    func testOperationQueueSelection() throws {
+        let mb = 1024 * 1024
+        let gb = mb * 1024
         
-        
-        XCTAssertEqual(context.primaryOperationQueue.operationCount, 1)
-        XCTAssertEqual(context.secondaryOperationQueue.operationCount, 2)
-    }*/
+        // Large applications (size > 10 mb) should always end up in the secondary queue
+        var fileInformation = FileInformation(path: "/Applications/XCode.app",
+                                              ownerId: 0,
+                                              size: 10 * gb)
+
+        var queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+        XCTAssertEqual(queueType, OperationQueueType.secondary)
+
+        // Small applications (size < 10mb) should always end up in the primary queue
+        fileInformation = FileInformation(path: "/bin/bash",
+                                          ownerId: 0,
+                                          size: 1 * mb)
+
+        queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+        XCTAssertEqual(queueType, OperationQueueType.primary)
+
+        // Regardless of application size, if the file is not owned by root then it should
+        // always end up in the secondary queue
+        fileInformation = FileInformation(path: "/bin/bash",
+                                          ownerId: 1,
+                                          size: 1 * mb)
+
+        queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+        XCTAssertEqual(queueType, OperationQueueType.secondary)
+    }
 }
