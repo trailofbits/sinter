@@ -9,7 +9,7 @@
 import Foundation
 
 private class NotificationServer: NotificationServerInterface {
-    private let listener = NSXPCListener(machServiceName: "com.trailofbits.SinterNotificationServer")
+    private let listener = NSXPCListener(machServiceName: "com.trailofbits.sinter.notification-server")
     private let listenerDelegate: NotificationServerListenerDelegate
 
     init(notificationService: NotificationServiceProtocol) {
@@ -29,6 +29,7 @@ private class NotificationServerListenerDelegate: NSObject, NSXPCListenerDelegat
 
     func listener(_: NSXPCListener,
                   shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
+
         newConnection.exportedInterface = NSXPCInterface(with: NotificationServiceProtocol.self)
         newConnection.exportedObject = notificationService
         newConnection.resume()

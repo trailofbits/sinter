@@ -9,85 +9,72 @@
 /* Begin PBXBuildFile section */
 		D20F58622450DA800070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58612450DA800070C21C /* main.swift */; };
 		D20F58642450DA8E0070C21C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58632450DA8E0070C21C /* NotificationCenter.swift */; };
-		D20F58652450DB110070C21C /* notification-server.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D20F58662450DB200070C21C /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D20F58672450DB200070C21C /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D20F58652450DB110070C21C /* notification-server.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
-		D20F58772450DC880070C21C /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
-		D20F58782450DC880070C21C /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F58792450DC880070C21C /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; };
-		D20F587A2450DC880070C21C /* FilesystemLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F587B2450DC880070C21C /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; };
-		D20F587C2450DC880070C21C /* InMemorySignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F587D2450DC880070C21C /* JSONConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784EE243F75550020BC32 /* JSONConfiguration.framework */; };
-		D20F587E2450DC880070C21C /* JSONConfiguration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D25784EE243F75550020BC32 /* JSONConfiguration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F58812450DC880070C21C /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; };
-		D20F58822450DC880070C21C /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D20F58832450DC880070C21C /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; };
-		D20F58842450DC880070C21C /* SyncServerDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2513B67244073A900002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B61244073A300002645 /* libbsm.tbd */; };
-		D2513B8A2440BE9700002645 /* InMemorySignatureDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; };
-		D2513B8B2440BE9700002645 /* InMemorySignatureDatabase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2513BBF2440D70E00002645 /* SyncServerDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; };
-		D2513BC02440D70E00002645 /* SyncServerDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D25784D2243F73030020BC32 /* FilesystemLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; };
-		D25784D3243F73030020BC32 /* FilesystemLogger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D25784F9243F76EC0020BC32 /* JSONConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25784EE243F75550020BC32 /* JSONConfiguration.framework */; };
-		D25784FA243F76EC0020BC32 /* JSONConfiguration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D25784EE243F75550020BC32 /* JSONConfiguration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D257851D243F781F0020BC32 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
-		D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851F243F78250020BC32 /* libEndpointSecurity.tbd */; };
-		D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25CC59024461E94001C686C /* SystemExtensions.framework */; };
-		D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
-		D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2A3A6AB24534A8F00CF24FB /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
-		D2A3A6AC24534A8F00CF24FB /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; };
-		D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */; };
+		D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
+		D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
+		D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
+		D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
+		D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
+		D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
+		D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0232480113F00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; };
+		D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
-		D2D94399244726A500626B17 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D94398244726A500626B17 /* UserNotifications.framework */; };
 		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D248E47A247D4203002B9FBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E475247D4203002B9FBE /* Configuration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D248E3F8247D2221002B9FBE;
+			remoteInfo = Configuration;
+		};
+		D248E47C247D4203002B9FBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E475247D4203002B9FBE /* Configuration.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D248E401247D2221002B9FBE;
+			remoteInfo = ConfigurationTests;
+		};
+		D248E483247D420E002B9FBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E47E247D420E002B9FBE /* Logger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D248E43D247D2ACF002B9FBE;
+			remoteInfo = Logger;
+		};
+		D248E485247D420E002B9FBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E47E247D420E002B9FBE /* Logger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D248E446247D2ACF002B9FBE;
+			remoteInfo = LoggerTests;
+		};
+		D248E4B7247D4C27002B9FBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D248E498247D4C25002B9FBE;
+			remoteInfo = DecisionManager;
+		};
 		D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D24B4A2F2448A73000958F82;
 			remoteInfo = NotificationService;
-		};
-		D2513B832440BE7200002645 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2513B742440BE7100002645;
-			remoteInfo = InMemorySignatureDatabase;
-		};
-		D2513BB42440D6E400002645 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2513BA52440D6E300002645;
-			remoteInfo = SyncServerDecisionManager;
-		};
-		D25784BF243F6FE70020BC32 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D25784B0243F6FE60020BC32;
-			remoteInfo = FilesystemLogger;
-		};
-		D25784ED243F75550020BC32 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D25784DE243F75540020BC32;
-			remoteInfo = JSONConfiguration;
 		};
 		D2578514243F77DC0020BC32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -96,6 +83,20 @@
 			remoteGlobalIDString = D2578505243F77DC0020BC32;
 			remoteInfo = EndpointSecurityClient;
 		};
+		D295BFFF248001A700CBE00A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2C58E52247F37130029E06C;
+			remoteInfo = EndpointSecurityClientTests;
+		};
+		D295C01824800E5100CBE00A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D295C00924800BC200CBE00A;
+			remoteInfo = AuthorizationManagerTests;
+		};
 		D2A3A6A724534A0000CF24FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
@@ -103,27 +104,86 @@
 			remoteGlobalIDString = D20F58AD2450E1E40070C21C;
 			remoteInfo = AuthorizationManager;
 		};
-		D2BDB3E2244102080027C57F /* PBXContainerItemProxy */ = {
+		D2B1F50B247DB87000EB7DB3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */;
+			containerPortal = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2BDB3CE244102070027C57F;
-			remoteInfo = LocalDecisionManager;
+			remoteGlobalIDString = D21FDCD4247DAF8900309B61;
+			remoteInfo = JSONRuleDatabaseParserTests;
+		};
+		D2B1F50D247DB87000EB7DB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D21FDCEA247DB06800309B61;
+			remoteInfo = BaseDecisionManagerTests;
+		};
+		D2BED8C22481BED900A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F58402450DA370070C21C;
+			remoteInfo = "notification-server";
+		};
+		D2BED8C42481BED900A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F586C2450DC090070C21C;
+			remoteInfo = "system-extension";
+		};
+		D2BED8D22481BEE700A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D24B4A2E2448A73000958F82;
+			remoteInfo = NotificationService;
+		};
+		D2BED8D42481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E475247D4203002B9FBE /* Configuration.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E3F7247D2221002B9FBE;
+			remoteInfo = Configuration;
+		};
+		D2BED8D62481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E47E247D420E002B9FBE /* Logger.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E43C247D2ACF002B9FBE;
+			remoteInfo = Logger;
+		};
+		D2BED8D82481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D248E497247D4C25002B9FBE;
+			remoteInfo = DecisionManager;
+		};
+		D2BED8DA2481BEF800A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D20F58AC2450E1E40070C21C;
+			remoteInfo = AuthorizationManager;
+		};
+		D2BED8DC2481BF1700A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2578504243F77DC0020BC32;
+			remoteInfo = EndpointSecurityClient;
+		};
+		D2BED8DE2481BF2200A44C62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D24B4A2E2448A73000958F82;
+			remoteInfo = NotificationService;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		D20F58682450DB200070C21C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D20F58672450DB200070C21C /* NotificationService.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D20F586B2450DC090070C21C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,19 +193,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		D20F58852450DC880070C21C /* Embed Frameworks */ = {
+		D22AA6502483EA4800C40455 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D20F587C2450DC880070C21C /* InMemorySignatureDatabase.framework in Embed Frameworks */,
-				D20F587E2450DC880070C21C /* JSONConfiguration.framework in Embed Frameworks */,
-				D20F58842450DC880070C21C /* SyncServerDecisionManager.framework in Embed Frameworks */,
-				D20F58782450DC880070C21C /* EndpointSecurityClient.framework in Embed Frameworks */,
-				D20F58822450DC880070C21C /* LocalDecisionManager.framework in Embed Frameworks */,
-				D20F587A2450DC880070C21C /* FilesystemLogger.framework in Embed Frameworks */,
-				D2A3A6AA24534A8300CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
+				D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,20 +214,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D2578470243F63080020BC32 /* Embed Frameworks */ = {
+		D295C0252480113F00CBE00A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D257851E243F781F0020BC32 /* EndpointSecurityClient.framework in Embed Frameworks */,
-				D24B4A532448AEC900958F82 /* NotificationService.framework in Embed Frameworks */,
-				D2513B8B2440BE9700002645 /* InMemorySignatureDatabase.framework in Embed Frameworks */,
-				D25784D3243F73030020BC32 /* FilesystemLogger.framework in Embed Frameworks */,
-				D2513BC02440D70E00002645 /* SyncServerDecisionManager.framework in Embed Frameworks */,
-				D25784FA243F76EC0020BC32 /* JSONConfiguration.framework in Embed Frameworks */,
-				D2A3A6AC24534A8F00CF24FB /* AuthorizationManager.framework in Embed Frameworks */,
-				D2BDB3F42441051F0027C57F /* LocalDecisionManager.framework in Embed Frameworks */,
+				D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */,
+				D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */,
+				D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */,
+				D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */,
+				D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */,
+				D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D295C0282480115000CBE00A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,14 +247,14 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
-				D20F58652450DB110070C21C /* notification-server.xpc in CopyFiles */,
+				D20F58652450DB110070C21C /* notification-server.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D20F58412450DA370070C21C /* notification-server.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "notification-server.xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20F58412450DA370070C21C /* notification-server.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "notification-server.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F584F2450DA380070C21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58502450DA380070C21C /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D20F58612450DA800070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -200,21 +263,19 @@
 		D20F586F2450DC090070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58752450DC510070C21C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58762450DC510070C21C /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
+		D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonInstaller.swift; sourceTree = "<group>"; };
+		D248E475247D4203002B9FBE /* Configuration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Configuration.xcodeproj; path = Configuration/Configuration.xcodeproj; sourceTree = "<group>"; };
+		D248E47E247D420E002B9FBE /* Logger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logger.xcodeproj; path = Logger/Logger.xcodeproj; sourceTree = "<group>"; };
+		D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DecisionManager.xcodeproj; path = DecisionManager/DecisionManager.xcodeproj; sourceTree = "<group>"; };
 		D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NotificationService.xcodeproj; path = NotificationService/NotificationService.xcodeproj; sourceTree = "<group>"; };
 		D2513B61244073A300002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
-		D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = InMemorySignatureDatabase.xcodeproj; path = InMemorySignatureDatabase/InMemorySignatureDatabase.xcodeproj; sourceTree = "<group>"; };
-		D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SyncServerDecisionManager.xcodeproj; path = SyncServerDecisionManager/SyncServerDecisionManager.xcodeproj; sourceTree = "<group>"; };
 		D2578410243F602F0020BC32 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D257841F243F60350020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2578420243F60350020BC32 /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
-		D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FilesystemLogger.xcodeproj; path = FilesystemLogger/FilesystemLogger.xcodeproj; sourceTree = "<group>"; };
-		D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JSONConfiguration.xcodeproj; path = JSONConfiguration/JSONConfiguration.xcodeproj; sourceTree = "<group>"; };
 		D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EndpointSecurityClient.xcodeproj; path = EndpointSecurityClient/EndpointSecurityClient.xcodeproj; sourceTree = "<group>"; };
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
 		D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
-		D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LocalDecisionManager.xcodeproj; path = LocalDecisionManager/LocalDecisionManager.xcodeproj; sourceTree = "<group>"; };
-		D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionInstaller.swift; sourceTree = "<group>"; };
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D94398244726A500626B17 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServerInstaller.swift; sourceTree = "<group>"; };
@@ -225,7 +286,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20F58662450DB200070C21C /* NotificationService.framework in Frameworks */,
+				D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,13 +294,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20F587B2450DC880070C21C /* InMemorySignatureDatabase.framework in Frameworks */,
-				D20F587D2450DC880070C21C /* JSONConfiguration.framework in Frameworks */,
-				D20F58832450DC880070C21C /* SyncServerDecisionManager.framework in Frameworks */,
-				D20F58772450DC880070C21C /* EndpointSecurityClient.framework in Frameworks */,
-				D20F58812450DC880070C21C /* LocalDecisionManager.framework in Frameworks */,
-				D20F58792450DC880070C21C /* FilesystemLogger.framework in Frameworks */,
-				D2A3A6A924534A8300CF24FB /* AuthorizationManager.framework in Frameworks */,
+				D295C0232480113F00CBE00A /* Logger.framework in Frameworks */,
+				D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */,
+				D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */,
+				D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */,
+				D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */,
+				D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,18 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D257851D243F781F0020BC32 /* EndpointSecurityClient.framework in Frameworks */,
-				D25784D2243F73030020BC32 /* FilesystemLogger.framework in Frameworks */,
-				D2513B67244073A900002645 /* libbsm.tbd in Frameworks */,
-				D2D94399244726A500626B17 /* UserNotifications.framework in Frameworks */,
-				D2BDB3F32441051F0027C57F /* LocalDecisionManager.framework in Frameworks */,
-				D2513BBF2440D70E00002645 /* SyncServerDecisionManager.framework in Frameworks */,
-				D2A3A6AB24534A8F00CF24FB /* AuthorizationManager.framework in Frameworks */,
-				D25784F9243F76EC0020BC32 /* JSONConfiguration.framework in Frameworks */,
-				D25CC59924461E94001C686C /* SystemExtensions.framework in Frameworks */,
-				D24B4A522448AEC900958F82 /* NotificationService.framework in Frameworks */,
-				D2578520243F782E0020BC32 /* libEndpointSecurity.tbd in Frameworks */,
-				D2513B8A2440BE9700002645 /* InMemorySignatureDatabase.framework in Frameworks */,
+				D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +327,7 @@
 		D20F585E2450DA3E0070C21C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */,
+				D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */,
 				D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */,
 				D2D943942447235E00626B17 /* main.swift */,
 			);
@@ -322,26 +371,38 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D248E476247D4203002B9FBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D248E47B247D4203002B9FBE /* Configuration.framework */,
+				D248E47D247D4203002B9FBE /* ConfigurationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D248E47F247D420E002B9FBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D248E484247D420E002B9FBE /* Logger.framework */,
+				D248E486247D420E002B9FBE /* LoggerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D248E4B3247D4C26002B9FBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D248E4B8247D4C27002B9FBE /* DecisionManager.framework */,
+				D2B1F50C247DB87000EB7DB3 /* JSONRuleDatabaseParserTests.xctest */,
+				D2B1F50E247DB87000EB7DB3 /* BaseDecisionManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D24B4A3B2448A73000958F82 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				D24B4A3F2448A73200958F82 /* NotificationService.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D2513B802440BE7100002645 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D2513BB12440D6E300002645 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,7 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				D2578410243F602F0020BC32 /* Sinter.app */,
-				D20F58412450DA370070C21C /* notification-server.xpc */,
+				D20F58412450DA370070C21C /* notification-server.app */,
 				D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */,
 			);
 			name = Products;
@@ -379,14 +440,12 @@
 		D2578426243F60460020BC32 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
-				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
-				D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */,
-				D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */,
-				D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */,
 				D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */,
-				D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */,
-				D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */,
+				D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */,
+				D248E475247D4203002B9FBE /* Configuration.xcodeproj */,
+				D248E47E247D420E002B9FBE /* Logger.xcodeproj */,
+				D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */,
+				D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -402,26 +461,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D25784BC243F6FE60020BC32 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D25784EA243F75540020BC32 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D25784EE243F75550020BC32 /* JSONConfiguration.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D2578511243F77DC0020BC32 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */,
+				D295C000248001A700CBE00A /* EndpointSecurityClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -430,14 +474,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D2BDB3DA244102070027C57F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */,
+				D295C01924800E5100CBE00A /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,15 +489,16 @@
 				D20F583D2450DA370070C21C /* Sources */,
 				D20F583E2450DA370070C21C /* Frameworks */,
 				D20F583F2450DA370070C21C /* Resources */,
-				D20F58682450DB200070C21C /* Embed Frameworks */,
+				D295C0282480115000CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8D32481BEE700A44C62 /* PBXTargetDependency */,
 			);
 			name = "notification-server";
 			productName = "notification-server";
-			productReference = D20F58412450DA370070C21C /* notification-server.xpc */;
+			productReference = D20F58412450DA370070C21C /* notification-server.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D20F586C2450DC090070C21C /* system-extension */ = {
@@ -470,11 +508,17 @@
 				D20F58692450DC090070C21C /* Sources */,
 				D20F586A2450DC090070C21C /* Frameworks */,
 				D20F586B2450DC090070C21C /* CopyFiles */,
-				D20F58852450DC880070C21C /* Embed Frameworks */,
+				D295C0252480113F00CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8DF2481BF2200A44C62 /* PBXTargetDependency */,
+				D2BED8DD2481BF1700A44C62 /* PBXTargetDependency */,
+				D2BED8D52481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8D72481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8D92481BEF800A44C62 /* PBXTargetDependency */,
+				D2BED8DB2481BEF800A44C62 /* PBXTargetDependency */,
 			);
 			name = "system-extension";
 			productName = "system-extension";
@@ -489,12 +533,14 @@
 				D257840D243F602E0020BC32 /* Frameworks */,
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
-				D2578470243F63080020BC32 /* Embed Frameworks */,
 				D295C2A12447FCF500D39F9F /* CopyFiles */,
+				D22AA6502483EA4800C40455 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D2BED8C32481BED900A44C62 /* PBXTargetDependency */,
+				D2BED8C52481BED900A44C62 /* PBXTargetDependency */,
 			);
 			name = Sinter;
 			productName = Sinter;
@@ -539,32 +585,24 @@
 					ProjectRef = D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */;
 				},
 				{
+					ProductGroup = D248E476247D4203002B9FBE /* Products */;
+					ProjectRef = D248E475247D4203002B9FBE /* Configuration.xcodeproj */;
+				},
+				{
+					ProductGroup = D248E4B3247D4C26002B9FBE /* Products */;
+					ProjectRef = D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */;
+				},
+				{
 					ProductGroup = D2578511243F77DC0020BC32 /* Products */;
 					ProjectRef = D2578510243F77DC0020BC32 /* EndpointSecurityClient.xcodeproj */;
 				},
 				{
-					ProductGroup = D25784BC243F6FE60020BC32 /* Products */;
-					ProjectRef = D25784BB243F6FE60020BC32 /* FilesystemLogger.xcodeproj */;
-				},
-				{
-					ProductGroup = D2513B802440BE7100002645 /* Products */;
-					ProjectRef = D2513B7F2440BE7100002645 /* InMemorySignatureDatabase.xcodeproj */;
-				},
-				{
-					ProductGroup = D25784EA243F75540020BC32 /* Products */;
-					ProjectRef = D25784E9243F75540020BC32 /* JSONConfiguration.xcodeproj */;
-				},
-				{
-					ProductGroup = D2BDB3DA244102070027C57F /* Products */;
-					ProjectRef = D2BDB3D9244102070027C57F /* LocalDecisionManager.xcodeproj */;
+					ProductGroup = D248E47F247D420E002B9FBE /* Products */;
+					ProjectRef = D248E47E247D420E002B9FBE /* Logger.xcodeproj */;
 				},
 				{
 					ProductGroup = D24B4A3B2448A73000958F82 /* Products */;
 					ProjectRef = D24B4A3A2448A73000958F82 /* NotificationService.xcodeproj */;
-				},
-				{
-					ProductGroup = D2513BB12440D6E300002645 /* Products */;
-					ProjectRef = D2513BB02440D6E300002645 /* SyncServerDecisionManager.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -577,39 +615,46 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		D248E47B247D4203002B9FBE /* Configuration.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Configuration.framework;
+			remoteRef = D248E47A247D4203002B9FBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D248E47D247D4203002B9FBE /* ConfigurationTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ConfigurationTests.xctest;
+			remoteRef = D248E47C247D4203002B9FBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D248E484247D420E002B9FBE /* Logger.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Logger.framework;
+			remoteRef = D248E483247D420E002B9FBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D248E486247D420E002B9FBE /* LoggerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoggerTests.xctest;
+			remoteRef = D248E485247D420E002B9FBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D248E4B8247D4C27002B9FBE /* DecisionManager.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DecisionManager.framework;
+			remoteRef = D248E4B7247D4C27002B9FBE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D24B4A3F2448A73200958F82 /* NotificationService.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = NotificationService.framework;
 			remoteRef = D24B4A3E2448A73200958F82 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D2513B842440BE7200002645 /* InMemorySignatureDatabase.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = InMemorySignatureDatabase.framework;
-			remoteRef = D2513B832440BE7200002645 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D2513BB52440D6E400002645 /* SyncServerDecisionManager.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SyncServerDecisionManager.framework;
-			remoteRef = D2513BB42440D6E400002645 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25784C0243F6FE70020BC32 /* FilesystemLogger.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FilesystemLogger.framework;
-			remoteRef = D25784BF243F6FE70020BC32 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		D25784EE243F75550020BC32 /* JSONConfiguration.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JSONConfiguration.framework;
-			remoteRef = D25784ED243F75550020BC32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */ = {
@@ -619,6 +664,20 @@
 			remoteRef = D2578514243F77DC0020BC32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		D295C000248001A700CBE00A /* EndpointSecurityClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EndpointSecurityClientTests.xctest;
+			remoteRef = D295BFFF248001A700CBE00A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D295C01924800E5100CBE00A /* AuthorizationManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AuthorizationManagerTests.xctest;
+			remoteRef = D295C01824800E5100CBE00A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -626,11 +685,18 @@
 			remoteRef = D2A3A6A724534A0000CF24FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D2BDB3E3244102080027C57F /* LocalDecisionManager.framework */ = {
+		D2B1F50C247DB87000EB7DB3 /* JSONRuleDatabaseParserTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LocalDecisionManager.framework;
-			remoteRef = D2BDB3E2244102080027C57F /* PBXContainerItemProxy */;
+			fileType = wrapper.cfbundle;
+			path = JSONRuleDatabaseParserTests.xctest;
+			remoteRef = D2B1F50B247DB87000EB7DB3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2B1F50E247DB87000EB7DB3 /* BaseDecisionManagerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BaseDecisionManagerTests.xctest;
+			remoteRef = D2B1F50D247DB87000EB7DB3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -675,12 +741,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */,
-				D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */,
+				D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */,
 				D2D943952447235E00626B17 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2BED8C32481BED900A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D20F58402450DA370070C21C /* notification-server */;
+			targetProxy = D2BED8C22481BED900A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8C52481BED900A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D20F586C2450DC090070C21C /* system-extension */;
+			targetProxy = D2BED8C42481BED900A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D32481BEE700A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NotificationService;
+			targetProxy = D2BED8D22481BEE700A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D52481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Configuration;
+			targetProxy = D2BED8D42481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D72481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Logger;
+			targetProxy = D2BED8D62481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8D92481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DecisionManager;
+			targetProxy = D2BED8D82481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DB2481BEF800A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AuthorizationManager;
+			targetProxy = D2BED8DA2481BEF800A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DD2481BF1700A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EndpointSecurityClient;
+			targetProxy = D2BED8DC2481BF1700A44C62 /* PBXContainerItemProxy */;
+		};
+		D2BED8DF2481BF2200A44C62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NotificationService;
+			targetProxy = D2BED8DE2481BF2200A44C62 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D20F58512450DA380070C21C /* Debug */ = {
@@ -688,7 +802,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Sinter/notification-server/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -704,9 +818,9 @@
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.notification-server";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (App Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = xpc;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -715,7 +829,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Sinter/notification-server/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -732,9 +846,9 @@
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.notification-server";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (App Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = xpc;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -742,16 +856,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Sinter/system-extension/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (App Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -760,17 +874,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Sinter/system-extension/entitlements.plist";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (App Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -901,7 +1015,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sinter/application/entitlements.plist;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -916,7 +1030,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter (Application Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter (dev)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -926,7 +1040,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Sinter/application/entitlements.plist;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -942,7 +1056,7 @@
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Sinter (Application Distribution)";
+				PROVISIONING_PROFILE_SPECIFIER = "Sinter (dev)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

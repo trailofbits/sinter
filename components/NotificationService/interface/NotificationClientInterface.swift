@@ -10,8 +10,4 @@ import Foundation
 
 public protocol NotificationClientInterface {
     func showNotification(message: String)
-
-    func requestAuthorization(binaryPath: String,
-                              hash: String,
-                              allowExecution: inout Bool)
 }

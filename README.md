@@ -1,64 +1,19 @@
 # Sinter
 
-Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the safe-by-design Swift programming language.
+Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the Swift programming language.
 
-## Features
+# Features
 
-(Work in progress)
-- MONITOR mode: captures process execution events and records them to a log on the local filesystem.
-- LOCKDOWN mode: like MONITOR mode, but additionally blocks processes with missing or invalid signatures.
+This program is under heavy development, and new features will be added really soon! Currently, Sinter is able to block applications based on the code directory hash value, using a JSON-based database that can be provided either locally or with a Santa-compatible sync-server.
 
-- While in either mode:
- - Process execution whitelisting and blacklisting
-  - by certificate Team ID
-  - by hash
-  - by executable file path
- - Sync server support (compatible with the Moroz sync-server for Santa clients)
+Additional settings allow the user to choose whether to enable or disable unsigned and invalid programs, which can be used to mimic the MONITOR mode used by Santa.
 
-## How to Run (if built from source)
+# Building from source
 
-Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued "Distribution" signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source. To disable SIP (*not recommended except on a test system*):
+## Requirements
+Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued "Distribution" signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source.
 
-Schedule a Recovery Mode reboot:
-
-`$ sudo nvram "recovery-boot-mode=unused"; sudo reboot recovery`
-
-From Recovery Mode, launch Utilities -> Terminal. Disable SIP, and boot back into regular macOS:
-
-`$ csrutil disable; reboot`
-
-To confirm that SIP is disabled:
-
-`$ csrutil status`
-
-Finally, to run Sinter, do not double-click the `Sinter` app bundle in Finder. Rather, launch the daemon directly:
-
-`$ sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
-
-In this version, it outputs events to stdout. When run as a LaunchDaemon, which is the default install method, it includes a configuration that also redirects stdout and stderr to logs in `/var/db/sinter/`. Logs are updated every 2 minutes. View `Console.app` for live logging.
-
-## How to Build
-
-Sinter builds on macOS 10.15 or above.
-
-### Install the Prerequisites
-
-First, install [Xcode 11.4 or newer](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-
-Install the Xcode command-line tools as well. One way to do this is:
-
-`$ xcode-select --install`
-
-### Set your Apple code-signing identity (required)
-
-With the Xcode project open, enter the top-level project settings, and navigate to `Signing & Capabilities`. Here, configure your signing certificate and identity information.
-
-### Apply for EndpointSecurity entitltements for your code-signing identity (optional, required for distribution)
-
-To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a Distribution certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account *owner* can apply for this entitlement.
-
-### Build with Xcode at the command line
-
+## Build instructions
 From the Sinter directory:
 
 `$ xcodebuild -scheme Sinter -configuration Release`
@@ -67,16 +22,68 @@ Optional: you may need to set the command-line tools to the full Xcode, first, t
 
 `$ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
 
-## Configure and Run Sinter
+# Running Sinter
+## Prerequisites
+It is important for Sinter.app to have the 'Full Disk Access' permission, otherwise it will fail to start. Do this by opening System Preferences, Security, Privacy tab, Full Disk Access. Check the item for `Sinter.app`.
 
-Sinter requires a configuration file to be present at `/etc/sinter/config.json`. An example is provided in the source tree at `./config/config.json`.
+The PKG installer will setup a LaunchDaemon that will automatically open Sinter on startup. Developers that may want to start the daemon from the shell must ensure that the **terminal they use also have the 'Full Disk Access' permission**, otherwise the EndpointSecurity API will return an error.
 
-After building, from the build directory (`cd` to the build directory seen in the `--destination` output of the `xcodebuild` step):
+## Configuration
+Sinter requires a configuration file to be present at `/etc/sinter/config.json`. This is how the settings look like, taken from the [example configuration](config/config.json) saved in the config folder:
+```json
+{
+  "Sinter": {
+    "decision_manager": "local",
 
-`sudo ./Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon`
+    "allow_unsigned_programs": "true",
+    "allow_invalid_programs": "true",
+    "allow_unknown_programs": "true",
 
-*In order to be launched as a LaunchDaemon*, "Full Disk Access" must also be enabled on `Sinter.app`. Do this by opening System Preferences, Security, Privacy tab, Full Disk Access. Check the item for `Sinter.app`.
+    "log_file_path": "/var/log/sinter.log",
+    "config_update_interval": 600,
+  },
 
-## License
+  "SyncServerDecisionManager": {
+    "server_address": "https://server_address:port",
+    "machine_identifier": "machine_identifier",
+  },
 
+  "LocalDecisionManager": {
+    "rule_database_path": "/etc/sinter/rules.json",
+  }
+}
+```
+
+The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **SyncServerDecisionManager** configuration section, where the server URL and machine identifier can be set.
+
+## Enabling UI notifications
+1. Install the notification server (the PKG installer will do this automatically): `sudo /Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server`
+2. Start the agent: `/Applications/Sinter.app/Contents/MacOS/Sinter --start-notification-server`
+
+## Configuring Sinter in MONITOR mode
+Modes are not implemented in Sinter, as everything is rule-based. It is possible to implement the monitoring functionality by tweaking the following settings:
+
+ - **allow_unsigned_programs**: allow applications that are not signed
+ - **allow_invalid_programs**: allow applications that fail the signature check
+ - **allow_unknown_programs**: automatically allow applications that are not covered by the active rule database
+
+## Rule format
+Rule databases are written in JSON format. Here's an example database that allows the CMake application bundle from cmake.org:
+
+```json
+{
+  "rules": [
+    {
+      "rule_type": "BINARY",
+      "policy": "WHITELIST",
+      "sha256": "BDD0AF132D89EA4810566B3E1E0D1E48BAC6CF18D0C787054BB62A4938683039",
+      "custom_msg": "CMake"
+    }
+  ]
+}
+```
+
+Sinter only supports **BINARY** rules for now, using either **WHITELIST** or **BLACKLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
+
+# License
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.

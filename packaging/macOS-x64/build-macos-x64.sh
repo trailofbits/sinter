@@ -4,13 +4,13 @@
 
 function printUsage() {
   echo -e "\033[1mUsage:\033[0m"
-  echo "$0 [APPLICATION_NAME] [APPLICATION_VERSION]"
+  echo "$0 [APPLICATION_VERSION]"
   echo
   echo -e "\033[1mOptions:\033[0m"
   echo "  -h (--help)"
   echo
   echo -e "\033[1mExample::\033[0m"
-  echo "$0 Sinter 2.6.0"
+  echo "$0 2.6.0"
 }
 
 #Argument validation
@@ -18,16 +18,9 @@ if [[ "$1" == "-h" ||  "$1" == "--help" ]]; then
     printUsage
     exit 1
 fi
-if [ -z "$1" ]; then
-    echo "Please enter a valid application name for your application"
-    echo
-    printUsage
-    exit 1
-else
-    echo "Application Name : $1"
-fi
-if [[ "$2" == [0-9].[0-9].[0-9] ]]; then
-    echo "Application Version : $2"
+
+if [[ "$1" == [0-9].[0-9].[0-9] ]]; then
+    echo "Application Version : $1"
 else
     echo "Please enter a valid version for your application (format [0-9].[0-9].[0-9])"
     echo
@@ -37,8 +30,8 @@ fi
 
 #Parameters
 TARGET_DIRECTORY="target"
-PRODUCT=${1}
-VERSION=${2}
+PRODUCT="Sinter"
+VERSION=${1}
 DATE=`date +%Y-%m-%d`
 TIME=`date +%H:%M:%S`
 LOG_PREFIX="[$DATE $TIME]"
@@ -112,12 +105,8 @@ copyBuildDirectory() {
     chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Applications/
 
     mkdir -p ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
-    cp -a ./config/config.json.example ${TARGET_DIRECTORY}/darwinpkg/etc/sinter/config.json
+    cp -a ../../config/config.json ${TARGET_DIRECTORY}/darwinpkg/etc/sinter/config.json
     chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/etc/sinter
-
-    mkdir -p ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
-    cp -a ./plist/. ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
-    chmod -R 755 ${TARGET_DIRECTORY}/darwinpkg/Library/LaunchDaemons
 
     rm -rf ${TARGET_DIRECTORY}/package
     mkdir -p ${TARGET_DIRECTORY}/package

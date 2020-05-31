@@ -7,77 +7,42 @@
  */
 
 import EndpointSecurity
-import Foundation
-
-import AuthorizationManager
+import Logger
 
 private let eventExpirationTime: Double = 10
 
-private struct MessageMapEntry {
+struct MessageMapEntry {
+    public var key: Int64
     public var timestamp: Double
     public var binaryPath: String
     public var unsafeMessagePtr: UnsafeMutablePointer<es_message_t>
 }
 
-private typealias MessageMap = [Int64: MessageMapEntry]
+typealias MessageMap = [Int64: MessageMapEntry]
 
-private struct EndpointSecurityClientContext {
+struct EndpointSecurityClientContext {
     public var authorizationMessageMap = MessageMap()
     public var cachedPathList = Set<String>()
-
-    @Atomic private var identifierGenerator: Int64 = 0
-    public var nextIdentifier: Int64 {
-        mutating get {
-            identifierGenerator += 1
-            return identifierGenerator
-        }
-
-        set {
-            fatalError("nextIdentifier is read-only")
-        }
-    }
 }
 
-private final class EndpointSecurityClient: EndpointSecurityInterface {
+final class EndpointSecurityClient: EndpointSecurityInterface {
     private var context = EndpointSecurityClientContext()
+
+    private let api: EndpointSecurityAPIInterface
     private let logger: LoggerInterface
     private var esClientOpt: OpaquePointer?
     private var eventExpirationTimer = Timer()
 
-    private init(logger: LoggerInterface,
+    private init(api: EndpointSecurityAPIInterface,
+                 logger: LoggerInterface,
                  callback: @escaping EndpointSecurityCallback) throws {
+
+        self.api = api
         self.logger = logger
 
-        let clientErr = es_new_client(&esClientOpt) { _, unsafeMessagePtr in
-            let eventType = unsafeMessagePtr.pointee.event_type
-
-            switch eventType {
-            case ES_EVENT_TYPE_AUTH_EXEC:
-                EndpointSecurityClient.processExecAuthorizationEvent(context: &self.context,
-                                                                     esClient: self.esClientOpt!,
-                                                                     logger: logger,
-                                                                     unsafeMessagePtr: unsafeMessagePtr,
-                                                                     callback: callback)
-
-            case ES_EVENT_TYPE_NOTIFY_WRITE,
-                 ES_EVENT_TYPE_NOTIFY_UNLINK,
-                 ES_EVENT_TYPE_NOTIFY_RENAME,
-                 ES_EVENT_TYPE_NOTIFY_MMAP,
-                 ES_EVENT_TYPE_NOTIFY_LINK,
-                 ES_EVENT_TYPE_NOTIFY_TRUNCATE,
-                 ES_EVENT_TYPE_NOTIFY_CREATE:
-
-                EndpointSecurityClient.processFileChangeNotification(context: &self.context,
-                                                                     esClient: self.esClientOpt!,
-                                                                     logger: logger,
-                                                                     unsafeMessagePtr: unsafeMessagePtr,
-                                                                     callback: callback)
-            case _:
-                logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "Invalid/unsupported event received in the EndpointSecurityClient read callback")
-
-                return
-            }
+        let clientErr = api.newClient(client: &esClientOpt) { _, unsafeMessagePtr in
+            self.endpointSecurityCallback(unsafeMessagePtr: unsafeMessagePtr,
+                                          callback: callback)
         }
 
         if clientErr != ES_NEW_CLIENT_RESULT_SUCCESS {
@@ -98,78 +63,56 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
                                                 ES_EVENT_TYPE_NOTIFY_TRUNCATE,
                                                 ES_EVENT_TYPE_NOTIFY_CREATE]
 
-        let subscriptionErr = es_subscribe(esClientOpt!,
-                                           &eventTypeList,
-                                           UInt32(eventTypeList.count))
+        let subscriptionErr = api.subscribe(client: esClientOpt!,
+                                            events: &eventTypeList,
+                                            eventCount: UInt32(eventTypeList.count))
 
         if subscriptionErr != ES_RETURN_SUCCESS {
             throw EndpointSecurityError.subscriptionError
         }
 
         eventExpirationTimer = Timer.scheduledTimer(withTimeInterval: TimeInterval(eventExpirationTime),
-                                                    repeats: true) { _ in EndpointSecurityClient.expireEvents(context: &self.context,
-                                                                                                              esClient: self.esClientOpt!,
-                                                                                                              logger: self.logger,
-                                                                                                              callback: callback) }
+                                                    repeats: true) { _ in
+
+            atomic {
+                EndpointSecurityClient.onEventExpiration(context: &self.context,
+                                                         api: self.api,
+                                                         logger: self.logger,
+                                                         client: self.esClientOpt!,
+                                                         callback: callback)
+            }
+        }
     }
 
     deinit {
-        if let esClient = self.esClientOpt {
-            es_unsubscribe_all(esClient)
-            es_delete_client(esClient)
+        if let esClient = esClientOpt {
+            _ = api.unsubscribeAll(client: esClient)
+            _ = api.deleteClient(client: esClient)
         }
 
-        self.eventExpirationTimer.invalidate()
+        eventExpirationTimer.invalidate()
     }
 
-    static func create(logger: LoggerInterface,
+    static func create(api: EndpointSecurityAPIInterface,
+                       logger: LoggerInterface,
                        callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
-        Result<EndpointSecurityInterface, Error> { try EndpointSecurityClient(logger: logger,
+
+        Result<EndpointSecurityInterface, Error> { try EndpointSecurityClient(api: api,
+                                                                              logger: logger,
                                                                               callback: callback) }
-    }
-
-    public static func expireEvents(context: inout EndpointSecurityClientContext,
-                                    esClient: OpaquePointer,
-                                    logger: LoggerInterface,
-                                    callback: @escaping EndpointSecurityCallback) {
-        let currentTimestamp = NSDate().timeIntervalSince1970
-        var expiredMessageMap = MessageMap()
-
-        atomic {
-            for messageIterator in context.authorizationMessageMap {
-                let elapsedTime = currentTimestamp - messageIterator.value.timestamp
-                if elapsedTime > eventExpirationTime {
-                    expiredMessageMap[messageIterator.key] = messageIterator.value
-                }
-            }
-
-            for expiredEventIterator in expiredMessageMap {
-                let notification = EndpointSecurityExecInvalidationNotification(identifier: expiredEventIterator.key,
-                                                                                binaryPath: expiredEventIterator.value.binaryPath,
-                                                                                reason: .expired)
-
-                callback(EndpointSecurityMessage.ExecInvalidationNotification(notification))
-
-                _ = EndpointSecurityClient.setAuthorizationInternal(context: &context,
-                                                                    esClient: esClient,
-                                                                    logger: logger,
-                                                                    identifier: expiredEventIterator.key,
-                                                                    allow: false,
-                                                                    cache: false)
-            }
-        }
     }
 
     public func setAuthorization(identifier: Int64, allow: Bool, cache: Bool) -> Bool {
         var succeeded = false
 
         atomic {
-            succeeded = EndpointSecurityClient.setAuthorizationInternal(context: &self.context,
-                                                                        esClient: self.esClientOpt!,
-                                                                        logger: self.logger,
-                                                                        identifier: identifier,
-                                                                        allow: allow,
-                                                                        cache: cache)
+            succeeded = EndpointSecurityClient.setAuthorization(context: &context,
+                                                                api: api,
+                                                                logger: logger,
+                                                                client: esClientOpt!,
+                                                                identifier: identifier,
+                                                                allow: allow,
+                                                                cache: cache)
         }
 
         return succeeded
@@ -179,20 +122,216 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
         var succeeded = false
 
         atomic {
-            succeeded = EndpointSecurityClient.invalidateCacheInternal(context: &context,
-                                                                       esClient: esClientOpt!,
-                                                                       logger: logger)
+            succeeded = EndpointSecurityClient.invalidateCache(context: &context,
+                                                               api: api,
+                                                               client: esClientOpt!,
+                                                               logger: logger)
         }
 
         return succeeded
     }
 
-    private static func setAuthorizationInternal(context: inout EndpointSecurityClientContext,
-                                                 esClient: OpaquePointer,
-                                                 logger: LoggerInterface,
-                                                 identifier: Int64,
-                                                 allow: Bool,
-                                                 cache: Bool) -> Bool {
+    private func onExecEvent(unsafeMessagePtr: UnsafePointer<es_message_t>,
+                             callback: @escaping EndpointSecurityCallback) {
+
+        // Copy the message and save it, so we can respond to it later
+        let unsafeMsgPtrCopyOpt = api.copyMessage(msg: unsafeMessagePtr)
+        if unsafeMsgPtrCopyOpt == nil {
+            _ = api.respondAuthResult(client: esClientOpt!,
+                                      message: unsafeMessagePtr,
+                                      result: ES_AUTH_RESULT_DENY,
+                                      cache: false)
+
+            logger.logMessage(severity: .error,
+                              message: "Failed to duplicate the es_message_t object. Denying execution")
+
+            return
+        }
+
+        if var message = parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee) {
+            message.identifier = identifierGenerator.generate()
+
+            let timestamp = NSDate().timeIntervalSince1970
+            let messageMapEntry = MessageMapEntry(key: message.identifier,
+                                                  timestamp: timestamp,
+                                                  binaryPath: message.binaryPath,
+                                                  unsafeMessagePtr: unsafeMsgPtrCopyOpt!)
+
+            atomic {
+                context.authorizationMessageMap[message.identifier] = messageMapEntry
+            }
+
+            callback(EndpointSecurityMessage.ExecAuthorization(message))
+
+        } else {
+            _ = api.respondAuthResult(client: esClientOpt!,
+                                     message: unsafeMsgPtrCopyOpt!,
+                                     result: ES_AUTH_RESULT_DENY,
+                                     cache: false)
+
+            _ = api.freeMessage(msg: unsafeMsgPtrCopyOpt!)
+
+            logger.logMessage(severity: .error,
+                              message: "Failed to parse the es_message_t object. Denying execution")
+        }
+    }
+
+    private func onFileChangeEvent(unsafeMessagePtr: UnsafePointer<es_message_t>,
+                                   callback: @escaping EndpointSecurityCallback) {
+
+        let eventType = unsafeMessagePtr.pointee.event_type
+        var messageOpt: EndpointSecurityFileChangeNotification?
+
+        switch eventType {
+        case ES_EVENT_TYPE_NOTIFY_WRITE:
+            messageOpt = parseWriteNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_UNLINK:
+            messageOpt = parseUnlinkNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_RENAME:
+            messageOpt = parseRenameNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_MMAP:
+            // Ignore read-only mmap() requests
+            messageOpt = parseMmapNotification(esMessage: unsafeMessagePtr.pointee)
+            if messageOpt == nil {
+                return
+            }
+
+        case ES_EVENT_TYPE_NOTIFY_LINK:
+            messageOpt = parseLinkNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_TRUNCATE:
+            messageOpt = parseTruncateNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_CREATE:
+            messageOpt = parseCreateNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case _:
+            logger.logMessage(severity: .error, message: "Invalid/unsupported event received in onFileChangeEvent")
+            return
+        }
+
+        if messageOpt == nil {
+            logger.logMessage(severity: .error, message: "Failed to parse a file change event")
+            return
+        }
+
+        var resetCache = false
+        var invalidatedRequestList = [MessageMapEntry]()
+
+        atomic {
+            EndpointSecurityClient.processFileChangeNotification(context: &context,
+                                                                 resetCache: &resetCache,
+                                                                 invalidatedRequestList: &invalidatedRequestList,
+                                                                 message: messageOpt!)
+
+            if resetCache {
+                _ = EndpointSecurityClient.invalidateCache(context: &context,
+                                                           api: api,
+                                                           client: esClientOpt!,
+                                                           logger: logger)
+            }
+        }
+
+        for invalidatedRequest in invalidatedRequestList {
+            let notification = EndpointSecurityExecInvalidationNotification(identifier: invalidatedRequest.key,
+                                                                            binaryPath: invalidatedRequest.binaryPath,
+                                                                            reason: .applicationChanged)
+
+            callback(EndpointSecurityMessage.ExecInvalidationNotification(notification))
+        }
+
+        callback(EndpointSecurityMessage.ChangeNotification(messageOpt!))
+    }
+
+    private func endpointSecurityCallback(unsafeMessagePtr: UnsafePointer<es_message_t>,
+                                          callback: @escaping EndpointSecurityCallback) {
+
+        let eventType = unsafeMessagePtr.pointee.event_type
+
+        switch eventType {
+        case ES_EVENT_TYPE_AUTH_EXEC:
+            onExecEvent(unsafeMessagePtr: unsafeMessagePtr,
+                        callback: callback)
+
+        case ES_EVENT_TYPE_NOTIFY_WRITE,
+             ES_EVENT_TYPE_NOTIFY_UNLINK,
+             ES_EVENT_TYPE_NOTIFY_RENAME,
+             ES_EVENT_TYPE_NOTIFY_MMAP,
+             ES_EVENT_TYPE_NOTIFY_LINK,
+             ES_EVENT_TYPE_NOTIFY_TRUNCATE,
+             ES_EVENT_TYPE_NOTIFY_CREATE:
+
+            onFileChangeEvent(unsafeMessagePtr: unsafeMessagePtr,
+                              callback: callback)
+
+        case _:
+            logger.logMessage(severity: .error,
+                              message: "Invalid/unsupported event received in the EndpointSecurityClient read callback")
+        }
+    }
+
+    static func onEventExpiration(context: inout EndpointSecurityClientContext,
+                                  api: EndpointSecurityAPIInterface,
+                                  logger: LoggerInterface,
+                                  client: OpaquePointer,
+                                  callback: @escaping EndpointSecurityCallback) {
+
+        let currentTimestamp = NSDate().timeIntervalSince1970
+        var expiredMessageList = [MessageMapEntry]()
+
+        EndpointSecurityClient.expireEvents(context: context,
+                                            expiredMessageList: &expiredMessageList,
+                                            currentTimestamp: currentTimestamp,
+                                            maxRequestAge: eventExpirationTime)
+
+
+        for expiredMessage in expiredMessageList {
+            _ = EndpointSecurityClient.setAuthorization(context: &context,
+                                                        api: api,
+                                                        logger: logger,
+                                                        client: client,
+                                                        identifier: expiredMessage.key,
+                                                        allow: false,
+                                                        cache: false)
+
+            let notification = EndpointSecurityExecInvalidationNotification(identifier: expiredMessage.key,
+                                                                            binaryPath: expiredMessage.binaryPath,
+                                                                            reason: .expired)
+
+            callback(EndpointSecurityMessage.ExecInvalidationNotification(notification))
+        }
+    }
+
+    static func expireEvents(context: EndpointSecurityClientContext,
+                             expiredMessageList: inout [MessageMapEntry],
+                             currentTimestamp: TimeInterval,
+                             maxRequestAge: TimeInterval) {
+        
+        expiredMessageList = [MessageMapEntry]()
+
+        var keyList = [Int64]()
+        for messageIterator in context.authorizationMessageMap {
+            let elapsedTime = currentTimestamp - messageIterator.value.timestamp
+            if elapsedTime < maxRequestAge {
+                continue
+            }
+            
+            expiredMessageList.append(messageIterator.value)
+            keyList.append(messageIterator.key)
+        }
+    }
+
+    static func setAuthorization(context: inout EndpointSecurityClientContext,
+                                 api: EndpointSecurityAPIInterface,
+                                 logger: LoggerInterface,
+                                 client: OpaquePointer,
+                                 identifier: Int64,
+                                 allow: Bool,
+                                 cache: Bool) -> Bool {
+
         if let messageMapEntry = context.authorizationMessageMap[identifier] {
             context.authorizationMessageMap.removeValue(forKey: identifier)
 
@@ -201,381 +340,73 @@ private final class EndpointSecurityClient: EndpointSecurityInterface {
             }
 
             let authAction = allow ? ES_AUTH_RESULT_ALLOW : ES_AUTH_RESULT_DENY
-            es_respond_auth_result(esClient,
-                                   messageMapEntry.unsafeMessagePtr,
-                                   authAction, cache)
+            _ = api.respondAuthResult(client: client,
+                                      message: messageMapEntry.unsafeMessagePtr,
+                                      result: authAction,
+                                      cache: cache)
 
-            es_free_message(messageMapEntry.unsafeMessagePtr)
-
+            api.freeMessage(msg: messageMapEntry.unsafeMessagePtr)
             return true
 
         } else {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
+            logger.logMessage(severity: .error,
                               message: "Invalid identifier passed to setAuthorization")
 
             return false
         }
     }
 
-    private static func invalidateCacheInternal(context: inout EndpointSecurityClientContext,
-                                                esClient: OpaquePointer,
-                                                logger: LoggerInterface) -> Bool {
-        var succeeded = false
+    static func invalidateCache(context: inout EndpointSecurityClientContext,
+                                api: EndpointSecurityAPIInterface,
+                                client: OpaquePointer,
+                                logger: LoggerInterface) -> Bool {
 
-        let cacheErr = es_clear_cache(esClient)
-        if cacheErr != ES_CLEAR_CACHE_RESULT_SUCCESS {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Failed to invalidate the EndpointSecurity cache")
-
-        } else {
+        if api.clearCache(client: client) == ES_CLEAR_CACHE_RESULT_SUCCESS {
             context.cachedPathList.removeAll()
-            succeeded = true
-        }
-
-        return succeeded
-    }
-
-    private static func processExecAuthorizationEvent(context: inout EndpointSecurityClientContext,
-                                                      esClient: OpaquePointer,
-                                                      logger: LoggerInterface,
-                                                      unsafeMessagePtr: UnsafePointer<es_message_t>,
-                                                      callback: @escaping EndpointSecurityCallback) {
-        if unsafeMessagePtr.pointee.event_type != ES_EVENT_TYPE_AUTH_EXEC {
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Not an ES_EVENT_TYPE_AUTH_EXEC event")
-
-            return
-        }
-
-        let unsafeMsgPtrCopyOpt = es_copy_message(unsafeMessagePtr)
-        if unsafeMsgPtrCopyOpt == nil {
-            es_respond_auth_result(esClient,
-                                   unsafeMessagePtr,
-                                   ES_AUTH_RESULT_DENY,
-                                   false)
-
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Failed to duplicate the es_message_t object. Denying execution")
-
-            return
-        }
-
-        if var message = EndpointSecurityClient.parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee) {
-            message.identifier = context.nextIdentifier
-
-            atomic {
-                let timestamp = NSDate().timeIntervalSince1970
-                let messageMapEntry = MessageMapEntry(timestamp: timestamp,
-                                                      binaryPath: message.binaryPath,
-                                                      unsafeMessagePtr: unsafeMsgPtrCopyOpt!)
-
-                context.authorizationMessageMap[message.identifier] = messageMapEntry
-                callback(EndpointSecurityMessage.ExecAuthorization(message))
-            }
+            return true
 
         } else {
-            es_respond_auth_result(esClient,
-                                   unsafeMsgPtrCopyOpt!,
-                                   ES_AUTH_RESULT_DENY,
-                                   false)
-
-            es_free_message(unsafeMsgPtrCopyOpt!)
-
-            logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "Failed to parse the es_message_t object. Denying execution")
+            logger.logMessage(severity: .error,
+                              message: "Failed to clear the EndpointSecurity cache")
+            
+            return false
         }
     }
 
-    private static func processFileChangeNotification(context: inout EndpointSecurityClientContext,
-                                                      esClient: OpaquePointer,
-                                                      logger: LoggerInterface,
-                                                      unsafeMessagePtr: UnsafePointer<es_message_t>,
-                                                      callback: @escaping EndpointSecurityCallback) {
-        let eventType = unsafeMessagePtr.pointee.event_type
-        var messageOpt: EndpointSecurityFileChangeNotification?
+    static func processFileChangeNotification(context: inout EndpointSecurityClientContext,
+                                              resetCache: inout Bool,
+                                              invalidatedRequestList: inout [MessageMapEntry],
+                                              message: EndpointSecurityFileChangeNotification) {
 
-        switch eventType {
-        case ES_EVENT_TYPE_NOTIFY_WRITE:
-            messageOpt = EndpointSecurityClient.parseWriteNotification(esMessage: unsafeMessagePtr.pointee)
+        resetCache = false
+        invalidatedRequestList = [MessageMapEntry]()
 
-        case ES_EVENT_TYPE_NOTIFY_UNLINK:
-            messageOpt = EndpointSecurityClient.parseUnlinkNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case ES_EVENT_TYPE_NOTIFY_RENAME:
-            messageOpt = EndpointSecurityClient.parseRenameNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case ES_EVENT_TYPE_NOTIFY_MMAP:
-            messageOpt = EndpointSecurityClient.parseMmapNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case ES_EVENT_TYPE_NOTIFY_LINK:
-            messageOpt = EndpointSecurityClient.parseLinkNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case ES_EVENT_TYPE_NOTIFY_TRUNCATE:
-            messageOpt = EndpointSecurityClient.parseTruncateNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case ES_EVENT_TYPE_NOTIFY_CREATE:
-            messageOpt = EndpointSecurityClient.parseCreateNotification(esMessage: unsafeMessagePtr.pointee)
-
-        case _:
-            logger.logMessage(severity: LoggerMessageSeverity.error, message: "Invalid/unsupported event received in processFileChangeNotification")
-            return
-        }
-
-        if messageOpt == nil {
-            return
-        }
-
-        atomic {
-            for filePath in messageOpt!.pathList {
-                for cachedPath in context.cachedPathList {
-                    if filePath.starts(with: cachedPath) {
-                        _ = EndpointSecurityClient.invalidateCacheInternal(context: &context,
-                                                                           esClient: esClient,
-                                                                           logger: logger)
-                    }
+        for filePath in message.pathList {
+            if !resetCache && context.cachedPathList.contains(filePath) {
+                resetCache = true
+            }
+            
+            var keyList = [Int64]()
+            for authorizationMessage in context.authorizationMessageMap {
+                if !filePath.starts(with: authorizationMessage.value.binaryPath) {
+                    continue
                 }
 
-                for authorizationMessage in context.authorizationMessageMap {
-                    if filePath.starts(with: authorizationMessage.value.binaryPath) {
-                        context.authorizationMessageMap.removeValue(forKey: authorizationMessage.key)
-
-                        let notification = EndpointSecurityExecInvalidationNotification(identifier: authorizationMessage.key,
-                                                                                        binaryPath: authorizationMessage.value.binaryPath,
-                                                                                        reason: .applicationChanged)
-
-                        _ = EndpointSecurityClient.setAuthorizationInternal(context: &context,
-                                                                            esClient: esClient,
-                                                                            logger: logger,
-                                                                            identifier: authorizationMessage.key,
-                                                                            allow: false,
-                                                                            cache: false)
-
-                        callback(EndpointSecurityMessage.ExecInvalidationNotification(notification))
-                    }
-                }
-
-                callback(EndpointSecurityMessage.ChangeNotification(messageOpt!))
+                keyList.append(authorizationMessage.key)
+                invalidatedRequestList.append(authorizationMessage.value)
+            }
+            
+            for key in keyList {
+                context.authorizationMessageMap.removeValue(forKey: key)
             }
         }
-    }
-
-    private static func parseExecAuthorization(esMessage: es_message_t) -> EndpointSecurityExecAuthorization? {
-        if esMessage.event_type != ES_EVENT_TYPE_AUTH_EXEC {
-            return nil
-        }
-
-        let target = esMessage.event.exec.target.pointee
-        let binaryPath = EndpointSecurityClient.getProcessBinaryPath(process: target)
-
-        let parentProcessId = target.ppid
-        let processId = audit_token_to_pid(target.audit_token)
-
-        let userId = audit_token_to_euid(target.audit_token)
-        let groupId = target.group_id
-
-        let signingIdentifier = EndpointSecurityClient.getProcessSigningId(process: target)
-        let teamIdentifier = EndpointSecurityClient.getProcessTeamId(process: target)
-
-        // The target.is_platform_binary flag is tricky, and basically contains the value
-        // of the parent process. In case it's something like bash/zsh, it will get
-        // a value of 'true' even though the process being executed may not even
-        // be signed.
-        //
-        // This is because the execve() has completed but the code sections have not
-        // been updated yet
-        //
-        // The code signature is going to be verified before it can be authorized, so
-        // let's use the signingIdentifier instead for now
-        let platformBinary = signingIdentifier.starts(with: "com.apple.")
-
-        let cdHash = EndpointSecurityClient.getProcessCdHash(process: target)
-        let codeDirectoryHash = BinaryHash(type: BinaryHashType.truncatedSha256,
-                                           hash: cdHash)
-
-        let parsedMessage = EndpointSecurityExecAuthorization(binaryPath: binaryPath,
-                                                              parentProcessId: pid_t(parentProcessId),
-                                                              processId: pid_t(processId),
-                                                              userId: uid_t(userId),
-                                                              groupId: gid_t(groupId),
-                                                              codeDirectoryHash: codeDirectoryHash,
-                                                              signingIdentifier: signingIdentifier,
-                                                              teamIdentifier: teamIdentifier,
-                                                              platformBinary: platformBinary)
-
-        return parsedMessage
-    }
-
-    private static func parseWriteNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let filePath = getFilePath(file: esMessage.event.write.target.pointee)
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.write,
-                                                                   pathList: [filePath])
-
-        return parsedMessage
-    }
-
-    private static func parseUnlinkNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let filePath = getFilePath(file: esMessage.event.unlink.target.pointee)
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.unlink,
-                                                                   pathList: [filePath])
-
-        return parsedMessage
-    }
-
-    private static func parseRenameNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let renameEvent = esMessage.event.rename
-
-        let sourceFilePath = getFilePath(file: renameEvent.source.pointee)
-
-        var destinationFilePath = String()
-        if renameEvent.destination_type == ES_DESTINATION_TYPE_EXISTING_FILE {
-            destinationFilePath = getFilePath(file: renameEvent.destination.existing_file.pointee)
-
-        } else {
-            let folderPath = getFilePath(file: renameEvent.destination.new_path.dir.pointee)
-
-            // TODO(alessandro): Use filename.size
-            destinationFilePath = folderPath + "/" + String(cString: renameEvent.destination.new_path.filename.data)
-        }
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.rename,
-                                                                   pathList: [sourceFilePath, destinationFilePath])
-
-        return parsedMessage
-    }
-
-    private static func parseMmapNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let mmapEvent = esMessage.event.mmap
-
-        if (mmapEvent.flags & MAP_PRIVATE) != 0 {
-            return nil
-        }
-
-        if (mmapEvent.protection & PROT_WRITE) == 0 {
-            return nil
-        }
-
-        let filePath = getFilePath(file: esMessage.event.mmap.source.pointee)
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.mmap,
-                                                                   pathList: [filePath])
-
-        return parsedMessage
-    }
-
-    private static func parseLinkNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let linkEvent = esMessage.event.link
-
-        let sourceFilePath = getFilePath(file: linkEvent.source.pointee)
-
-        let destinationFolderPath = getFilePath(file: linkEvent.target_dir.pointee)
-        let destinationFilePath = destinationFolderPath + "/" + String(cString: linkEvent.target_filename.data)
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.link,
-                                                                   pathList: [sourceFilePath, destinationFilePath])
-
-        return parsedMessage
-    }
-
-    private static func parseTruncateNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let filePath = getFilePath(file: esMessage.event.truncate.target.pointee)
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.truncate,
-                                                                   pathList: [filePath])
-
-        return parsedMessage
-    }
-
-    private static func parseCreateNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
-        let createEvent = esMessage.event.create
-
-        var filePath = String()
-        if createEvent.destination_type == ES_DESTINATION_TYPE_EXISTING_FILE {
-            filePath = getFilePath(file: createEvent.destination.existing_file.pointee)
-
-        } else {
-            let folderPath = getFilePath(file: createEvent.destination.new_path.dir.pointee)
-
-            // TODO(alessandro): Use filename.size
-            filePath = folderPath + "/" + String(cString: createEvent.destination.new_path.filename.data)
-        }
-
-        let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.create,
-                                                                   pathList: [filePath])
-
-        return parsedMessage
-    }
-
-    private static func getFilePath(file: es_file_t) -> String {
-        // TODO: use path.size
-        String(cString: file.path.data)
-    }
-
-    private static func getProcessBinaryPath(process: es_process_t) -> String {
-        // TODO: is there a better way to detect bundles?
-        let binaryPath = getFilePath(file: process.executable.pointee)
-
-        var bundleURL = URL(fileURLWithPath: binaryPath)
-        for _ in 1 ... 3 {
-            bundleURL.deleteLastPathComponent()
-        }
-
-        let bundleCodeSignatureURL = bundleURL.appendingPathComponent("Contents/_CodeSignature")
-
-        let validURLOpt = try? bundleCodeSignatureURL.checkResourceIsReachable()
-        if validURLOpt != nil {
-            return bundleURL.path
-        }
-
-        return binaryPath
-    }
-
-    private static func getProcessCdHash(process: es_process_t) -> String {
-        // Convert the tuple of UInt8 bytes to its hexadecimal string form
-        let CDhashArray = CDhash(tuple: process.cdhash).array
-        var cdhashHexString: String = ""
-        for eachByte in CDhashArray {
-            cdhashHexString += String(format: "%02X", eachByte)
-        }
-
-        return cdhashHexString
-    }
-
-    private static func getProcessTeamId(process: es_process_t) -> String {
-        var teamIdString: String = ""
-        if process.team_id.length > 0 {
-            teamIdString = String(cString: process.team_id.data)
-        }
-
-        return teamIdString
-    }
-
-    private static func getProcessSigningId(process: es_process_t) -> String {
-        var signingIdString: String = ""
-        if process.signing_id.length > 0 {
-            signingIdString = String(cString: process.signing_id.data)
-        }
-
-        return signingIdString
     }
 }
 
 public func createEndpointSecurityClient(logger: LoggerInterface,
                                          callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
-    EndpointSecurityClient.create(logger: logger,
+
+    EndpointSecurityClient.create(api: createSystemEndpointSecurityAPI(),
+                                  logger: logger,
                                   callback: callback)
-}
-
-// Because a Swift tuple cannot/shouldn't be iterated at runtime,
-// use an UnsafeBufferPointer to store the twenty UInt8 values of
-// the cdhash (a tuple of UInt8 values) into an iterable array form
-private struct CDhash {
-    public var tuple: (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
-                       UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8,
-                       UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
-
-    public var array: [UInt8] {
-        var tmp = tuple
-        return [UInt8](UnsafeBufferPointer(start: &tmp.0, count: MemoryLayout.size(ofValue: tmp)))
-    }
 }

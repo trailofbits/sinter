@@ -7,26 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20F58E02450E4740070C21C /* AuthorizationManager.framework */; };
 		D2513B602440739200002645 /* libbsm.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D2513B5F2440738C00002645 /* libbsm.tbd */; };
 		D257850A243F77DC0020BC32 /* EndpointSecurityClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578523243F78580020BC32 /* EndpointSecurityClient.swift */; };
-		D2578528243F7CA00020BC32 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2578527243F7CA00020BC32 /* Utility.swift */; };
 		D257852E243F88610020BC32 /* libEndpointSecurity.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D257851C243F780A0020BC32 /* libEndpointSecurity.tbd */; };
+		D295BFCC247FD97500CBE00A /* EndpointSecurityInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E3D247ECD4B0029E06C /* EndpointSecurityInterface.swift */; };
+		D295BFCE247FDB2A00CBE00A /* MockedEndpointSecurityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E4C247F34AE0029E06C /* MockedEndpointSecurityAPI.swift */; };
+		D295BFD0247FEFD200CBE00A /* MockedLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D295BFCF247FEFD200CBE00A /* MockedLogger.swift */; };
+		D295BFD3247FFB0C00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD1247FFB0C00CBE00A /* Configuration.framework */; };
+		D295BFD5247FFB0C00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD2247FFB0C00CBE00A /* Logger.framework */; };
+		D2C58E41247ED4DD0029E06C /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E40247ED4DD0029E06C /* IdentifierGenerator.swift */; };
+		D2C58E43247ED5940029E06C /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E42247ED5940029E06C /* Atomic.swift */; };
+		D2C58E47247EF6040029E06C /* EndpointSecurityAPIInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E46247EF6040029E06C /* EndpointSecurityAPIInterface.swift */; };
+		D2C58E49247EF6200029E06C /* SystemEndpointSecurityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E48247EF6200029E06C /* SystemEndpointSecurityAPI.swift */; };
+		D2C58E4B247EFBEC0029E06C /* CDHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E4A247EFBEC0029E06C /* CDHash.swift */; };
+		D2C58E57247F37130029E06C /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578505243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
+		D2C58E5F247F37510029E06C /* EndpointSecurityClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E5D247F37400029E06C /* EndpointSecurityClientTests.swift */; };
+		D2C58E6F247F65860029E06C /* MessageParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C58E6E247F65860029E06C /* MessageParsers.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		D20F58E32450E4740070C21C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+/* Begin PBXContainerItemProxy section */
+		D2C58E58247F37130029E06C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D25784FC243F77DC0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2578504243F77DC0020BC32;
+			remoteInfo = EndpointSecurityClient;
 		};
-/* End PBXCopyFilesBuildPhase section */
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D20F58E02450E4740070C21C /* AuthorizationManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AuthorizationManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,7 +45,19 @@
 		D2578517243F77E30020BC32 /* LibSinter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LibSinter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D257851C243F780A0020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D2578523243F78580020BC32 /* EndpointSecurityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityClient.swift; sourceTree = "<group>"; };
-		D2578527243F7CA00020BC32 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		D295BFCF247FEFD200CBE00A /* MockedLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedLogger.swift; sourceTree = "<group>"; };
+		D295BFD1247FFB0C00CBE00A /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D295BFD2247FFB0C00CBE00A /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C58E3D247ECD4B0029E06C /* EndpointSecurityInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityInterface.swift; sourceTree = "<group>"; };
+		D2C58E40247ED4DD0029E06C /* IdentifierGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifierGenerator.swift; sourceTree = "<group>"; };
+		D2C58E42247ED5940029E06C /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		D2C58E46247EF6040029E06C /* EndpointSecurityAPIInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityAPIInterface.swift; sourceTree = "<group>"; };
+		D2C58E48247EF6200029E06C /* SystemEndpointSecurityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemEndpointSecurityAPI.swift; sourceTree = "<group>"; };
+		D2C58E4A247EFBEC0029E06C /* CDHash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDHash.swift; sourceTree = "<group>"; };
+		D2C58E4C247F34AE0029E06C /* MockedEndpointSecurityAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedEndpointSecurityAPI.swift; sourceTree = "<group>"; };
+		D2C58E52247F37130029E06C /* EndpointSecurityClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EndpointSecurityClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2C58E5D247F37400029E06C /* EndpointSecurityClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointSecurityClientTests.swift; sourceTree = "<group>"; };
+		D2C58E6E247F65860029E06C /* MessageParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageParsers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,9 +65,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D20F58E12450E4740070C21C /* AuthorizationManager.framework in Frameworks */,
+				D295BFD5247FFB0C00CBE00A /* Logger.framework in Frameworks */,
+				D295BFD3247FFB0C00CBE00A /* Configuration.framework in Frameworks */,
 				D2513B602440739200002645 /* libbsm.tbd in Frameworks */,
 				D257852E243F88610020BC32 /* libEndpointSecurity.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C58E4F247F37130029E06C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2C58E57247F37130029E06C /* EndpointSecurityClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +87,9 @@
 			isa = PBXGroup;
 			children = (
 				D2578509243F77DC0020BC32 /* Info.plist */,
+				D2C58E3C247ECD320029E06C /* interface */,
 				D2578507243F77DC0020BC32 /* src */,
+				D2C58E3F247ED46B0029E06C /* tests */,
 				D2578506243F77DC0020BC32 /* Products */,
 				D2578516243F77E30020BC32 /* Frameworks */,
 			);
@@ -68,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				D2578505243F77DC0020BC32 /* EndpointSecurityClient.framework */,
+				D2C58E52247F37130029E06C /* EndpointSecurityClientTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,8 +108,12 @@
 			isa = PBXGroup;
 			children = (
 				D2578508243F77DC0020BC32 /* EndpointSecurityClient.h */,
+				D2C58E48247EF6200029E06C /* SystemEndpointSecurityAPI.swift */,
 				D2578523243F78580020BC32 /* EndpointSecurityClient.swift */,
-				D2578527243F7CA00020BC32 /* Utility.swift */,
+				D2C58E40247ED4DD0029E06C /* IdentifierGenerator.swift */,
+				D2C58E42247ED5940029E06C /* Atomic.swift */,
+				D2C58E4A247EFBEC0029E06C /* CDHash.swift */,
+				D2C58E6E247F65860029E06C /* MessageParsers.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -85,12 +121,33 @@
 		D2578516243F77E30020BC32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D295BFD1247FFB0C00CBE00A /* Configuration.framework */,
+				D295BFD2247FFB0C00CBE00A /* Logger.framework */,
 				D20F58E02450E4740070C21C /* AuthorizationManager.framework */,
 				D2513B5F2440738C00002645 /* libbsm.tbd */,
 				D257851C243F780A0020BC32 /* libEndpointSecurity.tbd */,
 				D2578517243F77E30020BC32 /* LibSinter.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2C58E3C247ECD320029E06C /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				D2C58E3D247ECD4B0029E06C /* EndpointSecurityInterface.swift */,
+				D2C58E46247EF6040029E06C /* EndpointSecurityAPIInterface.swift */,
+			);
+			path = interface;
+			sourceTree = "<group>";
+		};
+		D2C58E3F247ED46B0029E06C /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				D2C58E4C247F34AE0029E06C /* MockedEndpointSecurityAPI.swift */,
+				D2C58E5D247F37400029E06C /* EndpointSecurityClientTests.swift */,
+				D295BFCF247FEFD200CBE00A /* MockedLogger.swift */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,7 +172,6 @@
 				D2578501243F77DC0020BC32 /* Sources */,
 				D2578502243F77DC0020BC32 /* Frameworks */,
 				D2578503243F77DC0020BC32 /* Resources */,
-				D20F58E32450E4740070C21C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,18 +182,40 @@
 			productReference = D2578505243F77DC0020BC32 /* EndpointSecurityClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		D2C58E51247F37130029E06C /* EndpointSecurityClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2C58E5A247F37130029E06C /* Build configuration list for PBXNativeTarget "EndpointSecurityClientTests" */;
+			buildPhases = (
+				D2C58E4E247F37130029E06C /* Sources */,
+				D2C58E4F247F37130029E06C /* Frameworks */,
+				D2C58E50247F37130029E06C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2C58E59247F37130029E06C /* PBXTargetDependency */,
+			);
+			name = EndpointSecurityClientTests;
+			productName = EndpointSecurityClientTests;
+			productReference = D2C58E52247F37130029E06C /* EndpointSecurityClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D25784FC243F77DC0020BC32 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
 					D2578504243F77DC0020BC32 = {
 						CreatedOnToolsVersion = 11.4;
 						LastSwiftMigration = 1140;
+					};
+					D2C58E51247F37130029E06C = {
+						CreatedOnToolsVersion = 11.5;
 					};
 				};
 			};
@@ -155,12 +233,20 @@
 			projectRoot = "";
 			targets = (
 				D2578504243F77DC0020BC32 /* EndpointSecurityClient */,
+				D2C58E51247F37130029E06C /* EndpointSecurityClientTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D2578503243F77DC0020BC32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C58E50247F37130029E06C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -174,12 +260,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2578528243F7CA00020BC32 /* Utility.swift in Sources */,
+				D2C58E41247ED4DD0029E06C /* IdentifierGenerator.swift in Sources */,
 				D2578524243F78580020BC32 /* EndpointSecurityClient.swift in Sources */,
+				D2C58E47247EF6040029E06C /* EndpointSecurityAPIInterface.swift in Sources */,
+				D2C58E49247EF6200029E06C /* SystemEndpointSecurityAPI.swift in Sources */,
+				D295BFCC247FD97500CBE00A /* EndpointSecurityInterface.swift in Sources */,
+				D2C58E6F247F65860029E06C /* MessageParsers.swift in Sources */,
+				D2C58E4B247EFBEC0029E06C /* CDHash.swift in Sources */,
+				D2C58E43247ED5940029E06C /* Atomic.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2C58E4E247F37130029E06C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D295BFD0247FEFD200CBE00A /* MockedLogger.swift in Sources */,
+				D2C58E5F247F37510029E06C /* EndpointSecurityClientTests.swift in Sources */,
+				D295BFCE247FDB2A00CBE00A /* MockedEndpointSecurityAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2C58E59247F37130029E06C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2578504243F77DC0020BC32 /* EndpointSecurityClient */;
+			targetProxy = D2C58E58247F37130029E06C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D257850B243F77DC0020BC32 /* Debug */ = {
@@ -305,11 +415,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_UNDEFINED_BEHAVIOR_SANITIZER_INTEGER = NO;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 44WTB9L362;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -336,7 +447,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 44WTB9L362;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -350,6 +461,42 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.endpoint-security-client";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D2C58E5B247F37130029E06C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.endpoint-security-client-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D2C58E5C247F37130029E06C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				INFOPLIST_FILE = Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.endpoint-security-client-tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -371,6 +518,15 @@
 			buildConfigurations = (
 				D257850E243F77DC0020BC32 /* Debug */,
 				D257850F243F77DC0020BC32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2C58E5A247F37130029E06C /* Build configuration list for PBXNativeTarget "EndpointSecurityClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2C58E5B247F37130029E06C /* Debug */,
+				D2C58E5C247F37130029E06C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

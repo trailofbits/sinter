@@ -8,18 +8,18 @@
 
 import Foundation
 
-private let launchConfigurationPath = "/Library/LaunchAgents/com.trailofbits.SinterNotificationServer.plist"
+fileprivate let launchConfigurationPath = "/Library/LaunchAgents/com.trailofbits.sinter.notification-server.plist"
 
-private let launchdConfigurationData = """
+fileprivate let launchdConfigurationData = """
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.trailofbits.SinterNotificationServer</string>
+    <string>com.trailofbits.sinter.notification-server</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Applications/Sinter.app/Contents/XPCServices/SinterNotificationServer.app/Contents/MacOS/SinterNotificationServer</string>
+        <string>/Applications/Sinter.app/Contents/XPCServices/notification-server.app/Contents/MacOS/notification-server</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -58,13 +58,20 @@ func uninstallNotificationServer() -> Bool {
 
 func startNotificationServer() {
     do {
-        let process = Process()
+        var process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
         process.arguments = ["load",
-                             "-w",
                              launchConfigurationPath]
 
         try process.run()
+        process.waitUntilExit()
+
+        process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
+        process.arguments = ["start", "com.trailofbits.sinter.notification-server"]
+
+        try process.run()
+        process.waitUntilExit()
 
     } catch {
         print("Failed to start the launchctl process: \(error)")
@@ -73,13 +80,20 @@ func startNotificationServer() {
 
 func stopNotificationServer() {
     do {
-        let process = Process()
+        var process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
+        process.arguments = ["stop", "com.trailofbits.sinter.notification-server"]
+
+        try process.run()
+        process.waitUntilExit()
+
+        process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
         process.arguments = ["unload",
-                             "-w",
                              launchConfigurationPath]
 
         try process.run()
+        process.waitUntilExit()
 
     } catch {
         print("Failed to start the launchctl process: \(error)")
