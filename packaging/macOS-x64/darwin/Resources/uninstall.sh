@@ -42,31 +42,43 @@ VERSION=__VERSION__
 PRODUCT=__PRODUCT__
 
 echo "Application uninstalling process started"
+# remove launchd items
+/Applications/Sinter.app/Contents/MacOS/Sinter --uninstall-daemon
+if [ $? -eq 0 ]
+then
+  echo "[1/4] [DONE] Successfully deleted application"
+else
+  echo "[1/4] [ERROR] Could not delete application" >&2
+  exit 1
+fi
+
+/Applications/Sinter.app/Contents/MacOS/Sinter --uninstall-notification-server
+if [ $? -eq 0 ]
+then
+  echo "[2/4] [DONE] Successfully deleted application"
+else
+  echo "[2/4] [ERROR] Could not delete application" >&2
+  exit 1
+fi
+
 # remove application bundle
 find "/Applications/" -name "__PRODUCT__" | xargs rm
 if [ $? -eq 0 ]
 then
-  echo "[1/3] [DONE] Successfully deleted Application"
+  echo "[3/4] [DONE] Successfully deleted Application"
 else
-  echo "[1/3] [ERROR] Could not delete Application" >&2
+  echo "[3/4] [ERROR] Could not delete Application" >&2
+  exit 1
 fi
 
 # forget from pkgutil
 pkgutil --forget "org.$PRODUCT.$VERSION" > /dev/null 2>&1
 if [ $? -eq 0 ]
 then
-  echo "[2/3] [DONE] Successfully deleted application informations"
+  echo "[4/4] [DONE] Successfully deleted application informations"
 else
-  echo "[2/3] [ERROR] Could not delete application informations" >&2
-fi
-
-# remove launchd item
-/bin/launchctl unload /Library/LaunchDaemons/com.trailofbits.sinter.plist && rm -f /Library/LaunchDaemons/com.trailofbits.sinter.plist
-if [ $? -eq 0 ]
-then
-  echo "[3/3] [DONE] Successfully deleted application"
-else
-  echo "[3/3] [ERROR] Could not delete application" >&2
+  echo "[4/4] [ERROR] Could not delete application informations" >&2
+  exit 1
 fi
 
 echo "Application uninstall process finished"

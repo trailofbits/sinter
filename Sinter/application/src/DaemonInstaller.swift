@@ -8,28 +8,33 @@
 
 import Foundation
 
-fileprivate let launchConfigurationPath = "/Library/LaunchAgents/com.trailofbits.sinter.notification-server.plist"
+fileprivate let launchConfigurationPath = "/Library/LaunchDaemons/com.trailofbits.sinter.plist"
 
 fileprivate let launchdConfigurationData = """
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Label</key>
-    <string>com.trailofbits.SinterNotificationServer</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/Applications/Sinter.app/Contents/XPCServices/notification-server.xpc/Contents/MacOS/notification-server</string>
-    </array>
-    <key>RunAtLoad</key>
+	  <key>StandardErrorPath</key>
+	  <string>/var/log/sinter_stderr.log</string>
+	  <key>StandardOutPath</key>
+	  <string>/var/log/sinter_stdout.log</string>
+	  <key>Label</key>
+	  <string>com.trailofbits.sinter</string>
+	  <key>ProgramArguments</key>
+	  <array>
+        <string>/Applications/Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.daemon.systemextension/Contents/MacOS/com.trailofbits.sinter.daemon</string>
+	  </array>
+	  <key>RunAtLoad</key>
     <true/>
-    <key>KeepAlive</key>
-    <true/>
+	  <key>KeepAlive</key>
+	  <true/>
 </dict>
 </plist>
+
 """
 
-func installNotificationServer() -> Bool {
+func installDaemon() -> Bool {
     do {
         try launchdConfigurationData.write(toFile: launchConfigurationPath,
                                            atomically: true,
@@ -51,7 +56,7 @@ func installNotificationServer() -> Bool {
     }
 }
 
-func uninstallNotificationServer() -> Bool {
+func uninstallDaemon() -> Bool {
     do {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
@@ -72,11 +77,11 @@ func uninstallNotificationServer() -> Bool {
     }
 }
 
-func startNotificationServer() -> Bool {
+func startDaemon() -> Bool {
     do {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
-        process.arguments = ["start", "com.trailofbits.sinter.notification-server"]
+        process.arguments = ["start", "com.trailofbits.sinter"]
 
         try process.run()
         process.waitUntilExit()
@@ -89,11 +94,11 @@ func startNotificationServer() -> Bool {
     }
 }
 
-func stopNotificationServer() -> Bool {
+func stopDaemon() -> Bool {
     do {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
-        process.arguments = ["stop", "com.trailofbits.sinter.notification-server"]
+        process.arguments = ["stop", "com.trailofbits.sinter"]
 
         try process.run()
         process.waitUntilExit()

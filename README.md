@@ -79,7 +79,7 @@ Rule databases are written in JSON format. Here's an example database that allow
 }
 ```
 
-Sinter only supports BINARY rules for now, using either WHITELIST or BLACKLIST policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
+Sinter only supports **BINARY** rules for now, using either **WHITELIST** or **BLACKLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
 # License
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.

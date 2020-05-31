@@ -16,6 +16,9 @@
 		D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
+		D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
+		D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
 		D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
@@ -26,7 +29,6 @@
 		D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */; };
 		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
 		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
 /* End PBXBuildFile section */
@@ -191,6 +193,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		D22AA6502483EA4800C40455 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D257846B243F62DA0020BC32 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +263,7 @@
 		D20F586F2450DC090070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58752450DC510070C21C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58762450DC510070C21C /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
+		D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonInstaller.swift; sourceTree = "<group>"; };
 		D248E475247D4203002B9FBE /* Configuration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Configuration.xcodeproj; path = Configuration/Configuration.xcodeproj; sourceTree = "<group>"; };
 		D248E47E247D420E002B9FBE /* Logger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Logger.xcodeproj; path = Logger/Logger.xcodeproj; sourceTree = "<group>"; };
 		D248E4B2247D4C26002B9FBE /* DecisionManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DecisionManager.xcodeproj; path = DecisionManager/DecisionManager.xcodeproj; sourceTree = "<group>"; };
@@ -262,7 +276,6 @@
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
 		D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
-		D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionInstaller.swift; sourceTree = "<group>"; };
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D94398244726A500626B17 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServerInstaller.swift; sourceTree = "<group>"; };
@@ -294,6 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +327,7 @@
 		D20F585E2450DA3E0070C21C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				D2D9439224471DAB00626B17 /* SystemExtensionInstaller.swift */,
+				D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */,
 				D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */,
 				D2D943942447235E00626B17 /* main.swift */,
 			);
@@ -520,6 +534,7 @@
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
 				D295C2A12447FCF500D39F9F /* CopyFiles */,
+				D22AA6502483EA4800C40455 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -726,7 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */,
-				D2D9439324471DAB00626B17 /* SystemExtensionInstaller.swift in Sources */,
+				D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */,
 				D2D943952447235E00626B17 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
