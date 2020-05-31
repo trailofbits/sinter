@@ -29,11 +29,13 @@ class SignatureDatabaseTests: XCTestCase {
 
         var testPath = "/Applications/Xcode.app"
         context.operationMap[testPath] = SignatureDatabaseOperation(path: testPath,
-                                                                    cachedResultOpt: nil)
+                                                                    cachedResultOpt: nil,
+                                                                    external: false)
 
         testPath = "/Applications/Google Chrome.app"
         context.operationMap[testPath] = SignatureDatabaseOperation(path: testPath,
-                                                                    cachedResultOpt: nil)
+                                                                    cachedResultOpt: nil,
+                                                                    external: false)
 
         return context
     }
@@ -84,32 +86,97 @@ class SignatureDatabaseTests: XCTestCase {
     }
 
     func testOperationQueueSelection() throws {
-        let mb = 1024 * 1024
-        let gb = mb * 1024
-        
-        // Large applications (size > 10 mb) should always end up in the secondary queue
+        // Application bundles always end up in the secondary queue
         var fileInformation = FileInformation(path: "/Applications/XCode.app",
-                                              ownerId: 0,
-                                              size: 10 * gb)
+                                              ownerAccountName: "root",
+                                              groupOwnerAccountName: "wheel",
+                                              size: 1,
+                                              directory: true)
 
         var queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
         XCTAssertEqual(queueType, OperationQueueType.secondary)
 
-        // Small applications (size < 10mb) should always end up in the primary queue
-        fileInformation = FileInformation(path: "/bin/bash",
-                                          ownerId: 0,
-                                          size: 1 * mb)
-
-        queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
-        XCTAssertEqual(queueType, OperationQueueType.primary)
-
-        // Regardless of application size, if the file is not owned by root then it should
-        // always end up in the secondary queue
-        fileInformation = FileInformation(path: "/bin/bash",
-                                          ownerId: 1,
-                                          size: 1 * mb)
+        // Applications that are not owned by the root user, always end up in the secondary queue
+        fileInformation = FileInformation(path: "/usr/local/bin/test_application",
+                                          ownerAccountName: "user",
+                                          groupOwnerAccountName: "user",
+                                          size: 1,
+                                          directory: false)
 
         queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
         XCTAssertEqual(queueType, OperationQueueType.secondary)
+
+        // Applications that are not owned by the admin/staff/wheel groups, always end up in the secondary queue
+        fileInformation = FileInformation(path: "/usr/local/bin/test_application",
+                                          ownerAccountName: "root",
+                                          groupOwnerAccountName: "user",
+                                          size: 1,
+                                          directory: false)
+
+        queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+        XCTAssertEqual(queueType, OperationQueueType.secondary)
+
+        // Sinter.app always end up in the primary queue, if the owners are correct
+        let userList = ["root", "user"]
+        let groupList = ["admin", "staff", "wheel", "user"]
+        let fileSizeList = [1024, 1048576, 5242880, 10485760, 52428800]
+        
+        let sinterAppBundlePath = "/Applications/Sinter.app"
+        let applicationPathList = ["/Applications/Xcode.app",
+                                   sinterAppBundlePath]
+
+        for user in userList {
+            for group in groupList {
+                for fileSize in fileSizeList {
+                    for applicationPath in applicationPathList {
+                        fileInformation = FileInformation(path: applicationPath,
+                                                          ownerAccountName: user,
+                                                          groupOwnerAccountName: group,
+                                                          size: fileSize,
+                                                          directory: true)
+
+                        let expectedQueueType: OperationQueueType
+                        if fileInformation.ownerAccountName == "root" &&
+                           fileInformation.groupOwnerAccountName != "user" &&
+                           fileInformation.path == sinterAppBundlePath {
+
+                            expectedQueueType = OperationQueueType.primary
+                        } else {
+                            expectedQueueType = OperationQueueType.secondary
+                        }
+
+                        queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+                        XCTAssertEqual(queueType, expectedQueueType)
+                    }
+                }
+            }
+        }
+
+        // Applications owned by the root user and one of the approved groups ends up in the primary queue
+        // unless they exceed the maximum file size limitation
+        for user in userList {
+            for group in groupList {
+                for fileSize in fileSizeList {
+                    fileInformation = FileInformation(path: "/usr/local/bin/test_application",
+                                                      ownerAccountName: user,
+                                                      groupOwnerAccountName: group,
+                                                      size: fileSize,
+                                                      directory: false)
+
+                    let expectedQueueType: OperationQueueType
+                    if fileInformation.ownerAccountName != "root" ||
+                        fileInformation.groupOwnerAccountName == "user" ||
+                        fileInformation.size > 10485760 {
+
+                        expectedQueueType = OperationQueueType.secondary
+                    } else {
+                        expectedQueueType = OperationQueueType.primary
+                    }
+
+                    queueType = SignatureDatabase.getQueueTypeFor(fileInformation: fileInformation)
+                    XCTAssertEqual(queueType, expectedQueueType)
+                }
+            }
+        }
     }
 }

@@ -36,7 +36,14 @@ func parseExecAuthorization(esMessage: es_message_t) -> EndpointSecurityExecAuth
     //
     // The code signature is going to be verified before it can be authorized, so
     // let's use the signingIdentifier instead for now
-    let platformBinary = signingIdentifier.starts(with: "com.apple.")
+    var binaryType: BinaryType
+    if signingIdentifier.starts(with: "com.apple.") {
+        binaryType = BinaryType.platform
+    } else if signingIdentifier.starts(with: "com.trailofbits.") {
+        binaryType = BinaryType.sinter
+    } else {
+        binaryType = BinaryType.thirdParty
+    }
 
     let cdHash = getProcessCdHash(process: target)
     let codeDirectoryHash = BinaryHash(type: BinaryHashType.truncatedSha256,
@@ -50,7 +57,7 @@ func parseExecAuthorization(esMessage: es_message_t) -> EndpointSecurityExecAuth
                                                           codeDirectoryHash: codeDirectoryHash,
                                                           signingIdentifier: signingIdentifier,
                                                           teamIdentifier: teamIdentifier,
-                                                          platformBinary: platformBinary)
+                                                          binaryType: binaryType)
 
     return parsedMessage
 }

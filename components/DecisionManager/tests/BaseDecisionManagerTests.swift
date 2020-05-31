@@ -33,37 +33,42 @@ final class DecisionManagerTests : XCTestCase {
 
     }
     
-    func testRequestProcessingForPlatformBinaries() throws {
-        let request = DecisionManagerRequest(binaryPath: "/Applications/Safari.app",
-                                             codeDirectoryHash: BinaryHash(type: BinaryHashType.truncatedSha256,
-                                                                           hash: "91BFCC1CE8BCE7473D35FD00BDDF33AF52A1D2FD"),
-
-                                             signingIdentifier: "com.apple.Safari",
-                                             teamIdentifier: "",
-                                             platformBinary: true)
-        
+    func testBinaryTypeProcessing() throws {
         let context = BaseDecisionManagerContext()
         XCTAssertFalse(context.allowInvalidPrograms)
         XCTAssertFalse(context.allowUnknownPrograms)
         XCTAssertFalse(context.allowUnsignedPrograms)
 
-        for signatureCheckResult in SignatureDatabaseResult.allCases {
-            var allow = false
-            var cache = false
+        for binaryType in BinaryType.allCases {
+            let request = DecisionManagerRequest(binaryPath: "/Applications/Safari.app",
+                                                 codeDirectoryHash: BinaryHash(type: BinaryHashType.truncatedSha256,
+                                                                               hash: "91BFCC1CE8BCE7473D35FD00BDDF33AF52A1D2FD"),
 
-            BaseDecisionManager.processRequest(context: context,
-                                               request: request,
-                                               ruleDatabase: RuleDatabase(),
-                                               allow: &allow,
-                                               cache: &cache,
-                                               signatureCheckResult: signatureCheckResult)
+                                                 signingIdentifier: "com.apple.Safari",
+                                                 teamIdentifier: "",
+                                                 binaryType: binaryType)
 
-            if signatureCheckResult == SignatureDatabaseResult.Valid {
-                XCTAssertTrue(allow)
-                XCTAssertTrue(cache)
-            } else {
-                XCTAssertFalse(allow)
-                XCTAssertFalse(cache)
+            for signatureCheckResult in SignatureDatabaseResult.allCases {
+                var allow = false
+                var cache = false
+
+                BaseDecisionManager.processRequest(context: context,
+                                                   request: request,
+                                                   ruleDatabase: RuleDatabase(),
+                                                   allow: &allow,
+                                                   cache: &cache,
+                                                   signatureCheckResult: signatureCheckResult)
+
+                if signatureCheckResult == SignatureDatabaseResult.Valid &&
+                    (binaryType == BinaryType.platform || binaryType == BinaryType.sinter) {
+
+                    XCTAssertTrue(allow)
+                    XCTAssertTrue(cache)
+
+                } else {
+                    XCTAssertFalse(allow)
+                    XCTAssertFalse(cache)
+                }
             }
         }
     }
@@ -75,7 +80,7 @@ final class DecisionManagerTests : XCTestCase {
 
                                              signingIdentifier: "",
                                              teamIdentifier: "",
-                                             platformBinary: false)
+                                             binaryType: BinaryType.thirdParty)
         
         var context = BaseDecisionManagerContext()
         XCTAssertFalse(context.allowInvalidPrograms)
@@ -127,7 +132,7 @@ final class DecisionManagerTests : XCTestCase {
 
                                              signingIdentifier: "org.cmake.cmake",
                                              teamIdentifier: "W38PE5Y733",
-                                             platformBinary: false)
+                                             binaryType: BinaryType.thirdParty)
         
         var context = BaseDecisionManagerContext()
         XCTAssertFalse(context.allowInvalidPrograms)
@@ -181,7 +186,7 @@ final class DecisionManagerTests : XCTestCase {
 
                                              signingIdentifier: "org.cmake.cmake",
                                              teamIdentifier: "W38PE5Y733",
-                                             platformBinary: false)
+                                             binaryType: BinaryType.thirdParty)
         
         let context = BaseDecisionManagerContext()
         XCTAssertFalse(context.allowInvalidPrograms)

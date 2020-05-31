@@ -8,6 +8,7 @@
 
 import Logger
 import Configuration
+import EndpointSecurityClient
 
 struct BaseDecisionManagerContext {
     public var allowUnknownPrograms = false
@@ -122,7 +123,9 @@ class BaseDecisionManager: DecisionManagerInterface,
             allow = context.allowUnsignedPrograms
 
         case SignatureDatabaseResult.Valid:
-            if request.platformBinary {
+            if request.binaryType == BinaryType.platform ||
+               request.binaryType == BinaryType.sinter {
+
                 allow = true
                 cache = true
 

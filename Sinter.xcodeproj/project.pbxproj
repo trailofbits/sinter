@@ -29,6 +29,8 @@
 		D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2CCBF192486AD2D004999ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CCBF182486AD2D004999ED /* main.swift */; };
+		D2CCBF1B2486AE8B004999ED /* signature-checker in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2CCBF112486AD1B004999ED /* signature-checker */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
 		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
 /* End PBXBuildFile section */
@@ -181,6 +183,13 @@
 			remoteGlobalIDString = D24B4A2E2448A73000958F82;
 			remoteInfo = NotificationService;
 		};
+		D2CCBF1C2486AED0004999ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2CCBF102486AD1B004999ED;
+			remoteInfo = "signature-checker";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -251,6 +260,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D2CCBF0F2486AD1B004999ED /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		D2CCBF1A2486AE7D004999ED /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				D2CCBF1B2486AE8B004999ED /* signature-checker in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -276,6 +304,8 @@
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
 		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
 		D2A3A6A324534A0000CF24FB /* AuthorizationManager.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AuthorizationManager.xcodeproj; path = AuthorizationManager/AuthorizationManager.xcodeproj; sourceTree = "<group>"; };
+		D2CCBF112486AD1B004999ED /* signature-checker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "signature-checker"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2CCBF182486AD2D004999ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D94398244726A500626B17 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServerInstaller.swift; sourceTree = "<group>"; };
@@ -308,6 +338,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2CCBF0E2486AD1B004999ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +460,7 @@
 				D2578410243F602F0020BC32 /* Sinter.app */,
 				D20F58412450DA370070C21C /* notification-server.app */,
 				D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */,
+				D2CCBF112486AD1B004999ED /* signature-checker */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -430,6 +468,7 @@
 		D2578412243F602F0020BC32 /* Sinter */ = {
 			isa = PBXGroup;
 			children = (
+				D2CCBF0C2486ACEA004999ED /* signature-checker */,
 				D20F585F2450DA450070C21C /* application */,
 				D20F586E2450DC090070C21C /* system-extension */,
 				D20F58422450DA370070C21C /* notification-server */,
@@ -477,6 +516,14 @@
 				D295C01924800E5100CBE00A /* AuthorizationManagerTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D2CCBF0C2486ACEA004999ED /* signature-checker */ = {
+			isa = PBXGroup;
+			children = (
+				D2CCBF182486AD2D004999ED /* main.swift */,
+			);
+			path = "signature-checker";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,11 +581,13 @@
 				D257840E243F602E0020BC32 /* Resources */,
 				D257846B243F62DA0020BC32 /* CopyFiles */,
 				D295C2A12447FCF500D39F9F /* CopyFiles */,
+				D2CCBF1A2486AE7D004999ED /* CopyFiles */,
 				D22AA6502483EA4800C40455 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D2CCBF1D2486AED0004999ED /* PBXTargetDependency */,
 				D2BED8C32481BED900A44C62 /* PBXTargetDependency */,
 				D2BED8C52481BED900A44C62 /* PBXTargetDependency */,
 			);
@@ -547,13 +596,30 @@
 			productReference = D2578410243F602F0020BC32 /* Sinter.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D2CCBF102486AD1B004999ED /* signature-checker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2CCBF152486AD1B004999ED /* Build configuration list for PBXNativeTarget "signature-checker" */;
+			buildPhases = (
+				D2CCBF0D2486AD1B004999ED /* Sources */,
+				D2CCBF0E2486AD1B004999ED /* Frameworks */,
+				D2CCBF0F2486AD1B004999ED /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "signature-checker";
+			productName = "signature-checker";
+			productReference = D2CCBF112486AD1B004999ED /* signature-checker */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		D2578408243F602E0020BC32 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Trail of Bits";
 				TargetAttributes = {
@@ -565,6 +631,9 @@
 					};
 					D257840F243F602E0020BC32 = {
 						CreatedOnToolsVersion = 11.4;
+					};
+					D2CCBF102486AD1B004999ED = {
+						CreatedOnToolsVersion = 11.5;
 					};
 				};
 			};
@@ -610,6 +679,7 @@
 				D257840F243F602E0020BC32 /* Sinter */,
 				D20F58402450DA370070C21C /* notification-server */,
 				D20F586C2450DC090070C21C /* system-extension */,
+				D2CCBF102486AD1B004999ED /* signature-checker */,
 			);
 		};
 /* End PBXProject section */
@@ -746,6 +816,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D2CCBF0D2486AD1B004999ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2CCBF192486AD2D004999ED /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -793,6 +871,11 @@
 			isa = PBXTargetDependency;
 			name = NotificationService;
 			targetProxy = D2BED8DE2481BF2200A44C62 /* PBXContainerItemProxy */;
+		};
+		D2CCBF1D2486AED0004999ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2CCBF102486AD1B004999ED /* signature-checker */;
+			targetProxy = D2CCBF1C2486AED0004999ED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1061,6 +1144,32 @@
 			};
 			name = Release;
 		};
+		D2CCBF162486AD1B004999ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.signature-checker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D2CCBF172486AD1B004999ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K73DT7EGT9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trailofbits.sinter.signature-checker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1096,6 +1205,15 @@
 			buildConfigurations = (
 				D2578424243F60350020BC32 /* Debug */,
 				D2578425243F60350020BC32 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2CCBF152486AD1B004999ED /* Build configuration list for PBXNativeTarget "signature-checker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2CCBF162486AD1B004999ED /* Debug */,
+				D2CCBF172486AD1B004999ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

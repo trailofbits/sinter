@@ -121,7 +121,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
                                              codeDirectoryHash: message.codeDirectoryHash,
                                              signingIdentifier: message.signingIdentifier,
                                              teamIdentifier: message.teamIdentifier,
-                                             platformBinary: message.platformBinary)
+                                             binaryType: message.binaryType)
 
         var allow = false
         var cache = false
