@@ -59,21 +59,4 @@ class NotificationCenter: NotificationServiceProtocol {
 
         notificationCenter.add(request)
     }
-
-    func requestAuthorization(binaryPath: String,
-                              hash: String,
-                              reply: @escaping (_ allow: Bool) -> Void) {
-        DispatchQueue.main.sync {
-            let alert = NSAlert()
-
-            alert.messageText = "Sinter needs to allow an unknown program"
-            alert.informativeText = "Path: \(binaryPath)\nHash: \(hash)"
-            alert.alertStyle = .warning
-            alert.addButton(withTitle: "Allow")
-            alert.addButton(withTitle: "Deny")
-
-            let allow = alert.runModal() == .alertFirstButtonReturn
-            reply(allow)
-        }
-    }
 }

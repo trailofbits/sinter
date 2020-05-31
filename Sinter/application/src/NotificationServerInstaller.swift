@@ -16,10 +16,10 @@ fileprivate let launchdConfigurationData = """
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.trailofbits.SinterNotificationServer</string>
+    <string>com.trailofbits.sinter.notification-server</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Applications/Sinter.app/Contents/XPCServices/notification-server.xpc/Contents/MacOS/notification-server</string>
+        <string>/Applications/Sinter.app/Contents/XPCServices/notification-server.app/Contents/MacOS/notification-server</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
@@ -35,14 +35,6 @@ func installNotificationServer() -> Bool {
                                            atomically: true,
                                            encoding: .utf8)
 
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
-        process.arguments = ["load",
-                             launchConfigurationPath]
-
-        try process.run()
-        process.waitUntilExit()
-
         return true
 
     } catch {
@@ -53,14 +45,6 @@ func installNotificationServer() -> Bool {
 
 func uninstallNotificationServer() -> Bool {
     do {
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
-        process.arguments = ["unload",
-                             launchConfigurationPath]
-
-        try process.run()
-        process.waitUntilExit()
-
         let fileManager = FileManager.default
         try fileManager.removeItem(atPath: launchConfigurationPath)
 
@@ -72,36 +56,46 @@ func uninstallNotificationServer() -> Bool {
     }
 }
 
-func startNotificationServer() -> Bool {
+func startNotificationServer() {
     do {
-        let process = Process()
+        var process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
+        process.arguments = ["load",
+                             launchConfigurationPath]
+
+        try process.run()
+        process.waitUntilExit()
+
+        process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
         process.arguments = ["start", "com.trailofbits.sinter.notification-server"]
 
         try process.run()
         process.waitUntilExit()
 
-        return true
-
     } catch {
         print("Failed to start the launchctl process: \(error)")
-        return false
     }
 }
 
-func stopNotificationServer() -> Bool {
+func stopNotificationServer() {
     do {
-        let process = Process()
+        var process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
         process.arguments = ["stop", "com.trailofbits.sinter.notification-server"]
 
         try process.run()
         process.waitUntilExit()
 
-        return true
+        process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/launchctl")
+        process.arguments = ["unload",
+                             launchConfigurationPath]
+
+        try process.run()
+        process.waitUntilExit()
 
     } catch {
         print("Failed to start the launchctl process: \(error)")
-        return false
     }
 }

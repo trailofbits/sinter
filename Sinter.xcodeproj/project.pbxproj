@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D20F58622450DA800070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58612450DA800070C21C /* main.swift */; };
 		D20F58642450DA8E0070C21C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58632450DA8E0070C21C /* NotificationCenter.swift */; };
-		D20F58652450DB110070C21C /* notification-server.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D20F58652450DB110070C21C /* notification-server.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
@@ -247,14 +247,14 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
-				D20F58652450DB110070C21C /* notification-server.xpc in CopyFiles */,
+				D20F58652450DB110070C21C /* notification-server.app in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D20F58412450DA370070C21C /* notification-server.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "notification-server.xpc"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D20F58412450DA370070C21C /* notification-server.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "notification-server.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F584F2450DA380070C21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58502450DA380070C21C /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D20F58612450DA800070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				D2578410243F602F0020BC32 /* Sinter.app */,
-				D20F58412450DA370070C21C /* notification-server.xpc */,
+				D20F58412450DA370070C21C /* notification-server.app */,
 				D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */,
 			);
 			name = Products;
@@ -498,7 +498,7 @@
 			);
 			name = "notification-server";
 			productName = "notification-server";
-			productReference = D20F58412450DA370070C21C /* notification-server.xpc */;
+			productReference = D20F58412450DA370070C21C /* notification-server.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D20F586C2450DC090070C21C /* system-extension */ = {
@@ -820,7 +820,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = xpc;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
@@ -848,7 +848,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Sinter Notification Server (dev)";
 				SWIFT_VERSION = 5.0;
-				WRAPPER_EXTENSION = xpc;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
