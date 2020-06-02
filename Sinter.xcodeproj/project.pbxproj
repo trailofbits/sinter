@@ -13,26 +13,31 @@
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D21D6D082480121E00247227 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
-		D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D21D6D14248012DF00247227 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
-		D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
 		D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
 		D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01D2480113F00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
-		D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C01F2480113F00CBE00A /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
-		D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C0212480113F00CBE00A /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
-		D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C0232480113F00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; };
-		D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295C0262480115000CBE00A /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
 		D295C0272480115000CBE00A /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D2CCBF192486AD2D004999ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CCBF182486AD2D004999ED /* main.swift */; };
 		D2CCBF1B2486AE8B004999ED /* signature-checker in CopyFiles */ = {isa = PBXBuildFile; fileRef = D2CCBF112486AD1B004999ED /* signature-checker */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D2D943952447235E00626B17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D943942447235E00626B17 /* main.swift */; };
 		D2D9439B24474AC100626B17 /* NotificationServerInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */; };
+		D2F042002487004600A00BA7 /* AuthorizationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; };
+		D2F042012487004600A00BA7 /* AuthorizationManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2A3A6A824534A0000CF24FB /* AuthorizationManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2F042022487004600A00BA7 /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E47B247D4203002B9FBE /* Configuration.framework */; };
+		D2F042032487004600A00BA7 /* DecisionManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; };
+		D2F042042487004600A00BA7 /* DecisionManager.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E4B8247D4C27002B9FBE /* DecisionManager.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2F042052487004600A00BA7 /* EndpointSecurityClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; };
+		D2F042062487004600A00BA7 /* EndpointSecurityClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D2578515243F77DC0020BC32 /* EndpointSecurityClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2F042072487004600A00BA7 /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; };
+		D2F042082487004600A00BA7 /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D248E484247D420E002B9FBE /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D2F042092487004600A00BA7 /* NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; };
+		D2F0420A2487004600A00BA7 /* NotificationService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D24B4A3F2448A73200958F82 /* NotificationService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,7 +213,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D2F042062487004600A00BA7 /* EndpointSecurityClient.framework in Embed Frameworks */,
+				D2F042012487004600A00BA7 /* AuthorizationManager.framework in Embed Frameworks */,
 				D22AA64F2483EA4700C40455 /* Configuration.framework in Embed Frameworks */,
+				D2F0420A2487004600A00BA7 /* NotificationService.framework in Embed Frameworks */,
+				D2F042042487004600A00BA7 /* DecisionManager.framework in Embed Frameworks */,
+				D2F042082487004600A00BA7 /* Logger.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,22 +231,6 @@
 			files = (
 				D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D295C0252480113F00CBE00A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D295C0242480113F00CBE00A /* Logger.framework in Embed Frameworks */,
-				D295C0202480113F00CBE00A /* DecisionManager.framework in Embed Frameworks */,
-				D295C01E2480113F00CBE00A /* Configuration.framework in Embed Frameworks */,
-				D21D6D15248012DF00247227 /* NotificationService.framework in Embed Frameworks */,
-				D21D6D092480121E00247227 /* AuthorizationManager.framework in Embed Frameworks */,
-				D295C0222480113F00CBE00A /* EndpointSecurityClient.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D295C0282480115000CBE00A /* Embed Frameworks */ = {
@@ -337,6 +331,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F042072487004600A00BA7 /* Logger.framework in Frameworks */,
+				D2F042022487004600A00BA7 /* Configuration.framework in Frameworks */,
+				D2F042092487004600A00BA7 /* NotificationService.framework in Frameworks */,
+				D2F042052487004600A00BA7 /* EndpointSecurityClient.framework in Frameworks */,
+				D2F042002487004600A00BA7 /* AuthorizationManager.framework in Frameworks */,
+				D2F042032487004600A00BA7 /* DecisionManager.framework in Frameworks */,
 				D22AA64E2483EA4700C40455 /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,7 +555,6 @@
 				D20F58692450DC090070C21C /* Sources */,
 				D20F586A2450DC090070C21C /* Frameworks */,
 				D20F586B2450DC090070C21C /* CopyFiles */,
-				D295C0252480113F00CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -945,7 +944,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
 				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
@@ -964,7 +963,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXECUTABLE_EXTENSION = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Sinter/notification-server/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../../../../../Frameworks";
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter.daemon;
 				PROVISIONING_PROFILE_SPECIFIER = "Sinter Daemon (dev)";
