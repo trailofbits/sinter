@@ -13,12 +13,15 @@ final class SignatureDatabaseOperation : Operation {
     private let path: String
     private var result = SignatureDatabaseResult.Invalid
     private let cachedResultOpt: SignatureDatabaseResult?
+    private let external: Bool
 
     public init(path: String,
-                cachedResultOpt: SignatureDatabaseResult?) {
+                cachedResultOpt: SignatureDatabaseResult?,
+                external: Bool) {
 
         self.path = path
         self.cachedResultOpt = cachedResultOpt
+        self.external = external
 
         super.init()
     }
@@ -33,21 +36,62 @@ final class SignatureDatabaseOperation : Operation {
 
         if let parentOperation = dependencies.first as? SignatureDatabaseOperation {
             result = parentOperation.getResult()
-
+            return
+        }
+        
+        if external {
+            externalSignatureCheck()
         } else {
-            switch checkCodeSignature(path: path) {
-            case .internalError:
-                result = SignatureDatabaseResult.Failed
+            inProcessSignatureCheck()
+        }
+    }
+    
+    private func inProcessSignatureCheck() {
+        switch checkCodeSignature(path: path) {
+        case .internalError:
+            result = SignatureDatabaseResult.Failed
 
-            case .ioError:
-                result = SignatureDatabaseResult.Failed
+        case .ioError:
+            result = SignatureDatabaseResult.Failed
 
-            case .valid:
+        case .valid:
+            result = SignatureDatabaseResult.Valid
+
+        case .invalid:
+            result = SignatureDatabaseResult.Invalid
+        }
+    }
+
+    private func externalSignatureCheck() {
+        result = SignatureDatabaseResult.Failed
+
+        do {
+            let process = Process()
+            process.executableURL = URL(fileURLWithPath: "/Applications/Sinter.app/Contents/MacOS/signature-checker")
+            process.arguments = [self.path]
+
+            try process.run()
+
+            while process.isRunning {
+                sleep(1)
+
+                if isCancelled {
+                    process.terminate()
+                    break
+                }
+            }
+
+            if isCancelled {
+                return
+            }
+
+            if process.terminationStatus == 0 {
                 result = SignatureDatabaseResult.Valid
-
-            case .invalid:
+            } else {
                 result = SignatureDatabaseResult.Invalid
             }
+
+        } catch {
         }
     }
 

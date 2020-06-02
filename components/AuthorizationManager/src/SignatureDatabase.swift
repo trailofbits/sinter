@@ -18,10 +18,11 @@ public typealias SignatureDatabaseCallback = (EndpointSecurityExecAuthorization,
 
 final class SignatureDatabaseContext {
     var operationMap = [String: SignatureDatabaseOperation]()
+    var childOperationMap = [String: [SignatureDatabaseOperation]]()
     var resultCache = [String: SignatureDatabaseResult]()
 
-    let primaryOperationQueue = createOperationQueue(type: OperationQueueType.primary)
-    let secondaryOperationQueue = createOperationQueue(type: OperationQueueType.secondary)
+    var primaryOperationQueue = OperationQueue()
+    var secondaryOperationQueue = OperationQueue()
 }
 
 fileprivate let dispatchQueue = DispatchQueue(label: "com.trailofbits.sinter.signature-database")
@@ -32,6 +33,9 @@ final class SignatureDatabase {
 
     public init(logger: LoggerInterface) {
         self.logger = logger
+        
+        context.primaryOperationQueue = createOperationQueue(type: OperationQueueType.primary)
+        context.secondaryOperationQueue = createOperationQueue(type: OperationQueueType.secondary)
     }
 
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
@@ -43,26 +47,49 @@ final class SignatureDatabase {
             }
 
             let cachedResultOpt = context.resultCache[message.binaryPath]
+
+            // If the permissions are correct, Sinter.app will end up in the
+            // primary queue
+            let queueType = SignatureDatabase.getQueueTypeFor(path: message.binaryPath)
+            if message.binaryPath == "/Applications/Sinter.app" &&
+                queueType != OperationQueueType.primary {
+
+                logger.logMessage(severity: LoggerMessageSeverity.error,
+                                  message: "Wrong permissions on /Applications/Sinter.app. The application bundle should be owned by root:wheel")
+            }
+
             let operation = SignatureDatabaseOperation(path: message.binaryPath,
-                                                       cachedResultOpt: cachedResultOpt)
+                                                       cachedResultOpt: cachedResultOpt,
+                                                       external: queueType == OperationQueueType.secondary)
 
             operation.completionBlock = { [unowned operation, message, block] in
-                let result = operation.getResult()
-                block(message, result)
+                dispatchQueue.sync {
+                    if operation.isCancelled {
+                        return
+                    }
 
-                let binaryPath = message.binaryPath
-                self.setResult(binaryPath: binaryPath,
-                               result: result)
+                    let result = operation.getResult()
+                    block(message, result)
+
+                    let binaryPath = message.binaryPath
+                    self.setResult(binaryPath: binaryPath,
+                                   result: result)
+                }
             }
 
-            let parentOperationOpt = context.operationMap[message.binaryPath]
-            if parentOperationOpt != nil {
-                operation.addDependency(parentOperationOpt!)
+            if let parentOperation = context.operationMap[message.binaryPath] {
+                operation.addDependency(parentOperation)
+                
+                if context.childOperationMap[message.binaryPath] == nil {
+                    context.childOperationMap[message.binaryPath] = [SignatureDatabaseOperation]()
+                }
+
+                context.childOperationMap[message.binaryPath]!.append(operation)
+
+            } else {
+                context.operationMap[message.binaryPath] = operation
             }
 
-            context.operationMap[message.binaryPath] = operation
-            
-            let queueType = SignatureDatabase.getQueueTypeFor(path: message.binaryPath)
             switch (queueType) {
             case .primary:
                 context.primaryOperationQueue.addOperation(operation)
@@ -76,10 +103,10 @@ final class SignatureDatabase {
     private func setResult(binaryPath: String,
                            result: SignatureDatabaseResult) {
 
-        dispatchQueue.sync {
-            context.resultCache[binaryPath] = result
-            context.operationMap.removeValue(forKey: binaryPath)
-        }
+
+        context.resultCache[binaryPath] = result
+        context.operationMap.removeValue(forKey: binaryPath)
+        context.childOperationMap.removeValue(forKey: binaryPath)
     }
 
     public func invalidateCacheFor(path: String) {
@@ -102,22 +129,40 @@ final class SignatureDatabase {
 
         var operationPathList = [String]()
 
-        for operation in context.operationMap {
-            let operationPath = operation.value.getPath()
+        for it in context.childOperationMap {
+            let operationPath = it.key
 
             if !path.starts(with: operationPath) {
                 continue
             }
 
             operationPathList.append(operationPath)
-            operation.value.cancel()
+
+            for operation in it.value {
+                operation.cancel()
+
+                logger.logMessage(severity: LoggerMessageSeverity.information,
+                                  message: "Invalidating signature check operation for \(operationPath)")
+            }
         }
-        
-        for operationPath in operationPathList {
-            context.operationMap.removeValue(forKey: operationPath)
+
+        for it in context.operationMap {
+            let operationPath = it.key
+
+            if !path.starts(with: operationPath) {
+                continue
+            }
+
+            operationPathList.append(operationPath)
+            it.value.cancel()
 
             logger.logMessage(severity: LoggerMessageSeverity.information,
                               message: "Invalidating signature check operation for \(operationPath)")
+        }
+
+        for operationPath in operationPathList {
+            context.childOperationMap.removeValue(forKey: operationPath)
+            context.operationMap.removeValue(forKey: operationPath)
         }
 
         var resultPathList = [String]()
@@ -129,7 +174,7 @@ final class SignatureDatabase {
                 resultPathList.append(resultPath)
             }
         }
-        
+
         for resultPath in resultPathList {
             context.resultCache.removeValue(forKey: resultPath)
 
@@ -139,22 +184,65 @@ final class SignatureDatabase {
     }
 
     static func invalidateCache(context: inout SignatureDatabaseContext) {
-        for operation in context.operationMap {
-            operation.value.cancel()
+        // Delete the operation maps
+        context.operationMap.removeAll()
+        context.childOperationMap.removeAll()
+
+        // Cancel all the leaves first
+        for operation in context.primaryOperationQueue.operations {
+            let isParentOperation = operation.dependencies.isEmpty
+            
+            if !isParentOperation {
+                operation.cancel()
+            }
         }
 
-        context.operationMap.removeAll()
+        for operation in context.secondaryOperationQueue.operations {
+            let isParentOperation = operation.dependencies.isEmpty
+            
+            if !isParentOperation {
+                operation.cancel()
+            }
+        }
+
+        // Cancel everything else
+        for operation in context.primaryOperationQueue.operations {
+            operation.cancel()
+        }
+
+        for operation in context.secondaryOperationQueue.operations {
+            operation.cancel()
+        }
+
+        // Delete the cached results
         context.resultCache.removeAll()
     }
 
     static func getQueueTypeFor(fileInformation: FileInformation) -> OperationQueueType {
-        var queueType = OperationQueueType.secondary
-
-        if fileInformation.ownerId == 0 && fileInformation.size < fileSizeLimit {
-            queueType = OperationQueueType.primary
+        if fileInformation.ownerAccountName != "root" {
+            return OperationQueueType.secondary
         }
         
-        return queueType
+        if fileInformation.groupOwnerAccountName != "admin" &&
+            fileInformation.groupOwnerAccountName != "staff" &&
+            fileInformation.groupOwnerAccountName != "wheel" {
+
+            return OperationQueueType.secondary
+        }
+
+        if fileInformation.directory {
+            if fileInformation.path == "/Applications/Sinter.app" {
+                return OperationQueueType.primary
+            }
+
+            return OperationQueueType.secondary
+        }
+
+        if fileInformation.size > fileSizeLimit {
+            return OperationQueueType.secondary
+        }
+        
+        return OperationQueueType.primary
     }
 
     static func getQueueTypeFor(path: String) -> OperationQueueType {

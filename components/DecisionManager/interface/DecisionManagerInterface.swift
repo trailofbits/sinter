@@ -20,19 +20,19 @@ public struct DecisionManagerRequest {
     public var codeDirectoryHash: BinaryHash
     public var signingIdentifier: String
     public var teamIdentifier: String
-    public var platformBinary: Bool
+    public var binaryType: BinaryType
 
     public init(binaryPath: String,
                 codeDirectoryHash: BinaryHash,
                 signingIdentifier: String,
                 teamIdentifier: String,
-                platformBinary: Bool) {
+                binaryType: BinaryType) {
 
         self.binaryPath = binaryPath
         self.codeDirectoryHash = codeDirectoryHash
         self.signingIdentifier = signingIdentifier
         self.teamIdentifier = teamIdentifier
-        self.platformBinary = platformBinary
+        self.binaryType = binaryType
     }
 }
 

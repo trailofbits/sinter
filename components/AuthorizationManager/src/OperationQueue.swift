@@ -15,17 +15,15 @@ enum OperationQueueType {
 
 func createOperationQueue(type: OperationQueueType) -> OperationQueue {
     let queue = OperationQueue()
+    queue.qualityOfService = .userInteractive
     
     switch type {
     case .primary:
-        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
-
-        queue.maxConcurrentOperationCount = onlineProcessorCount
-        queue.qualityOfService = .userInteractive
+        queue.maxConcurrentOperationCount = OperationQueue.defaultMaxConcurrentOperationCount
 
     case .secondary:
-        queue.maxConcurrentOperationCount = 2
-        queue.qualityOfService = .background
+        let onlineProcessorCount = sysconf(CInt(_SC_NPROCESSORS_ONLN))
+        queue.maxConcurrentOperationCount = onlineProcessorCount
     }
 
     return queue

@@ -39,11 +39,17 @@ public struct BinaryHash {
     public var hash: String
 }
 
+public enum BinaryType : CaseIterable {
+    case platform
+    case sinter
+    case thirdParty
+}
+
 public struct EndpointSecurityExecAuthorization {
     public init(binaryPath: String, parentProcessId: pid_t,
                 processId: pid_t, userId: uid_t, groupId: gid_t,
                 codeDirectoryHash: BinaryHash, signingIdentifier: String,
-                teamIdentifier: String, platformBinary: Bool) {
+                teamIdentifier: String, binaryType: BinaryType) {
 
         self.binaryPath = binaryPath
         self.parentProcessId = parentProcessId
@@ -53,7 +59,7 @@ public struct EndpointSecurityExecAuthorization {
         self.codeDirectoryHash = codeDirectoryHash
         self.signingIdentifier = signingIdentifier
         self.teamIdentifier = teamIdentifier
-        self.platformBinary = platformBinary
+        self.binaryType = binaryType
     }
 
     public var identifier: Int64 = 0
@@ -69,7 +75,7 @@ public struct EndpointSecurityExecAuthorization {
     public var signingIdentifier: String
     public var teamIdentifier: String
 
-    public var platformBinary: Bool
+    public var binaryType: BinaryType
 }
 
 public enum EndpointSecurityFileChangeNotificationType : CaseIterable {

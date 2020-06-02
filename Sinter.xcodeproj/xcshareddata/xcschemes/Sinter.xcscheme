@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D20F58402450DA370070C21C"
-               BuildableName = "notification-server.xpc"
+               BuildableName = "notification-server.app"
                BlueprintName = "notification-server"
                ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
@@ -139,8 +139,8 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      enableAddressSanitizer = "YES"
-      enableASanStackUseAfterReturn = "YES">
+      enableASanStackUseAfterReturn = "YES"
+      enableThreadSanitizer = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">

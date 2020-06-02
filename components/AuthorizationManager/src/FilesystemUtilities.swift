@@ -10,8 +10,10 @@ import Foundation
 
 struct FileInformation {
     public var path = String()
-    public var ownerId: Int = 0
+    public var ownerAccountName = String()
+    public var groupOwnerAccountName = String()
     public var size: Int = 0
+    public var directory: Bool = false
 }
 
 func getFileInformation(path: String) -> FileInformation? {
@@ -22,7 +24,7 @@ func getFileInformation(path: String) -> FileInformation? {
     } catch {
         return nil
     }
-    
+
     var fileInformation = FileInformation()
     fileInformation.path = path
 
@@ -32,11 +34,23 @@ func getFileInformation(path: String) -> FileInformation? {
         return nil
     }
 
-    if let ownerId = fileAttributes[FileAttributeKey.ownerAccountID] as? Int {
-        fileInformation.ownerId = ownerId
+    if let ownerAccountName = fileAttributes[FileAttributeKey.ownerAccountName] as? String {
+        fileInformation.ownerAccountName = ownerAccountName
     } else {
         return nil
     }
-    
+
+    if let groupOwnerAccountName = fileAttributes[FileAttributeKey.groupOwnerAccountName] as? String {
+        fileInformation.groupOwnerAccountName = groupOwnerAccountName
+    } else {
+        return nil
+    }
+
+    if let type = fileAttributes[FileAttributeKey.type] as? FileAttributeType {
+        fileInformation.directory = (type == FileAttributeType.typeDirectory)
+    } else {
+        return nil
+    }
+
     return fileInformation
 }
