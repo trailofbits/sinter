@@ -28,9 +28,7 @@
 		D248E4D1247D7C7F002B9FBE /* LocalRuleDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248E4D0247D7C7F002B9FBE /* LocalRuleDatabaseProvider.swift */; };
 		D248E4D4247D7FA6002B9FBE /* RemoteRuleDatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248E4D3247D7FA6002B9FBE /* RemoteRuleDatabaseProvider.swift */; };
 		D295BFDA247FFB4C00CBE00A /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD8247FFB4C00CBE00A /* Configuration.framework */; };
-		D295BFDB247FFB4C00CBE00A /* Configuration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD8247FFB4C00CBE00A /* Configuration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D295BFDC247FFB4C00CBE00A /* Logger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD9247FFB4C00CBE00A /* Logger.framework */; };
-		D295BFDD247FFB4C00CBE00A /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D295BFD9247FFB4C00CBE00A /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,21 +47,6 @@
 			remoteInfo = DecisionManager;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		D295BFDE247FFB4C00CBE00A /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				D295BFDD247FFB4C00CBE00A /* Logger.framework in Embed Frameworks */,
-				D295BFDB247FFB4C00CBE00A /* Configuration.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		D21FDCCE247DAC5D00309B61 /* JSONRuleDatabaseParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONRuleDatabaseParserTests.swift; sourceTree = "<group>"; };
@@ -229,7 +212,6 @@
 				D248E494247D4C25002B9FBE /* Sources */,
 				D248E495247D4C25002B9FBE /* Frameworks */,
 				D248E496247D4C25002B9FBE /* Resources */,
-				D295BFDE247FFB4C00CBE00A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
