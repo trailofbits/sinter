@@ -2,7 +2,7 @@
 
 echo "Post installation process started"
 
-/Applications/Sinter.app/Contents/MacOS/Sinter --install-daemon
-/Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server
+#/Applications/Sinter.app/Contents/MacOS/Sinter --install-daemon
+#/Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server
 
 echo "Post installation process finished"
