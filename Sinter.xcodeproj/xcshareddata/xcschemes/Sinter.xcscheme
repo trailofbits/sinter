@@ -20,186 +20,62 @@
                ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D20F58402450DA370070C21C"
-               BuildableName = "notification-server.app"
-               BlueprintName = "notification-server"
-               ReferencedContainer = "container:Sinter.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D20F586C2450DC090070C21C"
-               BuildableName = "com.trailofbits.sinter.daemon.systemextension"
-               BlueprintName = "system-extension"
-               ReferencedContainer = "container:Sinter.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D20F58AC2450E1E40070C21C"
-               BuildableName = "AuthorizationManager.framework"
-               BlueprintName = "AuthorizationManager"
-               ReferencedContainer = "container:components/AuthorizationManager/AuthorizationManager.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E3F7247D2221002B9FBE"
-               BuildableName = "Configuration.framework"
-               BlueprintName = "Configuration"
-               ReferencedContainer = "container:components/Configuration/Configuration.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E497247D4C25002B9FBE"
-               BuildableName = "DecisionManager.framework"
-               BlueprintName = "DecisionManager"
-               ReferencedContainer = "container:components/DecisionManager/DecisionManager.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2578504243F77DC0020BC32"
-               BuildableName = "EndpointSecurityClient.framework"
-               BlueprintName = "EndpointSecurityClient"
-               ReferencedContainer = "container:components/EndpointSecurityClient/EndpointSecurityClient.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E43C247D2ACF002B9FBE"
-               BuildableName = "Logger.framework"
-               BlueprintName = "Logger"
-               ReferencedContainer = "container:components/Logger/Logger.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D24B4A2E2448A73000958F82"
-               BuildableName = "NotificationService.framework"
-               BlueprintName = "NotificationService"
-               ReferencedContainer = "container:components/NotificationService/NotificationService.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      enableASanStackUseAfterReturn = "YES"
-      enableThreadSanitizer = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D295C00824800BC200CBE00A"
+               BlueprintIdentifier = "D269AE05248834A80047A32A"
                BuildableName = "AuthorizationManagerTests.xctest"
                BlueprintName = "AuthorizationManagerTests"
-               ReferencedContainer = "container:components/AuthorizationManager/AuthorizationManager.xcodeproj">
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E400247D2221002B9FBE"
+               BlueprintIdentifier = "D269ADF5248833DD0047A32A"
                BuildableName = "ConfigurationTests.xctest"
                BlueprintName = "ConfigurationTests"
-               ReferencedContainer = "container:components/Configuration/Configuration.xcodeproj">
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D21FDCE9247DB06800309B61"
-               BuildableName = "BaseDecisionManagerTests.xctest"
-               BlueprintName = "BaseDecisionManagerTests"
-               ReferencedContainer = "container:components/DecisionManager/DecisionManager.xcodeproj">
+               BlueprintIdentifier = "D269AE15248835070047A32A"
+               BuildableName = "DecisionManagerTests.xctest"
+               BlueprintName = "DecisionManagerTests"
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D21FDCD3247DAF8900309B61"
-               BuildableName = "JSONRuleDatabaseParserTests.xctest"
-               BlueprintName = "JSONRuleDatabaseParserTests"
-               ReferencedContainer = "container:components/DecisionManager/DecisionManager.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2C58E51247F37130029E06C"
+               BlueprintIdentifier = "D269AE262488357A0047A32A"
                BuildableName = "EndpointSecurityClientTests.xctest"
                BlueprintName = "EndpointSecurityClientTests"
-               ReferencedContainer = "container:components/EndpointSecurityClient/EndpointSecurityClient.xcodeproj">
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D248E445247D2ACF002B9FBE"
+               BlueprintIdentifier = "D269AE38248835F70047A32A"
                BuildableName = "LoggerTests.xctest"
                BlueprintName = "LoggerTests"
-               ReferencedContainer = "container:components/Logger/Logger.xcodeproj">
+               ReferencedContainer = "container:Sinter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
