@@ -5,6 +5,7 @@
     "allow_unsigned_programs": "true",
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
+    "allow_expired_auth_requests": "true",
 
     "log_file_path": "/var/log/sinter.log",
     "config_update_interval": 600,
