@@ -38,6 +38,7 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
     "allow_unsigned_programs": "true",
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
+    "allow_expired_auth_requests": "true",
 
     "log_file_path": "/var/log/sinter.log",
     "config_update_interval": 600,
@@ -66,6 +67,7 @@ Modes are not implemented in Sinter, as everything is rule-based. It is possible
  - **allow_unsigned_programs**: allow applications that are not signed
  - **allow_invalid_programs**: allow applications that fail the signature check
  - **allow_unknown_programs**: automatically allow applications that are not covered by the active rule database
+ - **allow_expired_auth_requests**: the EndpointSecurity API requires Sinter to answer to an authorization requests within an unspecified time frame (typically, less than a minute). Large applications, such as Xcode, will take a considerable amount of time to verify. Those executions are denied by default, and the user is expected to try again once the application has been verified. Setting this configuration to true changes this behavior so that those requests are always allowed.
 
 ## Rule format
 Rule databases are written in JSON format. Here's an example database that allows the CMake application bundle from cmake.org:

@@ -7,8 +7,9 @@
  */
 
 import EndpointSecurity
-import Logger
 import Foundation
+import Logger
+import Configuration
 
 private let eventExpirationTime: Double = 10
 
@@ -24,9 +25,10 @@ typealias MessageMap = [Int64: MessageMapEntry]
 struct EndpointSecurityClientContext {
     public var authorizationMessageMap = MessageMap()
     public var cachedPathList = Set<String>()
+    public var allowExpiredAuthRequests = false
 }
 
-final class EndpointSecurityClient: EndpointSecurityInterface {
+final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSubscriberInterface {
     private var context = EndpointSecurityClientContext()
 
     private let api: EndpointSecurityAPIInterface
@@ -36,10 +38,13 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
 
     private init(api: EndpointSecurityAPIInterface,
                  logger: LoggerInterface,
+                 configuration: ConfigurationInterface,
                  callback: @escaping EndpointSecurityCallback) throws {
 
         self.api = api
         self.logger = logger
+        
+        configuration.subscribe(subscriber: self)
 
         let clientErr = api.newClient(client: &esClientOpt) { _, unsafeMessagePtr in
             self.endpointSecurityCallback(unsafeMessagePtr: unsafeMessagePtr,
@@ -96,11 +101,21 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
 
     static func create(api: EndpointSecurityAPIInterface,
                        logger: LoggerInterface,
+                       configuration: ConfigurationInterface,
                        callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
 
         Result<EndpointSecurityInterface, Error> { try EndpointSecurityClient(api: api,
                                                                               logger: logger,
+                                                                              configuration: configuration,
                                                                               callback: callback) }
+    }
+
+    public func onConfigurationChange(configuration: ConfigurationInterface) {
+        if let allowExpiredAuthRequests = configuration.booleanValue(section: "Sinter", key: "allow_expired_auth_requests") {
+            context.allowExpiredAuthRequests = allowExpiredAuthRequests
+        } else {
+            context.allowExpiredAuthRequests = false
+        }
     }
 
     public func setAuthorization(identifier: Int64, allow: Bool, cache: Bool) -> Bool {
@@ -295,7 +310,7 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
                                                         logger: logger,
                                                         client: client,
                                                         identifier: expiredMessage.key,
-                                                        allow: false,
+                                                        allow: context.allowExpiredAuthRequests,
                                                         cache: false)
 
             let notification = EndpointSecurityExecInvalidationNotification(identifier: expiredMessage.key,
@@ -405,9 +420,11 @@ final class EndpointSecurityClient: EndpointSecurityInterface {
 }
 
 public func createEndpointSecurityClient(logger: LoggerInterface,
+                                         configuration: ConfigurationInterface,
                                          callback: @escaping EndpointSecurityCallback) -> Result<EndpointSecurityInterface, Error> {
 
     EndpointSecurityClient.create(api: createSystemEndpointSecurityAPI(),
                                   logger: logger,
+                                  configuration: configuration,
                                   callback: callback)
 }

@@ -13,6 +13,7 @@
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
+		D22AC1C524891E7E0070D08E /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E56DF7248826F30050980C /* Configuration.framework */; };
 		D269AD6B24882E040047A32A /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA7248827810050980C /* IdentifierGenerator.swift */; };
 		D269AD7224882E060047A32A /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA8248827810050980C /* EndpointSecurityClient.swift */; };
 		D269AD7324882E080047A32A /* MessageParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA9248827810050980C /* MessageParsers.swift */; };
@@ -96,6 +97,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D22AC1C724891E7E0070D08E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2578408243F602E0020BC32 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2E56DF6248826F30050980C;
+			remoteInfo = Configuration;
+		};
 		D269AD8E248830940047A32A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2578408243F602E0020BC32 /* Project object */;
@@ -552,6 +560,7 @@
 				D269AD97248831090047A32A /* libbsm.tbd in Frameworks */,
 				D269AD91248830E50047A32A /* Logger.framework in Frameworks */,
 				D269AD96248831000047A32A /* libEndpointSecurity.tbd in Frameworks */,
+				D22AC1C524891E7E0070D08E /* Configuration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,6 +1206,7 @@
 			);
 			dependencies = (
 				D269AD94248830E50047A32A /* PBXTargetDependency */,
+				D22AC1C824891E7E0070D08E /* PBXTargetDependency */,
 			);
 			name = EndpointSecurityClient;
 			productName = EndpointSecurityClient;
@@ -1642,6 +1652,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D22AC1C824891E7E0070D08E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2E56DF6248826F30050980C /* Configuration */;
+			targetProxy = D22AC1C724891E7E0070D08E /* PBXContainerItemProxy */;
+		};
 		D269AD8F248830940047A32A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2E56DF6248826F30050980C /* Configuration */;

@@ -35,6 +35,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
         notificationClient = createNotificationClient()
 
         let endpointSecurityExp = endpointSecurityFactory(logger,
+                                                          configuration,
                                                           onEndpointSecurityMessage)
 
         switch endpointSecurityExp {
@@ -75,9 +76,9 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
                 notificationMessage = "Denied '\(execInvalidationNotification.binaryPath)' (application changed)"
 
             case .expired:
-                logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the authorization/code signing check process took too long"
+                logMessage = "The authorization request for '\(execInvalidationNotification.binaryPath)' has taken too long and has expired"
 
-                notificationMessage = "Authorization expired: '\(execInvalidationNotification.binaryPath)'"
+                notificationMessage = "Authorization request expired: '\(execInvalidationNotification.binaryPath)'"
             }
 
             logger.logMessage(severity: LoggerMessageSeverity.warning,
