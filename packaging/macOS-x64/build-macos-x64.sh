@@ -139,9 +139,13 @@ function signProduct() {
     mkdir -p ${TARGET_DIRECTORY}/pkg-signed
     chmod -R 755 ${TARGET_DIRECTORY}/pkg-signed
 
+    if [[ "${APPLE_ACCOUNT_INSTALLER_TEAM}" == "" ]] ; then
+      log_info "The APPLE_ACCOUNT_INSTALLER_TEAM env var is not defined. Aborting."
+      exit 1
+    fi
+
     # security find-identity -v | grep -i Installer
-    read -p "Please enter your Apple Developer Installer Certificate ID common name (example: \"TRAIL OF BITS INC (44WTB9L362)\"). If you are unsure, try 'security find-identity -v | grep -i Installer':" APPLE_DEVELOPER_CERTIFICATE_ID
-    productsign --sign "Developer ID Installer: ${APPLE_DEVELOPER_CERTIFICATE_ID}" \
+    productsign --sign "Developer ID Installer: ${APPLE_ACCOUNT_INSTALLER_TEAM}" \
     ${TARGET_DIRECTORY}/pkg/$1 \
     ${TARGET_DIRECTORY}/pkg-signed/$1
 
@@ -152,13 +156,7 @@ function createInstaller() {
     log_info "Application installer generation process started.(3 Steps)"
     buildPackage
     buildProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
-    while true; do
-        read -p "Do you wish to sign the installer (requires an Apple Developer Installer Certificate) [y/N]?" answer
-        [[ $answer == "y" || $answer == "Y" ]] && FLAG=true && break
-        [[ $answer == "n" || $answer == "N" || $answer == "" ]] && log_info "Skipped signing the package." && FLAG=false && break
-        echo "Please answer with 'y' or 'n'"
-    done
-    [[ $FLAG == "true" ]] && signProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
+    signProduct ${PRODUCT}-macos-installer-x64-${VERSION}.pkg
     log_info "Application installer generation steps finished."
 }
 
