@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20731EC248EDDF500477D86 /* UnifiedLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20731EB248EDDF500477D86 /* UnifiedLogging.swift */; };
+		D20731EE248EDE9F00477D86 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D20731ED248EDE9F00477D86 /* OSLog.framework */; };
+		D20731F0248EE0FD00477D86 /* UnifiedLoggingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20731EF248EE0FD00477D86 /* UnifiedLoggingFactory.swift */; };
 		D20F58622450DA800070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58612450DA800070C21C /* main.swift */; };
 		D20F58642450DA8E0070C21C /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F58632450DA8E0070C21C /* NotificationCenter.swift */; };
 		D20F58652450DB110070C21C /* notification-server.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -391,6 +394,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D20731EB248EDDF500477D86 /* UnifiedLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedLogging.swift; sourceTree = "<group>"; };
+		D20731ED248EDE9F00477D86 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
+		D20731EF248EE0FD00477D86 /* UnifiedLoggingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnifiedLoggingFactory.swift; sourceTree = "<group>"; };
 		D20F58412450DA370070C21C /* notification-server.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "notification-server.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D20F584F2450DA380070C21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58502450DA380070C21C /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
@@ -597,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D269AD8C248830940047A32A /* Configuration.framework in Frameworks */,
+				D20731EE248EDE9F00477D86 /* OSLog.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,6 +740,7 @@
 		D257846D243F63080020BC32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D20731ED248EDE9F00477D86 /* OSLog.framework */,
 				D2D94398244726A500626B17 /* UserNotifications.framework */,
 				D25CC59024461E94001C686C /* SystemExtensions.framework */,
 				D2513B61244073A300002645 /* libbsm.tbd */,
@@ -999,6 +1007,7 @@
 			children = (
 				D2E56EAF248827810050980C /* FilesystemLoggerFactory.swift */,
 				D2E56EB0248827810050980C /* LoggerInterface.swift */,
+				D20731EF248EE0FD00477D86 /* UnifiedLoggingFactory.swift */,
 			);
 			path = interface;
 			sourceTree = "<group>";
@@ -1015,6 +1024,7 @@
 			isa = PBXGroup;
 			children = (
 				D2E56EB5248827810050980C /* FilesystemLogger.swift */,
+				D20731EB248EDDF500477D86 /* UnifiedLogging.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -1711,6 +1721,8 @@
 			files = (
 				D269AD7B24882E290047A32A /* FilesystemLoggerFactory.swift in Sources */,
 				D269AD7C24882E2B0047A32A /* LoggerInterface.swift in Sources */,
+				D20731F0248EE0FD00477D86 /* UnifiedLoggingFactory.swift in Sources */,
+				D20731EC248EDDF500477D86 /* UnifiedLogging.swift in Sources */,
 				D269AD7D24882E300047A32A /* FilesystemLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

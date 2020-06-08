@@ -19,9 +19,6 @@ var configuration: ConfigurationInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
 
-// Initialize the logger
-let logger = createFilesystemLogger()
-
 // Initialize the configuration
 let configurationExp = createJSONConfiguration()
 switch configurationExp {
@@ -30,6 +27,24 @@ case let .success(obj):
 
 case let .failure(error):
     print("Failed to create the JSONConfiguration object: \(error)")
+    exit(EXIT_FAILURE)
+}
+
+// Initialize the logger
+var loggerPluginName = "unifiedlogging"
+if let configuredLoggerPluginName = configuration.stringValue(section: "Sinter", key: "logger") {
+    loggerPluginName = configuredLoggerPluginName
+}
+
+let logger: LoggerInterface
+if loggerPluginName == "filesystem" {
+    logger = createFilesystemLogger()
+
+} else if loggerPluginName == "unifiedlogging" {
+    logger = createUnifiedLoggingLogger()
+
+} else {
+    print("The following logger plugin is not valid: \(loggerPluginName)")
     exit(EXIT_FAILURE)
 }
 

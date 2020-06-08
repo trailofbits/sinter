@@ -36,14 +36,18 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
 {
   "Sinter": {
     "decision_manager": "local",
+    "logger": "filesystem",
 
     "allow_unsigned_programs": "true",
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
     "allow_expired_auth_requests": "true",
 
-    "log_file_path": "/var/log/sinter.log",
     "config_update_interval": 600,
+  },
+  
+  "FilesystemLogger": {
+    "log_file_path": "/var/log/sinter.log",
   },
 
   "SyncServerDecisionManager": {
@@ -55,9 +59,14 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
     "rule_database_path": "/etc/sinter/rules.json",
   }
 }
+
 ```
 
 The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **SyncServerDecisionManager** configuration section, where the server URL and machine identifier can be set.
+
+There are two logger plugins implemented:
+1. **filesystem**: Messages are written to file, using the path specified at FilesystemLogger.log_file_path
+2. **unifiedlogging**: Logs are emitted using the Unified Logging, using **com.trailofbits.sinter** as subsystem.
 
 ## Enabling UI notifications
 1. Install the notification server (the PKG installer will do this automatically): `sudo /Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server`

@@ -17,7 +17,7 @@ final class FilesystemLoggerContext {
     var logFileURL = URL(fileURLWithPath: "")
 }
 
-final class FilesystemLogger: LoggerInterface, ConfigurationSubscriberInterface {
+final class FilesystemLogger : LoggerInterface, ConfigurationSubscriberInterface {
     var context = FilesystemLoggerContext()
 
     func onConfigurationChange(configuration: ConfigurationInterface) {
@@ -49,7 +49,7 @@ final class FilesystemLogger: LoggerInterface, ConfigurationSubscriberInterface 
                                   configuration: ConfigurationInterface) {
 
         var newLogFilePath: String
-        if let logFilePath = configuration.stringValue(section: "Sinter",
+        if let logFilePath = configuration.stringValue(section: "FilesystemLogger",
                                                        key: "log_file_path") {
             newLogFilePath = logFilePath
 
