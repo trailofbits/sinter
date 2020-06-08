@@ -24,8 +24,8 @@ enum RuleType {
 }
 
 enum RulePolicy {
-    case blacklist
-    case whitelist
+    case denylist
+    case allowlist
 }
 
 struct RuleMapEntry {
@@ -81,11 +81,13 @@ func parseJSONRuleDatabase(jsonData: Data) -> RuleDatabase {
 
                 var rulePolicy: RulePolicy
 
-                if jsonRule.policy == "WHITELIST" || jsonRule.policy == "WHITELIST_COMPILER" {
-                    rulePolicy = RulePolicy.whitelist
+                if jsonRule.policy == "ALLOWLIST" || jsonRule.policy == "WHITELIST" || jsonRule.policy == "WHITELIST_COMPILER" {
+                    // WHITELIST, WHITELIST_COMPILER are supported for Google Santa compatibility
+                    rulePolicy = RulePolicy.allowlist
 
-                } else if jsonRule.policy == "BLACKLIST" {
-                    rulePolicy = RulePolicy.blacklist
+                } else if jsonRule.policy == "DENYLIST" || jsonRule.policy == "BLACKLIST" {
+                    // BLACKLIST is supported for Google Santa compatibility
+                    rulePolicy = RulePolicy.denylist
 
                 } else {
                     ruleDatabase.status = RuleDatabaseStatus.partial

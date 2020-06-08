@@ -20,7 +20,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testValidDatabase() throws {
-        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"rule_type\": \"CERTIFICATE\", \"policy\": \"BLACKLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test2\" } ] }"
+        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"rule_type\": \"CERTIFICATE\", \"policy\": \"DENYLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test2\" } ] }"
 
         let truncatedHash = "4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5"
 
@@ -38,7 +38,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
         
         let binaryRule = binaryRuleIterator.value
         XCTAssertEqual(binaryRule.truncatedHash, truncatedHash)
-        XCTAssertEqual(binaryRule.policy, RulePolicy.whitelist)
+        XCTAssertEqual(binaryRule.policy, RulePolicy.allowlist)
         XCTAssertEqual(binaryRule.ruleType, RuleType.binary)
         XCTAssertEqual(binaryRule.customMessage, "Test1")
 
@@ -50,7 +50,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
         
         let certificateRule = certificateRuleIterator.value
         XCTAssertEqual(certificateRule.truncatedHash, truncatedHash)
-        XCTAssertEqual(certificateRule.policy, RulePolicy.blacklist)
+        XCTAssertEqual(certificateRule.policy, RulePolicy.denylist)
         XCTAssertEqual(certificateRule.ruleType, RuleType.certificate)
         XCTAssertEqual(certificateRule.customMessage, "Test2")
     }
@@ -66,7 +66,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testPartialDatabase() throws {
-        let partialRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"rule_type\": \"test\", \"policy\": \"test\", \"sha256\": \"test\", \"custom_msg\": \"test\" } ] }"
+        let partialRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"rule_type\": \"test\", \"policy\": \"test\", \"sha256\": \"test\", \"custom_msg\": \"test\" } ] }"
 
         let ruleDatabase = parseJsonString(json: partialRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.partial)
@@ -76,7 +76,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testInvalidDatabase() throws {
-        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"test\": \"test\" } ] }"
+        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" }, { \"test\": \"test\" } ] }"
 
         let ruleDatabase = parseJsonString(json: invalidRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)
@@ -96,7 +96,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testInvalidRuleType() throws {
-        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"test\", \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" } ] }"
+        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"test\", \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" } ] }"
 
         let ruleDatabase = parseJsonString(json: validRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)
@@ -116,7 +116,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testInvalidHash() throws {
-        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"sha256\": \"test\", \"custom_msg\": \"Test1\" } ] }"
+        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"sha256\": \"test\", \"custom_msg\": \"Test1\" } ] }"
 
         let ruleDatabase = parseJsonString(json: invalidRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)
@@ -126,7 +126,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testMissingRuleType() throws {
-        let invalidRuleDatabase = "{ \"rules\": [ { \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" } ] }"
+        let invalidRuleDatabase = "{ \"rules\": [ { \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\", \"custom_msg\": \"Test1\" } ] }"
 
         let ruleDatabase = parseJsonString(json: invalidRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)
@@ -146,7 +146,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testMissingHash() throws {
-        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"custom_msg\": \"Test1\" } ] }"
+        let invalidRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"custom_msg\": \"Test1\" } ] }"
 
         let ruleDatabase = parseJsonString(json: invalidRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)
@@ -156,7 +156,7 @@ final class JSONRuleDatabaseParserTests : XCTestCase {
     }
 
     func testMissingCustomMessage() throws {
-        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"WHITELIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\" } ] }"
+        let validRuleDatabase = "{ \"rules\": [ { \"rule_type\": \"BINARY\", \"policy\": \"ALLOWLIST\", \"sha256\": \"4FC009DCC8B6B11FBFFB47051AA26BC9CE6C24F5FD8EA69380CFBE534FF9860A\" } ] }"
 
         let ruleDatabase = parseJsonString(json: validRuleDatabase)
         XCTAssertEqual(ruleDatabase.status, RuleDatabaseStatus.invalid)

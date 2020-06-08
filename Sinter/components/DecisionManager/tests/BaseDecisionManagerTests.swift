@@ -215,7 +215,7 @@ final class DecisionManagerTests : XCTestCase {
         }
 
         ruleDatabase.binaryRuleMap[cmakeHash] = RuleMapEntry(ruleType: RuleType.binary,
-                                                             policy: RulePolicy.whitelist,
+                                                             policy: RulePolicy.allowlist,
                                                              customMessage: "Test",
                                                              truncatedHash: cmakeHash)
 
@@ -239,7 +239,7 @@ final class DecisionManagerTests : XCTestCase {
             XCTAssertFalse(cache)
         }
 
-        ruleDatabase.binaryRuleMap[cmakeHash]!.policy = RulePolicy.blacklist
+        ruleDatabase.binaryRuleMap[cmakeHash]!.policy = RulePolicy.denylist
         
         for signatureCheckResult in SignatureDatabaseResult.allCases {
             var allow = false

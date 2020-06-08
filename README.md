@@ -1,6 +1,6 @@
 # Sinter
 
-Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the Swift programming language.
+Sinter is a user-mode application authorization system for MacOS written in Swift.
 
 # Features
 
@@ -77,7 +77,7 @@ Rule databases are written in JSON format. Here's an example database that allow
   "rules": [
     {
       "rule_type": "BINARY",
-      "policy": "WHITELIST",
+      "policy": "ALLOWLIST",
       "sha256": "BDD0AF132D89EA4810566B3E1E0D1E48BAC6CF18D0C787054BB62A4938683039",
       "custom_msg": "CMake"
     }
@@ -85,7 +85,7 @@ Rule databases are written in JSON format. Here's an example database that allow
 }
 ```
 
-Sinter only supports **BINARY** rules for now, using either **WHITELIST** or **BLACKLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
+Sinter only supports **BINARY** rules for now, using either **ALLOWLIST** or **DENYLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
 # License
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.

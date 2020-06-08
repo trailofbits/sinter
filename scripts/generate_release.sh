@@ -131,7 +131,7 @@ notarizeApplicationBundle() {
   dumpLogFile "${notarization_info_log}"
 
   printf "Running the stapling procedure\n"
-  local stapler_log="mktemp"
+  local stapler_log="$(mktemp)"
   xcrun stapler staple "packaging/macOS-x64/application/Sinter.app" > "${stapler_log}" 2>&1
   if [[ $? -ne 0 ]] ; then
     printf "The stapling procedure has failed\n"

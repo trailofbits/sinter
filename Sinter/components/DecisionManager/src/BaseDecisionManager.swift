@@ -131,7 +131,7 @@ class BaseDecisionManager: DecisionManagerInterface,
                 cache = true
 
             } else if let rule = ruleDatabase.binaryRuleMap[request.codeDirectoryHash.hash] {
-                allow = rule.policy == RulePolicy.whitelist
+                allow = rule.policy == RulePolicy.allowlist
 
             } else {
                 allow = context.allowUnknownPrograms
