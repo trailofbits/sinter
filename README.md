@@ -1,3 +1,5 @@
+CI: [![Build Status](https://app.bitrise.io/app/7981426cfe90b436/status.svg?token=nUfXVprK5okMCcFXeOuwzg&branch=master)](https://app.bitrise.io/app/7981426cfe90b436)
+
 # Sinter
 
 Sinter is a user-mode application authorization system for MacOS written in Swift.
