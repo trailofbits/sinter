@@ -412,6 +412,20 @@
 		D269AE16248835070047A32A /* DecisionManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DecisionManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D269AE272488357A0047A32A /* EndpointSecurityClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EndpointSecurityClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D269AE39248835F70047A32A /* LoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2BB9820248EA07200595912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D2BB9821248EA07200595912 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D2BB9824248EA0F700595912 /* build-macos-x64.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-macos-x64.sh"; sourceTree = "<group>"; };
+		D2BB9827248EA0F700595912 /* conclusion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = conclusion.html; sourceTree = "<group>"; };
+		D2BB9828248EA0F700595912 /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		D2BB9829248EA0F700595912 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
+		D2BB982A248EA0F700595912 /* Distribution */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Distribution; sourceTree = "<group>"; };
+		D2BB982C248EA0F700595912 /* postinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = postinstall; sourceTree = "<group>"; };
+		D2BB982E248EA0F700595912 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		D2BB982F248EA0F700595912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D2BB9830248EA0F700595912 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D2BB9832248EA0F700595912 /* generate_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generate_release.sh; sourceTree = "<group>"; };
+		D2BB9834248EA0F700595912 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		D2BB9835248EA0F700595912 /* rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = rules.json; sourceTree = "<group>"; };
 		D2CCBF112486AD1B004999ED /* signature-checker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "signature-checker"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2CCBF182486AD2D004999ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -671,6 +685,11 @@
 		D2578407243F602E0020BC32 = {
 			isa = PBXGroup;
 			children = (
+				D2BB9821248EA07200595912 /* LICENSE */,
+				D2BB9820248EA07200595912 /* README.md */,
+				D2BB9833248EA0F700595912 /* config */,
+				D2BB9822248EA0F700595912 /* packaging */,
+				D2BB9831248EA0F700595912 /* scripts */,
 				D2578412243F602F0020BC32 /* Sinter */,
 				D2578411243F602F0020BC32 /* Products */,
 				D257846D243F63080020BC32 /* Frameworks */,
@@ -720,6 +739,79 @@
 				D257851F243F78250020BC32 /* libEndpointSecurity.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2BB9822248EA0F700595912 /* packaging */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9823248EA0F700595912 /* macOS-x64 */,
+				D2BB982F248EA0F700595912 /* README.md */,
+				D2BB9830248EA0F700595912 /* .gitignore */,
+			);
+			path = packaging;
+			sourceTree = "<group>";
+		};
+		D2BB9823248EA0F700595912 /* macOS-x64 */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9824248EA0F700595912 /* build-macos-x64.sh */,
+				D2BB9825248EA0F700595912 /* darwin */,
+				D2BB982D248EA0F700595912 /* application */,
+			);
+			path = "macOS-x64";
+			sourceTree = "<group>";
+		};
+		D2BB9825248EA0F700595912 /* darwin */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9826248EA0F700595912 /* Resources */,
+				D2BB982A248EA0F700595912 /* Distribution */,
+				D2BB982B248EA0F700595912 /* scripts */,
+			);
+			path = darwin;
+			sourceTree = "<group>";
+		};
+		D2BB9826248EA0F700595912 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9827248EA0F700595912 /* conclusion.html */,
+				D2BB9828248EA0F700595912 /* uninstall.sh */,
+				D2BB9829248EA0F700595912 /* banner.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2BB982B248EA0F700595912 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB982C248EA0F700595912 /* postinstall */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		D2BB982D248EA0F700595912 /* application */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB982E248EA0F700595912 /* .gitkeep */,
+			);
+			path = application;
+			sourceTree = "<group>";
+		};
+		D2BB9831248EA0F700595912 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9832248EA0F700595912 /* generate_release.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		D2BB9833248EA0F700595912 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				D2BB9834248EA0F700595912 /* config.json */,
+				D2BB9835248EA0F700595912 /* rules.json */,
+			);
+			path = config;
 			sourceTree = "<group>";
 		};
 		D2CCBF0C2486ACEA004999ED /* signature-checker */ = {
