@@ -28,6 +28,11 @@ else
     exit 1
 fi
 
+if [[ "${APPLE_ACCOUNT_INSTALLER_TEAM_FULL}" == "" ]] ; then
+  log_info "The APPLE_ACCOUNT_INSTALLER_TEAM_FULL env var is not defined. Example: export APPLE_ACCOUNT_INSTALLER_TEAM_FULL='COMPANY NAME (12ABC3D456)'"
+  exit 1
+fi
+
 #Parameters
 TARGET_DIRECTORY="target"
 PRODUCT="Sinter"
@@ -139,13 +144,8 @@ function signProduct() {
     mkdir -p ${TARGET_DIRECTORY}/pkg-signed
     chmod -R 755 ${TARGET_DIRECTORY}/pkg-signed
 
-    if [[ "${APPLE_ACCOUNT_INSTALLER_TEAM}" == "" ]] ; then
-      log_info "The APPLE_ACCOUNT_INSTALLER_TEAM env var is not defined. Aborting."
-      exit 1
-    fi
-
     # security find-identity -v | grep -i Installer
-    productsign --sign "Developer ID Installer: ${APPLE_ACCOUNT_INSTALLER_TEAM}" \
+    productsign --sign "Developer ID Installer: ${APPLE_ACCOUNT_INSTALLER_TEAM_FULL}" \
     ${TARGET_DIRECTORY}/pkg/$1 \
     ${TARGET_DIRECTORY}/pkg-signed/$1
 

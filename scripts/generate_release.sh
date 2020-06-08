@@ -8,6 +8,24 @@ main() {
     return 1
   fi
 
+  printf "Fetching git tags...\n"
+
+  local git_log="$(mktemp)"
+  git fetch --all --tags > "${git_log}" 2>&1
+  if [[ $? -ne 0  ]] ; then
+    dumpLogFile "${build_log}"
+    return 1
+  fi
+
+  export SINTER_VERSION="$(git describe --tags --abbrev=0)"
+  local build="$(git describe --tags --always)"
+
+  printf "Version: ${SINTER_VERSION} (${build})\n"
+  
+  local plist_path="Sinter/application/Info.plist"
+  /usr/libexec/Plistbuddy -c "Set CFBundleShortVersionString ${SINTER_VERSION}" "${plist_path}"
+  /usr/libexec/Plistbuddy -c "Set CFBundleVersion $build" "${plist_path}"
+
   buildApplication || return 1
   notarizeApplicationBundle || return 1
   buildInstaller || return 1
@@ -18,21 +36,25 @@ main() {
 checkEnvironmentVariables() {
   if [[ "${APPLE_ACCOUNT_ID}" == "" ]] ; then
     printf "The environment variable containing the Apple account ID is not defined: APPLE_ACCOUNT_ID\n"
+    printf "Example: export APPLE_ACCOUNT_ID=email.name@gmail.com\n"
     return 1
   fi
 
   if [[ "${APPLE_ACCOUNT_PASSWORD}" == "" ]] ; then
     printf "The environment variable containing the Apple account password is not defined: APPLE_ACCOUNT_PASSWORD\n"
+    printf "Example: export APPLE_ACCOUNT_PASSWORD=1234-1234-1234-1234\n"
     return 1
   fi
 
   if [[ "${APPLE_ACCOUNT_APPLICATION_TEAM_SHORT}" == "" ]] ; then
     printf "The environment variable containing the team identifier is not defined: APPLE_ACCOUNT_APPLICATION_TEAM_SHORT\n"
+    printf "Example: export APPLE_ACCOUNT_APPLICATION_TEAM_SHORT=12ABC3D456\n"
     return 1
   fi
 
   if [[ "${APPLE_ACCOUNT_INSTALLER_TEAM_FULL}" == "" ]] ; then
-    printf "The environment variable containing the team identifier is not defined: APPLE_ACCOUNT_INSTALLER_TEAM_FULL\n"
+    printf "The environment variable containing the full team identifier is not defined: APPLE_ACCOUNT_INSTALLER_TEAM_FULL\n"
+    printf "Example: export APPLE_ACCOUNT_INSTALLER_TEAM_FULL='COMPANY NAME (12ABC3D456)'\n"
     return 1
   fi
 
@@ -150,18 +172,10 @@ buildInstaller() {
     return 1
   fi
 
-  local sinter_version=$(git describe --tags --abbrev=0)
-  if [[ $? -ne 0 ]] ; then
-    printf "Failed to determine the version from the git tag\n"
-    return 1
-  fi
-
-  printf "Version: ${sinter_version}\n"
-
   local packager_log="$(mktemp)"
   printf "Generating the PKG installer (${packager_log})\n"
 
-  ( cd "packaging/macOS-x64" && ./build-macos-x64.sh "${sinter_version}" ) > "${packager_log}" 2>&1
+  ( cd "packaging/macOS-x64" && ./build-macos-x64.sh "${SINTER_VERSION}" ) > "${packager_log}" 2>&1
   if [[ $? -ne 0 ]] ; then
     printf "Failed to create the PKG installer\n"
     dumpLogFile "${packager_log}"
@@ -171,7 +185,15 @@ buildInstaller() {
   printf "The package has been created\n"
   dumpLogFile "${packager_log}"
 
-  printf "Package path: $(pwd)/packaging/macOS-x64/target/pkg-signed/Sinter-macos-installer-x64-0.1.1.pkg\n"
+  local package_path="$(pwd)/packaging/macOS-x64/target/pkg-signed/Sinter-macos-installer-x64-${SINTER_VERSION}.pkg"
+  printf "Package path: ${package_path}\n"
+
+  which envman > /dev/null 2>&1
+  if [[ $? -eq 0 ]] ; then
+    printf "Bitrise: Exporting the package path to the SINTER_PKG environment variable"
+    envman add --key SINTER_PKG --value "${package_path}"
+  fi
+
   return 0
 }
 
