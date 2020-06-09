@@ -28,7 +28,18 @@ main() {
 
   buildApplication || return 1
   notarizeApplicationBundle || return 1
+
   buildInstaller || return 1
+  notarizeInstaller || return 1
+
+  local package_path="$(pwd)/packaging/macOS-x64/target/pkg-signed/Sinter-macos-installer-x64-${SINTER_VERSION}.pkg"
+  printf "Package path: ${package_path}\n"
+
+  which envman > /dev/null 2>&1
+  if [[ $? -eq 0 ]] ; then
+    printf "Bitrise: Exporting the package path to the SINTER_PKG environment variable\n"
+    envman add --key SINTER_PKG --value "${package_path}"
+  fi
 
   return 0
 }
@@ -114,6 +125,44 @@ notarizeApplicationBundle() {
     return 1
   fi
 
+  notarizeProduct "${archive_path}" || return 1
+
+  printf "Running the stapling procedure\n"
+  local stapler_log="$(mktemp)"
+  xcrun stapler staple "packaging/macOS-x64/application/Sinter.app" > "${stapler_log}" 2>&1
+  if [[ $? -ne 0 ]] ; then
+    printf "The stapling procedure has failed\n"
+    dumpLogFile "${stapler_log}"
+    return 1
+  fi
+
+  return 0
+}
+
+notarizeInstaller() {
+  local pkg_path="packaging/macOS-x64/target/pkg-signed/Sinter-macos-installer-x64-${SINTER_VERSION}.pkg"
+  notarizeProduct "${pkg_path}" || return 1
+
+  printf "Running the stapling procedure\n"
+  local stapler_log="$(mktemp)"
+  xcrun stapler staple "${pkg_path}" > "${stapler_log}" 2>&1
+  if [[ $? -ne 0 ]] ; then
+    printf "The stapling procedure has failed\n"
+    dumpLogFile "${stapler_log}"
+    return 1
+  fi
+
+  return 0
+}
+
+notarizeProduct() {
+  if [[ $# -ne 1 ]] ; then
+    printf "Usage:\n\tnotarizeProduct /path/to/product.{zip|pkg}\n"
+    return 1
+  fi
+
+  local archive_path="${1}"
+
   local notarization_log="$(mktemp)"
   printf "Initiating the notarization process (${notarization_log})\n"
   xcrun altool --notarize-app -u "${APPLE_ACCOUNT_ID}" -p "${APPLE_ACCOUNT_PASSWORD}" -f "${archive_path}" --primary-bundle-id com.trailofbits.sinter --asc-provider "${APPLE_ACCOUNT_APPLICATION_TEAM_SHORT}" > "${notarization_log}" 2>&1
@@ -152,26 +201,10 @@ notarizeApplicationBundle() {
   printf "The package was approved\n"
   dumpLogFile "${notarization_info_log}"
 
-  printf "Running the stapling procedure\n"
-  local stapler_log="$(mktemp)"
-  xcrun stapler staple "packaging/macOS-x64/application/Sinter.app" > "${stapler_log}" 2>&1
-  if [[ $? -ne 0 ]] ; then
-    printf "The stapling procedure has failed\n"
-    dumpLogFile "${stapler_log}"
-    return 1
-  fi
-
   return 0
 }
 
 buildInstaller() {
-  printf "Downloading the git tags from the repository\n"
-  git fetch --tags > /dev/null 2>&1
-  if [[ $? -ne 0 ]] ; then
-    printf "Failed to fetch the git tags from the repository\n"
-    return 1
-  fi
-
   local packager_log="$(mktemp)"
   printf "Generating the PKG installer (${packager_log})\n"
 
@@ -184,15 +217,6 @@ buildInstaller() {
 
   printf "The package has been created\n"
   dumpLogFile "${packager_log}"
-
-  local package_path="$(pwd)/packaging/macOS-x64/target/pkg-signed/Sinter-macos-installer-x64-${SINTER_VERSION}.pkg"
-  printf "Package path: ${package_path}\n"
-
-  which envman > /dev/null 2>&1
-  if [[ $? -eq 0 ]] ; then
-    printf "Bitrise: Exporting the package path to the SINTER_PKG environment variable"
-    envman add --key SINTER_PKG --value "${package_path}"
-  fi
 
   return 0
 }
