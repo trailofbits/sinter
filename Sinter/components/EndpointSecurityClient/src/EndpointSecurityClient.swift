@@ -67,7 +67,9 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
                                                 ES_EVENT_TYPE_NOTIFY_MMAP,
                                                 ES_EVENT_TYPE_NOTIFY_LINK,
                                                 ES_EVENT_TYPE_NOTIFY_TRUNCATE,
-                                                ES_EVENT_TYPE_NOTIFY_CREATE]
+                                                ES_EVENT_TYPE_NOTIFY_CREATE,
+                                                ES_EVENT_TYPE_NOTIFY_MOUNT,
+                                                ES_EVENT_TYPE_NOTIFY_UNMOUNT]
 
         let subscriptionErr = api.subscribe(client: esClientOpt!,
                                             events: &eventTypeList,
@@ -224,6 +226,12 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
         case ES_EVENT_TYPE_NOTIFY_CREATE:
             messageOpt = parseCreateNotification(esMessage: unsafeMessagePtr.pointee)
 
+        case ES_EVENT_TYPE_NOTIFY_MOUNT:
+            messageOpt = parseMountNotification(esMessage: unsafeMessagePtr.pointee)
+
+        case ES_EVENT_TYPE_NOTIFY_UNMOUNT:
+            messageOpt = parseUnmountNotification(esMessage: unsafeMessagePtr.pointee)
+
         case _:
             logger.logMessage(severity: .error, message: "Invalid/unsupported event received in onFileChangeEvent")
             return
@@ -278,7 +286,9 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
              ES_EVENT_TYPE_NOTIFY_MMAP,
              ES_EVENT_TYPE_NOTIFY_LINK,
              ES_EVENT_TYPE_NOTIFY_TRUNCATE,
-             ES_EVENT_TYPE_NOTIFY_CREATE:
+             ES_EVENT_TYPE_NOTIFY_CREATE,
+             ES_EVENT_TYPE_NOTIFY_MOUNT,
+             ES_EVENT_TYPE_NOTIFY_UNMOUNT:
 
             onFileChangeEvent(unsafeMessagePtr: unsafeMessagePtr,
                               callback: callback)
