@@ -163,6 +163,42 @@ func parseCreateNotification(esMessage: es_message_t) -> EndpointSecurityFileCha
     return parsedMessage
 }
 
+fileprivate func getMountPointPath(statFs: es_statfs_t) -> String {
+    var statFsCopy = statFs
+
+    let mountPath = withUnsafePointer(to: &statFsCopy.f_mntonname) {
+        $0.withMemoryRebound(to: UInt8.self,
+                             capacity: MemoryLayout.size(ofValue: statFs.f_mntonname)) {
+
+            String(cString: $0)
+        }
+    }
+
+    return mountPath
+}
+
+func parseMountNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+    let mountEvent = esMessage.event.mount
+    let statFs = mountEvent.statfs.pointee
+
+    let mountPath = getMountPointPath(statFs: statFs)
+    let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.mount,
+                                                               pathList: [mountPath])
+
+    return parsedMessage
+}
+
+func parseUnmountNotification(esMessage: es_message_t) -> EndpointSecurityFileChangeNotification? {
+    let unmountEvent = esMessage.event.unmount
+    let statFs = unmountEvent.statfs.pointee
+
+    let mountPath = getMountPointPath(statFs: statFs)
+    let parsedMessage = EndpointSecurityFileChangeNotification(type: EndpointSecurityFileChangeNotificationType.unmount,
+                                                               pathList: [mountPath])
+
+    return parsedMessage
+}
+
 func getFilePath(file: es_file_t) -> String {
     // TODO: use path.size
     String(cString: file.path.data)

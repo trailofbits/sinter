@@ -88,6 +88,8 @@ public enum EndpointSecurityFileChangeNotificationType : CaseIterable {
     case link
     case truncate
     case create
+    case mount
+    case unmount
 }
 
 public struct EndpointSecurityFileChangeNotification {
