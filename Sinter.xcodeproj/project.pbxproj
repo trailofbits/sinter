@@ -17,6 +17,7 @@
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
 		D22AC1C524891E7E0070D08E /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E56DF7248826F30050980C /* Configuration.framework */; };
+		D25A45652497C77C004E2774 /* set_sinter_app_version.sh in Resources */ = {isa = PBXBuildFile; fileRef = D25A45642497C77C004E2774 /* set_sinter_app_version.sh */; };
 		D269AD6B24882E040047A32A /* IdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA7248827810050980C /* IdentifierGenerator.swift */; };
 		D269AD7224882E060047A32A /* EndpointSecurityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA8248827810050980C /* EndpointSecurityClient.swift */; };
 		D269AD7324882E080047A32A /* MessageParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E56EA9248827810050980C /* MessageParsers.swift */; };
@@ -412,6 +413,7 @@
 		D257841F243F60350020BC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2578420243F60350020BC32 /* entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
 		D257851F243F78250020BC32 /* libEndpointSecurity.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libEndpointSecurity.tbd; path = usr/lib/libEndpointSecurity.tbd; sourceTree = SDKROOT; };
+		D25A45642497C77C004E2774 /* set_sinter_app_version.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = set_sinter_app_version.sh; sourceTree = "<group>"; };
 		D25CC59024461E94001C686C /* SystemExtensions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemExtensions.framework; path = System/Library/Frameworks/SystemExtensions.framework; sourceTree = SDKROOT; };
 		D269ADF6248833DD0047A32A /* ConfigurationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConfigurationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D269AE06248834A80047A32A /* AuthorizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthorizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -420,16 +422,6 @@
 		D269AE39248835F70047A32A /* LoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BB9820248EA07200595912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D2BB9821248EA07200595912 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		D2BB9824248EA0F700595912 /* build-macos-x64.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "build-macos-x64.sh"; sourceTree = "<group>"; };
-		D2BB9827248EA0F700595912 /* conclusion.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = conclusion.html; sourceTree = "<group>"; };
-		D2BB9828248EA0F700595912 /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
-		D2BB9829248EA0F700595912 /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
-		D2BB982A248EA0F700595912 /* Distribution */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Distribution; sourceTree = "<group>"; };
-		D2BB982C248EA0F700595912 /* postinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = postinstall; sourceTree = "<group>"; };
-		D2BB982E248EA0F700595912 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
-		D2BB982F248EA0F700595912 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D2BB9830248EA0F700595912 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D2BB9832248EA0F700595912 /* generate_release.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generate_release.sh; sourceTree = "<group>"; };
 		D2BB9834248EA0F700595912 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		D2BB9835248EA0F700595912 /* rules.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = rules.json; sourceTree = "<group>"; };
 		D2CCBF112486AD1B004999ED /* signature-checker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "signature-checker"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -437,6 +429,14 @@
 		D2D943942447235E00626B17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D2D94398244726A500626B17 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D2D9439A24474AC100626B17 /* NotificationServerInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServerInstaller.swift; sourceTree = "<group>"; };
+		D2E19E1924981CDA0050AEAD /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		D2E19E1B24981CDA0050AEAD /* notarize.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = notarize.sh; sourceTree = "<group>"; };
+		D2E19EDF24981CDA0050AEAD /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		D2E19EE124981CDA0050AEAD /* uninstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = uninstall.sh; sourceTree = "<group>"; };
+		D2E19EE224981CDA0050AEAD /* welcome.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = welcome.txt; sourceTree = "<group>"; };
+		D2E19EE324981CDA0050AEAD /* readme.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		D2E19EE524981CDA0050AEAD /* preflight.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = preflight.sh; sourceTree = "<group>"; };
+		D2E19EE624981CDA0050AEAD /* postflight.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = postflight.sh; sourceTree = "<group>"; };
 		D2E56DB3248826BA0050980C /* EndpointSecurityClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EndpointSecurityClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E56DD5248826E10050980C /* NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E56DF7248826F30050980C /* Configuration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Configuration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -694,8 +694,8 @@
 			children = (
 				D2BB9821248EA07200595912 /* LICENSE */,
 				D2BB9820248EA07200595912 /* README.md */,
+				D2E19E1824981CDA0050AEAD /* packaging */,
 				D2BB9833248EA0F700595912 /* config */,
-				D2BB9822248EA0F700595912 /* packaging */,
 				D2BB9831248EA0F700595912 /* scripts */,
 				D2578412243F602F0020BC32 /* Sinter */,
 				D2578411243F602F0020BC32 /* Products */,
@@ -749,66 +749,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D2BB9822248EA0F700595912 /* packaging */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB9823248EA0F700595912 /* macOS-x64 */,
-				D2BB982F248EA0F700595912 /* README.md */,
-				D2BB9830248EA0F700595912 /* .gitignore */,
-			);
-			path = packaging;
-			sourceTree = "<group>";
-		};
-		D2BB9823248EA0F700595912 /* macOS-x64 */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB9824248EA0F700595912 /* build-macos-x64.sh */,
-				D2BB9825248EA0F700595912 /* darwin */,
-				D2BB982D248EA0F700595912 /* application */,
-			);
-			path = "macOS-x64";
-			sourceTree = "<group>";
-		};
-		D2BB9825248EA0F700595912 /* darwin */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB9826248EA0F700595912 /* Resources */,
-				D2BB982A248EA0F700595912 /* Distribution */,
-				D2BB982B248EA0F700595912 /* scripts */,
-			);
-			path = darwin;
-			sourceTree = "<group>";
-		};
-		D2BB9826248EA0F700595912 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB9827248EA0F700595912 /* conclusion.html */,
-				D2BB9828248EA0F700595912 /* uninstall.sh */,
-				D2BB9829248EA0F700595912 /* banner.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		D2BB982B248EA0F700595912 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB982C248EA0F700595912 /* postinstall */,
-			);
-			path = scripts;
-			sourceTree = "<group>";
-		};
-		D2BB982D248EA0F700595912 /* application */ = {
-			isa = PBXGroup;
-			children = (
-				D2BB982E248EA0F700595912 /* .gitkeep */,
-			);
-			path = application;
-			sourceTree = "<group>";
-		};
 		D2BB9831248EA0F700595912 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
-				D2BB9832248EA0F700595912 /* generate_release.sh */,
+				D25A45642497C77C004E2774 /* set_sinter_app_version.sh */,
 			);
 			path = scripts;
 			sourceTree = "<group>";
@@ -828,6 +772,53 @@
 				D2CCBF182486AD2D004999ED /* main.swift */,
 			);
 			path = "signature-checker";
+			sourceTree = "<group>";
+		};
+		D2E19E1824981CDA0050AEAD /* packaging */ = {
+			isa = PBXGroup;
+			children = (
+				D2E19E1924981CDA0050AEAD /* CMakeLists.txt */,
+				D2E19E1A24981CDA0050AEAD /* scripts */,
+				D2E19EDE24981CDA0050AEAD /* pkg */,
+			);
+			path = packaging;
+			sourceTree = "<group>";
+		};
+		D2E19E1A24981CDA0050AEAD /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D2E19E1B24981CDA0050AEAD /* notarize.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
+		D2E19EDE24981CDA0050AEAD /* pkg */ = {
+			isa = PBXGroup;
+			children = (
+				D2E19EDF24981CDA0050AEAD /* CMakeLists.txt */,
+				D2E19EE024981CDA0050AEAD /* resources */,
+				D2E19EE424981CDA0050AEAD /* scripts */,
+			);
+			path = pkg;
+			sourceTree = "<group>";
+		};
+		D2E19EE024981CDA0050AEAD /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2E19EE124981CDA0050AEAD /* uninstall.sh */,
+				D2E19EE224981CDA0050AEAD /* welcome.txt */,
+				D2E19EE324981CDA0050AEAD /* readme.txt */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		D2E19EE424981CDA0050AEAD /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D2E19EE524981CDA0050AEAD /* preflight.sh */,
+				D2E19EE624981CDA0050AEAD /* postflight.sh */,
+			);
+			path = scripts;
 			sourceTree = "<group>";
 		};
 		D2E56DA7248826100050980C /* components */ = {
@@ -1162,6 +1153,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2578423243F60350020BC32 /* Build configuration list for PBXNativeTarget "Sinter" */;
 			buildPhases = (
+				D25A45632497C766004E2774 /* Set the bundle version */,
 				D257840C243F602E0020BC32 /* Sources */,
 				D257840D243F602E0020BC32 /* Frameworks */,
 				D257840E243F602E0020BC32 /* Resources */,
@@ -1516,6 +1508,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25A45652497C77C004E2774 /* set_sinter_app_version.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1597,6 +1590,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D25A45632497C766004E2774 /* Set the bundle version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set the bundle version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/scripts/set_sinter_app_version.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D20F583D2450DA370070C21C /* Sources */ = {
@@ -1934,7 +1948,7 @@
 				INFOPLIST_FILE = "Sinter/notification-server/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
@@ -1962,7 +1976,7 @@
 				INFOPLIST_FILE = "Sinter/notification-server/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../../../../../Frameworks",
+					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
@@ -2145,6 +2159,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = AUTOMATICALLY_SET;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
@@ -2154,6 +2169,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = AUTOMATICALLY_SET;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2172,6 +2188,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = AUTOMATICALLY_SET;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 44WTB9L362;
 				ENABLE_PREVIEWS = YES;
@@ -2181,6 +2198,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = AUTOMATICALLY_SET;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.trailofbits.sinter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
