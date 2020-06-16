@@ -15,9 +15,9 @@
     "log_file_path": "/var/log/sinter.log",
   },
 
-  "SyncServerDecisionManager": {
-    "server_address": "https://server_address:port",
-    "machine_identifier": "machine_identifier",
+  "RemoteDecisionManager": {
+    "server_url": "https://server_address:port",
+    "machine_identifier": "identifier",
   },
 
   "LocalDecisionManager": {

@@ -50,19 +50,18 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
     "log_file_path": "/var/log/sinter.log",
   },
 
-  "SyncServerDecisionManager": {
-    "server_address": "https://server_address:port",
-    "machine_identifier": "machine_identifier",
+  "RemoteDecisionManager": {
+    "server_url": "https://server_address:port",
+    "machine_identifier": "identifier",
   },
 
   "LocalDecisionManager": {
     "rule_database_path": "/etc/sinter/rules.json",
   }
 }
-
 ```
 
-The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **SyncServerDecisionManager** configuration section, where the server URL and machine identifier can be set.
+The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **RemoteDecisionManager** configuration section, where the server URL and machine identifier can be set.
 
 There are two logger plugins implemented:
 1. **filesystem**: Messages are written to file, using the path specified at FilesystemLogger.log_file_path
