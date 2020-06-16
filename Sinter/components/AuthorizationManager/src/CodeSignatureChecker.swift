@@ -15,13 +15,21 @@ public enum CodeSignatureStatus {
     case invalid
 }
 
-func checkCodeSignature(path: String) -> CodeSignatureStatus {
+func checkCodeSignature(path: String,
+                        hashBundles: Bool) -> CodeSignatureStatus {
+
     let url: URL? = URL(fileURLWithPath: path)
     if url == nil {
         return CodeSignatureStatus.ioError
     }
 
-    let checkFlags: SecCSFlags? = SecCSFlags(rawValue: kSecCSCheckNestedCode)
+    let checkFlags: SecCSFlags?
+    if hashBundles {
+        checkFlags = SecCSFlags(rawValue: kSecCSCheckNestedCode)
+    } else {
+        checkFlags = SecCSFlags()
+    }
+
     if checkFlags == nil {
         return CodeSignatureStatus.internalError
     }

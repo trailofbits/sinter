@@ -14,14 +14,17 @@ final class SignatureDatabaseOperation : Operation {
     private var result = SignatureDatabaseResult.Invalid
     private let cachedResultOpt: SignatureDatabaseResult?
     private let external: Bool
+    private let hashBundles: Bool
 
     public init(path: String,
                 cachedResultOpt: SignatureDatabaseResult?,
-                external: Bool) {
+                external: Bool,
+                hashBundles: Bool) {
 
         self.path = path
         self.cachedResultOpt = cachedResultOpt
         self.external = external
+        self.hashBundles = hashBundles
 
         super.init()
     }
@@ -47,7 +50,9 @@ final class SignatureDatabaseOperation : Operation {
     }
     
     private func inProcessSignatureCheck() {
-        switch checkCodeSignature(path: path) {
+        switch checkCodeSignature(path: path,
+                                  hashBundles: hashBundles) {
+
         case .internalError:
             result = SignatureDatabaseResult.Failed
 

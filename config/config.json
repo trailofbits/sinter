@@ -3,6 +3,8 @@
     "decision_manager": "local",
     "logger": "filesystem",
 
+    "hash_bundles": "false",
+
     "allow_unsigned_programs": "true",
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",

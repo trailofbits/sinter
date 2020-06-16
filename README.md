@@ -38,6 +38,8 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
     "decision_manager": "local",
     "logger": "filesystem",
 
+    "hash_bundles": "false",
+
     "allow_unsigned_programs": "true",
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
@@ -68,9 +70,7 @@ There are two logger plugins implemented:
 1. **filesystem**: Messages are written to file, using the path specified at FilesystemLogger.log_file_path
 2. **unifiedlogging**: Logs are emitted using the Unified Logging, using **com.trailofbits.sinter** as subsystem.
 
-## Enabling UI notifications
-1. Install the notification server (the PKG installer will do this automatically): `sudo /Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server`
-2. Start the agent: `/Applications/Sinter.app/Contents/MacOS/Sinter --start-notification-server`
+By default Sinter will not hash bundles, but this can be changed by setting **hash_bundles** to true. This is a more secure configuration but it will increase the time it takes to verify large applications. When using this feature, is it important that the **Sinter.app** folder is owned by root:wheel (this is automatically taken care of when using the PKG installer).
 
 ## Configuring Sinter in MONITOR mode
 Modes are not implemented in Sinter, as everything is rule-based. It is possible to implement the monitoring functionality by tweaking the following settings:

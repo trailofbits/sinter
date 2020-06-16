@@ -23,6 +23,8 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
     private let notificationClient: NotificationClientInterface
     private let signatureDatabase: SignatureDatabase
 
+    private var hashBundles: Bool = false
+
     private init(configuration: ConfigurationInterface,
                  logger: LoggerInterface,
                  decisionManager: DecisionManagerInterface,
@@ -53,6 +55,12 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
     }
 
     func onConfigurationChange(configuration: ConfigurationInterface) {
+        if let hashBundles = configuration.booleanValue(section: "Sinter", key: "hash_bundles") {
+            self.hashBundles = hashBundles
+        } else {
+            self.hashBundles = false
+        }
+
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Deleting the cache")
 
@@ -64,6 +72,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
         switch message {
         case let .ExecAuthorization(execAuthorization):
             signatureDatabase.checkSignatureFor(message: execAuthorization,
+                                                hashBundles: hashBundles,
                                                 block: signatureDatabaseCallback)
 
         case let .ExecInvalidationNotification(execInvalidationNotification):
@@ -73,6 +82,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
             switch execInvalidationNotification.reason {
             case .applicationChanged:
                 logMessage = "'\(execInvalidationNotification.binaryPath)' has been denied execution because the application has been changed on disk"
+
                 notificationMessage = "Denied '\(execInvalidationNotification.binaryPath)' (application changed)"
 
             case .expired:

@@ -26,6 +26,7 @@ struct EndpointSecurityClientContext {
     public var authorizationMessageMap = MessageMap()
     public var cachedPathList = Set<String>()
     public var allowExpiredAuthRequests = false
+    public var hashBundles = false
 }
 
 final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSubscriberInterface {
@@ -118,6 +119,12 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
         } else {
             context.allowExpiredAuthRequests = false
         }
+
+        if let hashBundles = configuration.booleanValue(section: "Sinter", key: "hash_bundles") {
+            context.hashBundles = hashBundles
+        } else {
+            context.hashBundles = false
+        }
     }
 
     public func setAuthorization(identifier: Int64, allow: Bool, cache: Bool) -> Bool {
@@ -166,7 +173,9 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
             return
         }
 
-        if var message = parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee) {
+        if var message = parseExecAuthorization(esMessage: unsafeMsgPtrCopyOpt!.pointee,
+                                                hashBundles: context.hashBundles) {
+
             message.identifier = identifierGenerator.generate()
 
             let timestamp = NSDate().timeIntervalSince1970

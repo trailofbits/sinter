@@ -39,6 +39,7 @@ final class SignatureDatabase {
     }
 
     public func checkSignatureFor(message: EndpointSecurityExecAuthorization,
+                                  hashBundles: Bool,
                                   block: @escaping SignatureDatabaseCallback) {
 
         dispatchQueue.sync {
@@ -60,7 +61,8 @@ final class SignatureDatabase {
 
             let operation = SignatureDatabaseOperation(path: message.binaryPath,
                                                        cachedResultOpt: cachedResultOpt,
-                                                       external: queueType == OperationQueueType.secondary)
+                                                       external: queueType == OperationQueueType.secondary,
+                                                       hashBundles: hashBundles)
 
             operation.completionBlock = { [unowned operation, message, block] in
                 dispatchQueue.sync {

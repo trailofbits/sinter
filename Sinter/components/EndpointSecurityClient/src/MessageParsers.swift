@@ -9,13 +9,15 @@ the LICENSE file found in the root directory of this source tree.
 import EndpointSecurity
 import Foundation
 
-func parseExecAuthorization(esMessage: es_message_t) -> EndpointSecurityExecAuthorization? {
+func parseExecAuthorization(esMessage: es_message_t,
+                            hashBundles: Bool) -> EndpointSecurityExecAuthorization? {
     if esMessage.event_type != ES_EVENT_TYPE_AUTH_EXEC {
         return nil
     }
 
     let target = esMessage.event.exec.target.pointee
-    let binaryPath = getProcessBinaryPath(process: target)
+    let binaryPath = getProcessBinaryPath(process: target,
+                                          hashBundles: hashBundles)
 
     let parentProcessId = target.ppid
     let processId = audit_token_to_pid(target.audit_token)
@@ -204,20 +206,24 @@ func getFilePath(file: es_file_t) -> String {
     String(cString: file.path.data)
 }
 
-func getProcessBinaryPath(process: es_process_t) -> String {
-    // TODO: is there a better way to detect bundles?
+func getProcessBinaryPath(process: es_process_t,
+                          hashBundles: Bool) -> String {
+
     let binaryPath = getFilePath(file: process.executable.pointee)
 
-    var bundleURL = URL(fileURLWithPath: binaryPath)
-    for _ in 1 ... 3 {
-        bundleURL.deleteLastPathComponent()
-    }
+    if hashBundles {
+        // TODO: improve bundle detection logic
+        var bundleURL = URL(fileURLWithPath: binaryPath)
+        for _ in 1 ... 3 {
+            bundleURL.deleteLastPathComponent()
+        }
 
-    let bundleCodeSignatureURL = bundleURL.appendingPathComponent("Contents/_CodeSignature")
+        let bundleCodeSignatureURL = bundleURL.appendingPathComponent("Contents/_CodeSignature")
 
-    let validURLOpt = try? bundleCodeSignatureURL.checkResourceIsReachable()
-    if validURLOpt != nil {
-        return bundleURL.path
+        let validURLOpt = try? bundleCodeSignatureURL.checkResourceIsReachable()
+        if validURLOpt != nil {
+            return bundleURL.path
+        }
     }
 
     return binaryPath
