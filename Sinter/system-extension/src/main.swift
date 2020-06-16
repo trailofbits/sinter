@@ -8,6 +8,7 @@
 
 import Dispatch
 import Foundation
+import Darwin
 
 import EndpointSecurityClient
 import Logger
@@ -18,6 +19,21 @@ import DecisionManager
 var configuration: ConfigurationInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
+
+// Make sure we don't have multiple instances running
+let lockFile = open("/tmp/sinter.lock", O_CREAT | O_RDWR)
+if lockFile < 0 {
+    print("Failed to create the lock file")
+    exit(EXIT_FAILURE)
+}
+
+var lockSettings = flock()
+lockSettings.l_type = Int16(truncatingIfNeeded: F_WRLCK)
+
+if fcntl(lockFile, F_SETLK, &lockSettings) < 0 {
+    print("It seems like another instance of Sinter is already running")
+    exit(EXIT_FAILURE)
+}
 
 // Initialize the configuration
 let configurationExp = createJSONConfiguration()
