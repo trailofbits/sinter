@@ -42,7 +42,7 @@ final class SignatureDatabase {
                                   block: @escaping SignatureDatabaseCallback) {
 
         dispatchQueue.sync {
-            if message.codeDirectoryHash.hash.isEmpty {
+            if message.signingIdentifier.isEmpty {
                 context.resultCache[message.binaryPath] = SignatureDatabaseResult.NotSigned
             }
 
@@ -55,7 +55,7 @@ final class SignatureDatabase {
                 queueType != OperationQueueType.primary {
 
                 logger.logMessage(severity: LoggerMessageSeverity.error,
-                                  message: "Wrong permissions on /Applications/Sinter.app. The application bundle should be owned by root:wheel")
+                                  message: "Wrong permissions on /Applications/Sinter.app. The application bundle should be owned by root:wheel. This will cause issues in how authorizations are processed")
             }
 
             let operation = SignatureDatabaseOperation(path: message.binaryPath,
