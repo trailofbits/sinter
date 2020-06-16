@@ -27,7 +27,7 @@ class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
         let serverURLOpt = configuration.stringValue(section: "RemoteDecisionManager",
                                                      key: "server_url")
         
-        let machineIdentifierOpt = configuration.stringValue(section: "RemoteDecisionManager",
+        var machineIdentifierOpt = configuration.stringValue(section: "RemoteDecisionManager",
                                                              key: "machine_identifier")
 
         if serverURLOpt == nil {
@@ -36,14 +36,29 @@ class RemoteRuleDatabaseProvider : RuleDatabaseProviderInterface {
             
             return
         }
-
-        if machineIdentifierOpt == nil {
+        
+        if serverURLOpt!.isEmpty {
             logger.logMessage(severity: LoggerMessageSeverity.error,
-                              message: "The 'machine_identifier' key is missing from the RemoteDecisionManager section")
+                              message: "The 'server_url' key does not have a valid value")
             
             return
         }
-        
+
+        if machineIdentifierOpt == nil || machineIdentifierOpt!.isEmpty {
+            if let hostname = Host.current().name {
+                logger.logMessage(severity: LoggerMessageSeverity.warning,
+                                  message: "The 'machine_identifier' key does not have a valid value. Using the hostname: \(hostname)")
+
+                machineIdentifierOpt = hostname
+
+            } else {
+                logger.logMessage(severity: LoggerMessageSeverity.warning,
+                                  message: "The 'machine_identifier' key does not have a valid value and it was not possible to acquire the local hostname to populate it")
+                
+                return
+            }
+        }
+
         dispatchQueue.sync {
             serverURL = serverURLOpt!
             machineIdentifier = machineIdentifierOpt!
