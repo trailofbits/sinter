@@ -22,4 +22,5 @@ public protocol ConfigurationInterface {
     func stringValue(section: String, key: String) -> String?
     func integerValue(section: String, key: String) -> Int?
     func booleanValue(section: String, key: String) -> Bool?
+    func stringList(section: String, key: String) -> [String]?
 }

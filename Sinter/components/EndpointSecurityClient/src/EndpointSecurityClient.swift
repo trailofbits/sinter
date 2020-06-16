@@ -113,7 +113,9 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
     }
 
     public func onConfigurationChange(configuration: ConfigurationInterface) {
-        if let allowExpiredAuthRequests = configuration.booleanValue(section: "Sinter", key: "allow_expired_auth_requests") {
+        if let allowExpiredAuthRequests = configuration.booleanValue(section: "Sinter",
+                                                                     key: "allow_expired_auth_requests") {
+
             context.allowExpiredAuthRequests = allowExpiredAuthRequests
         } else {
             context.allowExpiredAuthRequests = false

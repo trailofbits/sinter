@@ -7,8 +7,19 @@
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
     "allow_expired_auth_requests": "true",
+    "allow_misplaced_applications": "true",
 
     "config_update_interval": 600,
+
+    "allowed_application_directories": [
+      "/bin",
+      "/usr/bin",
+      "/usr/local/bin",
+      "/Applications",
+      "/System",
+      "/usr/sbin",
+      "/usr/libexec",
+    ],
   },
   
   "FilesystemLogger": {
