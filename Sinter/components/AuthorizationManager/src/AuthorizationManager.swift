@@ -13,7 +13,12 @@ import Logger
 import DecisionManager
 import EndpointSecurityClient
 
-private final class AuthorizationManager: AuthorizationManagerInterface,
+struct ApplicationDirectorySettings {
+    public var allowMisplacedApplications = true
+    public var allowedApplicationDirectories = [String]()
+}
+
+final class AuthorizationManager: AuthorizationManagerInterface,
                                           ConfigurationSubscriberInterface {
 
     private let logger: LoggerInterface
@@ -22,6 +27,7 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
     private var endpointSecurityOpt: EndpointSecurityInterface? = nil
     private let notificationClient: NotificationClientInterface
     private let signatureDatabase: SignatureDatabase
+    private var applicationDirectorySettings = ApplicationDirectorySettings()
 
     private init(configuration: ConfigurationInterface,
                  logger: LoggerInterface,
@@ -53,6 +59,32 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
     }
 
     func onConfigurationChange(configuration: ConfigurationInterface) {
+        applicationDirectorySettings.allowedApplicationDirectories = [String]()
+
+        if let allowedApplicationDirectories = configuration.stringList(section: "Sinter",
+                                                                        key: "allowed_application_directories") {
+
+            for var path in allowedApplicationDirectories {
+                if path.isEmpty {
+                    continue
+                }
+
+                if path.last! != "/" {
+                    path += "/"
+                }
+
+                applicationDirectorySettings.allowedApplicationDirectories.append(path)
+            }
+        }
+
+        if let allowMisplacedApplications = configuration.booleanValue(section: "Sinter",
+                                                                       key: "allow_misplaced_applications") {
+
+            applicationDirectorySettings.allowMisplacedApplications = allowMisplacedApplications
+        } else {
+            applicationDirectorySettings.allowMisplacedApplications = false
+        }
+
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Deleting the cache")
 
@@ -63,8 +95,33 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
     private func onEndpointSecurityMessage(message: EndpointSecurityMessage) {
         switch message {
         case let .ExecAuthorization(execAuthorization):
-            signatureDatabase.checkSignatureFor(message: execAuthorization,
-                                                block: signatureDatabaseCallback)
+            var isMisplaced = false
+            let allowed = AuthorizationManager.isApplicationPathAllowed(applicationDirectorySettings: applicationDirectorySettings,
+                                                                        binaryPath: execAuthorization.binaryPath,
+                                                                        isMisplaced: &isMisplaced)
+
+            if isMisplaced {
+                logger.logMessage(severity: .error,
+                                  message: "The following application is not being started from a valid path: \(execAuthorization.binaryPath)")
+            }
+
+            if !allowed {
+                DispatchQueue.main.async {
+                    _ = self.endpointSecurityOpt!.setAuthorization(identifier: execAuthorization.identifier,
+                                                                   allow: false,
+                                                                   cache: true)
+                }
+
+                let message = "Blocked: \(execAuthorization.binaryPath) (invalid path)"
+
+                self.notificationClient.showNotification(message: message)
+                self.logger.logMessage(severity: LoggerMessageSeverity.information,
+                                       message: message)
+
+            } else {
+                signatureDatabase.checkSignatureFor(message: execAuthorization,
+                                                    block: signatureDatabaseCallback)
+            }
 
         case let .ExecInvalidationNotification(execInvalidationNotification):
             let logMessage: String
@@ -155,6 +212,44 @@ private final class AuthorizationManager: AuthorizationManagerInterface,
                                                                                 logger: logger,
                                                                                 decisionManager: decisionManager,
                                                                                 endpointSecurityFactory: endpointSecurityFactory) }
+    }
+
+    static func isApplicationMisplaced(applicationDirectorySettings: ApplicationDirectorySettings,
+                                       binaryPath: String) -> Bool {
+
+        if applicationDirectorySettings.allowedApplicationDirectories.isEmpty {
+            return false
+        }
+
+        for var allowedDirectory in applicationDirectorySettings.allowedApplicationDirectories {
+            if allowedDirectory.isEmpty {
+                continue
+            }
+
+            if allowedDirectory.last! != "/" {
+                allowedDirectory += "/"
+            }
+
+            if binaryPath.starts(with: allowedDirectory) {
+                return false
+            }
+        }
+
+        return true
+    }
+    
+    static func isApplicationPathAllowed(applicationDirectorySettings: ApplicationDirectorySettings,
+                                         binaryPath: String,
+                                         isMisplaced: inout Bool) -> Bool {
+
+        isMisplaced = isApplicationMisplaced(applicationDirectorySettings: applicationDirectorySettings,
+                                             binaryPath: binaryPath)
+
+        if isMisplaced {
+            return applicationDirectorySettings.allowMisplacedApplications
+        }
+        
+        return true
     }
 }
 

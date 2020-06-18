@@ -42,8 +42,19 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
     "allow_invalid_programs": "true",
     "allow_unknown_programs": "true",
     "allow_expired_auth_requests": "true",
+    "allow_misplaced_applications": "true",
 
     "config_update_interval": 600,
+
+    "allowed_application_directories": [
+      "/bin",
+      "/usr/bin",
+      "/usr/local/bin",
+      "/Applications",
+      "/System",
+      "/usr/sbin",
+      "/usr/libexec",
+    ],
   },
   
   "FilesystemLogger": {
@@ -66,6 +77,12 @@ The decision manager plugin can be selected by changing the `decision_manager` v
 There are two logger plugins implemented:
 1. **filesystem**: Messages are written to file, using the path specified at FilesystemLogger.log_file_path
 2. **unifiedlogging**: Logs are emitted using the Unified Logging, using **com.trailofbits.sinter** as subsystem.
+
+## Allowed application directories
+It is possible to configure Sinter to log and optionally block applications that have not been started from an allowed folder.
+
+**allow_misplaced_applications**: If set to true, misplaced applications will only generate a warning. If set to false, any execution that does not starts from a valid path is denied.
+**allowed_application_directories**: If non-empty, it will be used to determine if applications are placed in the wrong folder.
 
 ## Enabling UI notifications
 1. Install the notification server (the PKG installer will do this automatically): `sudo /Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server`

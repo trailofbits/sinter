@@ -15,6 +15,7 @@
 		D20F58652450DB110070C21C /* notification-server.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F58412450DA370070C21C /* notification-server.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D20F58702450DC090070C21C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20F586F2450DC090070C21C /* main.swift */; };
 		D20F58872450DDBF0070C21C /* com.trailofbits.sinter.daemon.systemextension in CopyFiles */ = {isa = PBXBuildFile; fileRef = D20F586D2450DC090070C21C /* com.trailofbits.sinter.daemon.systemextension */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		D2295E29249954720076B8F9 /* AuthorizationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2295E28249954720076B8F9 /* AuthorizationManagerTests.swift */; };
 		D22AA64D2483EA0D00C40455 /* DaemonInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */; };
 		D22AC1C524891E7E0070D08E /* Configuration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E56DF7248826F30050980C /* Configuration.framework */; };
 		D25A45652497C77C004E2774 /* set_sinter_app_version.sh in Resources */ = {isa = PBXBuildFile; fileRef = D25A45642497C77C004E2774 /* set_sinter_app_version.sh */; };
@@ -407,6 +408,7 @@
 		D20F586F2450DC090070C21C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D20F58752450DC510070C21C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D20F58762450DC510070C21C /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
+		D2295E28249954720076B8F9 /* AuthorizationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManagerTests.swift; sourceTree = "<group>"; };
 		D22AA64C2483EA0D00C40455 /* DaemonInstaller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaemonInstaller.swift; sourceTree = "<group>"; };
 		D2513B61244073A300002645 /* libbsm.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbsm.tbd; path = usr/lib/libbsm.tbd; sourceTree = SDKROOT; };
 		D2578410243F602F0020BC32 /* Sinter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sinter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1043,6 +1045,7 @@
 			isa = PBXGroup;
 			children = (
 				D2E56EBB248827810050980C /* SignatureDatabaseTests.swift */,
+				D2295E28249954720076B8F9 /* AuthorizationManagerTests.swift */,
 			);
 			path = tests;
 			sourceTree = "<group>";
@@ -1653,6 +1656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D269AE11248834CB0047A32A /* SignatureDatabaseTests.swift in Sources */,
+				D2295E29249954720076B8F9 /* AuthorizationManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
