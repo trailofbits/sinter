@@ -1,10 +1,14 @@
 # Sinter
 
-Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the safe-by-design Swift programming language. 
+CI: [![Build Status](https://app.bitrise.io/app/7981426cfe90b436/status.svg?token=nUfXVprK5okMCcFXeOuwzg&branch=master)](https://app.bitrise.io/app/7981426cfe90b436)
+
+Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in the safe-by-design Swift programming language.
 
 ## Purpose
 
-The first open-source solution for allowing/denying processes on macOS was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). However, being developed at Google, it primarily serves Google's needs. The best available configuration and management server ("sync server") for Santa [is tightly integrated with Google Cloud Platform](https://github.com/google/upvote), which not everyone uses. We often wondered if we could implement a simpler design from scratch, in strictly user-mode, with a modern programming language that avoids the potential for memory-corruption security vulnerabilities. We wanted it to be cloud-vendor-neutral with regard to its management servers. And we think an endpoint agent of this kind could do much more than just allowing and denying process events. So we began to develop Sinter.<sup>[1](#nameFootnote)</sup>
+The first open-source macOS solution for allowing/denying processes was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). However, being developed at Google, it primarily serves Google's needs. The best available configuration and management server ("sync server") for Santa [is tightly integrated with Google Cloud Platform](https://github.com/google/upvote), which not everyone uses. 
+
+We often wondered if we could implement a simpler design from scratch, in strictly user-mode, with a modern programming language that avoids the potential for memory-corruption security vulnerabilities. We wanted it to be cloud-vendor-neutral with regard to its management servers. And we think an endpoint agent of this kind could do much more than just allowing and denying process events. So we began to develop Sinter.<sup>[1](#nameFootnote)</sup>
 
 ## Features
 
@@ -23,7 +27,7 @@ Sinter uses the user-mode EndpointSecurity API to subscribe to and receive autho
 * Does not support legacy macOS (does not support 10.14 or older)
 * No legacy codebase, no third-party library dependencies
 * No components built with memory-unsafe programming languages
-* Not an anti-malware or anti-virus. No signatures database. Blocks only what you tell it to block using rules.
+* Not an anti-malware or anti-virus. No signatures database. Blocks only what you tell it to block, using rules.
 
 ## Quick Start: Configure and Run Sinter
 
