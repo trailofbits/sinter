@@ -5,6 +5,7 @@ CI: [![Build Status](https://app.bitrise.io/app/7981426cfe90b436/status.svg?toke
 Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in Swift.
 
 ## Table of Contents
+
 - [Purpose](#purpose)
 - [Features](#features)
 - [Anti-Features](#anti-features)
@@ -20,10 +21,10 @@ We often wondered if we could implement a simpler design from scratch, in strict
 
 ## Features <a name = "features"></a>
 
-Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/blocking process executions; future versions will support other kinds of events like file event, socket event, and kernel event. 
+Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/blocking process executions; future versions will support other kinds of events like file event, socket event, and kernel event.
 
 - Process execution allow-listing and deny-listing
-   - by code directory hash (aka "CD hash")
+  - by code directory hash (aka "CD hash")
 - MONITOR mode: track (but allow) process execution events and record them to a structured-format log file
 - Sync server support (currently compatible with the Moroz sync-server for Santa clients)
 - Blocking configured with a JSON-based database provided either locally or by sync-server
@@ -31,17 +32,17 @@ Sinter uses the user-mode EndpointSecurity API to subscribe to and receive autho
 
 Planned upcoming features:
 
-* Additional process execution blocking rules
-  * by executable file path
-  * by certificate Team ID
+- Additional process execution blocking rules
+  - by executable file path
+  - by certificate Team ID
 
 ## Anti-Features <a name = "anti-features"></a>
 
-* Uses no kernel extensions, which will be officially deprecated in macOS 11 Big Sur
-* Does not support legacy macOS (does not support 10.14 or older)
-* No legacy codebase, no third-party library dependencies
-* No components built with memory-unsafe programming languages
-* Not an anti-malware or anti-virus. No signatures database. Blocks only what you tell it to block, using rules.
+- Uses no kernel extensions, which will be officially deprecated in macOS 11 Big Sur
+- Does not support legacy macOS (does not support 10.14 or older)
+- No legacy codebase, no third-party library dependencies
+- No components built with memory-unsafe programming languages
+- Not an anti-malware or anti-virus. No signatures database. Blocks only what you tell it to block, using rules.
 
 ## Getting Started <a name = "quickstart"></a>
 
@@ -96,28 +97,33 @@ Sinter requires a configuration file to be present at `/etc/sinter/config.json`.
 The decision manager plugin can be selected by changing the `decision_manager` value. The **local** plugin will enable the **LocalDecisionManager** configuration section, pointing Sinter to use the local rule database present at the given path. It is possible to use a Santa-compatible sync-server, by using the **sync-server** plugin instead. This enables the **RemoteDecisionManager** configuration section, where the server URL and machine identifier can be set.
 
 There are two logger plugins currently implemented:
+
 1. **filesystem**: Messages are written to file, using the path specified at FilesystemLogger.log_file_path
 2. **unifiedlogging**: Logs are emitted using the Unified Logging, using **com.trailofbits.sinter** as subsystem.
 
 ### Allowed application directories
+
 It is possible to configure Sinter to log and optionally block applications that have not been started from an allowed folder.
 
-* **allow_misplaced_applications**: If set to true, misplaced applications will only generate a warning. If set to false, any execution that does not starts from a valid path is denied.
-* **allowed_application_directories**: If non-empty, it will be used to determine if applications are placed in the wrong folder.
+- **allow_misplaced_applications**: If set to true, misplaced applications will only generate a warning. If set to false, any execution that does not starts from a valid path is denied.
+- **allowed_application_directories**: If non-empty, it will be used to determine if applications are placed in the wrong folder.
 
 ### Enabling UI notifications
+
 1. Install the notification server (the PKG installer will do this automatically): `sudo /Applications/Sinter.app/Contents/MacOS/Sinter --install-notification-server`
 2. Start the agent: `/Applications/Sinter.app/Contents/MacOS/Sinter --start-notification-server`
 
 ### Configuring Sinter in MONITOR mode
+
 Modes are not implemented in Sinter, as everything is rule-based. It is possible to implement the monitoring functionality by tweaking the following settings:
 
- - **allow_unsigned_programs**: allow applications that are not signed
- - **allow_invalid_programs**: allow applications that fail the signature check
- - **allow_unknown_programs**: automatically allow applications that are not covered by the active rule database
- - **allow_expired_auth_requests**: the EndpointSecurity API requires Sinter to answer to an authorization requests within an unspecified time frame (typically, less than a minute). Large applications, such as Xcode, will take a considerable amount of time to verify. Those executions are denied by default, and the user is expected to try again once the application has been verified. Setting this configuration to true changes this behavior so that those requests are always allowed.
+- **allow_unsigned_programs**: allow applications that are not signed
+- **allow_invalid_programs**: allow applications that fail the signature check
+- **allow_unknown_programs**: automatically allow applications that are not covered by the active rule database
+- **allow_expired_auth_requests**: the EndpointSecurity API requires Sinter to answer to an authorization requests within an unspecified time frame (typically, less than a minute). Large applications, such as Xcode, will take a considerable amount of time to verify. Those executions are denied by default, and the user is expected to try again once the application has been verified. Setting this configuration to true changes this behavior so that those requests are always allowed.
 
 ### Rule format
+
 Rule databases are written in JSON format. Here's an example database that allows the CMake application bundle from cmake.org:
 
 ```json
@@ -140,6 +146,7 @@ Sinter only supports **BINARY** rules for now, using either **ALLOWLIST** or **D
 Sinter builds on macOS 10.15 or above.
 
 ### Disable SIP on a Dev System
+
 Because Sinter uses the EndpointSecurity API, it must be code-signed with an appropriate Apple-issued "Distribution" signing certificate and a corresponding provisioning profile that includes the EndpointSecurity entitlement, then also notarized. Code-signing for the EndpointSecurity entitlement requires a manual application to Apple for approval for the required provisioning profile. If you cannot sign with such a certificate, then you must disable SIP if you want to build Sinter from source and run locally. To disable SIP (*not recommended except on a test system*):
 
 Schedule a Recovery Mode reboot:
@@ -200,4 +207,4 @@ Run this way, it outputs events to stdout. When run via the default install meth
 
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.
 
-<a name="nameFootnote">1</a>: short for "Sinter Klausen," another name for Santa Claus
+<a name="nameFootnote">Sinter is short for "Sinter Klausen," another name for Santa Claus</a>
