@@ -209,4 +209,6 @@ Run this way, it outputs events to stdout. When run via the default install meth
 
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.
 
-<a name="nameFootnote">Sinter is short for "Sinter Klausen," another name for Santa Claus</a>
+## Footnotes
+
+<a name="nameFootnote">1: Sinter is short for "Sinter Klausen," another name for Santa Claus</a>
