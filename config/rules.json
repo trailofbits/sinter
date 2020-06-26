@@ -2,7 +2,7 @@
   "rules": [
     {
       "rule_type": "BINARY",
-      "policy": "WHITELIST",
+      "policy": "ALLOWLIST",
       "sha256": "edd649fc4aa059bb4d530ae8a94a12a4fd7caf2a547881332e8ecad58046c559",
       "custom_msg": "iTerm 2"
     }

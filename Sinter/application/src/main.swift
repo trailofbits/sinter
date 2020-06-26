@@ -8,7 +8,7 @@
 
 import Cocoa
 
-import JSONConfiguration
+import Configuration
 import AuthorizationManager
 
 // Do not start if the path is not right; system extensions can't even be
@@ -31,15 +31,23 @@ case let .failure(error):
     exit(EXIT_FAILURE)
 }
 
-let systemExtensionInstaller: SystemExtensionInstaller
+if CommandLine.arguments.contains("--install-daemon") {
+    if installDaemon() && startDaemon() {
+        print("The Sinter daemon has been installed")
+        exit(EXIT_SUCCESS)
+    } else {
+        print("Failed to install the Sinter daemon")
+        exit(EXIT_FAILURE)
+    }
 
-if CommandLine.arguments.contains("--install-system-extension") {
-    print("Installing the system extension")
-    systemExtensionInstaller = SystemExtensionInstaller(operation: SystemExtensionInstallerOperation.install)
-
-} else if CommandLine.arguments.contains("--uninstall-system-extension") {
-    print("Uninstalling the system extension")
-    systemExtensionInstaller = SystemExtensionInstaller(operation: SystemExtensionInstallerOperation.uninstall)
+} else if CommandLine.arguments.contains("--uninstall-daemon") {
+    if stopDaemon() && uninstallDaemon() {
+        print("The Sinter daemon has been uninstalled")
+        exit(EXIT_SUCCESS)
+    } else {
+        print("Failed to uninstall the Sinter daemon")
+        exit(EXIT_FAILURE)
+    }
 
 } else if CommandLine.arguments.contains("--install-notification-server") {
     if installNotificationServer() {

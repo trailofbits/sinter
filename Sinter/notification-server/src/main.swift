@@ -34,5 +34,7 @@ case let .failure(error):
 print("Starting the notification server")
 let notificationServer = createNotificationServer(notificationService: notificationCenter)
 
+notificationCenter.showNotification(message: "The Sinter notification server is running")
+
 RunLoop.current.run()
 dispatchMain()

@@ -8,20 +8,32 @@
 
 import Dispatch
 import Foundation
+import Darwin
 
 import EndpointSecurityClient
-import FilesystemLogger
-import InMemorySignatureDatabase
-import JSONConfiguration
+import Logger
+import Configuration
 import AuthorizationManager
-import LocalDecisionManager
-import SyncServerDecisionManager
+import DecisionManager
 
 var configuration: ConfigurationInterface
-var logger: LoggerInterface
-var signatureDatabase: SignatureDatabaseInterface
 var authorizationManager: AuthorizationManagerInterface
 var decisionManager: DecisionManagerInterface
+
+// Make sure we don't have multiple instances running
+let lockFile = open("/tmp/sinter.lock", O_CREAT | O_RDWR)
+if lockFile < 0 {
+    print("Failed to create the lock file")
+    exit(EXIT_FAILURE)
+}
+
+var lockSettings = flock()
+lockSettings.l_type = Int16(truncatingIfNeeded: F_WRLCK)
+
+if fcntl(lockFile, F_SETLK, &lockSettings) < 0 {
+    print("It seems like another instance of Sinter is already running")
+    exit(EXIT_FAILURE)
+}
 
 // Initialize the configuration
 let configurationExp = createJSONConfiguration()
@@ -35,45 +47,42 @@ case let .failure(error):
 }
 
 // Initialize the logger
-let loggerExp = createFilesystemLogger(configuration: configuration)
-switch loggerExp {
-case let .success(obj):
-    logger = obj
+var loggerPluginName = "unifiedlogging"
+if let configuredLoggerPluginName = configuration.stringValue(section: "Sinter", key: "logger") {
+    loggerPluginName = configuredLoggerPluginName
+}
 
-case let .failure(error):
-    print("Failed to create the FilesytemLogger object: \(error)")
+let logger: LoggerInterface
+if loggerPluginName == "filesystem" {
+    logger = createFilesystemLogger()
+
+} else if loggerPluginName == "unifiedlogging" {
+    logger = createUnifiedLoggingLogger()
+
+} else {
+    print("The following logger plugin is not valid: \(loggerPluginName)")
     exit(EXIT_FAILURE)
 }
 
-// Initialize the SignatureDatabase
-let signatureDatabaseExp = createInMemorySignatureDatabase()
-switch signatureDatabaseExp {
-case let .success(obj):
-    signatureDatabase = obj
-
-case let .failure(error):
-    print("Failed to create the SignatureDatabase object: \(error)")
-    exit(EXIT_FAILURE)
-}
-
-// Initialize the DecisionManager
-var decisionManagerExp: Result<DecisionManagerInterface, Error>
+// The logger has been using stdout/stderr so far; pass the
+// new configuration object we just created
+logger.setConfiguration(configuration: configuration)
 
 // Initialize the decision manager
-if let decisionManagerPluginName = configuration.stringValue(moduleName: "Sinter", key: "decision_manager") {
+if let decisionManagerPluginName = configuration.stringValue(section: "Sinter", key: "decision_manager") {
     if decisionManagerPluginName == "sync-server" {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Initializing the sync-server decision manager plugin")
 
-        decisionManagerExp = createSyncServerDecisionManager(logger: logger,
-                                                             configuration: configuration)
+        decisionManager = createRemoteDecisionManager(logger: logger,
+                                                      configuration: configuration)
 
     } else if decisionManagerPluginName == "local" {
         logger.logMessage(severity: LoggerMessageSeverity.information,
                           message: "Initializing the local decision manager plugin")
 
-        decisionManagerExp = createLocalDecisionManager(logger: logger,
-                                                        configuration: configuration)
+        decisionManager = createLocalDecisionManager(logger: logger,
+                                                     configuration: configuration)
 
     } else {
         logger.logMessage(severity: LoggerMessageSeverity.error,
@@ -89,19 +98,9 @@ if let decisionManagerPluginName = configuration.stringValue(moduleName: "Sinter
     exit(EXIT_FAILURE)
 }
 
-switch decisionManagerExp {
-case let .success(obj):
-    decisionManager = obj
-
-case let .failure(error):
-    print("Failed to create the DecisionManager object: \(error)")
-    exit(EXIT_FAILURE)
-}
-
 // Initialize the AuthorizationManager
 let authorizationManagerExp = createAuthorizationManager(configuration: configuration,
                                                          logger: logger,
-                                                         signatureDatabase: signatureDatabase,
                                                          decisionManager: decisionManager,
                                                          endpointSecurityFactory: createEndpointSecurityClient)
 

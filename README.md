@@ -167,20 +167,22 @@ First, install [Xcode 11.4 or newer](https://apps.apple.com/us/app/xcode/id49779
 
 Install the Xcode command-line tools as well. One way to do this is:
 
-`$ xcode-select --install`
+Sinter is a user-mode application authorization system for MacOS written in Swift.
 
 (Optional, if building the installer pkg) The Sinter project uses CMake to automate the post-build packaging and notarization steps. Install the [latest version of CMake](https://cmake.org/).
 
 ### Set your Apple code-signing identity (required)
 
-With the Xcode project open, enter the top-level project settings, and navigate to `Signing & Capabilities`. Here, configure your signing certificate and identity information.
+This program is under heavy development, and new features will be added really soon! Currently, Sinter is able to block applications based on the code directory hash value, using a JSON-based database that can be provided either locally or with a Santa-compatible sync-server.
 
-### Apply for EndpointSecurity entitltements for your code-signing identity (optional, required for distribution)
+Additional settings allow the user to choose whether to enable or disable unsigned and invalid programs, which can be used to mimic the MONITOR mode used by Santa.
 
 To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a Distribution certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account *owner* can apply for this entitlement. [Apply here](https://developer.apple.com/system-extensions/), at the "Request an Entitlement" link.
 
-### Build with Xcode at the command line
+## Requirements
+Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued "Distribution" signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source.
 
+## Build instructions
 From the Sinter directory:
 
 `$ xcodebuild -scheme Sinter -configuration Release`
