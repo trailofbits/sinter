@@ -195,7 +195,7 @@ Optional: you may need to set the command-line tools to the full Xcode, first, t
 
 ### Notarize and Generate the Package Installer (optional)
 
-`$ cd packaging && mkdir build && cd build && cmake ..`
+`$ cd packaging && mkdir build && cd build && make package ..`
 
 ### Running the Sinter Daemon in the Terminal
 
