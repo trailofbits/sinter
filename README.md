@@ -17,22 +17,24 @@ Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, wr
 
 The first open-source macOS solution for allowing/denying processes was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). However, being developed at Google, it primarily serves Google's needs. The best available configuration and management server ("sync server") for Santa [is tightly integrated with Google Cloud Platform](https://github.com/google/upvote), which not everyone uses. 
 
-We often wondered if we could implement a simpler design from scratch, in strictly user-mode, with a modern programming language that avoids the potential for memory-corruption security vulnerabilities. We wanted it to be cloud-vendor-neutral with regard to its management servers. And we think an endpoint agent of this kind could do much more than just allowing and denying process events. So we began to develop Sinter.<sup>[1](#nameFootnote)</sup>
+We often wondered if we could implement a simpler design from scratch, in strictly user-mode, with a modern programming language that avoids the potential for memory-corruption security vulnerabilities. We wanted it to be cloud-vendor-neutral with regard to its management servers. We think an endpoint agent of this kind could serve much greater purpose than simply allowing and denying process events, so we set out to develop Sinter.<sup>[1](#nameFootnote)</sup>
 
 ## Features <a name = "features"></a>
 
-Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/blocking process executions; future versions will support other kinds of events like file event, socket event, and kernel event.
+Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/denying process executions; future versions will support other types of events such as file event, socket event, and kernel event.
+
+Current features:
 
 - Process execution allow-listing and deny-listing
   - by code directory hash (aka "CD hash")
 - MONITOR mode: track (but allow) process execution events and record them to a structured-format log file
 - Sync server support (currently compatible with the Moroz sync-server for Santa clients)
-- Blocking configured with a JSON-based database provided either locally or by sync-server
+- Deny-rules configured with a JSON-based database provided either locally or by sync-server
 - Structured logging to the local filesystem
 
 Planned upcoming features:
 
-- Additional process execution blocking rules
+- Additional process execution deny rules
   - by executable file path
   - by certificate Team ID
 
@@ -42,7 +44,7 @@ Planned upcoming features:
 - Does not support legacy macOS (does not support 10.14 or older)
 - No legacy codebase, no third-party library dependencies
 - No components built with memory-unsafe programming languages
-- Not an anti-malware or anti-virus. No signatures database. Blocks only what you tell it to block, using rules.
+- Not an anti-malware or anti-virus. No signatures database. Denies only what you tell it to deny, using rules.
 
 ## Getting Started <a name = "quickstart"></a>
 
@@ -103,7 +105,7 @@ There are two logger plugins currently implemented:
 
 ### Allowed application directories
 
-It is possible to configure Sinter to log and optionally block applications that have not been started from an allowed folder.
+It is possible to configure Sinter to log and optionally deny applications that have not been started from an allowed folder.
 
 - **allow_misplaced_applications**: If set to true, misplaced applications will only generate a warning. If set to false, any execution that does not starts from a valid path is denied.
 - **allowed_application_directories**: If non-empty, it will be used to determine if applications are placed in the wrong folder.
@@ -173,7 +175,7 @@ Sinter is a user-mode application authorization system for MacOS written in Swif
 
 ### Set your Apple code-signing identity (required)
 
-This program is under heavy development, and new features will be added really soon! Currently, Sinter is able to block applications based on the code directory hash value, using a JSON-based database that can be provided either locally or with a Santa-compatible sync-server.
+This program is under heavy development, and new features will be added really soon! Currently, Sinter is able to deny applications based on the code directory hash value, using a JSON-based database that can be provided either locally or with a Santa-compatible sync-server.
 
 Additional settings allow the user to choose whether to enable or disable unsigned and invalid programs, which can be used to mimic the MONITOR mode used by Santa.
 
