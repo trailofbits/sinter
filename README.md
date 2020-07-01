@@ -15,22 +15,27 @@ Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, wr
 
 ## Purpose <a name = "purpose"></a>
 
-The first open-source macOS solution for allowing/denying processes was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). However, being developed at Google, it primarily serves Google's needs. The best available configuration and management server ("sync server") for Santa [is tightly integrated with Google Cloud Platform](https://github.com/google/upvote), which not everyone uses. 
+The first open-source macOS solution for allowing/denying processes was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). For a long time, however, many in the macOS community have asked for an open-source solution to track and manage _more_ than just process events. 
 
-We often wondered if we could implement a simpler design from scratch, in strictly user-mode, with a modern programming language that avoids the potential for memory-corruption security vulnerabilities. We wanted it to be cloud-vendor-neutral with regard to its management servers. We think an endpoint agent of this kind could serve much greater purpose than simply allowing and denying process events, so we set out to develop Sinter.<sup>[1](#nameFootnote)</sup>
+With the emergence of the EndpointSecurity API in macOS 10.15, we saw an ideal platform around which to build up such a capability. Starting from the ground-up around a strictly user-mode API meant that we could attempt a simpler design, and use a modern programming language that provides potentialy safer memory handling and which is reportedly [2.6x faster than Objective-C](https://www.apple.com/swift/). Thus, we set out to develop a new endpoint agent that we are calling Sinter.<sup>[1](#nameFootnote)</sup>
+
+**Sinter is a work-in-progress, not a finished product.** Currently, it demonstrates the use of the EndpointSecurity API and implements a useful subset of Santa's functionality. All feedback is welcome. If you are interested in contributing or sponsoring us to help achieve its potential, [let's get in touch](https://www.trailofbits.com/contact/).
 
 ## Features <a name = "features"></a>
 
-Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/denying process executions; future versions will support other types of events such as file event, socket event, and kernel event.
+Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/denying process executions; in future versions we intend to support other types of events such as file event, socket event, and kernel event.
 
 Current features:
 
 - Process execution allow-listing and deny-listing
   - by code directory hash (aka "CD hash")
-- MONITOR mode: track (but allow) process execution events and record them to a structured-format log file
-- Sync server support (currently compatible with the Moroz sync-server for Santa clients)
+  - option to deny all unknown programs (any program that is not explicitly allowed)
+  - option to deny all unsigned programs
+  - option to deny all programs with invalid signatures
+- The default configuration is a "monitor" mode: track and log (but allow) all process execution events
+- Sync server support (partial; work in progress): accepts allow/deny rules from a Santa sync-server
 - Deny-rules configured with a JSON-based database provided either locally or by sync-server
-- Structured logging to the local filesystem
+- Logging to the local filesystem (in a structured JSON format)
 
 Planned upcoming features:
 
@@ -42,8 +47,7 @@ Planned upcoming features:
 
 - Uses no kernel extensions, which will be officially deprecated in macOS 11 Big Sur
 - Does not support legacy macOS (does not support 10.14 or older)
-- No legacy codebase, no third-party library dependencies
-- No components built with memory-unsafe programming languages
+- Avoids third-party library dependencies
 - Not an anti-malware or anti-virus. No signatures database. Denies only what you tell it to deny, using rules.
 
 ## Getting Started <a name = "quickstart"></a>
