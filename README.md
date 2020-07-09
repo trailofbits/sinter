@@ -1,56 +1,43 @@
 # Sinter
 
-CI: [![Build Status](https://app.bitrise.io/app/7981426cfe90b436/status.svg?token=nUfXVprK5okMCcFXeOuwzg&branch=master)](https://app.bitrise.io/app/7981426cfe90b436)
+[![Build Status](https://app.bitrise.io/app/7981426cfe90b436/status.svg?token=nUfXVprK5okMCcFXeOuwzg&branch=master)](https://app.bitrise.io/app/7981426cfe90b436)
 
 Sinter is a 100% user-mode endpoint security agent for macOS 10.15 and above, written in Swift.
 
-## Table of Contents
+Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/denying process executions; in future versions we intend to support other types of events such as file, socket, and kernel events.
 
-- [Purpose](#purpose)
-- [Features](#features)
-- [Anti-Features](#anti-features)
-- [Getting Started](#quickstart)
-- [How to Build from Source](#build-from-source)
-- [License](#license)
+**Sinter is a work-in-progress.** Feedback is welcome. If you are interested in contributing or sponsoring us to help achieve its potential, [let's get in touch](https://www.trailofbits.com/contact/).
 
-## Purpose <a name = "purpose"></a>
+## Features
 
-The first open-source macOS solution for allowing/denying processes was [Google's Santa](https://github.com/google/santa). We at Trail of Bits are fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). For a long time, however, many in the macOS community have asked for an open-source solution to track and manage _more_ than just process events. 
-
-With the emergence of the EndpointSecurity API in macOS 10.15, we saw an ideal platform around which to build up such a capability. Starting from the ground-up around a strictly user-mode API meant that we could attempt a simpler design, and use a modern programming language that provides potentialy safer memory handling and which is reportedly [2.6x faster than Objective-C](https://www.apple.com/swift/). Thus, we set out to develop a new endpoint agent that we are calling Sinter.<sup>[1](#nameFootnote)</sup>
-
-**Sinter is a work-in-progress, not a finished product.** Currently, it demonstrates the use of the EndpointSecurity API and implements a useful subset of Santa's functionality. All feedback is welcome. If you are interested in contributing or sponsoring us to help achieve its potential, [let's get in touch](https://www.trailofbits.com/contact/).
-
-## Features <a name = "features"></a>
-
-Sinter uses the user-mode EndpointSecurity API to subscribe to and receive authorization callbacks from the macOS kernel, for a set of security-relevant event types. The current version of Sinter supports allowing/denying process executions; in future versions we intend to support other types of events such as file event, socket event, and kernel event.
-
-Current features:
-
-- Process execution allow-listing and deny-listing
-  - by code directory hash (aka "CD hash")
+- Allow or deny process execution by code directory hash (aka "CD hash")
   - option to deny all unknown programs (any program that is not explicitly allowed)
   - option to deny all unsigned programs
   - option to deny all programs with invalid signatures
-- The default configuration is a "monitor" mode: track and log (but allow) all process execution events
-- Sync server support (partial; work in progress): accepts allow/deny rules from a Santa sync-server
-- Deny-rules configured with a JSON-based database provided either locally or by sync-server
-- Logging to the local filesystem (in a structured JSON format)
+- "monitor" mode to track and log (but allow) all process execution events
+- Accepts allow/deny rules from a Santa sync-server
+- Configure deny rules in JSON, provided locally or by a sync-server
+- Log to the local filesystem in a structured JSON format
 
 Planned upcoming features:
+- Deny process execution by [executable file path](https://github.com/trailofbits/sinter/issues/17)
+- Deny process execution by [certificate Team ID](https://github.com/trailofbits/sinter/issues/4)
 
-- Additional process execution deny rules
-  - by executable file path
-  - by certificate Team ID
+## Anti-Features
 
-## Anti-Features <a name = "anti-features"></a>
+- Does not use kernel extensions (which will be officially deprecated in macOS 11 Big Sur)
+- Does not support legacy macOS (10.14 or older)
+- Does not use any memory unsafe code
+- Limits third-party library dependencies
+- Not an anti-malware or anti-virus. No signature database. Denies only what you tell it to deny, using rules.
 
-- Uses no kernel extensions, which will be officially deprecated in macOS 11 Big Sur
-- Does not support legacy macOS (does not support 10.14 or older)
-- Avoids third-party library dependencies
-- Not an anti-malware or anti-virus. No signatures database. Denies only what you tell it to deny, using rules.
+## Background
 
-## Getting Started <a name = "quickstart"></a>
+The first open-source macOS solution for allowing/denying processes was [Google Santa](https://github.com/google/santa). We're fans of Santa, and [have contributed to its codebase in the past](https://github.com/google/santa/pulls?q=is%3Apr+is%3Aclosed+author%3Aalessandrogario). For a long time, however, many in the macOS community have asked for an open-source solution to track and manage _more_ than just process events.
+
+We saw the ideal platform to build such a capability with the EndpointSecurity API in macOS 10.15. Starting from the ground-up around a strictly user-mode API meant that we could attempt a simpler design, and use a modern programming language with safer memory handling and [better performance](https://www.apple.com/swift/). Thus, we set out to develop Sinter, short for "Sinter Klausen," another name for Santa Claus.
+
+## Getting Started
 
 Download and install the latest version of Sinter using the `pkg` installer link from the [Releases](https://github.com/trailofbits/sinter/releases) page.
 
@@ -147,7 +134,7 @@ Rule databases are written in JSON format. Here's an example database that allow
 
 Sinter only supports **BINARY** rules for now, using either **ALLOWLIST** or **DENYLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
-## How to Build from Source <a name = "build-from-source"></a>
+## How to Build from Source
 
 Sinter builds on macOS 10.15 or above.
 
@@ -186,9 +173,11 @@ Additional settings allow the user to choose whether to enable or disable unsign
 To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a Distribution certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account *owner* can apply for this entitlement. [Apply here](https://developer.apple.com/system-extensions/), at the "Request an Entitlement" link.
 
 ## Requirements
+
 Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued "Distribution" signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source.
 
 ## Build instructions
+
 From the Sinter directory:
 
 `$ xcodebuild -scheme Sinter -configuration Release`
@@ -211,10 +200,6 @@ Run this way, it outputs events to stdout. When run via the default install meth
 
 **Note**: to run Sinter in the CLI this way, the `terminal.app` process must also have the Full Disk Access permission, in System Preferences -> Security -> Privacy tab.
 
-## License <a name = "license"></a>
+## License
 
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.
-
-## Footnotes
-
-<a name="nameFootnote">1: Sinter is short for "Sinter Klausen," another name for Santa Claus</a>
