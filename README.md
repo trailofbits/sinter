@@ -134,6 +134,10 @@ Rule databases are written in JSON format. Here's an example database that allow
 
 Sinter only supports **BINARY** rules for now, using either **ALLOWLIST** or **DENYLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
+## Building from Source
+
+Building Sinter requires certain code-signing certificates and entitlements that Apple must grant your organization. However, Sinter can still be built from source and run locally on a test system with SIP disabled. For instructions, see the [Sinter wiki](https://github.com/trailofbits/sinter/wiki).
+
 ## License
 
 Sinter is licensed and distributed under the AGPLv3 license. [Contact us](mailto:opensource@trailofbits.com) if you're looking for an exception to the terms.
