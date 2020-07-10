@@ -134,71 +134,9 @@ Rule databases are written in JSON format. Here's an example database that allow
 
 Sinter only supports **BINARY** rules for now, using either **ALLOWLIST** or **DENYLIST** policies. The code directory hash value can be taken from the `codesign` tool output (example: `codesign -dvvv /Applications/CMake.app`). Note that even though the CLI tools can acquire the full SHA256 hash, the Kernel/EndpointSecurity API is limited to the first 20 bytes.
 
-## How to Build from Source
+## Building from Source
 
-Sinter builds on macOS 10.15 or above.
-
-### Disable SIP on a Dev System
-
-Because Sinter uses the EndpointSecurity API, it must be code-signed with an appropriate Apple-issued "Distribution" signing certificate and a corresponding provisioning profile that includes the EndpointSecurity entitlement, then also notarized. Code-signing for the EndpointSecurity entitlement requires a manual application to Apple for approval for the required provisioning profile. If you cannot sign with such a certificate, then you must disable SIP if you want to build Sinter from source and run locally. To disable SIP (*not recommended except on a test system*):
-
-Schedule a Recovery Mode reboot:
-
-`$ sudo nvram "recovery-boot-mode=unused"; sudo reboot recovery`
-
-From Recovery Mode, launch Utilities -> Terminal. Disable SIP, and boot back into regular macOS:
-
-`$ csrutil disable; reboot`
-
-To confirm that SIP is disabled:
-
-`$ csrutil status`
-
-### Install the Prerequisites
-
-First, install [Xcode 11.4 or newer](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
-
-Install the Xcode command-line tools as well. One way to do this is:
-
-Sinter is a user-mode application authorization system for MacOS written in Swift.
-
-(Optional, if building the installer pkg) The Sinter project uses CMake to automate the post-build packaging and notarization steps. Install the [latest version of CMake](https://cmake.org/).
-
-### Set your Apple code-signing identity (required)
-
-This program is under heavy development, and new features will be added really soon! Currently, Sinter is able to deny applications based on the code directory hash value, using a JSON-based database that can be provided either locally or with a Santa-compatible sync-server.
-
-Additional settings allow the user to choose whether to enable or disable unsigned and invalid programs, which can be used to mimic the MONITOR mode used by Santa.
-
-To be able to distribute a macOS application that uses the `EndpointSecurity` API, as Sinter does, requires building and signing with a Distribution certificate from an Apple Developer Account that has been approved for the `EndpointSecurity` entitlement. Note that only a Team Account *owner* can apply for this entitlement. [Apply here](https://developer.apple.com/system-extensions/), at the "Request an Entitlement" link.
-
-## Requirements
-
-Sinter uses the Endpoint Security API in macOS 10.15 and above, meaning it must be code-signed with an Apple-issued "Distribution" signing certificate and provisioning profile that includes the Endpoint Security entitlement, which requires a manual application to Apple for approval. If you cannot sign with such a certificate, then you must disable SIP if you want to run Sinter built from source.
-
-## Build instructions
-
-From the Sinter directory:
-
-`$ xcodebuild -scheme Sinter -configuration Release`
-
-Optional: you may need to set the command-line tools to the full Xcode, first, then try the above command again:
-
-`$ sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer`
-
-### Notarize and Generate the Package Installer (optional)
-
-`$ cd packaging && mkdir build && cd build && make package ..`
-
-### Running the Sinter Daemon in the Terminal
-
-Finally, to run Sinter and observe the console output in realtime, do not double-click the `Sinter` app bundle in Finder. Rather, launch the daemon directly:
-
-`$ sudo Sinter.app/Contents/Library/SystemExtensions/com.trailofbits.sinter.systemextension`
-
-Run this way, it outputs events to stdout. When run via the default install method, it includes a launchd daemon configuration that also redirects `stdout` and `stderr` to logs in `/var/db/sinter/`. Logs are updated every 2 minutes. View `Console.app` for live logging.
-
-**Note**: to run Sinter in the CLI this way, the `terminal.app` process must also have the Full Disk Access permission, in System Preferences -> Security -> Privacy tab.
+Building Sinter requires certain code-signing certificates and entitlements that Apple must grant your organization. However, Sinter can still be built from source and run locally on a test system with SIP disabled. For instructions, see the [Sinter wiki](https://github.com/trailofbits/sinter/wiki).
 
 ## License
 
