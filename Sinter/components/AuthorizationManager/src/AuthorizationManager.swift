@@ -49,8 +49,15 @@ final class AuthorizationManager: AuthorizationManagerInterface,
             endpointSecurityOpt = obj
 
         case let .failure(error):
+            let errorMessage: String
+            if case let EndpointSecurityError.initializationError(description) = error {
+                errorMessage = description
+            } else {
+                errorMessage = "Unknown error"
+            }
+
             self.logger.logMessage(severity: LoggerMessageSeverity.error,
-                                   message: "The EndpointSecurity factory returned an error: \(error)")
+                                   message: "The EndpointSecurity factory returned an error: \(errorMessage)")
 
             throw AuthorizationManagerError.endpointSecurityFactoryError
         }
