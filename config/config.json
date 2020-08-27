@@ -15,7 +15,7 @@
       "/bin",
       "/sbin",
       "/usr/bin",
-      "/usr/sbin".
+      "/usr/sbin",
       "/usr/libexec",
       "/usr/local/bin",
       "/usr/local/sbin",
