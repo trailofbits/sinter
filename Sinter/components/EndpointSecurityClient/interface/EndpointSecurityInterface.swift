@@ -12,7 +12,7 @@ import Configuration
 
 public enum EndpointSecurityError: Error {
     case unknownError
-    case initializationError
+    case initializationError(String)
     case cacheClearError
     case subscriptionError
 }

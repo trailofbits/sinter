@@ -153,4 +153,27 @@ final class JSONConfigurationTests : XCTestCase {
         XCTAssertNotNil(errorOpt)
         XCTAssertEqual(errorOpt!, ConfigurationError.notFound)
     }
+    
+    func testArrayValue() {
+        let arrayConfig = "{ \"Section\": { \"string_array\": [ \"1\", \"2\", \"3\" ] } }"
+
+        var context = JSONConfigurationContext()
+        let errorOpt = loadConfiguration(context: &context,
+                                         config: arrayConfig)
+
+        XCTAssertNil(errorOpt)
+
+        let stringArrayOpt = JSONConfiguration.stringList(context: context,
+                                                          section: "Section",
+                                                          key: "string_array")
+
+        XCTAssertNotNil(stringArrayOpt)
+
+        let stringArray = stringArrayOpt!
+        XCTAssertEqual(stringArray.count, 3)
+
+        XCTAssertEqual(stringArray[0], "1")
+        XCTAssertEqual(stringArray[1], "2")
+        XCTAssertEqual(stringArray[2], "3")
+    }
 }

@@ -280,6 +280,10 @@ fileprivate final class TestConfiguration : ConfigurationInterface {
 
         return nil
     }
+
+    func stringList(section: String, key: String) -> [String]? {
+        return nil
+    }
 }
 
 fileprivate final class DummyLogger : LoggerInterface {

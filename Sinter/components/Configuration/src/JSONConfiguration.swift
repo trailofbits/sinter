@@ -72,6 +72,18 @@ final class JSONConfiguration: ConfigurationInterface {
         return value
     }
     
+    public func stringList(section: String, key: String) -> [String]? {
+        var value: [String]? = nil
+
+        dispatchQueue.sync {
+            value = JSONConfiguration.stringList(context: context,
+                                                 section: section,
+                                                 key: key)
+        }
+
+        return value
+    }
+    
     public func subscribe(subscriber: ConfigurationSubscriberInterface) -> Void {
         let subscription = Subscription(configuration: self,
                                         subscriber: subscriber)
@@ -200,6 +212,36 @@ final class JSONConfiguration: ConfigurationInterface {
                 return nil
             }
 
+        } else {
+            return nil
+        }
+    }
+    
+    static func stringList(context: JSONConfigurationContext,
+                           section: String,
+                           key: String) -> [String]? {
+
+        return getValueList(context: context,
+                            section: section,
+                            key: key)
+    }
+    
+    static func getValueList<T>(context: JSONConfigurationContext,
+                                section: String,
+                                key: String) -> [T]? {
+
+        if let section = context.configuration[section] {
+            if let value = section[key] {
+                if let castedValue = value as? [T] {
+                    return castedValue
+                } else {
+                    return nil
+                }
+                
+            } else {
+                return nil
+            }
+            
         } else {
             return nil
         }

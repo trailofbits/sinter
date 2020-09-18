@@ -52,7 +52,32 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
         }
 
         if clientErr != ES_NEW_CLIENT_RESULT_SUCCESS {
-            throw EndpointSecurityError.initializationError
+            let errorMessage: String
+
+            switch clientErr {
+            case ES_NEW_CLIENT_RESULT_ERR_INTERNAL:
+                errorMessage = "Communication with the Endpoint Security subsystem failed"
+
+            case ES_NEW_CLIENT_RESULT_ERR_INVALID_ARGUMENT:
+                errorMessage = "The attempt to create a new client contained one or more invalid arguments";
+
+            case ES_NEW_CLIENT_RESULT_ERR_NOT_ENTITLED:
+                errorMessage = "The caller isn’t properly entitled to connect to Endpoint Security"
+
+            case ES_NEW_CLIENT_RESULT_ERR_NOT_PERMITTED:
+                errorMessage = "The caller isn’t permitted to connect to Endpoint Security"
+
+            case ES_NEW_CLIENT_RESULT_ERR_NOT_PRIVILEGED:
+                errorMessage = "The caller isn’t running as root"
+
+            case ES_NEW_CLIENT_RESULT_ERR_TOO_MANY_CLIENTS:
+                errorMessage = "The caller has reached the maximum allowed number of simultaneously connected clients"
+
+            default:
+                errorMessage = "Unknown error";
+            }
+
+            throw EndpointSecurityError.initializationError(errorMessage)
         }
 
         let cacheErr = es_clear_cache(esClientOpt!)
@@ -113,7 +138,9 @@ final class EndpointSecurityClient : EndpointSecurityInterface, ConfigurationSub
     }
 
     public func onConfigurationChange(configuration: ConfigurationInterface) {
-        if let allowExpiredAuthRequests = configuration.booleanValue(section: "Sinter", key: "allow_expired_auth_requests") {
+        if let allowExpiredAuthRequests = configuration.booleanValue(section: "Sinter",
+                                                                     key: "allow_expired_auth_requests") {
+
             context.allowExpiredAuthRequests = allowExpiredAuthRequests
         } else {
             context.allowExpiredAuthRequests = false
